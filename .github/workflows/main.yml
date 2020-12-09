@@ -9,7 +9,7 @@ jobs:
       mongodb:
         image: mongo
         ports:
-          - "27017:27017"
+          - '27017:27017'
         options: -v ${{ github.workspace }}:/github/workspace
       mysql:
         image: mysql:8.0.21
@@ -21,8 +21,8 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1.4.4	
-        with:	
+      - uses: actions/setup-node@v1.4.4
+        with:
           node-version: '12'
       - name: Static code analysis step
         uses: betrybe/eslint-linter-action@v2
@@ -42,7 +42,7 @@ jobs:
           DB_URL: 'mongodb://mongodb:27017/Trybeer'
           SCHEMA: 'Trybeer'
           DB_NAME: 'Trybeer'
-          GITHUB_USER: ${{ github.actor }} 
+          GITHUB_USER: 'frederico-campello'
       - name: Store evaluation step
         uses: betrybe/store-evaluation-action@v2
         with:
