@@ -1,0 +1,20 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+      "configFile": "reporter.json"
+    },
+    "video": false,
+    "screenshotOnRunFailure": false,
+    "viewportWidth": 1366,
+    "viewportHeight": 768,
+    "defaultCommandTimeout": 10000,
+    "pageLoadTimeout": 10000,
+      "env": {
+        "login": "zebirita@gmail.com",
+        "password": "12345678",
+        "loginAdmin": "tryber@trybe.com.br",
+        "passwordAdmin": "12345678",
+        "gitHubUser": ""
+      }
+  }

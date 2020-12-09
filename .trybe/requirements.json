@@ -1,0 +1,52 @@
+{
+  "requirements": [
+    {
+      "description": "Desenvolver os status para o pedido da tela de `Detalhe pedido` do Administrador",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolver os status para o pedido da tela `Pedidos` do Administrador",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolver os status para o pedido da tela Pedidos do Cliente",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolver os status para o pedido da tela de Detalhe pedido Cliente",
+      "bonus": false
+    },
+    {
+      "description": "Criar um botão no sidebar para acessar o chat do cliente",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolver funcionalidade de chat na visão de cliente",
+      "bonus": false
+    },
+    {
+      "description": "Criar botão no sidebar para acessar a lista de chats do admin",
+      "bonus": false
+    },
+    {
+      "description": "Criar funcionalidade de lista de conversas de chat na visão de administrador",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolver funcionalidade de chat na visão de administrador",
+      "bonus": false
+    },
+    {
+      "description": "Desenvolva a cobertura de testes unitários do back-end",
+      "bonus": false
+    },
+    {
+      "description": "Realizar o deploy do projeto back-end e front-end",
+      "bonus": true
+    },
+    {
+      "description": "Desenvolva a cobertura de testes unitários do front-end",
+      "bonus": true
+    }
+  ]
+}

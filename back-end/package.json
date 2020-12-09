@@ -1,0 +1,38 @@
+{
+  "name": "trybeer-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "drop": "npx sequelize-cli db:drop $",
+    "seed": "npx sequelize-cli db:seed:all $",
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
+    "start": "node index.js",
+    "test": "jest --watchAll",
+    "test-band": "jest --watchAll --runInBand --detectOpenHandles",
+    "test-coverage": "jest --coverage",
+    "debug": "nodemon index.js",
+    "start:watch": "nodemon index.js",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
+}
