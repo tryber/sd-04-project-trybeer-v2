@@ -8,13 +8,11 @@
     "seed": "npx sequelize-cli db:seed:all $",
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "start": "node index.js",
-    "test": "jest --watchAll",
+    "test": "jest",
     "test-band": "jest --watchAll --runInBand --detectOpenHandles",
-    "test-coverage": "jest --coverage",
+    "test-coverage": "jest --coverage --watchAll=false",
     "debug": "nodemon index.js",
     "start:watch": "nodemon index.js",
-    "test": "jest",
-    "test-coverage": "jest --coverage --watchAll=false",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
@@ -31,7 +29,7 @@
     "mongodb": "^3.6.2",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
     "express-rescue": "^1.1.26",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
@@ -41,10 +39,9 @@
   },
   "devDependencies": {
     "eslint": "^7.7.0",
-    "jest": "25.1.0",
+    "jest": "^26.4.2",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "typescript": ">=2.8.0",
     "sequelize-cli": "^6.2.0"

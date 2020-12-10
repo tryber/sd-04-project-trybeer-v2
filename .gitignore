@@ -286,6 +286,7 @@ $RECYCLE.BIN/
 
 .vscode
 .coverage
+.env
 
 cypress/screenshots/
 cypress/videos/
