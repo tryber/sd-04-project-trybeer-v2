@@ -1,34 +1,25 @@
-const mysqlx = require('@mysql/xdevapi');
-require('dotenv/config');
+const mongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
-const config = {
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  host: process.env.HOSTNAME,
-  port: 33060,
-  socketPath: '/var/run/mysqld/mysqld.sock',
+let schema = null;
+
+const connection = async () => {
+  if (schema) return Promise.resolve(schema);
+
+  return mongoClient
+    .connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then((conn) => conn.db(process.env.DB_NAME))
+    .then((dbSchema) => {
+      schema = dbSchema;
+      return schema;
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
 };
 
-// Retorna uma Sessão
-let section;
-async function session() {
-  return section
-    ? Promise.resolve(section)
-    : mysqlx.getSession(config);
-}
-// Retorna o Schema
-let schema;
-async function connection() {
-  return schema
-    ? Promise.resolve(schema)
-    : session()
-      .then((s) => {
-        schema = s.getSchema('Trybeer');
-        return schema;
-      })
-      .catch(() => {
-        process.exit(1);
-      });
-}
-
-module.exports = { connection, session };
+module.exports = connection;
