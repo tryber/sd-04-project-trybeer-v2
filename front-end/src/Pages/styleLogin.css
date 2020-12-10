@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap');
+
+/* Login e Registro */
+
+.login-content {
+  width: 500px;
+  min-height: 500px;    
+  margin: 0px auto;
+  position: relative;
+}
+
+.lr-title{
+  font-size: 48px;
+  color: #f5d628;
+  padding: 2px 0 10px 0;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.form-content {
+  margin:15px;
+}
+
+.registro-content {
+  width: 600px;
+  min-height: 300px;    
+  margin: 0px auto;
+  position: relative;
+}
+
+/* End Login e Redgistro */

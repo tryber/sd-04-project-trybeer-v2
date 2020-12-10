@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  top: 90px;
+}
+
+.col {
+  border-color: none;
+}
+
+.border-sucess {
+  color: black;
+}
