@@ -26,7 +26,7 @@ const MenuAdmin = () => {
           <button
             data-testid="side-menu-item-logout"
             type="button"
-            onClick={cleanLocal}
+            onClick={ cleanLocal }
           >
             Sair
           </button>

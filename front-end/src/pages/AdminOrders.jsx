@@ -13,42 +13,46 @@ const AdminOrders = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user'));
     if (!userData) {
-      return setRedirectToLogin(true);
+      setRedirectToLogin(true);
     }
 
     axios
       .get('http://localhost:3001/sales')
       .then((res) => {
         setOrders(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error));
+      });
   }, []);
+
+  const toFixed = 2;
 
   return (
     <div>
       <MenuAdmin title="Meus Pedidos" />
       <h1>Pedidos</h1>
       {redirectToLogin && <Redirect to="/login" />}
-      {orders &&
-        orders.map((order, index) => (
-          <div key={order.id}>
-            <Link to={`/admin/orders/${order.id}`}>
-              <p
-                data-testid={`${index}-order-number`}
-              >{`Pedido ${order.id}`}</p>
+      {orders
+      && orders.map((order, index) => (
+        <div key={ order.id }>
+          <Link to={ `/admin/orders/${order.id}` }>
+            <p
+              data-testid={ `${index}-order-number` }
+            >
+              { `Pedido ${order.id}` }
+            </p>
 
-              <p
-                data-testid={`${index}-order-address`}
-              >{`${order.address}, ${order.number}`}</p>
+            <p
+              data-testid={ `${index}-order-address` }
+            >
+              { `${order.address}, ${order.number}` }
+            </p>
 
-              <p data-testid={`${index}-order-total-value`}>
-                {`R$ ${order.price.toFixed(2).replace('.', ',')}`}
-              </p>
-              <p data-testid={`${index}-order-status`}>{order.status}</p>
-            </Link>
-          </div>
-        ))}
+            <p data-testid={ `${index}-order-total-value` }>
+              { `R$ ${order.price.toFixed(toFixed).replace('.', ',')}` }
+            </p>
+            <p data-testid={ `${index}-order-status` }>{ order.status }</p>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };

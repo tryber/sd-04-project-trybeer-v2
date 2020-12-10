@@ -5,8 +5,8 @@ import axios from 'axios';
 import Menu from '../components/Menu';
 
 const ClientProfile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name_, setName] = useState('');
+  const [email_, setEmail] = useState('');
 
   const [name1, setName1] = useState('');
 
@@ -22,9 +22,8 @@ const ClientProfile = () => {
 
   const editUser = () => {
     axios
-      .put('http://localhost:3001/users', { name, email })
-      .then((_res) => setMessage('Atualização concluída com sucesso'))
-      .catch((error) => console.log(error));
+      .put('http://localhost:3001/users', { name_, email_ })
+      .then(() => setMessage('Atualização concluída com sucesso'));
   };
 
   const handleSubmit = (e) => {
@@ -35,27 +34,32 @@ const ClientProfile = () => {
   return (
     <div>
       <Menu title="Meu perfil" />
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          data-testid="profile-name-input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          data-testid="profile-email-input"
-          readOnly
-          value={email}
-        />
+      <form onSubmit={ (e) => handleSubmit(e) }>
+        <label htmlFor="name">
+          Name
+          <input
+            type="text"
+            id="name"
+            data-testid="profile-name-input"
+            value={ name_ }
+            onChange={ (e) => setName(e.target.value) }
+          />
+        </label>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            data-testid="profile-email-input"
+            readOnly
+            value={ email_ }
+          />
+        </label>
         <button
           type="submit"
           data-testid="profile-save-btn"
-          disabled={name1 === name ? true : false}
+          // disabled={ name1 === name ? true : false }
+          disabled={ name1 === name_ }
         >
           Salvar
         </button>
