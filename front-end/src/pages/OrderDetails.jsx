@@ -6,22 +6,26 @@ import axios from 'axios';
 import Menu from '../components/Menu';
 
 const OrderDetails = () => {
+  const OITO = 8;
+  const ZERO = 0;
+  const CINCO = 5;
+  const DOIS = 2;
+
   const [orderDetails, setOrderDetails] = useState([]);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
-      return setRedirectToLogin(true);
+      setRedirectToLogin(true);
     }
 
     axios
       .get('http://localhost:3001/order-details', {
-        params: { saleId: window.location.pathname.slice(8) },
+        params: { saleId: window.location.pathname.slice(OITO) },
       })
       .then((res) => {
         setOrderDetails(res.data);
-      })
-      .catch((error) => console.log(error));
+      });
   }, []);
 
   return (
@@ -34,25 +38,27 @@ const OrderDetails = () => {
           <p data-testid="order-date">
             {new Date(orderDetails[0].saleDate)
               .toLocaleDateString('pt-BR', { timeZone: 'UTC' })
-              .slice(0, 5)}
+              .slice(ZERO, CINCO)}
           </p>
-          <p data-testid="order-total-value">{`Total: R$ ${orderDetails[0].totalPrice
-            .toFixed(2)
-            .replace('.', ',')}`}</p>
+          <p data-testid="order-total-value">
+            {`Total: R$ ${orderDetails[0].totalPrice
+              .toFixed(DOIS)
+              .replace('.', ',')}`}
+          </p>
         </div>
       )}
       {orderDetails && (
         <ol>
           {orderDetails.map((order, index) => (
-            <li key={order.productName}>
-              <p data-testid={`${index}-product-name`}>{order.productName}</p>
-              <p data-testid={`${index}-product-qtd`}>
+            <li key={ order.productName }>
+              <p data-testid={ `${index}-product-name` }>{ order.productName }</p>
+              <p data-testid={ `${index}-product-qtd` }>
                 {order.productQuantity}
               </p>
-              <p data-testid={`${index}-product-total-value`}>
-                {`R$ ${(order.productPrice * order.productQuantity)
-                  .toFixed(2)
-                  .replace('.', ',')}`}
+              <p data-testid={ `${index}-product-total-value` }>
+                { `R$ ${(order.productPrice * order.productQuantity)
+                  .toFixed(DOIS)
+                  .replace('.', ',')}` }
               </p>
             </li>
           ))}

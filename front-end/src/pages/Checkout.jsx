@@ -1,32 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { saveCart } from '../actions';
-
 import Menu from '../components/Menu';
 
-import { updateTotalCheckout, updateCart } from '../actions';
+import { updateTotalCheckout, updateCart, saveCart } from '../actions';
 
-const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
+const Checkout = (
+  {
+    cart,
+    total,
+    updateTotal,
+    updateProducts,
+    saveCartLS,
+  },
+) => {
+  const ZERO = 0;
+  const DEZENOVE = 19;
+  const DOISMIL = 2000;
+  const DOIS = 2;
+
   const [userLS, setUserLS] = useState(null);
 
-  // dados para registrar a venda
   const [userId, setUserId] = useState('');
   const [price, setPrice] = useState('');
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
-  const [date, setDate] = useState(
-    new Date().toISOString().slice(0, 19).replace('T', ' '),
+  const [date] = useState(
+    new Date().toISOString().slice(ZERO, DEZENOVE).replace('T', ' '),
   );
-  const [status, setStatus] = useState('Pendente');
-  ///////////////////////////////////////////////////////////
+  const [status] = useState('Pendente');
 
-  // dados para o insert na tabela sales_products
   const [productId, setProductId] = useState();
   const [quantity, setQuantity] = useState();
-  ///////////////////////////////////////////////////////
 
   const [messageCart, setMessageCart] = useState('');
   const [messageSuccess, setMessageSuccess] = useState('');
@@ -34,7 +42,7 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
   const [redirect, setRedirect] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
 
-  const saveCart = () => {
+  const saveToCart = () => {
     const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
     const totalLS = JSON.parse(localStorage.getItem('total'));
     return cartLS ? saveCartLS(cartLS, totalLS) : null;
@@ -42,14 +50,14 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
-      return setRedirectToLogin(true);
+      setRedirectToLogin(true);
     }
+
     const userData = JSON.parse(localStorage.getItem('user'));
     setUserLS(userData);
-    saveCart();
-  }, []);
+    saveToCart();
+  }, [saveToCart]);
 
-  // requisição para pegar o id do usuário no banco
   if (userLS) {
     axios
       .get('http://localhost:3001/users', {
@@ -58,15 +66,13 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
       .then((res) => {
         setUserId(res.data[0]);
         localStorage.setItem('userID', userId);
-      })
-      .catch((error) => console.log(error));
+      });
   }
-  //////////////////////////////////////////////////
 
   useEffect(() => {
     setPrice(total);
-    if (cart.length === 0) {
-      return setMessageCart('Não há produtos no carrinho');
+    if (cart.length === ZERO) {
+      setMessageCart('Não há produtos no carrinho');
     }
     setMessageCart('');
   }, [cart, total]);
@@ -97,11 +103,10 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
         productId,
         quantity,
       })
-      .then((_res) => {
+      .then(() => {
         setMessageSuccess('Compra realizada com sucesso!');
-        setTimeout(() => setRedirect(true), 2000);
-      })
-      .catch((error) => console.log(error));
+        setTimeout(() => setRedirect(true), DOISMIL);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -118,34 +123,43 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
       {redirectToLogin && <Redirect to="/login" />}
       <Menu title="Finalizar Pedido" />
       <h2>Produtos</h2>
-      {messageCart && <h3>{messageCart}</h3>}
-      {cart &&
-        cart.map((item, index) => (
-          <div key={item.name}>
-            <p data-testid={`${index}-product-name`}>{item.name}</p>
+      {messageCart
+        && <h3>{ messageCart }</h3>}
+      {cart
+        && cart.map((item, index) => (
+          <div key={ item.name }>
+            <p data-testid={ `${index}-product-name` }>
+              { item.name }
+            </p>
             <p
-              data-testid={`${index}-product-unit-price`}
-            >{`(R$ ${item.price.toFixed(2).replace('.', ',')} un)`}</p>
-            <p data-testid={`${index}-product-qtd-input`}>{item.quantity}</p>
-            <p data-testid={`${index}-product-total-value`}>{`R$ ${(
-              item.price * item.quantity
-            )
-              .toFixed(2)
-              .replace('.', ',')}`}</p>
+              data-testid={ `${index}-product-unit-price` }
+            >
+              { `(R$ ${item.price.toFixed(DOIS).replace('.', ',')} un)` }
+            </p>
+            <p data-testid={ `${index}-product-qtd-input` }>
+              { item.quantity }
+            </p>
+            <p data-testid={ `${index}-product-total-value` }>
+              { `R$ ${(item.price * item.quantity)
+                .toFixed(DOIS)
+                .replace('.', ',')}` }
+            </p>
             <button
               type="button"
-              data-testid={`${index}-removal-button`}
-              onClick={() => removeProduct(item)}
+              data-testid={ `${index}-removal-button` }
+              onClick={ () => removeProduct(item) }
             >
               X
             </button>
           </div>
         ))}
-      <p data-testid="order-total-value">{`R$ ${total
-        .toFixed(2)
-        .replace('.', ',')}`}</p>
+      <p data-testid="order-total-value">
+        { `R$ ${total
+          .toFixed(DOIS)
+          .replace('.', ',')}` }
+      </p>
       <h2>Endereço</h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={ (e) => handleSubmit(e) }>
         <label htmlFor="street">
           Rua:
           <input
@@ -153,7 +167,7 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
             name="street"
             id="street"
             data-testid="checkout-street-input"
-            onChange={(e) => setStreet(e.target.value)}
+            onChange={ (e) => setStreet(e.target.value) }
           />
         </label>
         <br />
@@ -164,19 +178,20 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
             name="number"
             id="number"
             data-testid="checkout-house-number-input"
-            onChange={(e) => setHouseNumber(e.target.value)}
+            onChange={ (e) => setHouseNumber(e.target.value) }
           />
         </label>
         <br />
         <button
           type="submit"
           data-testid="checkout-finish-btn"
-          disabled={!street || !houseNumber || !price}
+          disabled={ !street || !houseNumber || !price }
         >
           Finalizar Pedido
         </button>
       </form>
-      {messageSuccess && <h3>{messageSuccess}</h3>}
+      {messageSuccess
+        && <h3>{ messageSuccess }</h3>}
     </div>
   );
 };
@@ -192,4 +207,11 @@ const mapDispatchToProps = (dispatch) => ({
   saveCartLS: (localstorage, total) => dispatch(saveCart(localstorage, total)),
 });
 
+Checkout.propTypes = {
+  cart: PropTypes.func.isRequired,
+  total: PropTypes.func.isRequired,
+  updateTotal: PropTypes.func.isRequired,
+  updateProducts: PropTypes.func.isRequired,
+  saveCartLS: PropTypes.func.isRequired,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
