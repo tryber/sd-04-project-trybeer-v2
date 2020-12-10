@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'simpsons';
+  src: url('./fonts/Simpsonfont.ttf');
+}
+
+@font-face {
+  font-family: 'akbar';
+  src: url('./fonts/akbar.ttf');
+}
+
+.page {
+  display: flex;
+  min-height: 100%;
+  background: linear-gradient(45deg, #cecece 0%,#f6f6f6 10%,#f3f3f3 25%,#f3f3f3 37%,#f4f4f4 50%,#eaeaea 51%,#f6f6f6 83%,#d3d3d3 100%);
+}
+
+.page-content {
+  padding-top: 57px;
+  flex: 1;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +31,40 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+::-webkit-scrollbar {
+  border-radius: 60px;
+  border: 1px solid rgb(156, 156, 156);
+  width: 10px;
+}
+
+body::-webkit-scrollbar {
+  border-radius: 0;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(0deg, #4d4d4d 0,#242424 100%);
+  border: 1px solid rgb(54, 54, 54);
+  border-radius: 60px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7c7c7c 0,#353535 100%);
+}
+
+body::-webkit-scrollbar-track {
+}
+
+body::-webkit-scrollbar-track-piece {
+}
+
+::-webkit-scrollbar-corner {
+}
+
+::-webkit-resizer {
 }

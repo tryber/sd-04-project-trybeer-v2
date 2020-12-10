@@ -1,0 +1,121 @@
+.products-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: -2px;
+}
+
+.product-card {
+  color: rgb(39, 39, 39);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  flex: 0 1 30%;
+  overflow: hidden;
+  height: 250px;
+  border-radius: 20px;
+  background-color: white;
+  margin: 2px;
+  text-align: center;
+  box-shadow: 1px 1px 6px rgb(155, 155, 155);
+}
+
+.product-card > img {
+  height: 100px;
+}
+
+.cart-button {
+  position: sticky;
+  bottom: 0;
+  border: 3px solid rgb(177, 23, 23);
+  border-bottom: none;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  background: linear-gradient(45deg, #4d4d4d 0,#242424 100%);
+  box-shadow: -2px -2px 20px rgba(182, 0, 0, 0.473), 2px -2px 20px rgba(182, 0, 0, 0.473);
+}
+
+.cart-button > a {
+  color: white;
+  text-decoration: none;
+}
+
+.cart-button:disabled > a {
+  color: transparent;
+}
+
+.cart-button:disabled {
+  pointer-events: none;
+  color: transparent;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.product-quantity {
+  background-color: rgb(53, 53, 53);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  width: 65px;
+  color: white;
+}
+
+.product-quantity > button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-radius: 10px;
+}
+
+.product-quantity > button:focus {
+  outline: 0;
+}
+
+.product-quantity > button:active {
+  background-color: rgba(255, 255, 255, 0.185);
+}
+
+.product-price {
+  color: rgb(11, 163, 49);
+}
+
+@media screen and (min-width: 500px) {
+  .products-list {
+    margin: 6px 2px;
+  }
+
+  .product-card {
+    margin: 6px;
+  }
+
+  .product-card > img {
+    height: 130px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .product-card {
+    flex-basis: 20%;
+  }
+
+  .product-card > img {
+    height: 150px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .product-card {
+    flex-basis: 15%;
+  }
+}

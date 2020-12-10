@@ -1,0 +1,13 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-family: akbar;
+}
+
+.loading > img {
+  width: 80%;
+  max-width: 400px;
+}

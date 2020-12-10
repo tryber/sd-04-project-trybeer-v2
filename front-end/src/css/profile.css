@@ -1,0 +1,41 @@
+.user-profile-page {
+  padding-top: 57px;
+  height: 100vh;
+  background: linear-gradient(45deg, #cecece 0%,#f6f6f6 10%,#f3f3f3 25%,#f3f3f3 37%,#f4f4f4 50%,#eaeaea 51%,#f6f6f6 83%,#d3d3d3 100%);
+}
+
+.admin-profile-page {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  margin-left: 325px;
+  margin-right: 15px;
+  flex-wrap: wrap;
+  text-decoration: none;
+}
+
+.admin-profile-page > h1 {
+  margin: 25px;
+}
+
+.admin-profile-page > span {
+  margin: 25px;
+}
+
+.user-profile-page > img {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.duff-beer {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .duff-beer {
+    display: none;
+  }
+}
+

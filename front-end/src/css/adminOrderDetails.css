@@ -1,0 +1,74 @@
+.sale-Pendente-btn {
+  background-color: #1bd118a8;
+}
+
+.sale-Entregue-btn {
+  display: none;
+}
+.element-orders-detail {
+  font-size: large;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.cardDetailsA {
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.466);
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 30%;
+  width: 40%;
+  height: auto;
+  justify-content: center;
+  margin: 0.3em;
+  overflow: hidden;
+  padding: 0.2em;
+}
+
+.marginDetails {
+  padding-top: 80px;
+  flex: 1;
+  
+}
+.marginDetails > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pedido {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.titleOne {
+  width: 100px;
+  flex: 1 1 80%;
+  margin: 5px;
+  font-weight: 500;
+  font-size: large;
+}
+
+.listOrders {
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: column;
+  text-align: left;
+}
+
+.listOrders>* {
+  flex: 1 1 15px;
+  font-size: medium;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 1500px) {
+  .marginDetails {
+    padding-left: 200px;
+  }
+  .cardDetailsA {
+    width: 70%;
+  }
+}
