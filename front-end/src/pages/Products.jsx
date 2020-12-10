@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,11 +21,19 @@ const Products = ({
 
   const [redirectToLogin, setRedirectToLogin] = useState(false);
 
-  const saveToCart = () => {
-    const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalLS = JSON.parse(localStorage.getItem('total'));
-    return cartLS ? saveCartLS(cartLS, totalLS) : null;
-  };
+  useEffect(() => {
+    const saveToCart = () => {
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalLS = JSON.parse(localStorage.getItem('total'));
+      return cartLS ? saveCartLS(cartLS, totalLS) : null;
+    };
+    axios
+      .get('http://localhost:3001/products')
+      .then((res) => {
+        setProducts(res.data);
+      });
+    saveToCart();
+  }, [saveCartLS]);
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
@@ -41,23 +49,18 @@ const Products = ({
           localStorage.setItem('userID', res.data[0]);
         });
     }
-
-    axios
-      .get('http://localhost:3001/products')
-      .then((res) => {
-        setProducts(res.data);
-      });
-    saveToCart();
-  }, [saveToCart]);
+  }, []);
 
   const quantity = (product) => {
-    let qty;
+    let qty = ZERO;
     const productInCart = cart.filter((item) => item.name === product.name);
-    productInCart.length ? (qty = productInCart[0].quantity) : (qty = ZERO);
+    if (productInCart.length) {
+      qty = productInCart[0].quantity;
+    }
     return qty;
   };
 
-  useEffect(() => {
+  useCallback(() => {
     localStorage.setItem('total', total);
     if (cart !== []) {
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -66,7 +69,9 @@ const Products = ({
 
   const stopDecrement = (product) => {
     const qty = quantity(product);
-    qty === ZERO || !qty ? null : decreaseQtd(product);
+    if (!(qty === ZERO || !qty)) {
+      decreaseQtd(product);
+    }
   };
 
   return (

@@ -42,11 +42,14 @@ const Checkout = (
   const [redirect, setRedirect] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
 
-  const saveToCart = () => {
-    const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalLS = JSON.parse(localStorage.getItem('total'));
-    return cartLS ? saveCartLS(cartLS, totalLS) : null;
-  };
+  useEffect(() => {
+    const saveToCart = () => {
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalLS = JSON.parse(localStorage.getItem('total'));
+      return cartLS ? saveCartLS(cartLS, totalLS) : null;
+    };
+    saveToCart();
+  }, [saveCartLS]);
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
@@ -55,8 +58,7 @@ const Checkout = (
 
     const userData = JSON.parse(localStorage.getItem('user'));
     setUserLS(userData);
-    saveToCart();
-  }, [saveToCart]);
+  }, []);
 
   if (userLS) {
     axios
