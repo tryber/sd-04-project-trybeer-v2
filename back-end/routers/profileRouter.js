@@ -1,12 +1,12 @@
-const express = require('express');
+// const express = require('express');
 
-const userController = require('../controllers/userController');
-const validateToken = require('../auth/validateToken');
+// const userController = require('../controllers/userController');
+// const validateToken = require('../auth/validateToken');
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post('/', validateToken, userController.userProfile);
+// router.post('/', validateToken, userController.userProfile);
 
-router.put('/', userController.editProfile);
+// router.put('/', userController.editProfile);
 
-module.exports = router;
+// module.exports = router;

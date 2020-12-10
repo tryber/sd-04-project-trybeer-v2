@@ -1,4 +1,4 @@
-const { Products } = require('../model');
+const { Products } = require('../models');
 
 const getBeer = async (_req, res) => {
   try {
@@ -6,7 +6,7 @@ const getBeer = async (_req, res) => {
 
     res.status(200).json(beer);
   } catch (error) {
-    res.status(404).json({ error: 'Nenhum producto foi encontrado' });
+    res.status(404).json({ error: 'Nenhum product foi encontrado' });
   }
 };
 

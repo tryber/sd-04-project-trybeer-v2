@@ -2,9 +2,9 @@ const Products = (sequelize, DataTpes) => sequelize
     .define('Products', {
         name: DataTpes.STRING,
         price: DataTpes.INTEGER,
-        image: DataTpes.STRING,
+        url_image: DataTpes.STRING,
     }, { 
-        updateAt: false,
+        timestamps: false,
     });
 
 module.exports = Products;

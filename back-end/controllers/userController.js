@@ -1,4 +1,4 @@
-const userModel = require('../model/userModel');
+const { Users } = require('../models');
 
 const userLogin = (req, res) => {
   try {
@@ -24,10 +24,11 @@ const userProfile = async (req, res) => {
 const editProfile = async (req, res) => {
   try {
     const { email, name } = req.body;
-    await userModel.editProfile(email, name);
+    await Users.update({ name: `${name}`}, { where: { email: `${email}` } });
+
     res.status(200).json('Atualização concluída com sucesso');
   } catch (error) {
-    console.log(error);
+    res.status(404).Json('Ocorreu um erro na atualizacao');
   }
 };
 
@@ -35,10 +36,10 @@ const userRegister = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    await userModel.registerUser(name, email, password, role);
+    await Users.create({name, email, password, role});
+
     return res.status(200).json({ message: 'registrado com sucesso' });
   } catch (err) {
-    console.log('teste', err);
     return res.status(404).json({ message: 'E-mail already in database.' });
   }
 };

@@ -17,8 +17,8 @@ app.use('/images', express.static('images'));
 
 app.use('/', userRouter);
 app.use('/products', productRouter);
-app.use('/checkout', checkoutRouter);
-app.use('/profile', profileRouter);
-app.use('/orders', ordersRouter);
+// app.use('/checkout', checkoutRouter);
+// app.use('/profile', profileRouter);
+// app.use('/orders', ordersRouter);
 
 app.listen(port, () => console.log('API rodando na porta 3001!'));

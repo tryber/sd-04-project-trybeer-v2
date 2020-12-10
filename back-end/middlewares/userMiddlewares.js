@@ -1,11 +1,11 @@
 const auth = require('../auth/createToken');
 
-const userModel = require('../model/userModel');
+const { Users } = require('../models');
 
 const validateUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await userModel.findByEmail(email);
+    const user = await Users.findOne({ where: { email: `${email}`} });
     const { password: _, ...userSafe } = user;
 
     if (user.password !== password) throw new Error();
