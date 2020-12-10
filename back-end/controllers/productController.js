@@ -1,8 +1,8 @@
-const productModel = require('../model/productModel');
+const { Products } = require('../model');
 
 const getBeer = async (_req, res) => {
   try {
-    const beer = await productModel.getAllProducts();
+    const beer = await Products.findAll();
 
     res.status(200).json(beer);
   } catch (error) {

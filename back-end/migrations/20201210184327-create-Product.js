@@ -4,21 +4,21 @@ module.exports = {
   up: async (queryInterface, Sequelize) =>
     queryInterface.createTable('Products', {
       id: {
-        type: sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       name: {
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       price: {
-        type: sequelize.FLOAT,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       image: {
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
@@ -31,5 +31,5 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface, Sequelize) =>  queryInterface.dropTable('Products'),
+  down: async (queryInterface, _Sequelize) =>  queryInterface.dropTable('Products'),
 };
