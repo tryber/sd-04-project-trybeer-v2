@@ -18,8 +18,8 @@ const salesProductModel = (sequelize, DataTypes) => {
   );
 
   SalesProduct.associate = (models) => {
-    SalesProduct.belongsTo(models.Sales, { foreignKey: 'sale_id', as: 'sales' });
-    SalesProduct.belongsTo(models.Products, { foreignKey: 'product_id', as: 'products' });
+    SalesProduct.belongsTo(models.sales, { foreignKey: 'sale_id', as: 'sales' });
+    SalesProduct.belongsTo(models.products, { foreignKey: 'product_id', as: 'products' });
   };
 
   return SalesProduct;
