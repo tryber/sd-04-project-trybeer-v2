@@ -1,4 +1,4 @@
-const { userModel } = require('../models');
+const { usersModel } = require('../models');
 const authentication = require('../auth/authentication');
 const { ERR_EMAIL_NOT_FOUND, ERR_INVALID_PASSWORD } = require('../utils/errorTypes');
 
@@ -8,7 +8,7 @@ const updateUserController = async (req, res) => {
 
     console.log('Controller Data:', name, email);
 
-    await userModel.updateUser(name, email);
+    await usersModel.update({ name, email }, { where: { email } });
     return res.status(200).json({ up: 'Update realizado' });
   } catch (err) {
     console.log('Erro inesperado');
@@ -32,7 +32,9 @@ const loginController = async (req, res) => {
 const createUserController = async (req, res) => {
   try {
     const data = req.body;
-    const result = await userModel.getUserByEmail(data.email);
+    const result = await usersModel.findAll({ where: { email: data.email } });
+
+    console.log(result);
 
     if (result) {
       if (result.email === data.email) {
@@ -40,7 +42,7 @@ const createUserController = async (req, res) => {
       }
     }
 
-    await userModel.createUser(data);
+    await usersModel.create(data);
     const userInfo = await authentication.authToken(data.email, data.password);
     return res.status(201).json(userInfo);
   } catch (err) {

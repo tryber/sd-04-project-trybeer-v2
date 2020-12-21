@@ -1,4 +1,4 @@
-const userModel = require('../models/userModel');
+const { usersModel } = require('../models');
 const {
   ERR_EMAIL_NOT_FOUND,
   ERR_INVALID_PASSWORD,
@@ -6,7 +6,7 @@ const {
 const Token = require('./token');
 
 const authToken = async (userEmail, userPassword) => {
-  const user = await userModel.getUserByEmail(userEmail);
+  const user = await usersModel.findAll({ where: { email: userEmail } });
 
   if (!user) {
     throw new Error(ERR_EMAIL_NOT_FOUND);
