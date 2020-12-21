@@ -1,0 +1,57 @@
+.header {
+  background: #e85d04;
+  display: flex;
+  height: 2rem;
+  left: 0;
+  justify-content: center;
+  padding: 6rem 5rem 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+}
+
+.topTitle {
+  color: #ffffff;
+  font-size: 30px;
+  max-height: 5rem;
+  padding: 10px 30px;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #e85d04;
+  height: 100vh;
+  position: absolute;
+  text-align: left;
+  left: 0;
+  padding: 2rem;
+  top: 0rem;
+  transition: transform 0.3s ease-in-out;
+  width: 15rem;
+}
+
+.navbar a {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 2rem 0;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  color: #f3ebeb;
+  text-decoration: none;
+  transition: color 0.3s linear;
+  text-align: center;
+}
+.navbar a:hover {
+  color: #ffffff;
+}
+
+.navLink:hover {
+  background-color: #faa307;
+}

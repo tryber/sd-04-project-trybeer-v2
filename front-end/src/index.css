@@ -11,3 +11,78 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.container-general {
+  margin-top: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  padding: 10px;
+  width: 100%;
+  border-radius: 0.2rem;
+  border: 1px solid #e85d04;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+input:focus {
+  border: 2px solid #f23202;
+  outline: none;
+}
+
+.buttonMain {
+  text-transform: uppercase;
+  color: white;
+  background-color: #e85d04;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  padding: 10px 0px;
+  transition: 0.5s;
+  width: 100%;
+  transform: scale(0.9);
+  border-radius: 0.2rem;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.buttonMain:hover {
+  background-color: #faa307;
+  transition: transform 0.2s linear;
+  transform: scale(1);
+}
+
+.buttonMain:disabled {
+  cursor: initial;
+  opacity: 0.5;
+  transform: scale(1);
+  transform: scale(0.9);
+}
+
+.buttonMain:disabled:hover {
+  background-color: #e85d04;
+  transform: scale(0.9);
+}
+
+.inputLabel {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}

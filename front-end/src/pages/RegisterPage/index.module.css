@@ -1,0 +1,42 @@
+.pageRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  width: 50vw;
+  margin: 0 auto;
+}
+
+.formRegister {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 150px;
+  width: 60vw;
+}
+
+.checkboxInput {
+  height: 26px;
+  width: 26px;
+  margin-right: 10px;
+}
+
+.wantToSell {
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  font-family: Roboto;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: normal;
+  height: 28px;
+  line-height: 29px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 800px) {
+  .formRegister {
+    max-width: 350px;
+  }
+}

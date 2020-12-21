@@ -1,0 +1,72 @@
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  width: 90vw;
+  margin-left: 15rem;
+  padding: 0 10rem;
+}
+
+.orderDetails {
+  width: 100%;
+}
+
+.pendingOrder {
+  color: black;
+  background-color: rgb(233, 233, 64);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.deliveredOrder {
+  color: black;
+  background-color: rgb(0, 197, 0);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.orderList {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+}
+
+.orderItem {
+  display: flex;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.orderItemRightContainer,
+.orderItemLeftContainer {
+  display: flex;
+  align-items: center;
+}
+
+.dashSpace {
+  margin: 0px 0.5rem;
+}
+
+.orderItemPrice {
+  font-weight: 700;
+  margin-left: 1rem;
+}
+
+.orderItemName {
+  font-weight: 700;
+}
+
+.unitaryPrice {
+  font-size: 0.7rem;
+}
+
+.orderTotal {
+  text-align: right;
+}
