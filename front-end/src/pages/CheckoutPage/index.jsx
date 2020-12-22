@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Menu from '../../components/Menu';
 import InputForm from '../../components/InputForm';
-import { setLS, getLS } from '../../utils/';
+import { setLS, getLS } from '../../utils';
 import { Context } from '../../context/Provider';
 import api from '../../services/api';
 import styles from './index.module.css';
@@ -14,6 +14,9 @@ const Checkout = () => {
   const finishTimeout = React.useRef();
   const history = useHistory();
 
+  const zero = 0;
+  const threeThousand = 3000;
+
   React.useEffect(() => {
     const setState = () => setCart(getLS('cart'));
     setState();
@@ -23,10 +26,8 @@ const Checkout = () => {
     setLS('cart', cart);
   }, [cart]);
 
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(finishTimeout);
-    };
+  React.useEffect(() => () => {
+    clearTimeout(finishTimeout);
   }, []);
 
   const handleRemove = (productId) => {
@@ -46,7 +47,7 @@ const Checkout = () => {
       cart.reduce((acc, cur) => {
         const itemTotal = cur.price * cur.quantity;
         return acc + itemTotal;
-      }, 0),
+      }, zero),
       form.street,
       form.houseNumber,
       cart.map((product) => product.id),
@@ -58,48 +59,52 @@ const Checkout = () => {
     finishTimeout.current = setTimeout(() => {
       setFinish(null);
       history.push('/products');
-    }, 3000);
+    }, threeThousand);
   };
 
   if (!getLS('user') || !getLS('user').token) history.push('/login');
   return (
-    <div className={styles.pageContainer}>
+    <div className={ styles.pageContainer }>
       <Menu nomeTela="Finalizar Pedido" />
-      {finish ? <p className={styles.finishNotification}>{finish}</p> : null}
-      <section className={styles.products}>
+      {finish ? <p className={ styles.finishNotification }>{finish}</p> : null}
+      <section className={ styles.products }>
         <h2>Produtos</h2>
         {!cart || !cart.length ? (
           <h3>Não há produtos no carrinho</h3>
         ) : (
-          <ul className={styles.cartList}>
-            {cart.map(({ id, name, quantity, price }, index) => (
-              <li key={name} className={styles.cartItem}>
-                <div className={styles.cartItemLeftContainer}>
+          <ul className={ styles.cartList }>
+            {cart.map(({
+              id, name, quantity, price,
+            }, index) => (
+              <li key={ name } className={ styles.cartItem }>
+                <div className={ styles.cartItemLeftContainer }>
                   <span
-                    className={styles.cartItemQty}
-                    data-testid={`${index}-product-qtd-input`}
+                    className={ styles.cartItemQty }
+                    data-testid={ `${index}-product-qtd-input` }
                   >
                     {quantity}
                   </span>
-                  <span className={styles.dashSpace}>-</span>
+                  <span className={ styles.dashSpace }>-</span>
                   <span
-                    className={styles.cartItemName}
-                    data-testid={`${index}-product-name`}
+                    className={ styles.cartItemName }
+                    data-testid={ `${index}-product-name` }
                   >
                     {name}
                   </span>
                 </div>
-                <div className={styles.cartItemRightContainer}>
+                <div className={ styles.cartItemRightContainer }>
                   <span
-                    className={styles.unitaryPrice}
-                    data-testid={`${index}-product-unit-price`}
-                  >{`(${price.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })} un)`}</span>
+                    className={ styles.unitaryPrice }
+                    data-testid={ `${index}-product-unit-price` }
+                  >
+                    {`(${price.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })} un)`}
+                  </span>
                   <span
-                    className={styles.cartItemPrice}
-                    data-testid={`${index}-product-total-value`}
+                    className={ styles.cartItemPrice }
+                    data-testid={ `${index}-product-total-value` }
                   >
                     {(price * quantity).toLocaleString('pt-BR', {
                       style: 'currency',
@@ -107,9 +112,10 @@ const Checkout = () => {
                     })}
                   </span>
                   <button
-                    className={styles.removeItemBtn}
-                    onClick={() => handleRemove(id)}
-                    data-testid={`${index}-removal-button`}
+                    type="button"
+                    className={ styles.removeItemBtn }
+                    onClick={ () => handleRemove(id) }
+                    data-testid={ `${index}-removal-button` }
                   >
                     Remover item
                   </button>
@@ -119,38 +125,40 @@ const Checkout = () => {
           </ul>
         )}
         <h3
-          className={styles.cartTotal}
+          className={ styles.cartTotal }
           data-testid="order-total-value"
-        >{`Total: ${cart
-          .reduce((acc, cur) => {
-            const itemTotal = cur.price * cur.quantity;
-            return acc + itemTotal;
-          }, 0)
-          .toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          })}`}</h3>
+        >
+          {`Total: ${cart
+            .reduce((acc, cur) => {
+              const itemTotal = cur.price * cur.quantity;
+              return acc + itemTotal;
+            }, zero)
+            .toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}`}
+        </h3>
       </section>
-      <section className={styles.address}>
+      <section className={ styles.address }>
         <h2>Endereço</h2>
-        <form onSubmit={handleSubmit} className={styles.addressForm}>
-          <div className={styles.addressInputs}>
+        <form onSubmit={ handleSubmit } className={ styles.addressForm }>
+          <div className={ styles.addressInputs }>
             <InputForm
               name="street"
               label="Rua"
               type="text"
-              className={styles.addressInput}
-              handleChange={handleInputChange}
-              value={form.street}
+              className={ styles.addressInput }
+              handleChange={ handleInputChange }
+              value={ form.street }
               dataTestId="checkout-street-input"
             />
             <InputForm
               name="houseNumber"
               label="Número da casa"
               type="number"
-              className={styles.addressInput}
-              handleChange={handleInputChange}
-              value={form.houseNumber}
+              className={ styles.addressInput }
+              handleChange={ handleInputChange }
+              value={ form.houseNumber }
               dataTestId="checkout-house-number-input"
             />
           </div>
@@ -158,7 +166,7 @@ const Checkout = () => {
             type="submit"
             className="buttonMain"
             data-testid="checkout-finish-btn"
-            disabled={!cart.length || !form.street || !form.houseNumber}
+            disabled={ !cart.length || !form.street || !form.houseNumber }
           >
             Finalizar Pedido
           </button>

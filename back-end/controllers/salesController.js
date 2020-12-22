@@ -29,7 +29,7 @@ const insertSale = async (req, res) => {
       getCurrentDate(),
     );
 
-    for (let i = 0; i < productId.length; i++) {
+    for (let i = 0; i < productId.length; i += 1) {
       salesModel.insertSalesProducts(saleInserted, productId[i], quantity[i]);
     }
 

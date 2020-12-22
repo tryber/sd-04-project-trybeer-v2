@@ -5,25 +5,25 @@ import styles from './index.module.css';
 const Burger = ({ open, setOpen }) => (
   <button
     type="button"
-    open={open}
-    onClick={() => setOpen(!open)}
+    open={ open }
+    onClick={ () => setOpen(!open) }
     data-testid="top-hamburguer"
-    className={styles.btnBurger}
+    className={ styles.btnBurger }
   >
     <div
-      className={`${styles.divBurger} ${
+      className={ `${styles.divBurger} ${
         open ? styles.divBurgerTopActive : styles.divBurgerTop
-      }`}
+      }` }
     />
     <div
-      className={`${styles.divBurger} ${
+      className={ `${styles.divBurger} ${
         open ? styles.divBurgerMiddleActive : styles.divBurgerMiddle
-      }`}
+      }` }
     />
     <div
-      className={`${styles.divBurger} ${
+      className={ `${styles.divBurger} ${
         open ? styles.divBurgerBottomActive : styles.divBurgerBottom
-      }`}
+      }` }
     />
   </button>
 );
