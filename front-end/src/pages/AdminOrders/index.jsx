@@ -15,32 +15,38 @@ const AdminOrders = () => {
   }, []);
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={ styles.pageContainer }>
       <Menu />
-      <section className={styles.orders}>
+      <section className={ styles.orders }>
         <h2>Pedidos pendentes</h2>
         {!ordersData || !ordersData.length ? (
           <h3>Não há pedidos registrados</h3>
         ) : (
-          <ul className={styles.ordersList}>
+          <ul className={ styles.ordersList }>
             {ordersData.map(
               (
-                { id, status, totalPrice, deliveryAddress, deliveryNumber },
+                {
+                  id, status, totalPrice, deliveryAddress, deliveryNumber,
+                },
                 index,
               ) => (
-                <Link to={`/admin/orders/${id}`} key={id}>
-                  <li className={styles.orderItem}>
+                <Link to={ `/admin/orders/${id}` } key={ id }>
+                  <li className={ styles.orderItem }>
                     <div
-                      className={styles.orderNumber}
-                      data-testid={`${index}-order-number`}
-                    >{`Pedido ${id}`}</div>
+                      className={ styles.orderNumber }
+                      data-testid={ `${index}-order-number` }
+                    >
+                      {`Pedido ${id}`}
+                    </div>
                     <div
-                      className={styles.orderAddress}
-                      data-testid={`${index}-order-address`}
-                    >{`${deliveryAddress}, ${deliveryNumber}`}</div>
+                      className={ styles.orderAddress }
+                      data-testid={ `${index}-order-address` }
+                    >
+                      {`${deliveryAddress}, ${deliveryNumber}`}
+                    </div>
                     <div
-                      className={styles.orderValue}
-                      data-testid={`${index}-order-total-value`}
+                      className={ styles.orderValue }
+                      data-testid={ `${index}-order-total-value` }
                     >
                       {totalPrice.toLocaleString('pt-BR', {
                         style: 'currency',
@@ -48,12 +54,12 @@ const AdminOrders = () => {
                       })}
                     </div>
                     <div
-                      className={`${styles.orderStatus} ${
+                      className={ `${styles.orderStatus} ${
                         status === 'pending'
                           ? styles.pendingOrder
                           : styles.deliveredOrder
-                      }`}
-                      data-testid={`${index}-order-status`}
+                      }` }
+                      data-testid={ `${index}-order-status` }
                     >
                       {status === 'pending' ? 'Pendente' : 'Entregue'}
                     </div>

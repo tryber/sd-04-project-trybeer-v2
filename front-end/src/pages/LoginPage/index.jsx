@@ -48,27 +48,27 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={ styles.loginContainer }>
       <Menu nomeTela="TryBeer" />
-      <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <div className={styles.fieldsContainer}>
+      <form onSubmit={ handleSubmit } className={ styles.loginForm }>
+        <div className={ styles.fieldsContainer }>
           <InputForm
             type="email"
             name="email"
-            value={form.email}
+            value={ form.email }
             label="Email"
-            handleChange={handleChange}
+            handleChange={ handleChange }
             dataTestId="email-input"
-            className={styles.loginInput}
+            className={ styles.loginInput }
           />
           <InputForm
             type="password"
             name="password"
-            value={form.password}
+            value={ form.password }
             label="Password"
-            handleChange={handleChange}
+            handleChange={ handleChange }
             dataTestId="password-input"
-            className={styles.loginInput}
+            className={ styles.loginInput }
           />
         </div>
         <button
@@ -84,7 +84,7 @@ const Login = () => {
         <Link
           to="/register"
           data-testid="no-account-btn"
-          className={styles.noAccountBtn}
+          className={ styles.noAccountBtn }
         >
           Ainda não tenho conta
         </Link>
