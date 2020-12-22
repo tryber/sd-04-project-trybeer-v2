@@ -21,21 +21,17 @@ const AdminOrdersDetails = () => {
 
   const handleStatus = async () => {
     await api.updateSaleStatusAPI(orderData[0].saleID, 'delivered');
-    setOrderData(
-      orderData.map((product) =>
-        Object.assign({}, product, (product.status = 'delivered')),
-      ),
-    );
+    setOrderData(orderData.map((product) => ({ ...product, ...(product.status = 'delivered') })));
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={ styles.pageContainer }>
       <Menu />
 
       {!orderData ? (
         <h2>Pedido não encontrado</h2>
       ) : (
-        <section className={styles.orderDetails}>
+        <section className={ styles.orderDetails }>
           <h2>
             <span data-testid="order-number">{`Pedido ${id} - `}</span>
             <span
@@ -45,40 +41,44 @@ const AdminOrdersDetails = () => {
                   : styles.deliveredOrder
               }
               data-testid="order-status"
-            >{`${
-              orderData[0].status === 'pending' ? 'Pendente' : 'Entregue'
-            }`}</span>
+            >
+              {`${
+                orderData[0].status === 'pending' ? 'Pendente' : 'Entregue'
+              }`}
+            </span>
           </h2>
-          <ul className={styles.orderList}>
+          <ul className={ styles.orderList }>
             {orderData.map(
               ({ productName, productQuantity, productPrice }, index) => (
-                <li key={productName} className={styles.orderItem}>
-                  <div className={styles.orderItemLeftContainer}>
+                <li key={ productName } className={ styles.orderItem }>
+                  <div className={ styles.orderItemLeftContainer }>
                     <span
-                      className={styles.orderItemQty}
-                      data-testid={`${index}-product-qtd`}
+                      className={ styles.orderItemQty }
+                      data-testid={ `${index}-product-qtd` }
                     >
                       {productQuantity}
                     </span>
-                    <span className={styles.dashSpace}>-</span>
+                    <span className={ styles.dashSpace }>-</span>
                     <span
-                      className={styles.orderItemName}
-                      data-testid={`${index}-product-name`}
+                      className={ styles.orderItemName }
+                      data-testid={ `${index}-product-name` }
                     >
                       {productName}
                     </span>
                   </div>
-                  <div className={styles.orderItemRightContainer}>
+                  <div className={ styles.orderItemRightContainer }>
                     <span
-                      className={styles.unitaryPrice}
-                      data-testid={`${index}-order-unit-price`}
-                    >{`(${productPrice.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })})`}</span>
+                      className={ styles.unitaryPrice }
+                      data-testid={ `${index}-order-unit-price` }
+                    >
+                      {`(${productPrice.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })})`}
+                    </span>
                     <span
-                      className={styles.orderItemPrice}
-                      data-testid={`${index}-product-total-value`}
+                      className={ styles.orderItemPrice }
+                      data-testid={ `${index}-product-total-value` }
                     >
                       {(productPrice * productQuantity).toLocaleString(
                         'pt-BR',
@@ -94,17 +94,19 @@ const AdminOrdersDetails = () => {
             )}
           </ul>
           <h2
-            className={styles.orderTotal}
+            className={ styles.orderTotal }
             data-testid="order-total-value"
-          >{`Total: ${orderData[0].totalPrice.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          })}`}</h2>
+          >
+            {`Total: ${orderData[0].totalPrice.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}`}
+          </h2>
           {orderData[0].status === 'pending' ? (
             <button
               type="button"
               className="buttonMain"
-              onClick={() => handleStatus()}
+              onClick={ () => handleStatus() }
               data-testid="mark-as-delivered-btn"
             >
               Marcar como entregue
