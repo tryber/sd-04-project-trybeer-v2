@@ -1,15 +1,15 @@
 const { Router } = require('express');
 const { userController } = require('../controllers');
-const { usersModel } = require('../models');
+// const { users } = require('../models');
 
 const userRouter = Router();
 
-userRouter.post('/', userController.createUserController);
-userRouter.put('/update', userController.updateUserController);
 /* userRouter.get('/', async (req, res) => {
   console.log('?');
-  const test = await usersModel.findAll();
+  const test = await users.findAll();
   res.status(200).json(test);
 }); */
+userRouter.post('/', userController.createUserController);
+userRouter.put('/update', userController.updateUserController);
 
 module.exports = userRouter;
