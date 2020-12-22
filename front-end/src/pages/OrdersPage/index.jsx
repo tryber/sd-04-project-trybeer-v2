@@ -32,7 +32,7 @@ const Orders = () => {
                 totalPrice={ order.totalPrice }
                 saleDate={ order.saleDate }
                 index={ index }
-                key={ index }
+                key={ order.id }
               />
             ))
             : ''}

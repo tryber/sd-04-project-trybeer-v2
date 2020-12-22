@@ -13,6 +13,8 @@ const Products = () => {
   const { cart, setCart } = useContext(Context);
   const isInitialMount = React.useRef(true);
 
+  const zero = 0;
+
   useEffect(() => {
     // (async () => {
     //   const products = await api.productsAPI();
@@ -54,7 +56,7 @@ const Products = () => {
             img={ urlImage }
             name={ name }
             price={ price }
-            key={ `${name}-${index}` }
+            key={ `${name}-${id}` }
           />
         ))}
       </div>
@@ -64,13 +66,13 @@ const Products = () => {
             .reduce((acc, cur) => {
               const itemTotal = cur.price * cur.quantity;
               return acc + itemTotal;
-            }, 0)
+            }, zero)
             .toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}
         </span>
-        {cart.length === 0 ? (
+        {cart.length === zero ? (
           <button disabled className={ styles.buttonCart } type="button" data-testid="checkout-bottom-btn">
             Ver Carrinho
           </button>

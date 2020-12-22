@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Context } from '../../context/Provider';
 import styles from './index.module.css';
 
+const zero = 0;
+
 const Card = ({
   img, name, price, index, id,
 }) => {
@@ -16,33 +18,37 @@ const Card = ({
     const itemInCart = cart.findIndex((product) => product.id === productId);
     const number = -1;
 
-    itemInCart !== number
-      ? setCart(
-        cart.map((product) => (
-          product.id === productId
-            ? ({ ...product, ...(product.quantity += 1) })
-            : product
-        )),
-      )
-      : setCart([...cart, itemAdd]);
+    if (itemInCart !== number) {
+      return setCart(
+        cart.map((product) => {
+          if (product.id === productId) {
+            const addQuantity = { ...product, ...(product.quantity += 1) };
+            return addQuantity;
+          } return product;
+        }),
+      );
+    } return setCart([...cart, itemAdd]);
   };
 
   const decrementCounterHandler = (productId) => {
     const itemInCart = cart.findIndex((product) => product.id === id);
 
-    if (itemInCart >= 0 && cart[itemInCart].quantity > 0) {
-      setCart(
-        cart.map((product) => (
-          product.id === productId
-            ? ({ ...product, ...(product.quantity -= 1) })
-            : product
-        )),
+    if (itemInCart >= zero && cart[itemInCart].quantity > zero) {
+      return setCart(
+        cart.map((product) => {
+          if (product.id === productId) {
+            const subtractQuantity = { ...product, ...(product.quantity -= 1) };
+            return subtractQuantity;
+          } return product;
+        }),
       );
     }
 
-    if (itemInCart >= 0 && cart[itemInCart].quantity === 0) {
-      setCart(cart.filter((item) => item.quantity > 0));
+    if (itemInCart >= zero && cart[itemInCart].quantity === zero) {
+      setCart(cart.filter((item) => item.quantity > zero));
     }
+
+    return null;
   };
 
   return (
@@ -71,7 +77,7 @@ const Card = ({
         </button>
         <span data-testid={ `${index}-product-qtd` }>
           {!cart.filter((item) => item.id === id)[0]
-            ? 0
+            ? zero
             : cart.filter((item) => item.id === id)[0].quantity}
         </span>
         <button

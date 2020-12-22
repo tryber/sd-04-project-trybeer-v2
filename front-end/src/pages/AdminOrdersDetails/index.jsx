@@ -16,12 +16,15 @@ const AdminOrdersDetails = () => {
   }, [id]);
 
   React.useEffect(() => {
-    console.log(orderData);
+    // console.log(orderData);
   }, [orderData]);
 
   const handleStatus = async () => {
     await api.updateSaleStatusAPI(orderData[0].saleID, 'delivered');
-    setOrderData(orderData.map((product) => ({ ...product, ...(product.status = 'delivered') })));
+    setOrderData(orderData.map((product) => {
+      const deliveredStatus = { ...product, ...(product.status = 'delivered') };
+      return deliveredStatus;
+    }));
   };
 
   return (

@@ -14,6 +14,9 @@ const Checkout = () => {
   const finishTimeout = React.useRef();
   const history = useHistory();
 
+  const zero = 0;
+  const threeThousand = 3000;
+
   React.useEffect(() => {
     const setState = () => setCart(getLS('cart'));
     setState();
@@ -44,7 +47,7 @@ const Checkout = () => {
       cart.reduce((acc, cur) => {
         const itemTotal = cur.price * cur.quantity;
         return acc + itemTotal;
-      }, 0),
+      }, zero),
       form.street,
       form.houseNumber,
       cart.map((product) => product.id),
@@ -56,7 +59,7 @@ const Checkout = () => {
     finishTimeout.current = setTimeout(() => {
       setFinish(null);
       history.push('/products');
-    }, 3000);
+    }, threeThousand);
   };
 
   if (!getLS('user') || !getLS('user').token) history.push('/login');
@@ -129,7 +132,7 @@ const Checkout = () => {
             .reduce((acc, cur) => {
               const itemTotal = cur.price * cur.quantity;
               return acc + itemTotal;
-            }, 0)
+            }, zero)
             .toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',

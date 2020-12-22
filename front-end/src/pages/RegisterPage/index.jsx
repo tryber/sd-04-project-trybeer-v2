@@ -26,7 +26,9 @@ const Register = () => {
 
   const checkName = (nome) => nome.match(/^([a-zA-Z\s]){12,100}$/);
   const checkEmail = (mail) => mail.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  const checkSenha = (senha) => senha.length >= 6;
+
+  const six = 6;
+  const checkSenha = (senha) => senha.length >= six;
 
   const handleName = (nome) => setState({ ...state, name: nome });
   const handleEmail = (carta) => setState({ ...state, email: carta });
@@ -41,7 +43,9 @@ const Register = () => {
       const createUser = await createUserAPI(name, email, password, role);
       const apiResponse = createUser;
 
-      if (apiResponse.status === 403) {
+      const forbidden = 403;
+
+      if (apiResponse.status === forbidden) {
         return setState({ ...state, erro: apiResponse.data.message });
       }
 
@@ -50,6 +54,7 @@ const Register = () => {
     } catch (err) {
       console.error(err);
     }
+    return null;
   };
 
   return (
@@ -58,44 +63,49 @@ const Register = () => {
       <form className={ styles.formRegister } method="POST" onSubmit={ handleSubmit }>
         <label className="inputLabel" htmlFor="name">
           Nome
+          <br />
+          <input
+            className={ styles.inputRegister }
+            data-testid="signup-name"
+            type="text"
+            name="name"
+            id="name"
+            minLength={ 12 }
+            maxLength={ 100 }
+            onChange={ (e) => handleName(e.target.value) }
+            value={ name }
+            required
+          />
         </label>
-        <input
-          className={ styles.inputRegister }
-          data-testid="signup-name"
-          type="text"
-          name="name"
-          id="name"
-          minLength={ 12 }
-          maxLength={ 100 }
-          onChange={ (e) => handleName(e.target.value) }
-          value={ name }
-          required
-        />
-        <label className="inputLabel">Email</label>
-        <input
-          className={ styles.inputRegister }
-          data-testid="signup-email"
-          type="email"
-          name="email"
-          id="email"
-          onChange={ (e) => handleEmail(e.target.value) }
-          value={ email }
-          required
-        />
+        <label className="inputLabel" htmlFor="email">
+          Email
+          <br />
+          <input
+            className={ styles.inputRegister }
+            data-testid="signup-email"
+            type="email"
+            name="email"
+            id="email"
+            onChange={ (e) => handleEmail(e.target.value) }
+            value={ email }
+            required
+          />
+        </label>
         <label className="inputLabel" htmlFor="password">
           Password
+          <br />
+          <input
+            className={ styles.inputRegister }
+            data-testid="signup-password"
+            type="password"
+            name="password"
+            id="password"
+            onChange={ (e) => handlePassword(e.target.value) }
+            value={ password }
+            required
+          />
         </label>
-        <input
-          className={ styles.inputRegister }
-          data-testid="signup-password"
-          type="password"
-          name="password"
-          id="password"
-          onChange={ (e) => handlePassword(e.target.value) }
-          value={ password }
-          required
-        />
-        <label className={ styles.wantToSell }>
+        <label className={ styles.wantToSell } htmlFor="seller">
           <input
             className={ styles.checkboxInput }
             data-testid="signup-seller"
