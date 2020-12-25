@@ -12,39 +12,39 @@ const Menu = ({ nomeTela }) => {
   useOnClickOutside(node, () => setOpen(false));
 
   return (
-    <header className={styles.header} ref={node}>
-      <Burger open={open} setOpen={setOpen} />
-      <StyledMenu open={open} className="side-menu-container">
+    <header className={ styles.header } ref={ node }>
+      <Burger open={ open } setOpen={ setOpen } />
+      <StyledMenu open={ open } className="side-menu-container">
         <Link
           to="/products"
-          className={styles.navLink}
+          className={ styles.navLink }
           data-testid="side-menu-item-products"
         >
           Produtos
         </Link>
         <Link
           to="/orders"
-          className={styles.navLink}
+          className={ styles.navLink }
           data-testid="side-menu-item-my-orders"
         >
           Meus pedidos
         </Link>
         <Link
           to="/profile"
-          className={styles.navLink}
+          className={ styles.navLink }
           data-testid="side-menu-item-my-profile"
         >
           Meu Perfil
         </Link>
         <Link
           to="/login"
-          className={styles.navLink}
+          className={ styles.navLink }
           data-testid="side-menu-item-logout"
         >
           Sair
         </Link>
       </StyledMenu>
-      <h1 className={styles.topTitle} data-testid="top-title">
+      <h1 className={ styles.topTitle } data-testid="top-title">
         {nomeTela}
       </h1>
     </header>

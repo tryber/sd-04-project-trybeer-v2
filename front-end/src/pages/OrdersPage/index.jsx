@@ -22,19 +22,19 @@ const Orders = () => {
   ) : (
     <div>
       <Menu nomeTela="Meus Pedidos" />
-      <div className={styles.containerOrders}>
+      <div className={ styles.containerOrders }>
         <h2>Meus pedidos</h2>
-        <div className={styles.products}>
+        <div className={ styles.products }>
           {sales
             ? sales.map((order, index) => (
-                <OrderCard
-                  id={order.id}
-                  totalPrice={order.totalPrice}
-                  saleDate={order.saleDate}
-                  index={index}
-                  key={index}
-                />
-              ))
+              <OrderCard
+                id={ order.id }
+                totalPrice={ order.totalPrice }
+                saleDate={ order.saleDate }
+                index={ index }
+                key={ order.id }
+              />
+            ))
             : ''}
         </div>
       </div>

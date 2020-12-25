@@ -16,7 +16,7 @@ const ProfilePage = () => {
     setName(getLS('user').name);
   }, []);
 
-  const checkNameChange = () => (getLS('user').name === name ? true : false);
+  const checkNameChange = () => (getLS('user').name === name);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,33 +28,33 @@ const ProfilePage = () => {
 
   if (!getLS('user').email) return <Redirect to="/login" />;
   return (
-    <div className={styles.profileContainer}>
+    <div className={ styles.profileContainer }>
       <Menu nomeTela="Meu perfil" />
-      <form onSubmit={handleSubmit} className={styles.profileForm}>
-        <div className={styles.profileFieldsContainer}>
+      <form onSubmit={ handleSubmit } className={ styles.profileForm }>
+        <div className={ styles.profileFieldsContainer }>
           <InputForm
             name="name"
-            handleChange={({ target }) => setName(target.value)}
+            handleChange={ ({ target }) => setName(target.value) }
             label="Nome"
-            value={name}
+            value={ name }
             type="text"
             dataTestId="profile-name-input"
           />
           <InputForm
             name="Email"
             label="Email"
-            value={email}
+            value={ email }
             type="text"
             dataTestId="profile-email-input"
             readOnly
           />
         </div>
-        <div className={styles.profileFieldsContainer}>
+        <div className={ styles.profileFieldsContainer }>
           <button
             data-testid="profile-save-btn"
             type="submit"
             className="buttonMain"
-            disabled={checkNameChange()}
+            disabled={ checkNameChange() }
           >
             Salvar
           </button>
