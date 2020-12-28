@@ -32,21 +32,19 @@ const loginController = async (req, res) => {
 const createUserController = async (req, res) => {
   try {
     const data = req.body;
-    const result = await users.findAll({ where: { email: data.email } });
-
-    console.log(result);
+    const result = await users.findOne({ where: { email: data.email } });
 
     if (result) {
-      if (result.email === data.email) {
+      if (result.dataValues.email === data.email) {
         return res.status(403).json({ message: 'E-mail already in database.' });
       }
     }
 
     await users.create(data);
     const userInfo = await authentication.authToken(data.email, data.password);
-    return res.status(201).json(userInfo);
+    return res.status(201).json(userInfo.dataValues);
   } catch (err) {
-    console.error('createUserController', err.message);
+    console.error('createUserController', err);
     return res.status(500).json({ message: 'Erro interno' });
   }
 };

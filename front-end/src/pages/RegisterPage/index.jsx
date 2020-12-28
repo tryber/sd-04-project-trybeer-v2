@@ -38,23 +38,18 @@ const Register = () => {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const createUser = await createUserAPI(name, email, password, role);
-      const apiResponse = createUser;
+    e.preventDefault();
+    const createUser = await createUserAPI(name, email, password, role);
+    const apiResponse = createUser;
 
-      const forbidden = 403;
+    const forbidden = 403;
 
-      if (apiResponse.status === forbidden) {
-        return setState({ ...state, erro: apiResponse.data.message });
-      }
-
-      setLS('user', apiResponse.data);
-      return history.push(box ? '/admin/orders' : '/products');
-    } catch (err) {
-      console.error(err);
+    if (apiResponse.status === forbidden) {
+      return setState({ ...state, erro: apiResponse.data.message });
     }
-    return null;
+
+    setLS('user', apiResponse.data);
+    return history.push(box ? '/admin/orders' : '/products');
   };
 
   return (

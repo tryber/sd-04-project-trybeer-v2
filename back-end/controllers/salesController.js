@@ -1,9 +1,9 @@
-const { salesModel } = require('../models');
+const { sales, sales_products } = require('../models');
 const { getCurrentDate } = require('../utils/date');
 
-const getAllSalesController = async (_req, res) => {
+const getAllSales = async (_req, res) => {
   try {
-    const data = await salesModel.getAllSales();
+    const data = await sales.findAll();
     if (!data.length) return new Error('Sales info not found');
     return res.status(200).json({ sales: data });
   } catch (err) {
@@ -21,16 +21,21 @@ const insertSale = async (req, res) => {
       productId,
       quantity,
     } = req.body;
-    const saleInserted = await salesModel.insertSale(
-      userId,
-      totalPrice,
-      deliveryAddr,
-      deliveryNumber,
-      getCurrentDate(),
-    );
+    const saleInserted = await sales.create({
+      user_id: userId,
+      total_price: totalPrice,
+      delivery_address: deliveryAddr,
+      delivery_number: deliveryNumber,
+      sale_date: getCurrentDate(),
+      status: 'pending',
+    });
 
     for (let i = 0; i < productId.length; i += 1) {
-      salesModel.insertSalesProducts(saleInserted, productId[i], quantity[i]);
+      sales_products.create({
+        sale_id: saleInserted.dataValues.id,
+        product_id: productId[i],
+        quantity: quantity[i],
+      });
     }
 
     res.status(201).json({ message: 'Sale successfully created' });
@@ -45,7 +50,7 @@ const getSaleById = async (req, res) => {
     const { id: saleId } = req.params;
 
     if (saleId) {
-      const orderDetails = await salesModel.getSaleById(saleId);
+      const orderDetails = await sales.findOne({ where: { id: saleId } });
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });
@@ -56,9 +61,9 @@ const getSaleById = async (req, res) => {
 
 const updateSaleStatus = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id: saleId } = req.params;
     const { status } = req.body;
-    await salesModel.updateSaleStatus(id, status);
+    await sales.update({ status }, { where: { id: saleId } });
     res.status(200).json({ message: 'Sale updated succesfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -66,7 +71,7 @@ const updateSaleStatus = async (req, res) => {
 };
 
 module.exports = {
-  getAllSalesController,
+  getAllSales,
   getSaleById,
   insertSale,
   updateSaleStatus,

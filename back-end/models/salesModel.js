@@ -5,6 +5,7 @@ const salesModel = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       user_id: {
         type: DataTypes.INTEGER,
@@ -23,7 +24,6 @@ const salesModel = (sequelize, DataTypes) => {
 
   Sales.associate = (models) => {
     Sales.belongsTo(models.users, { foreignKey: 'user_id', as: 'users' });
-    Sales.hasMany(models.sales_products, { foreignKey: 'sale_id', as: 'sales_products' });
   };
 
   return Sales;
