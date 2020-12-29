@@ -1,4 +1,4 @@
-const { usersModel } = require('../models');
+const { users } = require('../models');
 const {
   ERR_EMAIL_NOT_FOUND,
   ERR_INVALID_PASSWORD,
@@ -6,7 +6,7 @@ const {
 const Token = require('./token');
 
 const authToken = async (userEmail, userPassword) => {
-  const user = await usersModel.findAll({ where: { email: userEmail } });
+  const user = await users.findOne({ where: { email: userEmail } });
 
   if (!user) {
     throw new Error(ERR_EMAIL_NOT_FOUND);
@@ -15,7 +15,7 @@ const authToken = async (userEmail, userPassword) => {
   if (userPassword !== user.password) {
     throw new Error(ERR_INVALID_PASSWORD);
   }
-  // isolar esse trecho para ser usado tanto no login qnt no cadastro
+
   const token = await Token.generate({
     userId: user.id,
     userName: user.name,
@@ -23,7 +23,7 @@ const authToken = async (userEmail, userPassword) => {
     userRole: user.role,
   });
 
-  const { password, ...userInfo } = user;
+  const { password, ...userInfo } = user.dataValues;
 
   return { ...userInfo, token };
 };
