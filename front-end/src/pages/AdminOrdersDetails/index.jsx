@@ -27,6 +27,19 @@ const AdminOrdersDetails = () => {
     }));
   };
 
+  const styleStatus = () => {
+    if (orderData[0].status === 'pending') {
+      return styles.pendingOrder;
+    }
+    if (orderData[0].status === 'Preparando') {
+      return styles.preparingOrder;
+    }
+    if (orderData[0].status === 'Entregue') {
+      return styles.deliveredOrder;
+    }
+    return null;
+  };
+
   return (
     <div className={ styles.pageContainer }>
       <Menu />
@@ -39,10 +52,7 @@ const AdminOrdersDetails = () => {
             <span data-testid="order-number">{`Pedido ${id} - `}</span>
             <span
               className={
-                // mudar pra if
-                orderData[0].status === 'Pendente'
-                  ? styles.pendingOrder
-                  : styles.deliveredOrder
+                styleStatus()
               }
               data-testid="order-status"
             >
@@ -106,21 +116,21 @@ const AdminOrdersDetails = () => {
               currency: 'BRL',
             })}`}
           </h2>
-          {orderData[0].status === 'Pendente' ? (
+          {orderData[0].status === 'pending' ? (
             <button
               type="button"
               className="buttonMain"
-              onClick={ () => handleStatus('Entreque') }
+              onClick={ () => handleStatus('Preparando') }
               data-testid="mark-as-prepared-btn"
             >
               Preparar Pedido
             </button>
           ) : ''}
-          {orderData[0].status === 'Pendente' ? (
+          {orderData[0].status === 'pending' ? (
             <button
               type="button"
               className="buttonMain"
-              onClick={ () => handleStatus('Preparando') }
+              onClick={ () => handleStatus('Entregue') }
               data-testid="mark-as-delivered-btn"
             >
               Marcar como entregue

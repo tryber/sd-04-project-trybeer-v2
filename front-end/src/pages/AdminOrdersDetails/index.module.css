@@ -27,6 +27,13 @@
   border-radius: 0.2rem;
 }
 
+.preparingOrder {
+  color: black;
+  background-color: rgb(184, 128, 170);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
 .orderList {
   list-style: none;
   width: 100%;
