@@ -78,7 +78,6 @@ const AdminOrderDetails = () => {
           <h3 data-testid="order-total-value">
             {`Total: R$ ${totalPrice.toString().replace('.', ',')}0`}
           </h3>
-
           <button
             type="button"
             data-testid="mark-as-delivered-btn"
