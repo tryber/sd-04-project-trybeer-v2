@@ -1,21 +1,17 @@
 {
   "root": true,
   "env": {
-      "browser": true,
-      "commonjs": true,
-      "es2020": true,
-      "node": true,
-      "jest": true
+    "es2020": true,
+    "node": true,
+    "jest": true
   },
   "extends": "airbnb-base",
-  "parserOptions": { "ecmaVersion": 11 },
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
   "rules": {
     "no-console": "off",
-    "no-alert": "off",
-    "arrow-parens": [2, "always"],
-    "jsx-a11y/label-has-associated-control": 0,
-    "quotes": [2, "single"],
-    "implicit-arrow-linebreak": "off",
     "consistent-return": "off",
     "no-unused-vars": [
       "error",
@@ -24,6 +20,13 @@
         "ignoreRestSiblings": true
       }
     ],
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "prefer-promise-reject-errors": ["warn", { "allowEmptyReject": true }],
+    "import/no-commonjs": "off",
+    "import/no-dynamic-require": "off",
+    "camelcase": ["error", { "properties": "never", "ignoreDestructuring": true }],
+    "max-nested-callbacks": ["error", 2],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "no-plusplus": "off"
   }
 }

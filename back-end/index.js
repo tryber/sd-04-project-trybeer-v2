@@ -1,24 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const userRouter = require('./routers/userRouters');
-const profileRouter = require('./routers/profileRouter');
-const productRouter = require('./routers/productRouters');
-const ordersRouter = require('./routers/ordersRouter');
-const checkoutRouter = require('./routers/checkoutRouter');
+const routes = require('./routes');
 
 const app = express();
 const port = 3001;
 
-app.use(cors());
-app.use(express.json());
-
 app.use('/images', express.static('images'));
 
-app.use('/', userRouter);
-app.use('/products', productRouter);
-// app.use('/checkout', checkoutRouter);
-// app.use('/profile', profileRouter);
-// app.use('/orders', ordersRouter);
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/', routes.userRoutes, routes.productsRoutes);
 
-app.listen(port, () => console.log('API rodando na porta 3001!'));
+app.listen(port, () => console.log(`App listening on port ${port}!`));
