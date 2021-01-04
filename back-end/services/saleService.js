@@ -8,19 +8,19 @@ const {
 
 const postNewSale = async (
   id,
-  delivery_address,
-  delivery_number,
+  deliveryAddress,
+  deliveryNumber,
   cart,
-  total_price,
+  totalPrice,
 ) => {
   const date = moment().format('YYYY/MM/DD h:mm:ss');
   const status = 'Pendente';
 
   const sale = await sales.create({
     user_id: id,
-    total_price,
-    delivery_address,
-    delivery_number,
+    total_price: totalPrice,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
     sale_date: date,
     status,
   });

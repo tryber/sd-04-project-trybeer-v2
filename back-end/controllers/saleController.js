@@ -26,7 +26,8 @@ const saleRegister = async (req, res) => {
 const getSales = async (_req, res) => {
   const asales = await sales.findAll();
 
-  // const allSales = asales.map(([id, userId, totalPrice, nameAdress, numberAdress, date, status]) => (
+  // const allSales =
+  // asales.map(([id, userId, totalPrice, nameAdress, numberAdress, date, status]) => (
   //   { id, userId, totalPrice, nameAdress, numberAdress, date, status }
   // ));
 

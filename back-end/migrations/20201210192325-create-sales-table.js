@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('sales', {
@@ -16,7 +14,7 @@ module.exports = {
       },
       total_price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(9,2),
+        type: Sequelize.DECIMAL(9, 2),
       },
       delivery_address: {
         allowNull: false,
