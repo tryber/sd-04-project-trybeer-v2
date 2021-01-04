@@ -1,0 +1,83 @@
+.orders-page{
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #cecece 0%,#f6f6f6 10%,#f3f3f3 25%,#f3f3f3 37%,#f4f4f4 50%,#eaeaea 51%,#f6f6f6 83%,#d3d3d3 100%);
+}
+
+.container {
+  text-align: center;
+  width: 90%;
+  font-family: akbar;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 15px;
+}
+
+.flex {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 13%;
+}
+
+.linkRemove {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.listRemove {
+  list-style-type: none;
+  width: 95%;
+}
+
+.orderList {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.listFlex {
+  color: black;
+  margin: 0.2em;
+  overflow: hidden;
+  width: 80%;
+  padding: 0.3em;
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.466);
+  display: flex;
+
+}
+
+.elements {
+  flex: 1 1 80px;
+}
+.noOrders {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 500;
+  font-family: akbar;
+}
+
+.listFlex > img {
+  width: 3%;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 469px) {
+  .listFlex > img {
+    width: 15px;
+    max-width: 400px;
+  }
+  .elements {
+    font-size: small;
+  }
+}
+@media screen and (max-width: 900px) {
+  .listFlex > img {
+    width: 20px;
+  }
+}

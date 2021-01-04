@@ -1,29 +1,72 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import OrderDetail from './pages/OrderDetail';
+import {
+  UserProfile,
+  FormPage,
+  Products,
+  Checkout,
+  AdminOrders,
+  AdminOrderDetails,
+  AdminProfile,
+  Orders,
+} from './pages';
+import LoginForm from './components/forms/LoginForm';
+import ForgotPasswordForm from './components/forms/ForgotPasswordForm';
+import ResetPasswordForm from './components/forms/ResetPasswordForm';
+import RegisterForm from './components/forms/RegisterForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Redirect to="/login" />
+      </Route>
+      <Route path="/login">
+        <FormPage>
+          <LoginForm />
+        </FormPage>
+      </Route>
+      <Route path="/forgotPassword">
+        <FormPage>
+          <ForgotPasswordForm />
+        </FormPage>
+        </Route>
+        <Route path="/resetPassword">
+        <FormPage>
+          <ResetPasswordForm />
+        </FormPage>
+      </Route>
+      <Route path="/profile">
+        <UserProfile />
+      </Route>
+      <Route path="/orders/:id">
+        <OrderDetail />
+      </Route>
+      <Route path="/register">
+        <FormPage>
+          <RegisterForm />
+        </FormPage>
+      </Route>
+      <Route path="/orders">
+        <Orders />
+      </Route>
+      <Route path="/checkout">
+        <Checkout />
+      </Route>
+      <Route path="/products">
+        <Products />
+      </Route>
+      <Route path="/admin/orders/:id">
+        <AdminOrderDetails />
+      </Route>
+      <Route path="/admin/orders">
+        <AdminOrders />
+      </Route>
+      <Route path="/admin/profile">
+        <AdminProfile />
+      </Route>
+    </Switch>
   );
 }
 
