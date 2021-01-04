@@ -30,22 +30,24 @@ const OrderDetails = () => {
       {redirectToLogin && <Redirect to="/login" />}
       {orderDetails.length && (
         <div>
-          <p data-testid="order-number">{`Pedido ${orderDetails[0].saleID}`}</p>
+          <p data-testid="order-number">{`Pedido ${orderDetails[0].id}`}</p>
           <p data-testid="order-date">
             {new Date(orderDetails[0].saleDate)
               .toLocaleDateString('pt-BR', { timeZone: 'UTC' })
               .slice(0, 5)}
           </p>
-          <p data-testid="order-total-value">{`Total: R$ ${orderDetails[0].totalPrice
+          <p data-testid="order-total-value">{`Total: R$ ${Number(
+            orderDetails[0].totalPrice,
+          )
             .toFixed(2)
             .replace('.', ',')}`}</p>
         </div>
       )}
-      {orderDetails && (
+      {/* {orderDetails && (
         <ol>
-          {orderDetails.map((order, index) => (
-            <li key={order.productName}>
-              <p data-testid={`${index}-product-name`}>{order.productName}</p>
+          {orderDetails[0].products.map((product, index) => (
+            <li key={product.name}>
+              <p data-testid={`${index}-product-name`}>{product.name}</p>
               <p data-testid={`${index}-product-qtd`}>
                 {order.productQuantity}
               </p>
@@ -57,7 +59,7 @@ const OrderDetails = () => {
             </li>
           ))}
         </ol>
-      )}
+      )} */}
     </div>
   );
 };

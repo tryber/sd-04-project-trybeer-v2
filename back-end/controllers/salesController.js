@@ -1,40 +1,57 @@
-// const express = require('express');
-// const { sales } = require('../models');
-// const salesProductsModel = require('../models/salesProductsModel');
+const express = require('express');
+const { sales, salesProducts } = require('../models');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const { userId } = req.query;
-//     if (userId) {
-//       const salesById = await salesModel.getSalesByUserId(userId);
-//       return res.status(200).json(salesById);
-//     }
-//     const sales = await salesModel.getSales();
-//     return res.status(200).json(sales);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
+router.get('/', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    if (userId) {
+      const salesById = await sales.findAll({ where: { userId } });
+      return res.status(200).json(salesById);
+    }
+    const Sales = await sales.findAll();
+    return res.status(200).json(Sales);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
 
-// router.post('/', async (req, res) => {
-//   try {
-//     const { userId, price, street, houseNumber, date, status, productId, quantity } = req.body;
-//     const order =
-//     await salesModel.registerSale(userId, price, street, houseNumber, date, status);
+router.post('/', async (req, res) => {
+  try {
+    console.log(req.body);
+    const {
+      price: totalPrice,
+      street: deliveryAddress,
+      houseNumber: deliveryNumber,
+      date: saleDate,
+      status,
+      userId,
+      productId,
+      quantity,
+    } = req.body;
 
-//     const saleId = order.getAutoIncrementValue();
+    const order = await sales.create({
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+      saleDate,
+      status,
+      userId,
+    });
 
-//     for (let i = 0; i < productId.length; i++) {
-//       salesProductsModel.registerSalesProducts(saleId, productId[i], quantity[i]);
-//     }
+    const saleId = order.dataValues.id; // pegar o id do pedido para salvar na tabela N:N
 
-//     return res.status(200).json({ message: 'dados inseridos nas duas tabelas' });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
+    for (let i = 0; i < productId.length; i += 1) {
+      salesProducts.create({ saleId, productId: productId[i], quantity: quantity[i] });
+    }
+
+    // return res.status(200).json({ message: 'dados inseridos nas duas tabelas' });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 // router.put('/', async (req, res) => {
 //   try {
@@ -46,4 +63,4 @@
 //   }
 // });
 
-// module.exports = router;
+module.exports = router;

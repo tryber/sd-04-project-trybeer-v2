@@ -29,7 +29,7 @@ const Products = ({ cart, increaseQtd, decreaseQtd, total, saveCartLS }) => {
           params: { email: JSON.parse(localStorage.getItem('user')).email },
         })
         .then((res) => {
-          localStorage.setItem('userID', res.data[0]);
+          localStorage.setItem('userID', res.data.id);
         })
         .catch((error) => console.log(error));
     }
@@ -71,13 +71,15 @@ const Products = ({ cart, increaseQtd, decreaseQtd, total, saveCartLS }) => {
         products.map((product, index) => (
           <div key={product.name}>
             <p data-testid={`${index}-product-name`}>{product.name}</p>
-            <p
-              data-testid={`${index}-product-price`}
-            >{`R$ ${product.price.toFixed(2).replace('.', ',')}`}</p>
+            <p data-testid={`${index}-product-price`}>{`R$ ${parseFloat(
+              product.price,
+            )
+              .toFixed(2)
+              .replace('.', ',')}`}</p>
             <img
               data-testid={`${index}-product-img`}
               alt=""
-              src={product.urlImage}
+              src={product.url_image}
               width="100px"
             />
             <button
@@ -110,7 +112,7 @@ const Products = ({ cart, increaseQtd, decreaseQtd, total, saveCartLS }) => {
         <p data-testid="checkout-bottom-btn-value">
           {total === null
             ? 'R$ 0,00'
-            : `R$ ${total.toFixed(2).replace('.', ',')}`}
+            : `R$ ${parseFloat(total).toFixed(2).replace('.', ',')}`}
         </p>
       </div>
     </div>

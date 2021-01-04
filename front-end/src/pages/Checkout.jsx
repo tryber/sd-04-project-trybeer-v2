@@ -10,17 +10,13 @@ import Menu from '../components/Menu';
 import { updateTotalCheckout, updateCart } from '../actions';
 
 const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
-  const [userLS, setUserLS] = useState(null);
-
   // dados para registrar a venda
-  const [userId, setUserId] = useState('');
   const [price, setPrice] = useState('');
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
   const [date, setDate] = useState(
     new Date().toISOString().slice(0, 19).replace('T', ' '),
   );
-  const [status, setStatus] = useState('Pendente');
   ///////////////////////////////////////////////////////////
 
   // dados para o insert na tabela sales_products
@@ -44,24 +40,8 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
     if (!localStorage.getItem('user')) {
       return setRedirectToLogin(true);
     }
-    const userData = JSON.parse(localStorage.getItem('user'));
-    setUserLS(userData);
     saveCart();
   }, []);
-
-  // requisição para pegar o id do usuário no banco
-  if (userLS) {
-    axios
-      .get('http://localhost:3001/users', {
-        params: { email: userLS.email },
-      })
-      .then((res) => {
-        setUserId(res.data[0]);
-        localStorage.setItem('userID', userId);
-      })
-      .catch((error) => console.log(error));
-  }
-  //////////////////////////////////////////////////
 
   useEffect(() => {
     setPrice(total);
@@ -88,12 +68,12 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
   const registerSale = () => {
     axios
       .post('http://localhost:3001/sales', {
-        userId,
+        userId: JSON.parse(localStorage.getItem('userID')),
         price,
         street,
         houseNumber,
         date,
-        status,
+        status: 'Pendente',
         productId,
         quantity,
       })
@@ -123,9 +103,11 @@ const Checkout = ({ cart, total, updateTotal, updateProducts, saveCartLS }) => {
         cart.map((item, index) => (
           <div key={item.name}>
             <p data-testid={`${index}-product-name`}>{item.name}</p>
-            <p
-              data-testid={`${index}-product-unit-price`}
-            >{`(R$ ${item.price.toFixed(2).replace('.', ',')} un)`}</p>
+            <p data-testid={`${index}-product-unit-price`}>{`(R$ ${parseFloat(
+              item.price,
+            )
+              .toFixed(2)
+              .replace('.', ',')} un)`}</p>
             <p data-testid={`${index}-product-qtd-input`}>{item.quantity}</p>
             <p data-testid={`${index}-product-total-value`}>{`R$ ${(
               item.price * item.quantity
