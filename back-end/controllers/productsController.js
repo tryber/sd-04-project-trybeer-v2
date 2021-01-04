@@ -1,9 +1,17 @@
 const rescue = require('express-rescue');
-const { getAll } = require('../models/genericModel');
+const { products } = require('../models');
 
 const getAllProducts = rescue(async (_req, res) => {
-  const products = await getAll(['id', 'name', 'price', 'url_image'], 'products');
-  res.json(products);
+  const allProducts = await products.findAll();
+  const listagem = allProducts.reduce(
+    (acc, crr) => ({
+      ...acc,
+      [crr.name]: crr,
+    }),
+    {},
+  );
+  // console.log(listagem['Stella Artois 275ml']);
+  res.json(listagem);
 });
 
 module.exports = { getAllProducts };

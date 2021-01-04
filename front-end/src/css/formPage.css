@@ -1,0 +1,153 @@
+body, html, body > div, .form-page{
+  height: 100%;
+}
+
+.form-page {
+  align-items: flex-start;
+  background: linear-gradient(45deg, #ff1317 0%,#ff3b3b 12%,#ff6767 25%,#ff5b5b 38%,#ff4d50 49%,#ff6767 49%,#ff7173 74%,#ff7d86 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow:  1px 1px 8px rgb(59, 59, 59);;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: auto;
+  margin-top: 2%;
+  width: 90%;
+}
+
+.form {
+  align-items: center;
+  color: rgb(63, 63, 63);
+  display: flex;
+  flex-direction: column;
+  font-size: 70%;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 20px;
+  width: 85%;
+}
+
+.form > label {
+  display: flex;
+  flex-direction: column;
+  margin: 2% 0;
+  width: 100%;
+}
+  
+.form input {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 6px;
+  color: rgb(75, 75, 75);
+}
+
+.form > label {
+  margin: 2% 0;
+}
+
+.form > button {
+  border: 1px red groove;
+  border-bottom: 1px rgb(141, 4, 4) groove;
+  border-radius: 5px;
+  border-right: 1px rgb(141, 0, 0) groove;
+  color: rgb(59, 59, 59);
+  font-weight: bold;
+  margin: 20px;
+  width: 100%;
+}
+
+.form > button:enabled {
+  box-shadow: 2px 2px 6px rgb(59, 59, 59);
+}
+
+.form > button:focus {
+  outline: 0;
+}
+
+.form > button:hover:enabled {
+  background-color: rgb(235, 235, 235);
+  box-shadow: 2px 2px 6px rgb(43, 0, 0);
+}
+
+.form > button:disabled {
+  border: 1px rgb(199, 199, 199) groove;
+  color: rgb(187, 187, 187);
+}
+
+.form > button:enabled:active {
+  background-color: rgb(219, 219, 219);
+  color: rgb(136, 136, 136);
+}
+
+.form > a {
+  color: rgb(156, 0, 0);
+  text-decoration: dotted;
+}
+
+.form > a:hover {
+  color: rgb(255, 0, 0);
+}
+
+.form-img {
+  display: flex;
+  justify-content: center;
+}
+
+.form-img > .duff-logo {
+  filter: drop-shadow( 2px 2px 6px rgb(59, 59, 59));
+  width: 50%;
+}
+
+.form-checkbox:hover {
+  text-decoration: underline;
+}
+
+.get-duffed {
+  display: none;
+}
+
+.homer-sad {
+  display: none;
+}
+
+@media screen and (min-width: 500px) {
+  .form {
+    font-size: initial;
+  }
+}
+
+@media screen and (min-width: 560px) {
+  .form-container {
+    width: 560px;
+  }
+  .form {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .get-duffed {
+    display: initial;
+    position: absolute;
+    left: 0;
+    width: 15%;
+  }
+
+  .homer-sad {
+    display: initial;
+    position: absolute;
+    width: 15%;
+    bottom: -10px;
+    left: 15%;
+  }
+  
+  .profile.form {
+    width: 400px; 
+  }
+}

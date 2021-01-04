@@ -1,11 +1,11 @@
 const rescue = require('express-rescue');
 const saleService = require('../services/saleService');
-const saleModel = require('../models/saleModel');
+const { sales } = require('../models');
 
 const getAllUserSales = rescue(async (req, res) => {
   const { email } = req.query;
-  const sales = await saleService.getSalesId(email);
-  res.json(sales);
+  const asales = await saleService.getSalesId(email);
+  res.json(asales);
 });
 
 const saleRegister = async (req, res) => {
@@ -13,19 +13,25 @@ const saleRegister = async (req, res) => {
 
   const { id } = user;
 
-  const sale = await saleService.postNewSale(id, nameAdress, numberAdress, cart, totalPrice);
-  console.log(sale);
+  const sale = await saleService.postNewSale(
+    id,
+    nameAdress,
+    numberAdress,
+    cart,
+    totalPrice,
+  );
   return res.status(200).json(sale);
 };
 
 const getSales = async (_req, res) => {
-  const sales = await saleModel.getSales();
+  const asales = await sales.findAll();
 
-  const allSales = sales.map(([id, userId, totalPrice, nameAdress, numberAdress, date, status]) => (
-    { id, userId, totalPrice, nameAdress, numberAdress, date, status }
-  ));
+  // const allSales =
+  // asales.map(([id, userId, totalPrice, nameAdress, numberAdress, date, status]) => (
+  //   { id, userId, totalPrice, nameAdress, numberAdress, date, status }
+  // ));
 
-  return res.status(200).json(allSales);
+  return res.status(200).json(asales);
 };
 
 const getDetailsSales = async (req, res) => {
@@ -34,9 +40,10 @@ const getDetailsSales = async (req, res) => {
   res.status(200).json(result);
 };
 
-const setStatusAsDelivered = async (req, res) => {
+const setStatusAsDelivered = (req, res) => {
   const { id } = req.params;
-  return saleModel.setStatusAsDelivered(id)
+  return sales
+    .update({ status: 'Entregue' }, { where: { id } })
     .then(() => res.status(200));
 };
 
