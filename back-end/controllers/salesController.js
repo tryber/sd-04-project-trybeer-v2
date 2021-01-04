@@ -1,4 +1,5 @@
-const { sales, sales_products: salesProducs } = require('../models');
+const { sales, sales_products: salesProducts, products } = require('../models');
+const salesProductModel = require('../models/salesProductModel');
 const { getCurrentDate } = require('../utils/date');
 
 const getAllSales = async (_req, res) => {
@@ -50,7 +51,7 @@ const getSaleById = async (req, res) => {
     const { id: saleId } = req.params;
 
     if (saleId) {
-      const orderDetails = await sales.findByPk(id, { include: [{ model: products, as: 'products' }] });
+      const orderDetails = await salesProducts.findOne({ where: { saleId: saleId },  include: [{ model: products, as: 'products' }] });
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });
@@ -59,7 +60,7 @@ const getSaleById = async (req, res) => {
   }
 };
 
-const updateSaleStatus = async (req, res) => {
+const updateSaleStatus = async (req, res) => {}
   try {
     const { id: saleId } = req.params;
     const { status } = req.body;
