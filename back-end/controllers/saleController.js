@@ -46,7 +46,7 @@ const setStatusAsDelivered = (req, res) => {
     body: { status },
   } = req;
   return sales
-    .update({ status: status }, { where: { id } })
+    .update({ status }, { where: { id } })
     .then(() => res.status(200));
 };
 

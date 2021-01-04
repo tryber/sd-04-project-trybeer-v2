@@ -4,7 +4,11 @@ import '../../css/ordersDetails.css';
 
 function SalesDetails({ details }) {
   const {
-    id: saleId, total_price: totalPrice, sale_date: dateSale, products, status
+    id: saleId,
+    total_price: totalPrice,
+    sale_date: dateSale,
+    products,
+    status,
   } = details;
   const { name } = JSON.parse(localStorage.getItem('user') || '{}');
   const options = {
@@ -17,43 +21,35 @@ function SalesDetails({ details }) {
     month: 'numeric',
   });
   return (
-    <div className="page-content">
-      <div className="containerDetails">
-        <div className="container2">
-          <span className="tks">
+    <div className='page-content'>
+      <div className='containerDetails'>
+        <div className='container2'>
+          <span className='tks'>
             Obrigado pelo pedido,
             {name}
           </span>
         </div>
-        <div className="cardDetails">
-          <div className="flexDetails">
-            <span className="elementsD" data-testid="order-number">
-              Pedido
-              {' '}
-              {saleId}
+        <div className='cardDetails'>
+          <div className='flexDetails'>
+            <span className='elementsD' data-testid='order-number'>
+              Pedido {saleId}
             </span>
-            <span className="elementsD" data-testid="order-date">
+            <span className='elementsD' data-testid='order-date'>
               {date}
             </span>
           </div>
-          <div className="box">
+          <div className='box'>
             {products.map((product, i) => {
               const { sales_products: salesProducts } = product;
               return (
-                <div key={ product.name }>
-                  <span data-testid={ `${i}-product-qtd` }>
-                    {salesProducts.quantity}
-                    {' '}
-                    -
-                    {' '}
+                <div key={product.name}>
+                  <span data-testid={`${i}-product-qtd`}>
+                    {salesProducts.quantity} -{' '}
                   </span>
-                  <span data-testid={ `${i}-product-name` }>
-                    {product.name}
-                    {' '}
-                    -
-                    {' '}
+                  <span data-testid={`${i}-product-name`}>
+                    {product.name} -{' '}
                   </span>
-                  <span data-testid={ `${i}-product-total-value` }>
+                  <span data-testid={`${i}-product-total-value`}>
                     {(
                       product.price * Number.parseFloat(salesProducts.quantity)
                     ).toLocaleString('pt-br', options)}
@@ -63,7 +59,7 @@ function SalesDetails({ details }) {
             })}
           </div>
           <span>{status}</span>
-          <span className="total" data-testid="order-total-value">
+          <span className='total' data-testid='order-total-value'>
             Total:
             {priceArrendodado}
           </span>
