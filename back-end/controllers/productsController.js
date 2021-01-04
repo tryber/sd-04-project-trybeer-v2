@@ -10,7 +10,7 @@ const getAllProducts = rescue(async (_req, res) => {
     }),
     {},
   );
-  console.log(listagem['Stella Artois 275ml']);
+  // console.log(listagem['Stella Artois 275ml']);
   res.json(listagem);
 });
 

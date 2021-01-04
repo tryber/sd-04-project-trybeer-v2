@@ -8,24 +8,21 @@ const sendRequest = (id) => getSalesById(id);
 
 const AdminOrderDetails = () => {
   const { id } = useParams();
-  const [saleInfo, setSaleInfo] = useState({ total_price: 0 });
-  const [saleProduct, setSaleProduct] = useState([]);
+  const [saleInfo, setSaleInfo] = useState({ total_price: 0, products: [] });
   const [saleStatus, setSaleStatus] = useState();
   const { total_price: totalPrice } = saleInfo;
 
 
   useEffect(() => {
     sendRequest(id).then((result) => {
-      setSaleInfo(result.data.sale);
-      setSaleStatus(result.data.sale.status);
-      setSaleProduct(result.data.products);
+      setSaleInfo(result.data);
+      setSaleStatus(result.data.status);
     }).catch(err => console.log(err));
   }, [id]);
 
   return (
     <div className="page">
       <Header>Trybeer</Header>
-      {console.log(sendRequest(1).then(result => console.log(result)))}
       <div className="marginDetails">
         <div className="cardDetailsA">
           <div className="pedido">
@@ -43,7 +40,7 @@ const AdminOrderDetails = () => {
             </span>
           </div>
           <div className="listOrders">
-            {saleProduct.map(({ name, quantity, price }, index) => (
+            {saleInfo.products.map(({ name, sales_products: { quantity }, price }, index) => (
               <div key={ name }>
                 <span
                   className="element-orders-detail"

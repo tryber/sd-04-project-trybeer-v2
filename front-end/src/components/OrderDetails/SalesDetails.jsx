@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../css/ordersDetails.css';
 
-function SalesDetails({ details: { products, sale } }) {
-  const { id: saleId, total_price: totalPrice, sale_date: dateSale } = sale;
+function SalesDetails({ details: { products }, details}) {
+  const { id: saleId, total_price: totalPrice, sale_date: dateSale } = details;
   const { name } = JSON.parse(localStorage.getItem('user') || '{}');
   const options = {
     style: 'currency',
@@ -34,27 +34,30 @@ function SalesDetails({ details: { products, sale } }) {
             </span>
           </div>
           <div className="box">
-            {products.map((product, i) => (
-              <div key={ product.name }>
-                <span data-testid={ `${i}-product-qtd` }>
-                  {product.quantity}
-                  {' '}
-                  -
-                  {' '}
-                </span>
-                <span data-testid={ `${i}-product-name` }>
-                  {product.name}
-                  {' '}
-                  -
-                  {' '}
-                </span>
-                <span data-testid={ `${i}-product-total-value` }>
-                  {(
-                    product.price * Number.parseFloat(product.quantity)
-                  ).toLocaleString('pt-br', options)}
-                </span>
-              </div>
-            ))}
+            {products.map((product, i) => {
+              const { sales_products: salesProducts } = product
+              return (
+                <div key={ product.name }>
+                  <span data-testid={ `${i}-product-qtd` }>
+                    {salesProducts.quantity}
+                    {' '}
+                    -
+                    {' '}
+                  </span>
+                  <span data-testid={ `${i}-product-name` }>
+                    {product.name}
+                    {' '}
+                    -
+                    {' '}
+                  </span>
+                  <span data-testid={ `${i}-product-total-value` }>
+                    {(
+                      product.price * Number.parseFloat(salesProducts.quantity)
+                    ).toLocaleString('pt-br', options)}
+                  </span>
+                </div>
+              )
+            })}
           </div>
           <span className="total" data-testid="order-total-value">
             Total:
