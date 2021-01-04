@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { DuffLogoTransparent } from '../images';
 import '../css/formPage.css';
@@ -14,5 +15,9 @@ function FormPage({ children }) {
     </div>
   );
 }
+
+FormPage.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default FormPage;

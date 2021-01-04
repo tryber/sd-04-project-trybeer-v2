@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import '../../css/ordersDetails.css';
 
-function SalesDetails({ details: { products }, details}) {
-  const { id: saleId, total_price: totalPrice, sale_date: dateSale } = details;
+function SalesDetails({ details }) {
+  const {
+    id: saleId, total_price: totalPrice, sale_date: dateSale, products,
+  } = details;
   const { name } = JSON.parse(localStorage.getItem('user') || '{}');
   const options = {
     style: 'currency',
@@ -35,7 +38,7 @@ function SalesDetails({ details: { products }, details}) {
           </div>
           <div className="box">
             {products.map((product, i) => {
-              const { sales_products: salesProducts } = product
+              const { sales_products: salesProducts } = product;
               return (
                 <div key={ product.name }>
                   <span data-testid={ `${i}-product-qtd` }>
@@ -56,7 +59,7 @@ function SalesDetails({ details: { products }, details}) {
                     ).toLocaleString('pt-br', options)}
                   </span>
                 </div>
-              )
+              );
             })}
           </div>
           <span className="total" data-testid="order-total-value">
@@ -68,5 +71,14 @@ function SalesDetails({ details: { products }, details}) {
     </div>
   );
 }
+
+SalesDetails.propTypes = {
+  details: PropTypes.shape({
+    id: PropTypes.number,
+    sale_date: PropTypes.string,
+    total_price: PropTypes.string,
+    products: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+};
 
 export default SalesDetails;
