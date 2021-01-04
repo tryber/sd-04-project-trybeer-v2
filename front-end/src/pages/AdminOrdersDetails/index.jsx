@@ -5,7 +5,7 @@ import Menu from '../../components/AdminMenu';
 import styles from './index.module.css';
 
 const AdminOrdersDetails = () => {
-  const [orderData, setOrderData] = React.useState(null);
+  const [orderData, setOrderData] = React.useState('');
   const { id } = useParams();
 
   React.useEffect(() => {
@@ -16,13 +16,13 @@ const AdminOrdersDetails = () => {
   }, [id]);
 
   React.useEffect(() => {
-    // console.log(orderData);
+    console.log(orderData);
   }, [orderData]);
 
-  const handleStatus = async () => {
-    await api.updateSaleStatusAPI(orderData[0].saleID, 'delivered');
+  const handleStatus = async (orderStatus) => {
+    await api.updateSaleStatusAPI(orderData[0].saleID, orderStatus);
     setOrderData(orderData.map((product) => {
-      const deliveredStatus = { ...product, ...(product.status = 'delivered') };
+      const deliveredStatus = { ...product, ...(product.status = orderStatus) };
       return deliveredStatus;
     }));
   };
@@ -39,14 +39,15 @@ const AdminOrdersDetails = () => {
             <span data-testid="order-number">{`Pedido ${id} - `}</span>
             <span
               className={
-                orderData[0].status === 'pending'
+                // mudar pra if
+                orderData[0].status === 'Pendente'
                   ? styles.pendingOrder
                   : styles.deliveredOrder
               }
               data-testid="order-status"
             >
               {`${
-                orderData[0].status === 'pending' ? 'Pendente' : 'Entregue'
+                orderData[0].status
               }`}
             </span>
           </h2>
@@ -105,16 +106,26 @@ const AdminOrdersDetails = () => {
               currency: 'BRL',
             })}`}
           </h2>
-          {orderData[0].status === 'pending' ? (
+          {orderData[0].status === 'Pendente' ? (
             <button
               type="button"
               className="buttonMain"
-              onClick={ () => handleStatus() }
+              onClick={ () => handleStatus('Entreque') }
+              data-testid="mark-as-prepared-btn"
+            >
+              Preparar Pedido
+            </button>
+          ) : ''}
+          {orderData[0].status === 'Pendente' ? (
+            <button
+              type="button"
+              className="buttonMain"
+              onClick={ () => handleStatus('Preparando') }
               data-testid="mark-as-delivered-btn"
             >
               Marcar como entregue
             </button>
-          ) : null}
+          ) : ''}
         </section>
       )}
     </div>

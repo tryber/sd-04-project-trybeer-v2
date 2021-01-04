@@ -5,7 +5,7 @@ import api from '../../services/api';
 import styles from './index.module.css';
 
 const AdminOrders = () => {
-  const [ordersData, setOrdersData] = React.useState(null);
+  const [ordersData, setOrdersData] = React.useState('');
 
   React.useEffect(() => {
     (async () => {
