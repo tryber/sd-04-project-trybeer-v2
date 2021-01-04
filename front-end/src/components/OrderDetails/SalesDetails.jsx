@@ -4,7 +4,7 @@ import '../../css/ordersDetails.css';
 
 function SalesDetails({ details }) {
   const {
-    id: saleId, total_price: totalPrice, sale_date: dateSale, products,
+    id: saleId, total_price: totalPrice, sale_date: dateSale, products, status
   } = details;
   const { name } = JSON.parse(localStorage.getItem('user') || '{}');
   const options = {
@@ -62,6 +62,7 @@ function SalesDetails({ details }) {
               );
             })}
           </div>
+          <span>{status}</span>
           <span className="total" data-testid="order-total-value">
             Total:
             {priceArrendodado}
@@ -77,6 +78,7 @@ SalesDetails.propTypes = {
     id: PropTypes.number,
     sale_date: PropTypes.string,
     total_price: PropTypes.string,
+    status: PropTypes.string,
     products: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
