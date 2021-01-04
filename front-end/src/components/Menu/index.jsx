@@ -37,6 +37,13 @@ const Menu = ({ nomeTela }) => {
           Meu Perfil
         </Link>
         <Link
+          to="/chat"
+          className={ styles.navLink }
+          data-testid="side-menu-chat"
+        >
+          Conversar com a loja
+        </Link>
+        <Link
           to="/login"
           className={ styles.navLink }
           data-testid="side-menu-item-logout"
