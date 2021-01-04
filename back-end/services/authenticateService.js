@@ -20,7 +20,7 @@ const Login = async (email, passwordParam) => {
     ...userData
   } = user.dataValues;
 
-  if (!(await bcryptjs.compare(password, passwordParam))) {
+  if (!(await bcryptjs.compare(passwordParam, password))) {
     throw new Error('Invalid password');
   }
 
