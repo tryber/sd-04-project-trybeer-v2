@@ -45,10 +45,10 @@ const getSalesId = async (email) => {
 };
 
 const orderDetail = async (orderId) => {
-  const sale = await sales.findByPK(orderId);
+  const sale = await sales.findByPk(orderId);
   const aproducts = await salesProducts.findAll({
     where: { sale_id: orderId },
-    include: [{ model: products }],
+    include: products,
   });
   return { aproducts, sale };
 };

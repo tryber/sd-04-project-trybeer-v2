@@ -13,17 +13,19 @@ const AdminOrderDetails = () => {
   const [saleStatus, setSaleStatus] = useState();
   const { total_price: totalPrice } = saleInfo;
 
+
   useEffect(() => {
     sendRequest(id).then((result) => {
       setSaleInfo(result.data.sale);
       setSaleStatus(result.data.sale.status);
       setSaleProduct(result.data.products);
-    });
+    }).catch(err => console.log(err));
   }, [id]);
 
   return (
     <div className="page">
       <Header>Trybeer</Header>
+      {console.log(sendRequest(1).then(result => console.log(result)))}
       <div className="marginDetails">
         <div className="cardDetailsA">
           <div className="pedido">
