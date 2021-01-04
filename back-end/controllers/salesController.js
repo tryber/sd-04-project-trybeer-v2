@@ -50,7 +50,7 @@ const getSaleById = async (req, res) => {
     const { id: saleId } = req.params;
 
     if (saleId) {
-      const orderDetails = await sales.findOne({ where: { id: saleId } });
+      const orderDetails = await sales.findByPk(id, { include: [{ model: products, as: 'products' }] });
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });

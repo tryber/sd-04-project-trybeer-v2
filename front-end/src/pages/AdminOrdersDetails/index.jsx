@@ -5,13 +5,16 @@ import Menu from '../../components/AdminMenu';
 import styles from './index.module.css';
 
 const AdminOrdersDetails = () => {
-  const [orderData, setOrderData] = React.useState('');
+  const [orderData, setOrderData] = React.useState(null);
+  const [orderItem, setOrderItem] = React.useState([]);
   const { id } = useParams();
 
   React.useEffect(() => {
     (async () => {
       const order = await api.getSaleByIdAPI(id);
+      console.log(order);
       setOrderData(order.data);
+      setOrderItem(order.data.products);
     })();
   }, [id]);
 
@@ -20,7 +23,7 @@ const AdminOrdersDetails = () => {
   }, [orderData]);
 
   const handleStatus = async (orderStatus) => {
-    await api.updateSaleStatusAPI(orderData[0].saleID, orderStatus);
+    await api.updateSaleStatusAPI(orderData.saleID, orderStatus);
     setOrderData(orderData.map((product) => {
       const deliveredStatus = { ...product, ...(product.status = orderStatus) };
       return deliveredStatus;
@@ -28,13 +31,13 @@ const AdminOrdersDetails = () => {
   };
 
   const styleStatus = () => {
-    if (orderData[0].status === 'pending') {
+    if (orderData.status === 'pending') {
       return styles.pendingOrder;
     }
-    if (orderData[0].status === 'Preparando') {
+    if (orderData.status === 'Preparando') {
       return styles.preparingOrder;
     }
-    if (orderData[0].status === 'Entregue') {
+    if (orderData.status === 'Entregue') {
       return styles.deliveredOrder;
     }
     return null;
@@ -57,20 +60,20 @@ const AdminOrdersDetails = () => {
               data-testid="order-status"
             >
               {`${
-                orderData[0].status
+                orderData.status
               }`}
             </span>
           </h2>
           <ul className={ styles.orderList }>
-            {orderData.map(
-              ({ productName, productQuantity, productPrice }, index) => (
+            {orderItem && orderItem.map(
+              ({ productName, sales_product: { quantity }, productPrice }, index) => (
                 <li key={ productName } className={ styles.orderItem }>
                   <div className={ styles.orderItemLeftContainer }>
                     <span
                       className={ styles.orderItemQty }
                       data-testid={ `${index}-product-qtd` }
                     >
-                      {productQuantity}
+                      {quantity}
                     </span>
                     <span className={ styles.dashSpace }>-</span>
                     <span
@@ -94,7 +97,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.orderItemPrice }
                       data-testid={ `${index}-product-total-value` }
                     >
-                      {(productPrice * productQuantity).toLocaleString(
+                      {(productPrice * quantity).toLocaleString(
                         'pt-BR',
                         {
                           style: 'currency',
@@ -111,12 +114,12 @@ const AdminOrdersDetails = () => {
             className={ styles.orderTotal }
             data-testid="order-total-value"
           >
-            {`Total: ${orderData[0].totalPrice.toLocaleString('pt-BR', {
+            {`Total: ${orderData.totalPrice && orderData.totalPrice.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}
           </h2>
-          {orderData[0].status === 'pending' ? (
+          {orderData.status === 'pending' ? (
             <button
               type="button"
               className="buttonMain"
@@ -126,7 +129,7 @@ const AdminOrdersDetails = () => {
               Preparar Pedido
             </button>
           ) : ''}
-          {orderData[0].status === 'pending' ? (
+          {orderData.status === 'pending' ? (
             <button
               type="button"
               className="buttonMain"
