@@ -79,6 +79,14 @@ const AdminOrderDetails = () => {
           </h3>
           <button
             type="button"
+            data-testid="mark-as-prepared-btn"
+            onClick={ () => sendPutStatus(id).then(setSaleStatus('Preparando')) }
+            className={ `sale-${saleStatus}-btn` }
+          >
+            Preparar pedido
+          </button>
+          <button
+            type="button"
             data-testid="mark-as-delivered-btn"
             onClick={ () => sendPutStatus(id).then(setSaleStatus('Entregue')) }
             className={ `sale-${saleStatus}-btn` }
