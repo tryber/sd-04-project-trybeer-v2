@@ -1,0 +1,18 @@
+.bodyAdm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-container {
+  margin: 6vh 0 0 8vw;
+}
+
+.infoText {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-text {
+  color: white;
+}
