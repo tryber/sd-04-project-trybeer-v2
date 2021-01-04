@@ -46,21 +46,21 @@ router.post('/', async (req, res) => {
       salesProducts.create({ saleId, productId: productId[i], quantity: quantity[i] });
     }
 
-    // return res.status(200).json({ message: 'dados inseridos nas duas tabelas' });
+    return res.status(200).json({ message: 'dados inseridos nas duas tabelas' });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 });
 
-// router.put('/', async (req, res) => {
-//   try {
-//     const { saleId, status } = req.body;
-//     await salesModel.editSale(saleId, status);
-//     return res.status(200).json({ message: 'updated' });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
+router.put('/', async (req, res) => {
+  try {
+    const { saleId, status } = req.body;
+    await sales.update({ status }, { where: { id: saleId } });
+    return res.status(200).json({ message: 'updated' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     if (saleId) {
       const orderDetails = await sales.findAll({
         where: { id: saleId },
-        include: [{ model: products, as: 'products', through: { attributes: [] } }],
+        include: [{ model: products, as: 'products', through: { attributes: ['quantity'] } }],
       });
       return res.status(200).json(orderDetails);
     }

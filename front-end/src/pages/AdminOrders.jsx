@@ -40,10 +40,10 @@ const AdminOrders = () => {
 
               <p
                 data-testid={`${index}-order-address`}
-              >{`${order.address}, ${order.number}`}</p>
+              >{`${order.deliveryAddress}, ${order.deliveryNumber}`}</p>
 
               <p data-testid={`${index}-order-total-value`}>
-                {`R$ ${order.price.toFixed(2).replace('.', ',')}`}
+                {`R$ ${Number(order.totalPrice).toFixed(2).replace('.', ',')}`}
               </p>
               <p data-testid={`${index}-order-status`}>{order.status}</p>
             </Link>

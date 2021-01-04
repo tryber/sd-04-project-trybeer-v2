@@ -20,14 +20,14 @@ const AdminOrdersDetails = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const updateOrderStatus = () => {
+  const updateOrderStatus = (status) => {
     axios
       .put('http://localhost:3001/sales', {
         saleId: window.location.pathname.slice(14),
-        status: 'Entregue',
+        status,
       })
       .then((_res) => {
-        setOrderStatus('Entregue');
+        setOrderStatus(status);
       })
       .catch((error) => console.log(error));
   };
@@ -37,26 +37,28 @@ const AdminOrdersDetails = () => {
       <MenuAdmin title="Detalhes do Pedido" />
       {orderDetails.length && (
         <div>
-          <p data-testid="order-number">{`Pedido ${orderDetails[0].saleID}`}</p>
+          <p data-testid="order-number">{`Pedido ${orderDetails[0].id}`}</p>
           <p data-testid="order-status">{orderStatus}</p>
-          <p data-testid="order-total-value">{`Total: R$ ${orderDetails[0].totalPrice
+          <p data-testid="order-total-value">{`Total: R$ ${Number(
+            orderDetails[0].totalPrice,
+          )
             .toFixed(2)
             .replace('.', ',')}`}</p>
         </div>
       )}
-      {orderDetails && (
+      {orderDetails.length && (
         <ol>
-          {orderDetails.map((order, index) => (
-            <li key={order.productName}>
-              <p data-testid={`${index}-product-name`}>{order.productName}</p>
+          {orderDetails[0].products.map((product, index) => (
+            <li key={product.name}>
+              <p data-testid={`${index}-product-name`}>{product.name}</p>
               <p data-testid={`${index}-product-qtd`}>
-                {order.productQuantity}
+                {product.salesProducts.quantity}
               </p>
               <p data-testid={`${index}-order-unit-price`}>
-                {`(R$ ${order.productPrice.toFixed(2).replace('.', ',')})`}
+                {`(R$ ${Number(product.price).toFixed(2).replace('.', ',')})`}
               </p>
               <p data-testid={`${index}-product-total-value`}>
-                {`R$ ${(order.productPrice * order.productQuantity)
+                {`R$ ${(Number(product.price) * product.salesProducts.quantity)
                   .toFixed(2)
                   .replace('.', ',')}`}
               </p>
@@ -64,14 +66,23 @@ const AdminOrdersDetails = () => {
           ))}
         </ol>
       )}
-      {orderStatus === 'Pendente' && (
-        <button
-          type="button"
-          data-testid="mark-as-delivered-btn"
-          onClick={() => updateOrderStatus()}
-        >
-          Marcar como entregue
-        </button>
+      {orderStatus !== 'Entregue' && (
+        <div>
+          <button
+            type="button"
+            data-testid="mark-as-prepared-btn"
+            onClick={() => updateOrderStatus('Preparando')}
+          >
+            Preparar pedido
+          </button>
+          <button
+            type="button"
+            data-testid="mark-as-delivered-btn"
+            onClick={() => updateOrderStatus('Entregue')}
+          >
+            Marcar como entregue
+          </button>
+        </div>
       )}
     </div>
   );

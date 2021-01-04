@@ -43,23 +43,23 @@ const OrderDetails = () => {
             .replace('.', ',')}`}</p>
         </div>
       )}
-      {/* {orderDetails && (
+      {orderDetails.length && (
         <ol>
           {orderDetails[0].products.map((product, index) => (
             <li key={product.name}>
               <p data-testid={`${index}-product-name`}>{product.name}</p>
               <p data-testid={`${index}-product-qtd`}>
-                {order.productQuantity}
+                {product.salesProducts.quantity}
               </p>
               <p data-testid={`${index}-product-total-value`}>
-                {`R$ ${(order.productPrice * order.productQuantity)
+                {`R$ ${(Number(product.price) * product.salesProducts.quantity)
                   .toFixed(2)
                   .replace('.', ',')}`}
               </p>
             </li>
           ))}
         </ol>
-      )} */}
+      )}
     </div>
   );
 };
