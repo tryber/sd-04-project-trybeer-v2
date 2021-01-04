@@ -60,7 +60,7 @@ const getSaleById = async (req, res) => {
   }
 };
 
-const updateSaleStatus = async (req, res) => {}
+const updateSaleStatus = async (req, res) => {
   try {
     const { id: saleId } = req.params;
     const { status } = req.body;
