@@ -20,6 +20,13 @@ const index = () => (
         Perfil
       </Link>
       <Link
+        to="/admin/chats"
+        className={ styles.navLink }
+        data-testid="side-menu-item-chat"
+      >
+        Conversas
+      </Link>
+      <Link
         to="/login"
         className={ styles.navLink }
         data-testid="side-menu-item-logout"
