@@ -75,20 +75,22 @@ const AdminOrderDetails = () => {
           </div>
 
           <h3 data-testid="order-total-value">
-            {`Total: R$ ${totalPrice.toString().replace('.', ',')}0`}
+            {`Total: R$ ${totalPrice.toString().replace('.', ',')}`}
           </h3>
+
           <button
             type="button"
             data-testid="mark-as-prepared-btn"
-            onClick={ () => sendPutStatus(id).then(setSaleStatus('Preparando')) }
-            className={ `sale-${saleStatus}-btn` }
+            onClick={ () => sendPutStatus(id, 'Preparando').then(setSaleStatus('Preparando')) }
+            className={ `sale-${saleStatus}-btn1` }
           >
             Preparar pedido
           </button>
+
           <button
             type="button"
             data-testid="mark-as-delivered-btn"
-            onClick={ () => sendPutStatus(id).then(setSaleStatus('Entregue')) }
+            onClick={ () => sendPutStatus(id, 'Entregue').then(setSaleStatus('Entregue')) }
             className={ `sale-${saleStatus}-btn` }
           >
             Marcar como entregue

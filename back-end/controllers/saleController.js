@@ -41,9 +41,12 @@ const getDetailsSales = async (req, res) => {
 };
 
 const setStatusAsDelivered = (req, res) => {
-  const { id } = req.params;
+  const {
+    params: { id },
+    body: { status },
+  } = req;
   return sales
-    .update({ status: 'Entregue' }, { where: { id } })
+    .update({ status: status }, { where: { id } })
     .then(() => res.status(200));
 };
 
