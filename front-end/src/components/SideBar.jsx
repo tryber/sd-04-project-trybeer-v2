@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function SideBar({ userRole, active }) {
@@ -39,3 +40,8 @@ export default function SideBar({ userRole, active }) {
     </aside>
   );
 }
+
+SideBar.propTypes = {
+  active: PropTypes.bool.isRequired,
+  userRole: PropTypes.string.isRequired,
+};

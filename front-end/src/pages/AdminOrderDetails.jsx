@@ -12,12 +12,11 @@ const AdminOrderDetails = () => {
   const [saleStatus, setSaleStatus] = useState();
   const { total_price: totalPrice } = saleInfo;
 
-
   useEffect(() => {
     sendRequest(id).then((result) => {
       setSaleInfo(result.data);
       setSaleStatus(result.data.status);
-    }).catch(err => console.log(err));
+    }).catch(() => {});
   }, [id]);
 
   return (

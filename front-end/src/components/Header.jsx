@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import SideBar from './SideBar';
@@ -28,3 +29,7 @@ export default function Header({ children }) {
     </div>
   );
 }
+
+Header.propTypes = {
+  children: PropTypes.element.isRequired,
+};

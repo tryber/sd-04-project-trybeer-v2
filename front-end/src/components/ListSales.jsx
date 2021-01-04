@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Lupa } from '../images';
@@ -38,3 +39,12 @@ export default function ListSales(props) {
     </Link>
   );
 }
+
+ListSales.propTypes = {
+  index: PropTypes.number.isRequired,
+  result: PropTypes.shape({
+    id: PropTypes.string,
+    total_price: PropTypes.string,
+    sale_date: PropTypes.string,
+  }).isRequired,
+};

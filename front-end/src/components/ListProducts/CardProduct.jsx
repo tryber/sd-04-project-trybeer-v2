@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -79,5 +80,15 @@ function CardProduct({
     </div>
   );
 }
+
+CardProduct.propTypes = {
+  index: PropTypes.number.isRequired,
+  info: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    url_image: PropTypes.string,
+  }).isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
 export default CardProduct;

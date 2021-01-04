@@ -14,20 +14,12 @@
     },
     "plugins": ["react", "react-hooks"],
     "rules": {
+      "no-magic-numbers": "off",
       "linebreak-style": ["error", "unix"],
       "quotes": ["error", "single"],
       "semi": ["error", "always"],
       "class-methods-use-this": ["off"],
       "complexity": ["off", 11],
-      "no-magic-numbers": [
-        "error",
-        {
-          "ignore": [1],
-          "ignoreArrayIndexes": true,
-          "enforceConst": true,
-          "detectObjects": false
-        }
-      ],
       "react/button-has-type": [
         "error",
         {
