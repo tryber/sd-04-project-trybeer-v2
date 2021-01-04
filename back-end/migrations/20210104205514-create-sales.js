@@ -16,7 +16,7 @@ module.exports = {
       },
       totalPrice: {
         allowNull: false,
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.DECIMAL(10, 2),
       },
       deliveryAddress: {
         allowNull: false,
@@ -38,7 +38,7 @@ module.exports = {
     return createSales;
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('sales');
   },
 };

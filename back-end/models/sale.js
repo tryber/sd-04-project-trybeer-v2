@@ -4,19 +4,19 @@ const Sale = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     totalPrice: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     deliveryAddress: {
       type: DataTypes.STRING,
     },
     deliveryNumber: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     saleDate: {
       type: DataTypes.DATE,
     },
     status: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
   }, { timestamps: false });
 

@@ -14,7 +14,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(4,2),
+        type: Sequelize.DECIMAL(4, 2),
       },
       urlImage: {
         allowNull: false,
@@ -24,7 +24,7 @@ module.exports = {
     return createProducts;
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('products');
   },
 };
