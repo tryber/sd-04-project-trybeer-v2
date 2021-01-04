@@ -49,7 +49,6 @@ const orderDetail = async (orderId) => {
     where: { id: orderId },
     include: products,
   });
-  console.log(sale)
   return sale;
 };
 
