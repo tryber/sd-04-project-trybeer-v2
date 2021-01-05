@@ -6,3 +6,4 @@ export { default as Checkout } from './Checkout';
 export { default as AdminOrders } from './AdminOrders';
 export { default as AdminOrderDetails } from './AdminOrderDetails';
 export { default as AdminProfile } from './AdminProfile';
+export { default as Chat } from './Chat';

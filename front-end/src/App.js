@@ -10,6 +10,7 @@ import {
   AdminOrderDetails,
   AdminProfile,
   Orders,
+  Chat,
 } from './pages';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
@@ -53,6 +54,9 @@ function App() {
       </Route>
       <Route path="/admin/profile">
         <AdminProfile />
+      </Route>
+      <Route path="/chat">
+        <Chat />
       </Route>
     </Switch>
   );

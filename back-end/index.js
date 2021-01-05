@@ -1,4 +1,6 @@
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -7,6 +9,8 @@ const controllers = require('./controllers');
 require('dotenv/config');
 
 const app = express();
+const httpServer = http.createServer(app);
+const io = socketIo(httpServer);
 const port = 3001;
 
 app.use(bodyParser.json());
@@ -42,4 +46,4 @@ app.use((err, _req, res, _next) => {
   res.status(405).json({ err: err.message });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -16,6 +16,9 @@ export default function SideBar({ userRole, active }) {
             <a href="/profile" data-testid="side-menu-item-my-profile">
               Meu perfil
             </a>
+            <a href="/chat" data-testid="side-menu-chat">
+              Conversar com a loja
+            </a>
           </div>
           <a href="/login" data-testid="side-menu-item-logout">
             Sair
