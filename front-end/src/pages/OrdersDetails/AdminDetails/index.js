@@ -86,15 +86,27 @@ const AdminDetails = () => {
             o status desse pedido deve mudar para Entregue e o botão deve desaparecer.
           */}
           {status === 'Pendente' ? (
+            <Box>
+
             <Button
               data-testid="mark-as-delivered-btn"
               onClick={ () => {
-                changeStatus(salesId);
+                changeStatus(salesId, status = 'Entregue');
                 setDetails({ ...details, status: 'Entregue' });
               } }
-            >
+              >
               Marcar como entregue
             </Button>
+              <Button
+                data-testid="mark-as-prepared-btn"
+                onClick={ () => {
+                  changeStatus(salesId, status = 'Preparando');
+                  setDetails({ ...details, status: 'Preparando' });
+                } }
+              >
+                Preparar pedido
+              </Button>
+            </Box>
           ) : (<div />)}
         </Container>
       ) : (
