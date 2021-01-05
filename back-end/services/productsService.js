@@ -1,30 +1,30 @@
-const { productsModel } = require('../models');
+const { Products } = require('../models');
 
-const listProduct = async () => productsModel.getAllProducts();
+const listProduct = async () => Products.findAll();
 
-const listSales = async () => productsModel.getAllSales();
+// const listSales = async () => Sales.findAll();
 
-const newSale = async (payload) => productsModel.insertNewSale(payload);
+// const newSale = async (payload) => Products.create(payload);
 
-const getSaleById = async (saleId) => {
-  const { date: oldDate, ...restOfSale } = await productsModel.getSaleById(saleId);
-  const [day, month] = new Date(oldDate)
-    .toISOString()
-    .substring(0, 10)
-    .split('-')
-    .reverse();
-  return { ...restOfSale, date: `${day}/${month}` };
-};
+// const getSaleById = async (saleId) => {
+//   const { date: oldDate, ...restOfSale } = await Products.findByPk(saleId);
+//   const [day, month] = new Date(oldDate)
+//     .toISOString()
+//     .substring(0, 10)
+//     .split('-')
+//     .reverse();
+//   return { ...restOfSale, date: `${day}/${month}` };
+// };
 
-const updateSalesStatus = async (id) => productsModel.updateSaleStatus(id);
+// const updateSalesStatus = async (id) => Sales.update(id);
 
-const getSaleProducts = async (id) => productsModel.getSaleProducts(id);
+// const getSaleProducts = async (id) => SalesProducts.findByPk(id);
 
 module.exports = {
   listProduct,
-  listSales,
-  newSale,
-  getSaleById,
-  getSaleProducts,
-  updateSalesStatus,
+//   listSales,
+//   newSale,
+//   getSaleById,
+//   getSaleProducts,
+//   updateSalesStatus,
 };

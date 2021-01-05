@@ -1,11 +1,13 @@
 // const rescue = require('express-rescue');
-const userModel = require('../models/userModel');
-const productsModel = require('../models/productsModel');
+// const userModel = require('../models/users');
+// const productsModel = require('../models/products');
+// const saleModel = require('../models/sales');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
   try {
     const response = await userService.login(req.body);
+    console.log('login Controller', response);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -38,7 +40,7 @@ const updateUser = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
   try {
-    const orders = await userModel.getOrders();
+    const orders = await userModel.findAll();
     res.status(200).json(orders);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });
@@ -49,7 +51,7 @@ const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
     await productsModel.updateSaleStatus(id);
-    const updatedOrder = await productsModel.getSaleById(id);
+    const updatedOrder = await saleModel.findByPk(id);
     return res.status(200).json(updatedOrder);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });

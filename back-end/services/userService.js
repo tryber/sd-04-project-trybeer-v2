@@ -1,22 +1,24 @@
-const { userModel } = require('../models');
+const { User } = require('../models');
 
-const createUser = async ({ userName, emailUser, password, isSeller }) => {
-  const emailInDatabase = await userModel.getUserByEmail(emailUser);
-  if (emailInDatabase) return { message: 'E-mail already in database.' };
-  const role = isSeller ? 'administrator' : 'client';
-  const newUser = await userModel.registerNewUser(userName, emailUser, password, role);
-  return newUser;
-};
+// const createUser = async ({ userName, emailUser, password, isSeller }) => {
+//   const emailInDatabase = await userModel.findOne(emailUser);
+//   if (emailInDatabase) return { message: 'E-mail already in database.' };
+//   const role = isSeller ? 'administrator' : 'client';
+//   const newUser = await userModel.create(userName, emailUser, password, role);
+//   return newUser;
+// };
 
-const updateUser = async ({ userName, userEmail }) => {
-  const user = await userModel.getUserByEmail(userEmail);
-  if (user.userEmail !== userEmail) return { message: 'E-mail invalido' };
-  await userModel.updateUser(userName, userEmail);
-  return 'Atualização concluída com sucesso';
-};
+// const updateUser = async ({ userName, userEmail }) => {
+//   const user = await userModel.findOne(userEmail);
+//   if (user.userEmail !== userEmail) return { message: 'E-mail invalido' };
+//   await userModel.update(userName, userEmail);
+//   return 'Atualização concluída com sucesso';
+// };
 
 const login = async ({ email, password }) => {
-  const user = await userModel.getUserByEmail(email);
+  try {
+  const user = await User.findOne({ where: { email } });
+  // console.log('model', user);
   if (user.password === password) {
     const { password: _, ...withoutPassword } = user;
     return withoutPassword;
@@ -29,10 +31,13 @@ const login = async ({ email, password }) => {
   // if (password.length < 6) return { message: 'Senha inválida' };
   // return { email };
   return null;
+  } catch (e) {
+    console.log(e.message);
+  } 
 };
 
 module.exports = {
-  createUser,
+  // createUser,
   login,
-  updateUser,
+  // updateUser,
 };
