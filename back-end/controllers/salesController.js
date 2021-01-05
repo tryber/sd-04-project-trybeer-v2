@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
     const {
       price: totalPrice,
       street: deliveryAddress,
@@ -48,7 +47,6 @@ router.post('/', async (req, res) => {
 
     return res.status(200).json({ message: 'dados inseridos nas duas tabelas' });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 });
