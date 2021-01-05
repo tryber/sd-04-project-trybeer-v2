@@ -66,8 +66,8 @@ const AdminOrdersDetails = () => {
           </h2>
           <ul className={ styles.orderList }>
             {orderItem && orderItem.map(
-              ({ productName, sales_product: { quantity }, productPrice }, index) => (
-                <li key={ productName } className={ styles.orderItem }>
+              ({ name, sales_products: { quantity }, price }, index) => (
+                <li key={ name } className={ styles.orderItem }>
                   <div className={ styles.orderItemLeftContainer }>
                     <span
                       className={ styles.orderItemQty }
@@ -80,7 +80,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.orderItemName }
                       data-testid={ `${index}-product-name` }
                     >
-                      {productName}
+                      {name}
                     </span>
                   </div>
                   <div className={ styles.orderItemRightContainer }>
@@ -88,7 +88,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.unitaryPrice }
                       data-testid={ `${index}-order-unit-price` }
                     >
-                      {`(${productPrice.toLocaleString('pt-BR', {
+                      {`(${price && price.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })})`}
@@ -97,7 +97,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.orderItemPrice }
                       data-testid={ `${index}-product-total-value` }
                     >
-                      {(productPrice * quantity).toLocaleString(
+                      {(price * quantity).toLocaleString(
                         'pt-BR',
                         {
                           style: 'currency',
@@ -114,7 +114,7 @@ const AdminOrdersDetails = () => {
             className={ styles.orderTotal }
             data-testid="order-total-value"
           >
-            {`Total: ${orderData.totalPrice && orderData.totalPrice.toLocaleString('pt-BR', {
+            {`Total: ${orderData.total_price && orderData.total_price.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}
