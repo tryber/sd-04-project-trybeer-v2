@@ -2,13 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ProductContext } from '../../context';
 
 // funcao verifica se tem itens no storage, se n tiver ele adiciona
-function addStorage(id, name, price, urlImage, quantity) {
+function addStorage(id, name, price, url_image, quantity) {
   const storage = JSON.parse(localStorage.cartItens);
   const additem = {
     id,
     name,
     price,
-    urlImage,
+    url_image,
     quantity,
   };
   storage.push(additem);
@@ -57,7 +57,7 @@ export default function ProductCard(data) {
   // variavel para formatacao do price
   // const formato = { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' };
   const {
-    id, name, price, urlImage,
+    id, name, price, url_image,
   } = data.data;
 
   const [quantity, setQuantity] = useState(zero);
@@ -77,7 +77,7 @@ export default function ProductCard(data) {
     // checa se o item ja esta no storage
     const newArray = storage.find((ele) => ele.id === id);
     // se o item n estiver no storage add
-    if (!newArray) addStorage(id, name, price, urlImage, quantity);
+    if (!newArray) addStorage(id, name, price, url_image, quantity);
     // se a quantidade for 0 tira do storage
     if (quantity === zero) subStorage(id);
     // atualiza o array
@@ -87,13 +87,13 @@ export default function ProductCard(data) {
       }
     });
     setCartValue(totalValue());
-  }, [id, name, price, quantity, setCartValue, totalValue, urlImage]);
+  }, [id, name, price, quantity, setCartValue, totalValue, url_image]);
 
   return (
     <div>
       <div data-testid={ `${id - 1}-product-price` }>{price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}</div>
       <div>
-        <img width="100px" data-testid={ `${id - 1}-product-img` } src={ urlImage } alt="url da imagem" />
+        <img width="100px" data-testid={ `${id - 1}-product-img` } src={ url_image } alt="url da imagem" />
         <div data-testid={ `${id - 1}-product-name` }>{name}</div>
       </div>
       <div>
