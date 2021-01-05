@@ -58,7 +58,7 @@ const getSaleById = async (req, res) => {
     }
     return res.status(404).json({ message: 'Not Found' });
   } catch (err) {
-    return res.status(500).json({ message: `${err.message}, get sale` });
+    return res.status(500).json({ message: err.message });
   }
 };
 
