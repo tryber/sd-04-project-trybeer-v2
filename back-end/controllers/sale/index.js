@@ -1,4 +1,4 @@
-const { findOrderByUserId, findAllSales } = require('../../models/sales');
+const { findOrderByUserId, findAllSales } = require('../../models-trybeerv1/sales');
 
 const getOrderByUserId = async (req, res) => {
   try {

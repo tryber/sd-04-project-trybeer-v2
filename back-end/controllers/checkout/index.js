@@ -1,4 +1,4 @@
-const { addSale, addSaleProduct } = require('../../models/sales');
+const { addSale, addSaleProduct } = require('../../models-trybeerv1/sales');
 
 const checkout = async (req, res) => {
   const { products, status, date, userId, cartValue, addressValue, numberValue } = req.body;

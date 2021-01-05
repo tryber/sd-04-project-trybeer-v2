@@ -1,4 +1,4 @@
-const { updateUser, getById } = require('../../models/users');
+const { updateUser, getById } = require('../../models-trybeerv1/users');
 const { createToken } = require('../../middlewares/createJWT');
 
 const userUpdate = async (req, res) => {

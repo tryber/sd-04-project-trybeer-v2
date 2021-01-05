@@ -1,5 +1,5 @@
 const { createToken } = require('../../middlewares/createJWT');
-const { getByEmail } = require('../../models/users');
+const { getByEmail } = require('../../models-trybeerv1/users');
 
 const login = async (req, res) => {
   const { email, password } = req.body;

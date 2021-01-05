@@ -1,5 +1,5 @@
 const { createToken } = require('../../middlewares/createJWT');
-const { add, getByEmail } = require('../../models/users');
+const { add, getByEmail } = require('../../models-trybeerv1/users');
 
 const register = async (req, res) => {
   try {
