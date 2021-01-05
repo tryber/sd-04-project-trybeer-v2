@@ -1,9 +1,9 @@
 // controller products
-const productModel = require('../../models/products');
+const { products } = require('../../models');
 
 const getAll = async (_req, res) => {
-  const products = await productModel.getAllProducts();
-  if (products) return res.status(200).json(products);
+  const allProducts = await products.findAll();
+  if (allProducts) return res.status(200).json(allProducts);
   return res.status(500).json({ products: [] });
 };
 
