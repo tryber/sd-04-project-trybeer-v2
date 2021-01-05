@@ -39,8 +39,8 @@ export const getSalesById = async (id) => axios
   .get(`${baseUrl}/orders/${id}`)
   .catch((response) => response.data);
 
-export const sendPutStatus = async (id) => axios
-  .put(`${baseUrl}/admin/orders/${id}`)
+export const sendPutStatus = async (id, status) => axios
+  .put(`${baseUrl}/admin/orders/${id}`, { status })
   .catch((response) => response.data);
 
 // export const postRegister = async (name, email, password, role) => {
