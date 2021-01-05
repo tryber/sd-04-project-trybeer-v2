@@ -1,5 +1,4 @@
-const { sales, sales_products: salesProducts, products } = require('../models');
-const salesProductModel = require('../models/salesProductModel');
+const { sales, SalesProduct, products } = require('../models');
 const { getCurrentDate } = require('../utils/date');
 
 const getAllSales = async (_req, res) => {
@@ -32,7 +31,7 @@ const insertSale = async (req, res) => {
     });
 
     for (let i = 0; i < productId.length; i += 1) {
-      salesProducs.create({
+      SalesProduct.create({
         sale_id: saleInserted.dataValues.id,
         product_id: productId[i],
         quantity: quantity[i],
@@ -51,12 +50,15 @@ const getSaleById = async (req, res) => {
     const { id: saleId } = req.params;
 
     if (saleId) {
-      const orderDetails = await salesProducts.findOne({ where: { saleId: saleId },  include: [{ model: products, as: 'products' }] });
+      const orderDetails = await SalesProduct.findAll({
+        where: { saleId },
+        include: { model: products, as: 'products' },
+      });
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: `${err.message}, get sale` });
   }
 };
 
