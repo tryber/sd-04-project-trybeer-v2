@@ -33,25 +33,29 @@ const Checkout = ({
   const [redirect, setRedirect] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
 
-  const persistCart = () => {
-    const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalLS = JSON.parse(localStorage.getItem('total'));
-    return cartLS ? saveCartLS(cartLS, totalLS) : null;
-  };
+  // const persistCart = () => {
+  //   const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+  //   const totalLS = JSON.parse(localStorage.getItem('total'));
+  //   return cartLS ? saveCartLS(cartLS, totalLS) : null;
+  // };
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
       return setRedirectToLogin(true);
     }
-    persistCart();
-  }, []);
+    return () => {
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalLS = JSON.parse(localStorage.getItem('total'));
+      return cartLS ? saveCartLS(cartLS, totalLS) : null;
+    };
+  }, [saveCartLS]);
 
   useEffect(() => {
     setPrice(total);
     if (cart.length === ZERO) {
       return setMessageCart('Não há produtos no carrinho');
     }
-    setMessageCart('');
+    return setMessageCart('');
   }, [cart, total]);
 
   useEffect(() => {
