@@ -7,7 +7,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
-        references: { model: 'Sales', key: 'id' },
+        references: { model: 'sales', key: 'id' },
       },
       productId: {
         allowNull: false,
@@ -15,7 +15,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         primaryKey: true,
-        references: { model: 'Products', key: 'id' },
+        references: { model: 'products', key: 'id' },
       },
       quantity: {
         allowNull: false,
