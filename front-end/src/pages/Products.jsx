@@ -17,11 +17,11 @@ const Products = ({
   const ZERO = 0;
   const DOIS = 2;
 
-  const persistCart = () => {
-    const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalLS = JSON.parse(localStorage.getItem('total'));
-    return cartLS ? saveCartLS(cartLS, totalLS) : null;
-  };
+  // const persistCart = () => {
+  //   const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+  //   const totalLS = JSON.parse(localStorage.getItem('total'));
+  //   return cartLS ? saveCartLS(cartLS, totalLS) : null;
+  // };
 
   useEffect(() => {
     if (!localStorage.getItem('user')) {
@@ -45,13 +45,17 @@ const Products = ({
         setProducts(res.data);
       })
       .catch((error) => { throw new Error(error.message); });
-    persistCart();
-  }, []);
+    return () => {
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalLS = JSON.parse(localStorage.getItem('total'));
+      return cartLS ? saveCartLS(cartLS, totalLS) : null;
+    };
+  }, [saveCartLS]);
 
   const quantity = (product) => {
     let qty;
     const productInCart = cart.filter((item) => item.name === product.name);
-    productInCart.length ? (qty = productInCart[0].quantity) : (qty = ZERO);
+    qty = productInCart.length ? (qty = productInCart[0].quantity) : (qty = ZERO);
     return qty;
   };
 
@@ -65,7 +69,7 @@ const Products = ({
   const stopDecrement = (product) => {
     const qty = quantity(product);
     if (qty === ZERO || !qty) return null;
-    decreaseQtd(product);
+    return decreaseQtd(product);
   };
 
   return (
