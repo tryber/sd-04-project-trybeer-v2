@@ -1,0 +1,12 @@
+.products-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-cards-container {
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}

@@ -1,0 +1,21 @@
+.mobile-footer {
+  align-items: center;
+  align-self: flex-end;
+  display: flex;
+  height: 67px;
+  justify-content: center;
+  margin: 10px 0;
+  top: 90%;
+  width: 100%;
+}
+
+.mobile-footer button {
+  background-color: #fca311ff;
+  border: none;
+  height: 40px;
+  width: 100%;
+}
+
+.mobile-footer button:hover {
+  cursor: pointer;
+}

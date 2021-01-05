@@ -1,0 +1,161 @@
+.btn-div {
+  margin: auto;
+}
+
+.btn-cadastrar {
+  align-items: center;
+  background-color: #14213d;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #ffff;
+  display: flex;
+  font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  margin: auto;
+  outline: none;
+  width: 400px;
+}
+
+.btn-cadastrar:disabled {
+  background-color: #e5e5e5;
+  cursor: pointer;
+  color: white;
+}
+
+.disable-link {
+  text-decoration: none;
+}
+
+.checkbox-text {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  padding: 10px 5px;
+}
+
+.checkbox-text input {
+  margin-right: 15px;
+}
+
+.form-registro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 400px;
+}
+
+.input-labels {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.input-registro {
+  border: 2px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  margin: 5px auto 30px;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.input-registro:focus {
+  background-color: #fca311;
+  color: white;
+}
+
+.logo-trybeer {
+  align-items: center;
+  display: flex;
+  margin: auto;
+  width: 200px;
+}
+
+.page-registro {
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.seller-checkbox {
+  transform: scale(1.5)
+
+}
+
+.seller-checkbox-div {
+  margin: 10px 0;
+}
+
+@media ( max-width : 761px ) {
+.btn-cadastrar {
+  display: inline-block;
+  justify-content: center;
+  margin: auto;
+  margin-top: 5px;
+  width: 300px;
+}
+
+.input-registro {
+  font-size: 23px;
+  width: 370px;
+}
+
+.page-registro {
+  margin: 10px;
+}
+}
+
+/*
+.user-icon {
+  display: flex;
+  margin: auto;
+  width: 150px;
+}
+
+.login-form {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.login-label, .login-label input {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#emailInput,
+#passwordInput {
+  border: 2px solid black;
+  border-radius: 4px;
+  height: 20px;
+  margin: 5px auto 30px;
+  padding: 8px 0;
+}
+
+#emailInput:focus,
+#passwordInput:focus {
+  background-color: #fca311;
+  color: white;
+}
+
+.login-button:disabled {
+  background-color: #e5e5e5;
+  cursor: pointer;
+  color: white;
+}
+
+.register-link {
+  display: block;
+  color: rgb(133, 131, 131);
+  margin: 32px auto;
+  width: fit-content;
+} */

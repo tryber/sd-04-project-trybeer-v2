@@ -27,7 +27,7 @@ const Sales = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW,
       },
     },
-    { timestamps: false }
+    { timestamps: false },
   );
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, {

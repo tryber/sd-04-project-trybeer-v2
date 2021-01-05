@@ -1,0 +1,62 @@
+nav,
+ul,
+li,
+a,
+header,
+div,
+img,side-menu-item-logout
+button {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 320px;
+}
+
+header {
+  background-color: #0f0f0f;
+}
+
+.flex-title-container {
+  display: flex;
+}
+
+.top-title {
+  color: transparent;
+}
+
+.logo {
+  width: 130px;
+}
+
+.menu-hamburger-btn {
+  background-color: #0f0f0f;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  justify-content: space-between;
+  outline: none;
+  width: 30px;
+}
+
+.menu-hamburger-btn:hover {
+  cursor: pointer;
+}
+
+.menu-hamburger-btn div {
+  background-color: #e5e5e5;
+  height: 4px;
+  transition: all 0.4s linear;
+  width: 30px;
+}
+
+.header-container {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 23px;
+}

@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const SalesProducts = queryInterface.createTable(
@@ -10,7 +8,7 @@ module.exports = {
           onDelete: 'CASCADE',
           references: {
             model: 'Sales',
-            key: 'id',
+            key: 'sale_id',
           },
           type: Sequelize.INTEGER,
         },
@@ -19,7 +17,7 @@ module.exports = {
           onDelete: 'CASCADE',
           references: {
             model: 'Products',
-            key: 'id',
+            key: 'product_id',
           },
           type: Sequelize.INTEGER,
         },
@@ -33,6 +31,6 @@ module.exports = {
     return SalesProducts;
   },
 
-  down: async (queryInterface, Sequelize) =>
-    queryInterface.dropTable("Sales_Products"),
+  down: async (queryInterface, _Sequelize) =>
+    queryInterface.dropTable('Sales_Products'),
 };

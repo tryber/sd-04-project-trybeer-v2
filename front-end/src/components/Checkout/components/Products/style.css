@@ -1,0 +1,60 @@
+div,
+h2,
+p,
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+.products-container li {
+  align-items: center;
+  border-bottom: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 16px 0;
+  padding: 0 8px 16px;
+}
+
+.products-container li:first-child {
+  border-top: 1px solid;
+  padding: 16px 8px;
+}
+
+.products-container p {
+  font-size: 16px;
+}
+
+.products-container li button {
+  background-color: #fca311;
+  height: 32px;
+  width: 32px;
+}
+
+.cart-empty p {
+  font-size: 32px;
+  margin: 16px 0;
+}
+
+@media (max-width: 500px) {
+  .products-container li button {
+    height: 24px;
+    width: 24px;
+  }
+
+  .cart-empty p {
+    font-size: 1.4em;
+  }
+}
+
+@media (max-width: 400px) {
+  .products-container p {
+    font-size: 14px;
+  }
+
+  .cart-empty p {
+    font-size: 1.4em;
+  }
+}
