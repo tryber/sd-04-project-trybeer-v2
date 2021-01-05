@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import api from '../services/api';
+
 const beer = require('../images/beer2.webp');
 
 function Login() {
@@ -9,8 +10,7 @@ function Login() {
   const [adminUser, setAdminUser] = useState(false);
   const [clientUser, setClientUser] = useState(false);
 
-  const validateEmail = (email) =>
-    email.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
+  const validateEmail = (email) => email.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
 
   const validatePassword = (password) => password.length >= 6;
 
@@ -24,7 +24,9 @@ function Login() {
       .then((response) => {
         const { token, user } = response.data;
         const { name, email, role } = user;
-        const userData = { name, email, token, role };
+        const userData = {
+          name, email, token, role,
+        };
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(userData));
         return user.role === 'administrator'
@@ -36,10 +38,10 @@ function Login() {
 
   return (
     <div className="main-container">
-      <img src={beer} className="beer-img" />
+      <img src={ beer } className="beer-img" />
       <h2>Login Page</h2>
       <div>
-        <form onSubmit={(event) => login(event)}>
+        <form onSubmit={ (event) => login(event) }>
           <div className="form-group">
             <div className="col-sm-12">
               <label htmlFor="email">Email</label>
@@ -50,8 +52,8 @@ function Login() {
                 name="email"
                 type="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={ email }
+                onChange={ (e) => setEmail(e.target.value) }
               />
             </div>
           </div>
@@ -65,8 +67,8 @@ function Login() {
                 name="password"
                 type="password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={ password }
+                onChange={ (e) => setPassword(e.target.value) }
               />
             </div>
           </div>
@@ -76,7 +78,7 @@ function Login() {
               <div className="col-sm-12">
                 <button
                   type="submit"
-                  disabled={!(validateEmail(email) && validatePassword(password))}
+                  disabled={ !(validateEmail(email) && validatePassword(password)) }
                   data-testid="signin-btn"
                   className="col-sm-3 btn btn-success"
                 >
@@ -88,13 +90,13 @@ function Login() {
         </form>
 
         <div className="no-account">
-          <Link to="/register" style={{ color: "white", textDecoration: "none" }}>
+          <Link to="/register" style={ { color: 'white', textDecoration: 'none' } }>
             <div
               data-testid="no-account-btn"
-              onClick={() => <Redirect to="/register" />}
+              onClick={ () => <Redirect to="/register" /> }
             >
               Ainda não tenho conta
-          </div>
+            </div>
           </Link>
         </div>
       </div>

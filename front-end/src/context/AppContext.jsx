@@ -1,6 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
 
 const AppContext = createContext();
 
@@ -37,10 +36,10 @@ const AppProvider = ({ children }) => {
     setOrderMessage,
   };
 
-  return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={ context }>{children}</AppContext.Provider>;
 };
 
-//Prop-types
+// Prop-types
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,

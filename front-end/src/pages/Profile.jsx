@@ -1,8 +1,8 @@
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
-import { AppContext } from '../context/AppContext';
+import React, { useContext, useState, useEffect } from 'react';
+
 import axios from 'axios';
+import { AppContext } from '../context/AppContext';
 import api from '../services/api';
 import TopBar from '../components/ClientBar.jsx';
 
@@ -47,7 +47,7 @@ export default () => {
   return (
     <div>
       <h2>{message}</h2>
-      <TopBar title={'Meu perfil'} isAdm={false} />
+      <TopBar title="Meu perfil" isAdm={ false } />
 
       <div className="container">
         <div className="col-8">
@@ -56,11 +56,11 @@ export default () => {
           <form method="PUT" action="">
             <label htmlFor="">Name</label>
             <input
-              onChange={(e) => callSetName(e.target.value)}
+              onChange={ (e) => callSetName(e.target.value) }
               data-testid="profile-name-input"
               type="text"
-              name={newName}
-              value={newName}
+              name={ newName }
+              value={ newName }
               className="form-control"
             />
             <br />
@@ -68,24 +68,24 @@ export default () => {
             <input
               data-testid="profile-email-input"
               type="text"
-              name={userEmail}
+              name={ userEmail }
               className="form-control"
-              value={userEmail}
+              value={ userEmail }
               readOnly
             />
             <br />
             <button
-              onClick={(e) =>
-                sendEdit(e, newName, userEmail, history, setMessage)
-              }
+              onClick={ (e) => sendEdit(e, newName, userEmail, history, setMessage) }
               className="btn btn-outline-success"
-              disabled={validateEdit(newName, userName)}
+              disabled={ validateEdit(newName, userName) }
               data-testid="profile-save-btn"
             >
               Salvar
             </button>
           </form>
-          usuário {newName}
+          usuário
+          {' '}
+          {newName}
         </div>
       </div>
     </div>

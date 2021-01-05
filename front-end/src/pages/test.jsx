@@ -1,5 +1,5 @@
 import React from 'react';
-import TopBar from '../components/ClientBar.jsx';
+import TopBar from '../components/ClientBar';
 
 // Meus Pedidos
 // Detalhes do Pedido
@@ -9,7 +9,7 @@ import TopBar from '../components/ClientBar.jsx';
 
 const Page = () => (
   <div>
-    <TopBar title={'Trybeer'} isAdm={true} />
+    <TopBar title="Trybeer" isAdm />
   </div>
 );
 

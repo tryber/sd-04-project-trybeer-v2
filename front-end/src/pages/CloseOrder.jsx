@@ -1,12 +1,16 @@
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import TopBar from '../components/ClientBar.jsx';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
+import TopBar from '../components/ClientBar';
 import { AppContext } from '../context/AppContext';
-import api from '../services/api.js';
+import api from '../services/api';
 import './CloseOrder.css';
 
 function CloseOrder() {
-  const { cart, setCart, total, setTotal } = useContext(AppContext);
+  const {
+    cart, setCart, total, setTotal,
+  } = useContext(AppContext);
   const { orderMessage, setOrderMessage } = useContext(AppContext);
 
   const [message, setMessage] = useState('');
@@ -20,7 +24,7 @@ function CloseOrder() {
   useEffect(() => {
     if (localStorage.getItem('cart')) {
       setCart(JSON.parse(localStorage.getItem('cart')));
-      console.log(`eu so log do useffect: total: ${total}`)
+      console.log(`eu so log do useffect: total: ${total}`);
       const loginInStorage = JSON.parse(localStorage.getItem('user'));
       setEmail(loginInStorage.email);
       setTotal(JSON.parse(localStorage.getItem('totalPrice')));
@@ -56,13 +60,11 @@ function CloseOrder() {
   };
 
   const makeTotalValue = (cart) => {
-    let totalPrice = document.getElementById('itemTotal');
+    const totalPrice = document.getElementById('itemTotal');
 
     if (cart.length > 0) {
       const sum = cart
-        .map(({ price, quantity }) => {
-          return price * quantity;
-        })
+        .map(({ price, quantity }) => price * quantity)
         .reduce((acc, curr) => acc + curr);
       totalPrice.innerText = `R$ ${sum
         .toFixed(2)
@@ -77,7 +79,7 @@ function CloseOrder() {
   };
 
   const removeItemFromArray = (product) => {
-    let newArr = cart.filter((value, index, arr) => value.name !== product);
+    const newArr = cart.filter((value, index, arr) => value.name !== product);
     setCart(newArr);
     makeTotalValue(newArr);
     localStorage.setItem('cart', JSON.stringify(newArr));
@@ -89,7 +91,7 @@ function CloseOrder() {
     const cart = JSON.parse(localStorage.getItem('cart'));
     const newCart = [];
     cart.forEach((item) => {
-      const newItem = {...item, address: `${address}, ${number}`};
+      const newItem = { ...item, address: `${address}, ${number}` };
       newCart.push(newItem);
     });
     localStorage.setItem('cart', JSON.stringify(newCart));
@@ -101,7 +103,7 @@ function CloseOrder() {
     const orderDate = new Date();
     setData(orderDate);
     setStore();
-    console.log(`eu sou o log do doneOrder: ${total}`)
+    console.log(`eu sou o log do doneOrder: ${total}`);
     postData(email, total, address, number, orderDate, cart);
     localStorage.removeItem('cart');
     history.push('/products');
@@ -109,78 +111,76 @@ function CloseOrder() {
 
   return (
     <div>
-      <TopBar title={'Finalizar Pedido'} isAdm={false} />
+      <TopBar title="Finalizar Pedido" isAdm={ false } />
       <div className="container">
         <div className="col-lg-15">
           <h1>Produtos</h1>
           <h3>{message}</h3>
           <p id="orderMessage">{orderMessage}</p>
-          <ul ref={orderRef} id="list" className="list-group">
-            {cart.map(({ name, quantity, price }, index) => {
-              return (
-                <li
-                  name="itemList"
-                  id={name}
-                  key={name}
-                  className="list-group-item list-group-item-action list-group-item-primary"
-                  index={index}
-                >
-                  <div className="">
-                    <div className="row">
-                      <div
-                        data-testid={`${index}-product-qtd-input`}
-                        className="col"
-                      >
-                        {quantity}
-                      </div>
-                      <div
-                        data-testid={`${index}-product-name`}
-                        className="col-6"
-                      >
-                        {name}
-                      </div>
-                      <div
-                        data-testid={`${index}-product-unit-price`}
-                        className="price"
-                      >
-                        {`(R$ ${price
-                          .toFixed(2)
-                          .toString()
-                          .replace('.', ',')} un)`}
-                      </div>
-                      <div
-                        data-testid={`${index}-product-total-value`}
-                        className="price"
-                      >
-                        {`R$ ${(price * quantity)
-                          .toFixed(2)
-                          .toString()
-                          .replace('.', ',')}`}
-                      </div>
+          <ul ref={ orderRef } id="list" className="list-group">
+            {cart.map(({ name, quantity, price }, index) => (
+              <li
+                name="itemList"
+                id={ name }
+                key={ name }
+                className="list-group-item list-group-item-action list-group-item-primary"
+                index={ index }
+              >
+                <div className="">
+                  <div className="row">
+                    <div
+                      data-testid={ `${index}-product-qtd-input` }
+                      className="col"
+                    >
+                      {quantity}
+                    </div>
+                    <div
+                      data-testid={ `${index}-product-name` }
+                      className="col-6"
+                    >
+                      {name}
+                    </div>
+                    <div
+                      data-testid={ `${index}-product-unit-price` }
+                      className="price"
+                    >
+                      {`(R$ ${price
+                        .toFixed(2)
+                        .toString()
+                        .replace('.', ',')} un)`}
+                    </div>
+                    <div
+                      data-testid={ `${index}-product-total-value` }
+                      className="price"
+                    >
+                      {`R$ ${(price * quantity)
+                        .toFixed(2)
+                        .toString()
+                        .replace('.', ',')}`}
+                    </div>
 
-                      <input type="hidden" name="total" value={total} />
-                      <input type="hidden" name="products" value={cart} />
-                      <input type="hidden" name="date" value={data} />
+                    <input type="hidden" name="total" value={ total } />
+                    <input type="hidden" name="products" value={ cart } />
+                    <input type="hidden" name="date" value={ data } />
 
-                      <div
-                        onClick={(e) => removeItemFromArray(name)}
-                        className="col"
+                    <div
+                      onClick={ (e) => removeItemFromArray(name) }
+                      className="col"
+                    >
+                      <button
+                        data-testid={ `${index}-removal-button` }
+                        className="btn btn-danger"
                       >
-                        <button
-                          data-testid={`${index}-removal-button`}
-                          className="btn btn-danger"
-                        >
-                          X
-                        </button>
-                      </div>
+                        X
+                      </button>
                     </div>
                   </div>
-                </li>
-              );
-            })}
+                </div>
+              </li>
+            ))}
           </ul>
           <br />
-          <h4 className="order-total" data-testid="order-total-value" id="itemTotal"></h4>
+          <h4 className="order-total" data-testid="order-total-value" id="itemTotal" />
         </div>
       </div>
 
@@ -192,7 +192,7 @@ function CloseOrder() {
             <h3>Dados para Entrega</h3>
             <label htmlFor="rua">Rua:</label>
             <input
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={ (e) => setAddress(e.target.value) }
               id="inputEnd"
               name="adrress"
               data-testid="checkout-street-input"
@@ -205,7 +205,7 @@ function CloseOrder() {
             </label>
             <input
               name="number"
-              onChange={(e) => setNumber(e.target.value)}
+              onChange={ (e) => setNumber(e.target.value) }
               data-testid="checkout-house-number-input"
               type="text"
               className="form-control col-6"
@@ -217,14 +217,12 @@ function CloseOrder() {
             id="inputNum"
             data-testid="checkout-finish-btn"
             className="btn btn-outline-success"
-            disabled={!address || !number || !cart.length > 0}
-            onClick={() =>
-              doneOrder(
-                history,
-                'Compra realizada com sucesso!',
-                setOrderMessage
-              )
-            }
+            disabled={ !address || !number || !cart.length > 0 }
+            onClick={ () => doneOrder(
+              history,
+              'Compra realizada com sucesso!',
+              setOrderMessage,
+            ) }
           >
             Finalizar compra
           </button>

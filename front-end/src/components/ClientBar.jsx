@@ -20,7 +20,7 @@ const changeOpen = () => {
 };
 
 const changeUrl = (history, url, clear, isDetails) => {
-  if(isDetails) {
+  if (isDetails) {
     history.replace('/');
   }
   history.push(url);
@@ -31,36 +31,34 @@ const changeUrl = (history, url, clear, isDetails) => {
   ctrOpen = false;
 };
 
-const admOnline = (history, title) => {
-  return (
-    <nav className="admin-side-bar-container">
-      <div>
-        <h3 className='title-adm' >{title}</h3>
-        <button
-          className="nav-btn-adm"
-          data-testid="side-menu-item-orders"
-          onClick={() => changeUrl(history, 'orders')}
-        >
-          Pedidos
-        </button>
-        <button
-          className="nav-btn-adm"
-          data-testid="side-menu-item-profile"
-          onClick={() => changeUrl(history, 'profile')}
-        >
-          Perfil
-        </button>
-      </div>
+const admOnline = (history, title) => (
+  <nav className="admin-side-bar-container">
+    <div>
+      <h3 className="title-adm">{title}</h3>
       <button
         className="nav-btn-adm"
-        data-testid="side-menu-item-logout"
-        onClick={() => changeUrl(history, '', true)}
+        data-testid="side-menu-item-orders"
+        onClick={ () => changeUrl(history, 'orders') }
       >
-        Sair
+        Pedidos
       </button>
-    </nav>
-  );
-};
+      <button
+        className="nav-btn-adm"
+        data-testid="side-menu-item-profile"
+        onClick={ () => changeUrl(history, 'profile') }
+      >
+        Perfil
+      </button>
+    </div>
+    <button
+      className="nav-btn-adm"
+      data-testid="side-menu-item-logout"
+      onClick={ () => changeUrl(history, '', true) }
+    >
+      Sair
+    </button>
+  </nav>
+);
 
 const TopBar = ({ title, isAdm, isDetails }) => {
   const history = useHistory();
@@ -68,7 +66,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
   return (
     <div>
       <div className="body-top-bar">
-        <button className="menu-btn" onClick={() => changeOpen()} data-testid="top-hamburguer">
+        <button className="menu-btn" onClick={ () => changeOpen() } data-testid="top-hamburguer">
           <div className="menu-btn-burguer" />
         </button>
         <header className="title" data-testid="top-title">
@@ -82,21 +80,21 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             <button
               className="nav-btn"
               data-testid="side-menu-item-products"
-              onClick={() => changeUrl(history, 'products', null, isDetails)}
+              onClick={ () => changeUrl(history, 'products', null, isDetails) }
             >
               Produtos
             </button>
             <button
               className="nav-btn"
               data-testid="side-menu-item-my-orders"
-              onClick={() => changeUrl(history, 'orders', null, isDetails)}
+              onClick={ () => changeUrl(history, 'orders', null, isDetails) }
             >
               Meus Pedidos
             </button>
             <button
               className="nav-btn"
               data-testid="side-menu-item-my-profile"
-              onClick={() => changeUrl(history, 'profile', null, isDetails)}
+              onClick={ () => changeUrl(history, 'profile', null, isDetails) }
             >
               Meu Perfil
             </button>
@@ -104,7 +102,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
           <button
             className="nav-btn"
             data-testid="side-menu-item-logout"
-            onClick={() => changeUrl(history, '', true)}
+            onClick={ () => changeUrl(history, '', true) }
           >
             Sair
           </button>

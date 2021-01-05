@@ -1,6 +1,6 @@
 import React from 'react';
-import SideBar from '../../components/ClientBar.jsx';
 import { useHistory } from 'react-router-dom';
+import SideBar from '../../components/ClientBar';
 import './CSS/Profile.css';
 
 const Profile = () => {
@@ -15,7 +15,7 @@ const Profile = () => {
 
   return (
     <div className="bodyAdm">
-      <SideBar title={'TryBeer'} isAdm={true} />
+      <SideBar title="TryBeer" isAdm />
       <div className="profile-container">
         <h2 className="new-text">Perfil</h2>
         <div className="infoText">

@@ -27,14 +27,12 @@ function Register() {
     })
       .then(() => redirect())
       .catch((e) => setMessage(e.response.data.message));
-
-
   };
 
   return (
     <div className="main-container">
       <h2>Register Page</h2>
-      <form onSubmit={(event) => register(event)}>
+      <form onSubmit={ (event) => register(event) }>
         <div className="form-group">
           <div className="col-sm-12">
             <label htmlFor="name">Nome</label>
@@ -45,8 +43,8 @@ function Register() {
               name="name"
               type="text"
               required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={ name }
+              onChange={ (e) => setName(e.target.value) }
             />
           </div>
         </div>
@@ -61,8 +59,8 @@ function Register() {
               placeholder="email"
               type="email"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={ email }
+              onChange={ (e) => setEmail(e.target.value) }
             />
           </div>
         </div>
@@ -77,8 +75,8 @@ function Register() {
               placeholder="passwrod"
               type="password"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={ password }
+              onChange={ (e) => setPassword(e.target.value) }
             />
           </div>
         </div>
@@ -92,14 +90,14 @@ function Register() {
               name="checkbox"
               id="checkbox-i"
               type="checkbox"
-              onChange={(e) => setCheckbox(e.target.checked)}
+              onChange={ (e) => setCheckbox(e.target.checked) }
             />
           </div>
         </div>
 
         <button
           type="submit"
-          disabled={!(validateName(name) && validateEmail(email) && validatePassword(password))}
+          disabled={ !(validateName(name) && validateEmail(email) && validatePassword(password)) }
           data-testid="signup-btn"
         >
           Cadastrar
