@@ -8,6 +8,8 @@ function Chat() {
   useEffect(()=> {
     socket = window.io('http://localhost:3001');
     socket.emit('join', JSON.parse(localStorage.user).email);
+    socket.emit('message', 'testando app')
+    socket.on('message', data => {console.log(data)})
   },[])
   return (
     <div className="page">

@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const middleware = require('./middleware');
 const controllers = require('./controllers');
+// const Mongo = require('./services/mongoService');
 require('dotenv/config');
 
 const app = express();
@@ -45,19 +46,31 @@ app.use((err, _req, res, _next) => {
   // console.log(err)
   res.status(405).json({ err: err.message });
 });
-let menssage = [];
+
+let message = [];
 io.on('connection', (socket) => {
-  socket.on('join', (name) => {
-    socket.join(name);
+  const user = {};
+
+  socket.on('join', (roomName, loja) => {
+    user.activeRoom = roomName;
+    user.nickname = loja ? 'Loja' : roomName;
+    socket.join(user.activeRoom);
   });
-  console.log(socket.id);
-  io.emit('test');
+
+  socket.on('message', async (text) => {
+    const msg = {
+      text,
+      time: new Date().toLocaleTimeString('pt-BR', {hour12: false, hour: '2-digit', minute: '2-digit'}),
+      nickname: user.nickname,
+    }
+
+    // await Mongo.addNew('messages', msg);
+
+   io.to(user.activeRoom).emit('message', msg);
+  });
 
 
-  socket.on('send message', (message) => {
-
-  })
-
+  // salvar no BD nickname, time, text
   // socket.on('disconnect', () => console.log('saiu'));
 });
 
