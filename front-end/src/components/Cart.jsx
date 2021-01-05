@@ -7,13 +7,20 @@ function Cart() {
   return (
     <div>
       <h2>Shopping Cart</h2>
-      <p></p>
-      {cart.map((item, i) => (
-        <p key={i}>{item.name} - {item.quantity} - R$ {item.price}</p>
+      <p />
+      {cart.map((item) => (
+        <p key={ item.id }>
+          {item.name}
+          -
+          {item.quantity}
+          -
+          R$
+          {item.price}
+        </p>
       ))}
       {total}
     </div>
-  )
-};
+  );
+}
 
 export default Cart;
