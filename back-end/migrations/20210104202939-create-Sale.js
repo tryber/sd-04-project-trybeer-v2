@@ -1,9 +1,9 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const SalesTable = queryInterface.createTable(
-      'Sales',
+      'sales',
       {
-        sale_id: {
+        id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
@@ -34,10 +34,10 @@ module.exports = {
           allowNull: false,
         },
       },
-      { timestamps: false }
+      { timestamps: false },
     );
     return SalesTable;
   },
 
-  down: async (queryInterface, _Sequelize) => queryInterface.dropTable('Sales'),
+  down: async (queryInterface, _Sequelize) => queryInterface.dropTable('sales'),
 };

@@ -1,14 +1,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const SalesProducts = queryInterface.createTable(
-      'Sales_Products',
+      'sales_products',
       {
         sale_id: {
           primary_key: true,
           onDelete: 'CASCADE',
           references: {
-            model: 'Sales',
-            key: 'sale_id',
+            model: 'sales',
+            key: 'id',
           },
           type: Sequelize.INTEGER,
         },
@@ -16,8 +16,8 @@ module.exports = {
           primary_key: true,
           onDelete: 'CASCADE',
           references: {
-            model: 'Products',
-            key: 'product_id',
+            model: 'products',
+            key: 'id',
           },
           type: Sequelize.INTEGER,
         },
@@ -31,6 +31,5 @@ module.exports = {
     return SalesProducts;
   },
 
-  down: async (queryInterface, _Sequelize) =>
-    queryInterface.dropTable('Sales_Products'),
+  down: async (queryInterface, _Sequelize) => queryInterface.dropTable('sales_products'),
 };

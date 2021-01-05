@@ -1,5 +1,4 @@
-const Products = (sequelize, DataTypes) =>
-  sequelize.define(
+const Products = (sequelize, DataTypes) => sequelize.define(
     'Product',
     {
       name: DataTypes.STRING,
@@ -8,7 +7,7 @@ const Products = (sequelize, DataTypes) =>
     },
     {
       timestamps: false,
-    }
+    },
   );
 
 module.exports = Products;
