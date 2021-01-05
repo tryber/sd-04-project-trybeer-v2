@@ -14,40 +14,45 @@ const Register = () => {
   const [message, setMessage] = useState('');
   const [redirect, setRedirect] = useState(false);
 
-  const checkName = (name) => {
+  const DOZE = 12;
+  const SEIS = 6;
+
+  const checkName = (userName) => {
     const regexName = /^[a-z\s]*$/i;
-    return regexName.test(name) && name.length >= 12 ? true : false;
+    return !!(regexName.test(userName) && userName.length >= DOZE);
   };
 
-  const checkEmail = (email) => {
+  const checkEmail = (userEmail) => {
     const regexEmail = /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i;
-    return regexEmail.test(email);
+    return regexEmail.test(userEmail);
   };
 
   const role = checked ? 'administrator' : 'client';
 
   const registerUser = () => {
     axios
-      .post('http://localhost:3001/users', { name, email, password, role })
-      .then((_res) => setRedirect(true))
-      .catch((_error) => setMessage('E-mail already in database.'));
+      .post('http://localhost:3001/users', {
+        name, email, password, role,
+      })
+      .then(() => setRedirect(true))
+      .catch(() => setMessage('E-mail already in database.'));
   };
 
-  const createToken = () =>
-    axios
-      .post('http://localhost:3001/login', { email, password })
-      .then((res) => {
-        setToken(res.data.token);
-      })
-      .catch((error) => console.log(error));
+  const createToken = () => axios
+    .post('http://localhost:3001/login', { email, password })
+    .then((res) => {
+      setToken(res.data.token);
+    })
+    .catch((error) => { throw new Error(error.message); });
 
   if (token !== '') {
-    const objUser = { name, email, token, role };
+    const objUser = {
+      name, email, token, role,
+    };
     localStorage.setItem('user', JSON.stringify(objUser));
   }
 
-  if (role === 'administrator' && redirect)
-    return <Redirect to="/admin/orders" />;
+  if (role === 'administrator' && redirect) return <Redirect to="/admin/orders" />;
 
   if (role === 'client' && redirect) {
     return <Redirect to="/products" />;
@@ -55,49 +60,55 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     createToken();
-
     registerUser();
   };
 
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="name">Nome</label>
-        <input
-          type="text"
-          id="name"
-          data-testid="signup-name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          data-testid="signup-email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          data-testid="signup-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="seller">Quero Vender</label>
-        <input
-          type="checkbox"
-          id="seller"
-          data-testid="signup-seller"
-          defaultChecked={checked}
-          onChange={() => setChecked(!checked)}
-        />
+      <form onSubmit={ (e) => handleSubmit(e) }>
+        <label htmlFor="name">
+          Nome
+          <input
+            type="text"
+            id="name"
+            data-testid="signup-name"
+            onChange={ (e) => setName(e.target.value) }
+          />
+        </label>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            data-testid="signup-email"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            id="password"
+            data-testid="signup-password"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </label>
+        <label htmlFor="seller">
+          Quero Vender
+          <input
+            type="checkbox"
+            id="seller"
+            data-testid="signup-seller"
+            defaultChecked={ checked }
+            onChange={ () => setChecked(!checked) }
+          />
+        </label>
         <button
           type="submit"
           data-testid="signup-btn"
           disabled={
-            !checkEmail(email) || !checkName(name) || password.length < 6
+            !checkEmail(email) || !checkName(name) || password.length < SEIS
           }
         >
           Cadastrar

@@ -23,14 +23,14 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           cart: [...state.cart],
-          total: state.total + product.price,
+          total: state.total + parseFloat(product.price),
         };
       }
       action.payload.quantity = 1;
       return {
         ...state,
         cart: [...state.cart, action.payload],
-        total: state.total + action.payload.price,
+        total: state.total + parseFloat(action.payload.price),
       };
     }
 
@@ -52,6 +52,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cart: [...state.cart],
+        total: state.total - product.price,
       };
     }
     case SAVE_CART:

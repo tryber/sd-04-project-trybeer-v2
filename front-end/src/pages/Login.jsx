@@ -6,11 +6,13 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [userName, setName] = useState('');
+  const [userRole, setRole] = useState('');
   const [users, setUsers] = useState(null);
   const [token, setToken] = useState('');
   const [redirect, setRedirect] = useState(false);
+
+  const SEIS = 6;
 
   useEffect(() => {
     axios
@@ -18,38 +20,35 @@ const Login = () => {
       .then((res) => {
         setUsers(res.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { throw new Error(error.message); });
   }, []);
 
-  const validEmail = (email) =>
-    /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(email);
+  const validEmail = (userEmail) => /[A-Z0-9]{1,}@[A-Z0-9]{2,}\.[A-Z0-9]{2,}/i.test(userEmail);
 
-  const createToken = () =>
-    axios
-      .post('http://localhost:3001/login', { email, password })
-      .then((res) => {
-        setToken(res.data.token);
-        setRedirect(true);
-      })
-      .catch((error) => console.log(error));
+  const createToken = () => axios
+    .post('http://localhost:3001/login', { email, password })
+    .then((res) => {
+      setToken(res.data.token);
+      setRedirect(true);
+    })
+    .catch((error) => { throw new Error(error.message); });
 
   if (token !== '') {
-    const objUser = { name, email, token, role };
+    const objUser = {
+      name: userName, email, token, role: userRole,
+    };
     localStorage.setItem('user', JSON.stringify(objUser));
   }
 
-  if (role === 'administrator' && redirect)
-    return <Redirect to="/admin/orders" />;
+  if (userRole === 'administrator' && redirect) return <Redirect to="/admin/orders" />;
 
-  if (role === 'client' && redirect) {
+  if (userRole === 'client' && redirect) {
     return <Redirect to="/products" />;
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = users.find(
-      (item) => item.email === email && item.password === password,
-    );
+    const user = users.find((item) => item.email === email);
     if (user) {
       const { name, role } = user;
       setName(name);
@@ -60,27 +59,31 @@ const Login = () => {
 
   return (
     <div>
-      <label htmlFor="email">Email</label>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          data-testid="email-input"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          data-testid="password-input"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <form onSubmit={ (e) => handleSubmit(e) }>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            data-testid="email-input"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            name="password"
+            id="password"
+            data-testid="password-input"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </label>
         <button
           type="submit"
           data-testid="signin-btn"
-          disabled={!validEmail(email) || password.length < 6}
+          disabled={ !validEmail(email) || password.length < SEIS }
         >
           ENTRAR
         </button>

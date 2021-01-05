@@ -22,11 +22,17 @@ const MenuAdmin = () => {
           </button>
         </Link>
         <hr />
+        <Link to="/admin/chats">
+          <button data-testid="side-menu-item-chat" type="button">
+            Conversas
+          </button>
+        </Link>
+        <hr />
         <Link to="/login">
           <button
             data-testid="side-menu-item-logout"
             type="button"
-            onClick={cleanLocal}
+            onClick={ cleanLocal }
           >
             Sair
           </button>

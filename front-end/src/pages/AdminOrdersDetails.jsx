@@ -8,28 +8,31 @@ const AdminOrdersDetails = () => {
   const [orderDetails, setOrderDetails] = useState([]);
   const [orderStatus, setOrderStatus] = useState('');
 
+  const DOIS = 2;
+  const QUATORZE = 14;
+
   useEffect(() => {
     axios
       .get('http://localhost:3001/order-details', {
-        params: { saleId: window.location.pathname.slice(14) },
+        params: { saleId: window.location.pathname.slice(QUATORZE) },
       })
       .then((res) => {
         setOrderStatus(res.data[0].status);
         setOrderDetails(res.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { throw new Error(error.message); });
   }, []);
 
-  const updateOrderStatus = () => {
+  const updateOrderStatus = (status) => {
     axios
       .put('http://localhost:3001/sales', {
-        saleId: window.location.pathname.slice(14),
-        status: 'Entregue',
+        saleId: window.location.pathname.slice(QUATORZE),
+        status,
       })
-      .then((_res) => {
-        setOrderStatus('Entregue');
+      .then(() => {
+        setOrderStatus(status);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => { throw new Error(error.message); });
   };
 
   return (
@@ -37,41 +40,50 @@ const AdminOrdersDetails = () => {
       <MenuAdmin title="Detalhes do Pedido" />
       {orderDetails.length && (
         <div>
-          <p data-testid="order-number">{`Pedido ${orderDetails[0].saleID}`}</p>
+          <p data-testid="order-number">{ `Pedido ${orderDetails[0].id}` }</p>
           <p data-testid="order-status">{orderStatus}</p>
-          <p data-testid="order-total-value">{`Total: R$ ${orderDetails[0].totalPrice
-            .toFixed(2)
-            .replace('.', ',')}`}</p>
+          <p data-testid="order-total-value">
+            { `Total: R$ ${Number(orderDetails[0].totalPrice).toFixed(DOIS).replace('.', ',')}` }
+          </p>
         </div>
       )}
-      {orderDetails && (
+      {orderDetails.length && (
         <ol>
-          {orderDetails.map((order, index) => (
-            <li key={order.productName}>
-              <p data-testid={`${index}-product-name`}>{order.productName}</p>
-              <p data-testid={`${index}-product-qtd`}>
-                {order.productQuantity}
+          {orderDetails[0].products.map((product, index) => (
+            <li key={ product.name }>
+              <p data-testid={ `${index}-product-name` }>{product.name}</p>
+              <p data-testid={ `${index}-product-qtd` }>
+                {product.salesProducts.quantity}
               </p>
-              <p data-testid={`${index}-order-unit-price`}>
-                {`(R$ ${order.productPrice.toFixed(2).replace('.', ',')})`}
+              <p data-testid={ `${index}-order-unit-price` }>
+                {`(R$ ${Number(product.price).toFixed(DOIS).replace('.', ',')})`}
               </p>
-              <p data-testid={`${index}-product-total-value`}>
-                {`R$ ${(order.productPrice * order.productQuantity)
-                  .toFixed(2)
-                  .replace('.', ',')}`}
+              <p data-testid={ `${index}-product-total-value` }>
+                { `R$ ${(Number(product.price) * product.salesProducts.quantity)
+                  .toFixed(DOIS)
+                  .replace('.', ',')}` }
               </p>
             </li>
           ))}
         </ol>
       )}
-      {orderStatus === 'Pendente' && (
-        <button
-          type="button"
-          data-testid="mark-as-delivered-btn"
-          onClick={() => updateOrderStatus()}
-        >
-          Marcar como entregue
-        </button>
+      {orderStatus !== 'Entregue' && (
+        <div>
+          <button
+            type="button"
+            data-testid="mark-as-prepared-btn"
+            onClick={ () => updateOrderStatus('Preparando') }
+          >
+            Preparar pedido
+          </button>
+          <button
+            type="button"
+            data-testid="mark-as-delivered-btn"
+            onClick={ () => updateOrderStatus('Entregue') }
+          >
+            Marcar como entregue
+          </button>
+        </div>
       )}
     </div>
   );

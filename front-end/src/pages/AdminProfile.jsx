@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
-import MenuAdmin from '../components/MenuAdmin';
 import { Redirect } from 'react-router-dom';
 
+import MenuAdmin from '../components/MenuAdmin';
+
 const AdminProfile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [userName, setName] = useState('');
+  const [userEmail, setEmail] = useState('');
   const [userLogged, setUserLogged] = useState(false);
 
   useEffect(() => {
@@ -24,8 +24,14 @@ const AdminProfile = () => {
       {userLogged ? <Redirect to="/login" /> : null}
       <MenuAdmin />
       <h1>Login</h1>
-      <h3 data-testid="profile-name">Nome: {name}</h3>
-      <h3 data-testid="profile-email">Email: {email}</h3>
+      <h3 data-testid="profile-name">
+        Nome:
+        {userName}
+      </h3>
+      <h3 data-testid="profile-email">
+        Email:
+        {userEmail}
+      </h3>
     </div>
   );
 };
