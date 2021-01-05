@@ -55,6 +55,6 @@ export const getAllSalesDetails = async (id) => axios
   .get(`${url}/admin/orders/${id}`)
   .catch(({ response }) => response);
 
-export const changeStatus = async (id) => axios
-  .put(`${url}/admin/orders/${id}`)
+export const changeStatus = async (id, status) => axios
+  .put(`${url}/admin/orders/${id}`, { status })
   .catch(({ response }) => response);
