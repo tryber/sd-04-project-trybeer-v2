@@ -1,15 +1,23 @@
 // const rescue = require('express-rescue');
-// const userModel = require('../models/users');
+const Users = require('../models');
 // const productsModel = require('../models/products');
 // const saleModel = require('../models/sales');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
+  console.log('Users', Users);
   try {
-    const response = await userService.login(req.body);
-    console.log('login Controller', response);
-    return res.status(200).json(response);
+    const { email, password } = req.body;
+    console.log('login controller', req.body);
+    const user = await Users.findOne({ where: { email } });
+    console.log('model', user);
+    if (user.password === password) {
+      const { password: _, ...withoutPassword } = user;
+      return res.status(200).json(withoutPassword);
+    }
+    // const response = await userService.login(req.body);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };

@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const Users = require('../models');
 
 // const createUser = async ({ userName, emailUser, password, isSeller }) => {
 //   const emailInDatabase = await userModel.findOne(emailUser);
@@ -16,24 +16,13 @@ const { User } = require('../models');
 // };
 
 const login = async ({ email, password }) => {
-  try {
-  const user = await User.findOne({ where: { email } });
-  // console.log('model', user);
+  const user = await Users.findOne({ where: { email } });
+  console.log('model', user);
   if (user.password === password) {
     const { password: _, ...withoutPassword } = user;
     return withoutPassword;
   }
-  // const { password: _, ...withoutPassword } = await userModel.getUserByEmail(email);
-  // const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
-  // const testRegex = emailRegex.test(email);
-  // if (!testRegex || user.email !== email) return { message: 'E-mail invalido' };
-  // if (!password) return { message: 'A senha deve digitada' };
-  // if (password.length < 6) return { message: 'Senha inválida' };
-  // return { email };
   return null;
-  } catch (e) {
-    console.log(e.message);
-  } 
 };
 
 module.exports = {
