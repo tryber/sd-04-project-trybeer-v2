@@ -45,10 +45,21 @@ app.use((err, _req, res, _next) => {
   // console.log(err)
   res.status(405).json({ err: err.message });
 });
-
+let menssage = [];
 io.on('connection', (socket) => {
+  socket.on('join', (name) => {
+    socket.join(name);
+  });
   console.log(socket.id);
   io.emit('test');
+
+
+  socket.on('send message', (message) => {
+
+  })
+
+  // socket.on('disconnect', () => console.log('saiu'));
 });
+
 
 httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
