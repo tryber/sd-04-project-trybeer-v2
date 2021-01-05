@@ -2,9 +2,13 @@
   background-color: #1bd118a8;
 }
 
-.sale-Entregue-btn {
+.sale-Entregue-btn, .sale-Entregue-btn1 {
   display: none;
 }
+.sale-Preparando-btn1 {
+  display: none;
+}
+
 .element-orders-detail {
   font-size: large;
   font-weight: 500;

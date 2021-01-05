@@ -7,7 +7,7 @@ import '../css/orders.css';
 export default function ListSales(props) {
   const {
     result: {
-      id, total_price: totalPrice, sale_date: saleData,
+      id, total_price: totalPrice, sale_date: saleData, status,
     }, index,
   } = props;
   const priceArrendodado = totalPrice.toLocaleString('pt-br', {
@@ -33,6 +33,7 @@ export default function ListSales(props) {
           <span className="elements" data-testid={ `${index}-order-total-value` }>
             {priceArrendodado}
           </span>
+          <span>{status}</span>
           <img src={ Lupa } alt="lupa" />
         </div>
       </div>
@@ -46,5 +47,6 @@ ListSales.propTypes = {
     id: PropTypes.string,
     total_price: PropTypes.string,
     sale_date: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
 };
