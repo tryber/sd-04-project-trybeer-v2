@@ -17,7 +17,6 @@ const getDetailController = async (req, res) => {
 const postDetailController = async (req, res) => {
   try {
     const { status } = req.body;
-    // console.log('REQ: ', req);
     await sales.update(
       { status },
       { where: { id: req.params.id } },

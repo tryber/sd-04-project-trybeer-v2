@@ -2,13 +2,13 @@ const { sales, salesProducts } = require('../../models');
 
 const checkout = async (req, res) => {
   const { products, status, date, userId, cartValue, addressValue, numberValue } = req.body;
-  console.log('userid', userId);
-  console.log('status', status);
-  console.log('date', date);
-  console.log('cartvalue', cartValue);
-  console.log('addressValue', addressValue);
-  console.log('numberValue', numberValue);
-  console.log('pprodutos', products);
+  // console.log('userid', userId);
+  // console.log('status', status);
+  // console.log('date', date);
+  // console.log('cartvalue', cartValue);
+  // console.log('addressValue', addressValue);
+  // console.log('numberValue', numberValue);
+  // console.log('pprodutos', products);
   try {
     const resultSale = await sales.create({
       userId,
@@ -32,7 +32,7 @@ const checkout = async (req, res) => {
 
     return res.status(200).json({ resultSale, resultSaleProd });
   } catch (error) {
-    console.log('ERRORRR', error);
+    // console.log('ERRORRR', error);
     return res.status(500).json({ message: 'I have bad news' });
   }
 };
