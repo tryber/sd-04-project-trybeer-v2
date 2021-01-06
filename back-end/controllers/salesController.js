@@ -1,4 +1,4 @@
-const { sales, sales_products: salesProducts, products } = require('../models/');
+const { sales, sales_products: salesProducts, products } = require('../models');
 const { getCurrentDate } = require('../utils/date');
 
 const getAllSales = async (_req, res) => {
