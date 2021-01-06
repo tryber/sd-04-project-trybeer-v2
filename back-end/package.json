@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "josias": "npm run drop && npm run prestart && npm run seed && npm run debug",
     "drop": "npx sequelize-cli db:drop $",
     "seed": "npx sequelize-cli db:seed:all $",
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
