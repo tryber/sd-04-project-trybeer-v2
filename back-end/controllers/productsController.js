@@ -1,5 +1,5 @@
 const { productsService } = require('../services');
-const { products } = require('../models');
+const { products, sales, sales_products } = require('../models');
 
 const fetchProducts = async (_req, res) => {
   try {
@@ -33,14 +33,52 @@ const fetchProducts = async (_req, res) => {
 //   }
 // };
 
-// const newSale = async (req, res) => {
-//   try {
-//     await productsService.newSale(req.body);
-//     return res.status(200).json({ message: 'Compra realizada com sucesso!' });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+const newSale = async (req, res) => {
+  try {
+    // return Product.create({
+    //   title: 'Chair',
+    //   user: {
+    //     firstName: 'Mick',
+    //     lastName: 'Broadstone',
+    //     addresses: [{
+    //       type: 'home',
+    //       line1: '100 Main St.',
+    //       city: 'Austin',
+    //       state: 'TX',
+    //       zip: '78704'
+    //     }]
+    //   }
+    // }, {
+    //   include: [{
+    //     association: Product.User,
+    //     include: [ User.Addresses ]
+    //   }]
+    // });
+    console.log(req.body);
+    const { userId, total, rua, numeroCasa, status, purchasedProducts } = req.body;
+    const { _previousDataValues: { id: saleId } } = await sales.create({
+      user_Id: userId,
+      total_price: total,
+      delivery_address: rua,
+      delivery_number: numeroCasa,
+      sale_date: new Date(),
+      status,
+    });
+    purchasedProducts.forEach(async ({ id, quantity }) => {
+      await sales_products.create({
+        sale_id: saleId,
+        product_id: id,
+        quantity,
+      });
+    });
+    // console.log('Response de sales: ', response._previousDataValues);
+    // await productsService.newSale(req.body);
+    return res.status(200).json({ message: 'Compra realizada com sucesso!' });
+  } catch (error) {
+    console.log('Error de servidor: ', error.message);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 // const updateStatus = async (req, res) => {
 //   try {
@@ -59,6 +97,6 @@ module.exports = {
   fetchProducts,
   // fetchSales,
 //   fetchSaleById,
-  // newSale,
+  newSale,
 //   updateStatus,
 };
