@@ -15,8 +15,11 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/orders/${orderNumber}`);
-      setProduct(response.data);
-      setDateFormat(response.data.date);
+      // const { data: { products, saleData } } = await api.get(`/orders/${orderNumber}`);
+      // console.log('products: ', products);
+      // console.log('saleData: ', saleData);
+      // setProduct({ ...saleData, products:  });
+      // setDateFormat(response.data.date);
     };
     fetchProductDetails();
   }, [orderNumber]);

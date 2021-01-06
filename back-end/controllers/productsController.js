@@ -11,50 +11,34 @@ const fetchProducts = async (_req, res) => {
   }
 };
 
-// const fetchSales = async (_req, res) => {
-//   try {
-//     const response = await productsService.listSales();
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+const fetchSales = async (_req, res) => {
+  try {
+    const response = await sales.findAll();
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-// const fetchSaleById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const saleData = await productsService.getSaleById(id);
-//     const products = await productsService.getSaleProducts(id);
-//     // console.log(products);
+const fetchSaleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const saleData = await sales.findByPk(id);
+    // console.log(saleData);
 
-//     return res.status(200).json({ ...saleData, products });
-//   } catch (error) {
-//     return res.json({ error: error.message });
-//   }
-// };
+    const productsResult = await sales_products.findAll({
+      where: { sale_id: id }
+    }, { include: products });
+    console.log(productsResult);
+
+    // return res.status(200).json({ saleData, products });
+  } catch (error) {
+    return res.json({ error: error.message });
+  }
+};
 
 const newSale = async (req, res) => {
   try {
-    // return Product.create({
-    //   title: 'Chair',
-    //   user: {
-    //     firstName: 'Mick',
-    //     lastName: 'Broadstone',
-    //     addresses: [{
-    //       type: 'home',
-    //       line1: '100 Main St.',
-    //       city: 'Austin',
-    //       state: 'TX',
-    //       zip: '78704'
-    //     }]
-    //   }
-    // }, {
-    //   include: [{
-    //     association: Product.User,
-    //     include: [ User.Addresses ]
-    //   }]
-    // });
-    console.log(req.body);
     const { userId, total, rua, numeroCasa, status, purchasedProducts } = req.body;
     const { _previousDataValues: { id: saleId } } = await sales.create({
       user_Id: userId,
@@ -71,8 +55,6 @@ const newSale = async (req, res) => {
         quantity,
       });
     });
-    // console.log('Response de sales: ', response._previousDataValues);
-    // await productsService.newSale(req.body);
     return res.status(200).json({ message: 'Compra realizada com sucesso!' });
   } catch (error) {
     console.log('Error de servidor: ', error.message);
@@ -95,8 +77,8 @@ const newSale = async (req, res) => {
 
 module.exports = {
   fetchProducts,
-  // fetchSales,
-//   fetchSaleById,
+  fetchSales,
+  fetchSaleById,
   newSale,
 //   updateStatus,
 };
