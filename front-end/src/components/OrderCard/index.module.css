@@ -34,6 +34,11 @@
   text-align: end;
 }
 
+.orderStatus {
+  text-align: center;
+  margin: 0;
+}
+
 .pendingOrder {
   color: black;
   background-color: rgb(233, 233, 64);

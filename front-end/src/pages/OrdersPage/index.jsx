@@ -16,10 +16,6 @@ const Orders = () => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log(sales);
-  }, [sales]);
-
   if (!getLS('user').email) return <Redirect to="/login" />;
   return loading ? (
     <h1>Carregando...</h1>
