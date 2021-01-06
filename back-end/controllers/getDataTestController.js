@@ -1,4 +1,4 @@
-const getDataTestController = async (req, res) => {
+/* const getDataTestController = async (req, res) => {
   console.log('entrou aqui na rota de TESTE');
   try {
     const { email, total, address, number, date, products } = req.body;
@@ -21,3 +21,4 @@ const getDataTestController = async (req, res) => {
 };
 
 module.exports = getDataTestController;
+ */

@@ -1,4 +1,4 @@
-const saleService = require('../services/saleService');
+/* const saleService = require('../services/saleService');
 
 const findAllSalesController = async (_req, res) => {
   try {
@@ -35,3 +35,4 @@ module.exports = {
   findSalesBySaleId,
   findSalesByUserIdController,
 };
+ */

@@ -1,4 +1,4 @@
-// const saleModel = require('../models/saleModel');
+/* // const saleModel = require('../models/saleModel');
 const saleService = require('../services/saleService');
 const salesProductsService = require('../services/salesProductsService');
 
@@ -34,3 +34,4 @@ const checkoutController = async (req, res) => {
 };
 
 module.exports = checkoutController;
+ */
