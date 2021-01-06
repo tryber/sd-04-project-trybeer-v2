@@ -1,9 +1,9 @@
-const { sales, sales_products: salesProducs } = require('../models');
+const { sales, sales_products: salesProducts, products } = require('../models');
 const { getCurrentDate } = require('../utils/date');
 
 const getAllSales = async (_req, res) => {
   try {
-    const data = await sales.findAll();
+    const data = await sales.findAll({});
     if (!data.length) return new Error('Sales info not found');
     return res.status(200).json({ sales: data });
   } catch (err) {
@@ -27,11 +27,11 @@ const insertSale = async (req, res) => {
       delivery_address: deliveryAddr,
       delivery_number: deliveryNumber,
       sale_date: getCurrentDate(),
-      status: 'pending',
+      status: 'Pendente',
     });
 
     for (let i = 0; i < productId.length; i += 1) {
-      salesProducs.create({
+      salesProducts.create({
         sale_id: saleInserted.dataValues.id,
         product_id: productId[i],
         quantity: quantity[i],
@@ -48,9 +48,12 @@ const insertSale = async (req, res) => {
 const getSaleById = async (req, res) => {
   try {
     const { id: saleId } = req.params;
-
     if (saleId) {
-      const orderDetails = await sales.findOne({ where: { id: saleId } });
+      const orderDetails = await sales.findOne({
+        where: { id: saleId },
+        include: [{ model: products, as: 'products' }],
+      });
+      console.log('orderDetails', orderDetails);
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });

@@ -5,7 +5,7 @@ import api from '../../services/api';
 import styles from './index.module.css';
 
 const AdminOrders = () => {
-  const [ordersData, setOrdersData] = React.useState(null);
+  const [ordersData, setOrdersData] = React.useState('');
 
   React.useEffect(() => {
     (async () => {
@@ -26,7 +26,11 @@ const AdminOrders = () => {
             {ordersData.map(
               (
                 {
-                  id, status, totalPrice, deliveryAddress, deliveryNumber,
+                  id,
+                  status,
+                  total_price: totalPrice,
+                  delivery_address: deliveryAddress,
+                  delivery_number: deliveryNumber,
                 },
                 index,
               ) => (
@@ -48,7 +52,7 @@ const AdminOrders = () => {
                       className={ styles.orderValue }
                       data-testid={ `${index}-order-total-value` }
                     >
-                      {totalPrice.toLocaleString('pt-BR', {
+                      {totalPrice && totalPrice.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })}
