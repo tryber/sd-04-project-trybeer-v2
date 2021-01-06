@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function Message({ msg: { text, nickname, time}, itsMe }) {
+export default function Message({ msg: { text, nickname, time }, itsMe }) {
   return (
-    <div className={`msg ${itsMe ? 'itsMe' : ''}`}>
+    <div className={`msg ${ itsMe ? 'itsMe' : '' }`}>
       <div className="arrow"></div>
       <div className="msg-info">
         <span className="msg-name">{ nickname }</span>
@@ -13,4 +14,11 @@ function Message({ msg: { text, nickname, time}, itsMe }) {
   )
 }
 
-export default Message
+Message.propTypes = {
+  itsMe: PropTypes.bool,
+  msg: PropTypes.shape({
+    text: PropTypes.string,
+    nickname: PropTypes.string,
+    time: PropTypes.string,
+  }).isRequired,
+};

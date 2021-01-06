@@ -1,11 +1,16 @@
 const connection = require('./connection');
 
-const addNew = async (collection, info) =>
-  connection()
-    .then((db) => db.collection(collection).insertOne(info))
-    .then((result) => result.ops[0]);
+const addNew = async (nickname, msg) => {
+  const db = await connection();
+  await db
+    .collection('messages')
+    .updateOne({ nickname }, { $push: { messages: msg } }, { upsert: true });
+};
 
-const getAll = async (collection) =>
-  connection().then((db) => db.collection(collection).find({}).toArray());
+const getByNickname = async (nickname) =>
+  connection().then((db) => db.collection('messages').findOne({ nickname }));
 
-module.exports = { addNew, getAll };
+const getAll = async () =>
+  connection().then((db) => db.collection('messages').find({}).toArray());
+
+module.exports = { addNew, getAll, getByNickname };
