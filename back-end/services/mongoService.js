@@ -8,4 +8,7 @@ const addNew = async (collection, info) =>
 const getAll = async (collection) =>
   connection().then((db) => db.collection(collection).find({}).toArray());
 
-module.exports = { addNew, getAll };
+const listCollection = async () => 
+  connection().then((db) => db.listCollections().toArray());
+
+module.exports = { addNew, getAll, listCollection };

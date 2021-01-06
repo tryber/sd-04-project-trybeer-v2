@@ -46,6 +46,8 @@ app.get('/admin/orders', controllers.sale.getSales);
 
 app.put('/admin/orders/:id', controllers.sale.setStatusAsDelivered);
 
+app.get('/admin/chats', controllers.chat.listCollections);
+
 app.use((err, _req, res, _next) => {
   // console.log(err)
   res.status(405).json({ err: err.message });
@@ -59,7 +61,7 @@ io.on('connection', (socket) => {
     user.nickname = loja ? 'Loja' : roomName;
     socket.join(user.activeRoom);
     const history = await Mongo.getAll(user.activeRoom);
-    socket.to(user.activeRoom).emit('history', history);
+    socket.emit('message', history);
   });
 
   socket.on('message', async (text) => {
@@ -76,17 +78,12 @@ io.on('connection', (socket) => {
     await Mongo.addNew(user.activeRoom, msg);
 
     io.to(user.activeRoom).emit('message', msg);
-
-    socket.on('history', async () => {
-      const history = await Mongo.getAll('messages');
-      console.log(history);
-      socket.to(user.activeRoom).emit('history', history);
-    });
-
-    socket.on('disconnect', () => {
-      socket.broadcast.emit('exit', user.nickname);
-    })
+  
   });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('exit', user.nickname);
+  })
 });
 
 httpServer.listen(port, () =>
