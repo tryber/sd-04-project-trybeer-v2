@@ -3,8 +3,6 @@ import { sendIcon } from '../images';
 import '../css/chat.css';
 import Message from '../components/Message';
 
-let socket;
-
 function Chat({ adm, activeRoom }) {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useReducer(
@@ -13,7 +11,7 @@ function Chat({ adm, activeRoom }) {
 
   const sendMsg = () => {
     if (msg) {
-      socket.emit('message', msg);
+      window.socket.emit('message', msg);
       setMsg('');
     }
   };
@@ -25,9 +23,8 @@ function Chat({ adm, activeRoom }) {
   }, [chat])
 
   useEffect(() => {
-    socket = window.io('http://localhost:3001');
-    socket.emit('join', activeRoom, adm);
-    socket.on('message', (msg) => {
+    window.socket.emit('join', activeRoom, adm);
+    window.socket.on('message', (msg) => {
       setChat(msg);
       list.current.scrollTop = list.current.scrollHeight;
     });

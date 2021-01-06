@@ -26,7 +26,7 @@ export default function SideBar({ userRole, active }) {
         </div>
       )}
       {userRole === 'administrator' && (
-        <div className="admin-side-bar-container side-bar" visible>
+        <div className="admin-side-bar-container side-bar">
           <div>
             <a href="/admin/orders" data-testid="side-menu-item-orders">
               Meus pedidos

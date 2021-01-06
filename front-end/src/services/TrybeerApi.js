@@ -45,7 +45,7 @@ export const sendPutStatus = async (id, status) => axios
 
   export const getChats = async () => axios
   .get(`${baseUrl}/admin/chats`)
-  .catch(({ response }) => response);
+  .catch(({ response }) => response.data);
 // export const postRegister = async (name, email, password, role) => {
 //   const dataResponse = await axios({
 //     baseURL: `${baseUrl}/register`,

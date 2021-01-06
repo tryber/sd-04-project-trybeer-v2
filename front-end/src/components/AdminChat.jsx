@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { getChats } from '../services/TrybeerApi'
 
-function AdminChat({ setRoom }) {
-  const [chats, setChats] = useState([]);
+function AdminChat({ setRoom, socket }) {
+  const [chats, setChats] = useReducer(
+    (state, newState) => ([...state, ...newState]), [])
 
   useEffect(() => {
-    getChats().then(setChats);
+    getChats().then(({ data }) => setChats(data));
+    window.socket.on('chatList', setChats)
   }, []);
 
   return (
@@ -13,7 +15,7 @@ function AdminChat({ setRoom }) {
       { chats.length < 1
         ? <span data-testid='text-for-no-conversation'>Nenhuma conversa por aqui</span>
         : chats.map(({ nickname, messages }) => (
-          <div data-testid="containerChat" onClick={() => setRoom(nickname)}>
+          <div data-testid="containerChat" onClick={ () => setRoom(nickname) }>
             <span data-testid="profile-name">{ nickname }</span>
             <span data-testid="last-message">Última mensagem às { messages.pop().time }</span>
           </div>
