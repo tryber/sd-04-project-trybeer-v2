@@ -60,9 +60,8 @@ io.on('connection', (socket) => {
     user.activeRoom = roomName;
     user.nickname = loja ? 'Loja' : roomName;
     socket.join(user.activeRoom);
-    // verificar
     const history = await Mongo.getByNickname(user.activeRoom);
-    socket.emit('message', history.messages);
+    if (history) socket.emit('message', history.messages);
   });
 
   socket.on('message', async (text) => {
@@ -79,14 +78,12 @@ io.on('connection', (socket) => {
     // verificar se precisa nickname dentro da msg
     await Mongo.addNew(user.activeRoom, msg);
 
-
     io.to(user.activeRoom).emit('message', [msg]);
-
   });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('exit', user.nickname);
-  })
+  });
 });
 
 httpServer.listen(port, () =>
