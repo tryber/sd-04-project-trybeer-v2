@@ -1,11 +1,12 @@
 const { productsService } = require('../services');
-// // const productsModel = require('../models/products');
+const { products } = require('../models');
 
 const fetchProducts = async (_req, res) => {
   try {
-    const response = await productsService.listProduct();
+    const response = await products.findAll();
     return res.status(200).json(response);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };
@@ -56,8 +57,8 @@ const fetchProducts = async (_req, res) => {
 
 module.exports = {
   fetchProducts,
-//   fetchSales,
+  // fetchSales,
 //   fetchSaleById,
-//   newSale,
+  // newSale,
 //   updateStatus,
 };

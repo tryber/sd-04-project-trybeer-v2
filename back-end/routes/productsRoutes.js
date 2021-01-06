@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/products', productsController.fetchProducts);
 
-// router.get('/checkout', productsController.fetchProducts);
+router.get('/checkout', productsController.fetchProducts);
 
 // router.post('/checkout', productsController.newSale);
 

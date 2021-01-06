@@ -1,10 +1,10 @@
-const { Products } = require('../models');
+const { products } = require('../models');
 
-const listProduct = async () => Products.findAll();
+const listProduct = async () => products.findAll();
 
-// const listSales = async () => Sales.findAll();
+const listSales = async () => Sales.findAll();
 
-// const newSale = async (payload) => Products.create(payload);
+const newSale = async (payload) => Products.create({ payload });
 
 // const getSaleById = async (saleId) => {
 //   const { date: oldDate, ...restOfSale } = await Products.findByPk(saleId);
@@ -22,8 +22,8 @@ const listProduct = async () => Products.findAll();
 
 module.exports = {
   listProduct,
-//   listSales,
-//   newSale,
+  listSales,
+  newSale,
 //   getSaleById,
 //   getSaleProducts,
 //   updateSalesStatus,

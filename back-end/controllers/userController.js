@@ -1,23 +1,12 @@
 // const rescue = require('express-rescue');
-const Users = require('../models');
-// const productsModel = require('../models/products');
-// const saleModel = require('../models/sales');
+const { Products, Sale } = require('../models');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
-  console.log('Users', Users);
   try {
-    const { email, password } = req.body;
-    console.log('login controller', req.body);
-    const user = await Users.findOne({ where: { email } });
-    console.log('model', user);
-    if (user.password === password) {
-      const { password: _, ...withoutPassword } = user;
-      return res.status(200).json(withoutPassword);
-    }
-    // const response = await userService.login(req.body);
+    const response = await userService.login(req.body);
+    return res.status(200).json(response);
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };
@@ -30,6 +19,7 @@ const registerUser = async (req, res) => {
     }
     return res.status(201).json(newUser);
   } catch (err) {
+    console.log('erro register', err.message);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
@@ -58,8 +48,8 @@ const getUserOrders = async (req, res) => {
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    await productsModel.updateSaleStatus(id);
-    const updatedOrder = await saleModel.findByPk(id);
+    const updatedOrder =  await Sale.update({ status }, { where: { id } });
+    // const updatedOrder = await Sale.findByPk(id);
     return res.status(200).json(updatedOrder);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });
