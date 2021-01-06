@@ -87,21 +87,20 @@ const AdminDetails = () => {
           */}
           {status === 'Pendente' ? (
             <Box>
-
-            <Button
-              data-testid="mark-as-delivered-btn"
-              onClick={ () => {
-                setDetails({ ...details, status: 'Entregue' });
-                changeStatus(salesId, status );
-              } }
+              <Button
+                data-testid="mark-as-delivered-btn"
+                onClick={ () => {
+                  setDetails({ ...details, status: 'Entregue' });
+                  changeStatus(salesId, status);
+                } }
               >
-              Marcar como entregue
-            </Button>
+                Marcar como entregue
+              </Button>
               <Button
                 data-testid="mark-as-prepared-btn"
                 onClick={ () => {
                   setDetails({ ...details, status: 'Preparando' });
-                  changeStatus(salesId, status );
+                  changeStatus(salesId, status);
                 } }
               >
                 Preparar pedido

@@ -37,7 +37,6 @@ const Login = () => {
       }
 
       if (!localStorage.user) localStorage.user = result.data;
-      console.log('resul.data', jwtDecode(result.data));
       const redirect = jwtDecode(result.data).dataValues.role === 'client' ? '/products' : '/admin/orders';
       return history.push(redirect);
     },

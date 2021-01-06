@@ -2,9 +2,11 @@ const salesProducts = (sequelize, DataTypes) => {
   const createSalesProducts = sequelize.define('salesProducts', {
     saleId: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
     },
     productId: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -25,7 +27,7 @@ const salesProducts = (sequelize, DataTypes) => {
       otherKey: 'saleId',
     });
   };
-  createSalesProducts.removeAttribute('id');
+  // createSalesProducts.removeAttribute('id');
 
   return createSalesProducts;
 };
