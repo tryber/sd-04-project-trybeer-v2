@@ -4,21 +4,21 @@ on:
 jobs:
   evaluator_job:
     name: Evaluator Job
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.zero4
     services:
       mongodb:
         image: mongo
         ports:
-          - "27017:27017"
+          - "27zero17:27zero17"
         options: -v ${{ github.workspace }}:/github/workspace
       mysql:
-        image: mysql:8.0.21
+        image: mysql:8.zero.21
         env:
           MYSQL_ROOT_PASSWORD: 'password'
         ports:
-          - 3306:3306
-          - 33060:33060
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          - 33zero6:33zero6
+          - 33zero6zero:33zero6zero
+        options: --health-cmd="mysqladmin ping" --health-interval=1zeros --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1.4.4	
@@ -32,17 +32,17 @@ jobs:
         id: evaluator
         uses: betrybe/cypress-evaluator-action@v5
         with:
-          repository-test-name: 'betrybe/sd-0x-project-trybeer-v2-tests'
+          repository-test-name: 'betrybe/sd-zerox-project-trybeer-v2-tests'
           repository-test-branch: 'master'
           npm-start: true
         env:
           MYSQL_USER: 'root'
           MYSQL_PASSWORD: 'password'
           HOSTNAME: 'mysql'
-          DB_URL: 'mongodb://mongodb:27017/Trybeer'
+          DB_URL: 'mongodb://mongodb:27zero17/Trybeer'
           SCHEMA: 'Trybeer'
           DB_NAME: 'Trybeer'
-          GITHUB_USER: 'fogo5000' 
+          GITHUB_USER: 'fogo5zerozerozero' 
       - name: Store evaluation step
         uses: betrybe/store-evaluation-action@v2
         with:
