@@ -47,8 +47,6 @@ app.use((err, _req, res, _next) => {
 });
 
 io.on('connection', (socket) => {
-  console.log(socket.id);
-  io.emit('test');
 });
 
 httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
