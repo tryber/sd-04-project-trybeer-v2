@@ -6,7 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const middleware = require('./middleware');
 const controllers = require('./controllers');
-// const Mongo = require('./services/mongoService');
+const Mongo = require('./services/mongoService');
 require('dotenv/config');
 
 const app = express();
@@ -27,7 +27,11 @@ app.post(
   controllers.login.userLogin,
 );
 
-app.post('/register', middleware.validations.registerValidation, controllers.user.userRegister);
+app.post(
+  '/register',
+  middleware.validations.registerValidation,
+  controllers.user.userRegister,
+);
 
 app.post('/orders', controllers.sale.saleRegister);
 app.get('/orders', controllers.sale.getAllUserSales);
@@ -47,7 +51,6 @@ app.use((err, _req, res, _next) => {
   res.status(405).json({ err: err.message });
 });
 
-let message = [];
 io.on('connection', (socket) => {
   const user = {};
 
@@ -60,19 +63,29 @@ io.on('connection', (socket) => {
   socket.on('message', async (text) => {
     const msg = {
       text,
-      time: new Date().toLocaleTimeString('pt-BR', {hour12: false, hour: '2-digit', minute: '2-digit'}),
+      time: new Date().toLocaleTimeString('pt-BR', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
       nickname: user.nickname,
-    }
+    };
 
-    // await Mongo.addNew('messages', msg);
+    await Mongo.addNew('messages', msg);
 
-   io.to(user.activeRoom).emit('message', msg);
+    io.to(user.activeRoom).emit('message', msg);
+
+    socket.on('history', (messages) => {
+      const history = Mongo.getAll('messages');
+      socket.emit('message', history);
+    });
+
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('exit', user.nickname);
+    })
   });
-
-
-  // salvar no BD nickname, time, text
-  // socket.on('disconnect', () => console.log('saiu'));
 });
 
-
-httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
+httpServer.listen(port, () =>
+  console.log(`Example app listening on port ${port}!`),
+);
