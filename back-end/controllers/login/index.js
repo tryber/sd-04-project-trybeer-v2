@@ -1,5 +1,5 @@
 const { createToken } = require('../../middlewares/createJWT');
-const { getByEmail } = require('../../models-trybeerv1/users');
+const { users } = require('../../models');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -9,7 +9,7 @@ const login = async (req, res) => {
     return res.status(401).json({ message: 'É necessário usuário e senha para fazer login' });
   }
 
-  const user = await getByEmail(email);
+  const user = await users.findOne({ where: { email } });
 
   if (!user || user.password !== password) {
     return res.status(401).json({ message: 'Usuário não existe ou senha inválida' });

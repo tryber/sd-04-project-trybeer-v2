@@ -1,13 +1,16 @@
-const { updateUser, getById } = require('../../models-trybeerv1/users');
 const { createToken } = require('../../middlewares/createJWT');
+const { users } = require('../../models');
 
 const userUpdate = async (req, res) => {
   // const { id } = req.user; -> O id deverá vir do body
   const { id, name } = req.body;
   console.log(req.body);
   try {
-    await updateUser(id, name);
-    const newUser = await getById(id);
+    await users.update(
+      { name },
+      { where: { id } },
+    );
+    const newUser = await users.findByPk(id);
     const { password: _, ...userWithoutPassword } = newUser;
     const token = createToken(userWithoutPassword);
     res.status(200).json(token);

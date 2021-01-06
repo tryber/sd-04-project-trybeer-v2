@@ -1,5 +1,5 @@
 const { createToken } = require('../../middlewares/createJWT');
-const { add, getByEmail } = require('../../models-trybeerv1/users');
+const { users } = require('../../models');
 
 const register = async (req, res) => {
   try {
@@ -10,15 +10,15 @@ const register = async (req, res) => {
     const role = signRole ? 'administrator' : 'client';
 
     // Verifica se existe usuário com o mesmo email
-    const user = await getByEmail(signEmail);
+    const user = await users.findOne({ where: { email: signEmail } });
 
     if (user.email) {
       return res.status(200).json({ message: 'E-mail already in database.' });
     }
 
-    await add(signName, signEmail, signPassword, role);
+    await users.create({ name: signName, email: signEmail, password: signPassword, role });
 
-    const newUser = await getByEmail(signEmail);
+    const newUser = await users.findOne({ where: { email: signEmail } });
     const { password: _, ...userWithoutPassword } = newUser;
     const token = createToken(userWithoutPassword);
 
