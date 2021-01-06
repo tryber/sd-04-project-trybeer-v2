@@ -23,6 +23,8 @@ function Chat() {
   }, [chat])
 
   useEffect(() => {
+    socket = window.io('http://localhost:3001');
+    socket.emit('join', JSON.parse(localStorage.user).email);
     socket.on('message', (msg) => setChat(msg));
   }, [])
 
@@ -39,7 +41,7 @@ function Chat() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Chat
+export default Chat;

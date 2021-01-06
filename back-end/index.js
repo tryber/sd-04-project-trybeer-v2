@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const middleware = require('./middleware');
 const controllers = require('./controllers');
+const Mongo = require('./services/mongoService');
 require('dotenv/config');
 
 const app = express();
@@ -26,7 +27,11 @@ app.post(
   controllers.login.userLogin,
 );
 
-app.post('/register', middleware.validations.registerValidation, controllers.user.userRegister);
+app.post(
+  '/register',
+  middleware.validations.registerValidation,
+  controllers.user.userRegister,
+);
 
 app.post('/orders', controllers.sale.saleRegister);
 app.get('/orders', controllers.sale.getAllUserSales);
@@ -47,6 +52,37 @@ app.use((err, _req, res, _next) => {
 });
 
 io.on('connection', (socket) => {
+  const user = {};
+
+  socket.on('join', async (roomName, loja) => {
+    user.activeRoom = roomName;
+    user.nickname = loja ? 'Loja' : roomName;
+    socket.join(user.activeRoom);
+    const history = await Mongo.getAll(user.activeRoom);
+    socket.to(user.activeRoom).emit('message', history);
+  });
+
+  socket.on('message', async (text) => {
+    const msg = {
+      text,
+      time: new Date().toLocaleTimeString('pt-BR', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      nickname: user.nickname,
+    };
+
+    await Mongo.addNew(user.activeRoom, msg);
+
+    io.to(user.activeRoom).emit('message', [msg]);
+
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('exit', user.nickname);
+    })
+  });
 });
 
-httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
+httpServer.listen(port, () =>
+  console.log(`Example app listening on port ${port}!`),
+);
