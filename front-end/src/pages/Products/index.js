@@ -11,15 +11,21 @@ import './styles.css';
 const Products = () => {
   const [products, setProducts] = useState([]);
 
+  const addQuantity = (cart) => {
+    const cartWithQuantity = [...cart];
+    cartWithQuantity.forEach((item) => (item.quantity = 0));
+    return cartWithQuantity;
+  };
+
   const configureStorage = async () => {
     const response = await api.get('/products');
-    setProducts([...response.data]);
+    const cartUpdated = addQuantity(response.data);
+    setProducts([...cartUpdated]);
     localStorage.setItem('products', JSON.stringify(response.data));
   };
 
   useEffect(() => {
     const productList = JSON.parse(localStorage.getItem('products'));
-    // console.log(productList);
     const fetchProducts = async () => {
       if (productList && productList.length) {
         setProducts([...productList]);
@@ -35,7 +41,7 @@ const Products = () => {
       <Header title="TryBeer" />
       <div className="product-cards-container">
         { products.map(({
-          id, name, price, urlImage, quantity,
+          id, name, price, url_image: urlImage, quantity,
         }, index) => (
           <ProductsCard
             key={ id }
