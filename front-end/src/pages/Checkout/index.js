@@ -8,7 +8,7 @@ import { postCheckout } from '../../api';
 
 const Checkout = () => {
   const zero = 0;
-  const userId = localStorage.user ? jwtDecode(localStorage.user).id : null;
+  const userId = localStorage.user ? jwtDecode(localStorage.user).dataValues.id : null;
   const { cartValue } = useContext(ProductContext);
   const [products, setProducts] = useState([]);
   const [addressValue, setAddressValue] = useState('');
@@ -54,7 +54,6 @@ const Checkout = () => {
     const sliceNum = 3;
     const newCartValue = cartValue.slice(sliceNum);
     const floatCartValue = parseFloat(newCartValue.replace(',', '.'));
-
     const result = await postCheckout(
       products, status, datas, userId, floatCartValue, addressValue, numberValue,
     );

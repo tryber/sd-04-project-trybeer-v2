@@ -91,8 +91,8 @@ const AdminDetails = () => {
             <Button
               data-testid="mark-as-delivered-btn"
               onClick={ () => {
-                changeStatus(salesId, status = 'Entregue');
                 setDetails({ ...details, status: 'Entregue' });
+                changeStatus(salesId, status );
               } }
               >
               Marcar como entregue
@@ -100,8 +100,8 @@ const AdminDetails = () => {
               <Button
                 data-testid="mark-as-prepared-btn"
                 onClick={ () => {
-                  changeStatus(salesId, status = 'Preparando');
                   setDetails({ ...details, status: 'Preparando' });
+                  changeStatus(salesId, status );
                 } }
               >
                 Preparar pedido
