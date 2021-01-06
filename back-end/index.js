@@ -76,14 +76,19 @@ io.on('connection', (socket) => {
     };
 
     // verificar se precisa nickname dentro da msg
-    await Mongo.addNew(user.activeRoom, msg);
+    const chatList = await Mongo.addNew(user.activeRoom, msg);
 
     io.to(user.activeRoom).emit('message', [msg]);
+
+    // atualiza a lista de chats para o ADM
+    socket.emit('chatlist', chatList)
   });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('exit', user.nickname);
   });
+
+
 });
 
 httpServer.listen(port, () =>
