@@ -5,11 +5,12 @@ import '../css/chat.css';
 import Message from '../components/Message';
 
 let socket;
+const email = JSON.parse(localStorage.user).email;
 
 function Chat() {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useReducer(
-    (state, newState) => ({ ...state, ...newState }), [])
+    (state, newState) => ([ ...state, ...newState ]), [])
   const list = useRef();
 
   const sendMsg = () => {
@@ -26,7 +27,7 @@ function Chat() {
 
   useEffect(() => {
     socket = window.io('http://localhost:3001');
-    socket.emit('join', JSON.parse(localStorage.user).email);
+    socket.emit('join', email);
     socket.on('message', (msg) => setChat(msg));
   }, [])
 

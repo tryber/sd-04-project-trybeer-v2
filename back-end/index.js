@@ -46,7 +46,7 @@ app.get('/admin/orders', controllers.sale.getSales);
 
 app.put('/admin/orders/:id', controllers.sale.setStatusAsDelivered);
 
-app.get('/admin/chats', controllers.chat.listCollections);
+// app.get('/admin/chats', controllers.chat.listCollections);
 
 app.use((err, _req, res, _next) => {
   // console.log(err)
@@ -60,8 +60,9 @@ io.on('connection', (socket) => {
     user.activeRoom = roomName;
     user.nickname = loja ? 'Loja' : roomName;
     socket.join(user.activeRoom);
-    const history = await Mongo.getAll(user.activeRoom);
-    socket.emit('message', history);
+    // verificar
+    const history = await Mongo.getByNickname(user.activeRoom);
+    socket.emit('message', history.messages);
   });
 
   socket.on('message', async (text) => {
@@ -75,9 +76,9 @@ io.on('connection', (socket) => {
       nickname: user.nickname,
     };
 
+    // verificar se precisa nickname dentro da msg
     await Mongo.addNew(user.activeRoom, msg);
-    const collection = await Mongo.listCollection();
-    console.log(collection)
+
 
     io.to(user.activeRoom).emit('message', [msg]);
 
