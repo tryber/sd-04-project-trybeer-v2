@@ -11,8 +11,22 @@ const AdminOrders = () => {
     (async () => {
       const orders = await api.getSalesTb();
       setOrdersData(orders.data.sales);
+      console.log('orders', orders);
     })();
   }, []);
+
+  const styleStatus = (status) => {
+    if (status === 'Pendente') {
+      return styles.pendingOrder;
+    }
+    if (status === 'Preparando') {
+      return styles.preparingOrder;
+    }
+    if (status === 'Entregue') {
+      return styles.deliveredOrder;
+    }
+    return null;
+  };
 
   return (
     <div className={ styles.pageContainer }>
@@ -59,13 +73,11 @@ const AdminOrders = () => {
                     </div>
                     <div
                       className={ `${styles.orderStatus} ${
-                        status === 'pending'
-                          ? styles.pendingOrder
-                          : styles.deliveredOrder
+                        styleStatus(status)
                       }` }
                       data-testid={ `${index}-order-status` }
                     >
-                      {status === 'pending' ? 'Pendente' : 'Entregue'}
+                      {status}
                     </div>
                   </li>
                 </Link>
