@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
     user.nickname = loja ? 'Loja' : roomName;
     socket.join(user.activeRoom);
     const history = await Mongo.getAll(user.activeRoom);
-    socket.to(user.activeRoom).emit('message', history);
+    socket.emit('message', history);
   });
 
   socket.on('message', async (text) => {
@@ -76,13 +76,12 @@ io.on('connection', (socket) => {
     await Mongo.addNew(user.activeRoom, msg);
 
     io.to(user.activeRoom).emit('message', [msg]);
+  });
 
-    socket.on('disconnect', () => {
-      socket.broadcast.emit('exit', user.nickname);
-    })
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('exit', user.nickname);
   });
 });
 
 httpServer.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`),
-);
+  console.log(`Example app listening on port ${port}!`));

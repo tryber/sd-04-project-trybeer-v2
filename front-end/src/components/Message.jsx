@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Message({ msg: { text, nickname, time, itsMe} }) {
+function Message({ msg: { text, nickname, time}, itsMe }) {
   return (
     <div className={`msg ${itsMe ? 'itsMe' : ''}`}>
       <div className="arrow"></div>
