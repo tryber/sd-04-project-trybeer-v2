@@ -22,16 +22,16 @@ const AdminOrdersDetails = () => {
     console.log(orderData);
   }, [orderData]);
 
-  const handleStatus = async (orderStatus) => {
-    await api.updateSaleStatusAPI(orderData.saleID, orderStatus);
-    setOrderData(orderData.map((product) => {
-      const deliveredStatus = { ...product, ...(product.status = orderStatus) };
-      return deliveredStatus;
-    }));
+  const handleStatus = (orderStatus) => {
+    api.updateSaleStatusAPI(orderData.id, orderStatus);
+    return setOrderData({
+      ...orderData,
+      status: orderStatus,
+    });
   };
 
   const styleStatus = () => {
-    if (orderData.status === 'pending') {
+    if (orderData.status === 'Pendente') {
       return styles.pendingOrder;
     }
     if (orderData.status === 'Preparando') {
@@ -119,17 +119,17 @@ const AdminOrdersDetails = () => {
               currency: 'BRL',
             })}`}
           </h2>
-          {orderData.status === 'pending' ? (
+          {orderData.status === 'Pendente' ? (
             <button
               type="button"
               className="buttonMain"
               onClick={ () => handleStatus('Preparando') }
               data-testid="mark-as-prepared-btn"
             >
-              Preparar Pedido
+              Preparar pedido
             </button>
           ) : ''}
-          {orderData.status === 'pending' ? (
+          {orderData.status === 'Pendente' ? (
             <button
               type="button"
               className="buttonMain"

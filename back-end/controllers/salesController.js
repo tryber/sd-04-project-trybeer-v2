@@ -27,7 +27,7 @@ const insertSale = async (req, res) => {
       delivery_address: deliveryAddr,
       delivery_number: deliveryNumber,
       sale_date: getCurrentDate(),
-      status: 'pending',
+      status: 'Pendente'
     });
 
     for (let i = 0; i < productId.length; i += 1) {
