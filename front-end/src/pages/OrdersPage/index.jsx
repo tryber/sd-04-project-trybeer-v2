@@ -16,6 +16,10 @@ const Orders = () => {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    console.log(sales);
+  }, [sales]);
+
   if (!getLS('user').email) return <Redirect to="/login" />;
   return loading ? (
     <h1>Carregando...</h1>
@@ -29,9 +33,10 @@ const Orders = () => {
             ? sales.map((order, index) => (
               <OrderCard
                 id={ order.id }
-                totalPrice={ order.totalPrice }
-                saleDate={ order.saleDate }
+                totalPrice={ order.total_price }
+                saleDate={ order.sale_date }
                 index={ index }
+                status={ order.status }
                 key={ order.id }
               />
             ))

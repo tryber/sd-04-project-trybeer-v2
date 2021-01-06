@@ -19,6 +19,9 @@ const salesModel = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
+      // createdAt: 'sale_date',
+      // updatedAt: false,
+      // deletedAt: false,
     },
   );
 

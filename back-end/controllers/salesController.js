@@ -30,6 +30,8 @@ const insertSale = async (req, res) => {
       status: 'Pendente',
     });
 
+    console.log(typeof totalPrice);
+
     for (let i = 0; i < productId.length; i += 1) {
       salesProducts.create({
         sale_id: saleInserted.dataValues.id,

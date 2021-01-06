@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
 const OrderCard = ({
-  id, totalPrice, saleDate, index,
+  id, totalPrice, saleDate, index, status,
 }) => (
   <Link
     to={ `/orders/${id}` }
@@ -30,6 +30,7 @@ const OrderCard = ({
       <h4 data-testid={ `${index}-order-date` } className={ styles.orderDate }>
         {new Date(saleDate).toLocaleDateString('pt-BR')}
       </h4>
+      <h4>{ status }</h4>
     </div>
   </Link>
 );
@@ -39,6 +40,7 @@ OrderCard.propTypes = {
   totalPrice: PropTypes.string.isRequired,
   saleDate: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default OrderCard;
