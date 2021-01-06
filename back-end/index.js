@@ -54,10 +54,12 @@ app.use((err, _req, res, _next) => {
 io.on('connection', (socket) => {
   const user = {};
 
-  socket.on('join', (roomName, loja) => {
+  socket.on('join', async (roomName, loja) => {
     user.activeRoom = roomName;
     user.nickname = loja ? 'Loja' : roomName;
     socket.join(user.activeRoom);
+    const history = await Mongo.getAll(user.activeRoom);
+    socket.to(user.activeRoom).emit('history', history);
   });
 
   socket.on('message', async (text) => {
@@ -71,13 +73,14 @@ io.on('connection', (socket) => {
       nickname: user.nickname,
     };
 
-    await Mongo.addNew('messages', msg);
+    await Mongo.addNew(user.activeRoom, msg);
 
     io.to(user.activeRoom).emit('message', msg);
 
-    socket.on('history', (messages) => {
-      const history = Mongo.getAll('messages');
-      socket.emit('message', history);
+    socket.on('history', async () => {
+      const history = await Mongo.getAll('messages');
+      console.log(history);
+      socket.to(user.activeRoom).emit('history', history);
     });
 
     socket.on('disconnect', () => {

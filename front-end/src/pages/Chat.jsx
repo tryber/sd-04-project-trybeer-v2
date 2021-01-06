@@ -10,6 +10,7 @@ function Chat() {
     socket.emit('join', JSON.parse(localStorage.user).email);
     socket.emit('message', 'testando app')
     socket.on('message', data => {console.log(data)})
+    socket.on('history', history => console.log(history))
   },[])
   return (
     <div className="page">
