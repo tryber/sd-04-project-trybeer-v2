@@ -1,0 +1,15 @@
+.product-detail-card-body {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  width: 331px;
+}
+
+.product-detail-card-body span {
+  font-size: 19pt;
+  font-weight: 700;
+}

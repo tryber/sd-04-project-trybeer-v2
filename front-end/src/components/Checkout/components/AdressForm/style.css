@@ -1,0 +1,36 @@
+div,
+h2,
+form,
+label,
+input,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+.adress-form-container {
+  margin-top: 64px;
+}
+
+.adress-form-container form {
+  max-width: 800px;
+}
+
+.adress-form-container form label {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+}
+
+.adress-form-container form input {
+  border: 2px solid;
+  border-radius: 4px;
+  height: 30px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+.adress-form-container form button {
+  margin: 16px auto 0;
+  width: 50%;
+}
