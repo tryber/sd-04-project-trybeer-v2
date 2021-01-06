@@ -46,32 +46,36 @@ function Login() {
         <form onSubmit={ (event) => login(event) }>
           <div className="form-group">
             <div className="col-sm-12">
-              <label htmlFor="email">Email</label>
-              <input
-                className="form-control"
-                id="email"
-                data-testid="email-input"
-                name="email"
-                type="email"
-                required
-                value={ email }
-                onChange={ (e) => setEmail(e.target.value) }
-              />
+              <label htmlFor="email">
+                Email
+                <input
+                  className="form-control"
+                  id="email"
+                  data-testid="email-input"
+                  name="email"
+                  type="email"
+                  required
+                  value={ email }
+                  onChange={ (e) => setEmail(e.target.value) }
+                />
+              </label>
             </div>
           </div>
 
           <div className="form-group">
             <div className="col-sm-8">
-              <label htmlFor="email">Password</label>
-              <input
-                className="form-control"
-                data-testid="password-input"
-                name="password"
-                type="password"
-                required
-                value={ password }
-                onChange={ (e) => setPassword(e.target.value) }
-              />
+              <label htmlFor="email">
+                Password
+                <input
+                  className="form-control"
+                  data-testid="password-input"
+                  name="password"
+                  type="password"
+                  required
+                  value={ password }
+                  onChange={ (e) => setPassword(e.target.value) }
+                />
+              </label>
             </div>
           </div>
           <br />
@@ -93,7 +97,11 @@ function Login() {
 
         <div className="no-account">
           <Link to="/register" style={ { color: 'white', textDecoration: 'none' } }>
-            <button type="button" data-testid="no-account-btn" onClick={ () => <Redirect to="/register" /> }>
+            <button
+              type="button"
+              data-testid="no-account-btn"
+              onClick={ () => <Redirect to="/register" /> }
+            >
               Ainda não tenho conta
             </button>
           </Link>

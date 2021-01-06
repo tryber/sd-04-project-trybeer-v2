@@ -160,7 +160,9 @@ function CloseOrder() {
             ))}
           </ul>
           <br />
-          <h4 className="order-total" data-testid="order-total-value" id="itemTotal"> </h4>
+          <h4 className="order-total" data-testid="order-total-value" id="itemTotal">
+            {' '}
+          </h4>
         </div>
       </div>
 
@@ -170,26 +172,29 @@ function CloseOrder() {
         <div className="col-lg-8 col-offset-6 centered">
           <form method="POST" action="">
             <h3>Dados para Entrega</h3>
-            <label htmlFor="rua">Rua:</label>
-            <input
-              onChange={ (e) => setAddress(e.target.value) }
-              id="inputEnd"
-              name="adrress"
-              data-testid="checkout-street-input"
-              type="text"
-              className="form-control"
-            />
-            <br />
-            <label htmlFor="numberCasa" className="">
-              Número da casa:
+            <label htmlFor="inputEnd">
+              Rua:
+              <input
+                onChange={ (e) => setAddress(e.target.value) }
+                id="inputEnd"
+                name="adrress"
+                data-testid="checkout-street-input"
+                type="text"
+                className="form-control"
+              />
             </label>
-            <input
-              name="number"
-              onChange={ (e) => setNumber(e.target.value) }
-              data-testid="checkout-house-number-input"
-              type="text"
-              className="form-control col-6"
-            />
+            <br />
+            <label htmlFor="number" className="">
+              Número da casa:
+              <input
+                name="number"
+                id="number"
+                onChange={ (e) => setNumber(e.target.value) }
+                data-testid="checkout-house-number-input"
+                type="text"
+                className="form-control col-6"
+              />
+            </label>
           </form>
           <br />
           <br />

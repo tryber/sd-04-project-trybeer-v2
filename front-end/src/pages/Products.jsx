@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { AppContext } from '../context/AppContext';
@@ -11,17 +11,19 @@ const dois = 2;
 const mil = 1000;
 
 function Products() {
+  const [val, setVal] = useState('');
   const {
     products, setProducts, setCart, total, orderMessage,
   } = useContext(AppContext);
   const history = useHistory();
-  let val;
+
+  const tempinho = (funcao) => {
+    funcao();
+  };
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('token'));
-
-    setTimeout(() => {
-      val = zero;
+    const meuQueridoTempo = async () => {
+      const token = JSON.parse(localStorage.getItem('token'));
       api
         .get('/products', { headers: { Authorization: token } })
         .then((response) => setProducts(response.data))
@@ -30,7 +32,11 @@ function Products() {
       if (localStorage.getItem('cart')) {
         setCart(JSON.parse(localStorage.getItem('cart')));
       }
-      val = 1;
+    };
+    setTimeout(async () => {
+      setVal(zero);
+      await tempinho(meuQueridoTempo);
+      setVal(1);
     }, mil);
   }, []);
 

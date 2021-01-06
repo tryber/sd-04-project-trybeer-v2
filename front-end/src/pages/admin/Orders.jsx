@@ -6,7 +6,8 @@ import './CSS/Orders.css';
 
 const Orders = () => {
   const loginInStorage = JSON.parse(localStorage.getItem('cart'));
-  let orderCount = 0;
+  const zero = 0;
+  let orderCount = zero;
 
   if (!loginInStorage) {
     return (

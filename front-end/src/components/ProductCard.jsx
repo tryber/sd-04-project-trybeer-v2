@@ -25,15 +25,16 @@ function ProductCard({
     const isThereAProduct = cart.find((item) => item.id === prod.id);
 
     if (!isThereAProduct) {
-      op === '+'
-        ? setCart([...cart, { ...prod, quantity: prod.quantity + 1, status: 'Pendente' }])
-        : setCart([...cart, { ...prod, quantity: prod.quantity - 1, status: 'Pendente' }]);
-    } else {
-      //  const i = cart.indexOf(isThereAProduct);
-      op === '+'
-        ? isThereAProduct.quantity += 1
-        : isThereAProduct.quantity -= 1;
+      return setCart([...cart, {
+        ...prod,
+        quantity: op === '+' ? prod.quantity + 1 : prod.quantity - 1,
+        status: 'Pendente',
+      }]);
     }
+    if (op === '+') isThereAProduct.quantity += 1;
+    if (op === '-') isThereAProduct.quantity -= 1;
+    return true;
+    //  const i = cart.indexOf(isThereAProduct);
   }
 
   function addToCart(prod, op) {

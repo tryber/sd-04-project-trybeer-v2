@@ -18,6 +18,7 @@ const changeOpen = () => {
   menuBtn.classList.remove('open');
   navTrigger.classList.remove('open');
   ctrOpen = false;
+  return true;
 };
 
 const changeUrl = (history, url, clear, isDetails) => {

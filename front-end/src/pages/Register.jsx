@@ -19,12 +19,13 @@ function Register() {
 
   const register = async (event) => {
     event.preventDefault();
-    await api.post('/register', {
-      name,
-      email,
-      password,
-      checkbox,
-    })
+    await api
+      .post('/register', {
+        name,
+        email,
+        password,
+        checkbox,
+      })
       .then(() => redirect())
       .catch((e) => setMessage(e.response.data.message));
   };
@@ -35,63 +36,71 @@ function Register() {
       <form onSubmit={ (event) => register(event) }>
         <div className="form-group">
           <div className="col-sm-12">
-            <label htmlFor="name">Nome</label>
-            <input
-              className="form-control"
-              data-testid="signup-name"
-              placeholder="name"
-              name="name"
-              type="text"
-              required
-              value={ name }
-              onChange={ (e) => setName(e.target.value) }
-            />
+            <label htmlFor="name">
+              Nome
+              <input
+                className="form-control"
+                data-testid="signup-name"
+                placeholder="name"
+                name="name"
+                type="text"
+                required
+                value={ name }
+                onChange={ (e) => setName(e.target.value) }
+              />
+            </label>
           </div>
         </div>
 
         <div className="form-group">
           <div className="col-sm-12">
-            <label htmlFor="email">Email</label>
-            <input
-              className="form-control"
-              data-testid="signup-email"
-              name="email"
-              placeholder="email"
-              type="email"
-              required
-              value={ email }
-              onChange={ (e) => setEmail(e.target.value) }
-            />
+            <label htmlFor="email">
+              Email
+              <input
+                className="form-control"
+                data-testid="signup-email"
+                name="email"
+                placeholder="email"
+                type="email"
+                required
+                value={ email }
+                onChange={ (e) => setEmail(e.target.value) }
+              />
+            </label>
           </div>
         </div>
 
         <div className="form-group">
           <div className="col-sm-12">
-            <label htmlFor="password">Password</label>
-            <input
-              className="form-control"
-              data-testid="signup-password"
-              name="password"
-              placeholder="passwrod"
-              type="password"
-              required
-              value={ password }
-              onChange={ (e) => setPassword(e.target.value) }
-            />
+            <label htmlFor="password">
+              Password
+              <input
+                className="form-control"
+                data-testid="signup-password"
+                name="password"
+                placeholder="passwrod"
+                type="password"
+                required
+                value={ password }
+                onChange={ (e) => setPassword(e.target.value) }
+              />
+            </label>
           </div>
         </div>
 
         <div className="custom-control custom-checkbox">
           <div className="col-sm-12">
-            <label htmlFor="checkbox-i" className="custom-control-label">Quero Vender</label>
-            <input
-              className="custom-control-input"
-              data-testid="signup-seller"
-              name="checkbox"
-              id="checkbox-i"
-              type="checkbox"
-              onChange={ (e) => setCheckbox(e.target.checked) }
-            />
+            <label htmlFor="checkbox-i" className="custom-control-label">
+              Quero Vender
+              <input
+                className="custom-control-input"
+                data-testid="signup-seller"
+                name="checkbox"
+                id="checkbox-i"
+                type="checkbox"
+                onChange={ (e) => setCheckbox(e.target.checked) }
+              />
+            </label>
           </div>
         </div>
 

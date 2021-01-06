@@ -18,7 +18,7 @@ const URL = 'http://localhost:3001/profile/2';
 export default () => {
   const [message, setMessage] = useState(null);
   const [userName, setUserName] = useState('');
-  const [name, setName] = useState('');
+  const [, setName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [newName, setNewName] = useState('');
 
@@ -52,25 +52,29 @@ export default () => {
           <h1>Profile</h1>
           <h2>{newName}</h2>
           <form method="PUT" action="">
-            <label htmlFor="">Name</label>
-            <input
-              onChange={ (e) => callSetName(e.target.value) }
-              data-testid="profile-name-input"
-              type="text"
-              name={ newName }
-              value={ newName }
-              className="form-control"
-            />
+            <label htmlFor={ newName }>
+              Name
+              <input
+                onChange={ (e) => callSetName(e.target.value) }
+                data-testid="profile-name-input"
+                type="text"
+                name={ newName }
+                value={ newName }
+                className="form-control"
+              />
+            </label>
             <br />
-            <label htmlFor="">E-mail</label>
-            <input
-              data-testid="profile-email-input"
-              type="text"
-              name={ userEmail }
-              className="form-control"
-              value={ userEmail }
-              readOnly
-            />
+            <label htmlFor={ userEmail }>
+              E-mail
+              <input
+                data-testid="profile-email-input"
+                type="text"
+                name={ userEmail }
+                className="form-control"
+                value={ userEmail }
+                readOnly
+              />
+            </label>
             <br />
             <button
               type="button"
