@@ -4,6 +4,8 @@ import { sendIcon } from '../images';
 import '../css/chat.css';
 import Message from '../components/Message';
 
+let socket;
+
 function Chat() {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useReducer(

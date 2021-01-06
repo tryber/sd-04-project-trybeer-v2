@@ -76,6 +76,8 @@ io.on('connection', (socket) => {
     };
 
     await Mongo.addNew(user.activeRoom, msg);
+    const collection = await Mongo.listCollection();
+    console.log(collection)
 
     io.to(user.activeRoom).emit('message', [msg]);
 
