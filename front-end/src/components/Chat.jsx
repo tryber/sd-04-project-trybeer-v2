@@ -1,14 +1,11 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
-import Header from '../components/Header';
 import { sendIcon } from '../images';
 import '../css/chat.css';
 import Message from '../components/Message';
 
 let socket;
-const {email, role} = JSON.parse(localStorage.user);
-const adm = role === 'administrator';
 
-function Chat() {
+function Chat({ adm, activeRoom }) {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useReducer(
     (state, newState) => ([...state, ...newState]), [])
@@ -29,24 +26,21 @@ function Chat() {
 
   useEffect(() => {
     socket = window.io('http://localhost:3001');
-    socket.emit('join', email, adm);
+    socket.emit('join', activeRoom, adm);
     socket.on('message', (msg) => {
       setChat(msg);
       list.current.scrollTop = list.current.scrollHeight;
     });
-  }, [])
+  }, [activeRoom, adm])
 
   return (
-    <div className="page chat">
-      <Header>Chat</Header>
-      <div className="page-content chat-page">
-        <div className="messages-container" ref={ list }>
-          { chat.map((m) => <Message msg={ m } itsMe={ email === m.nickname || ( adm && m.nickname === 'loja') } />) }
-        </div>
-        <div className="msg-input">
-          <input type="text" placeholder="Digite..." autoComplete="off" value={ msg } onChange={ (e) => setMsg(e.target.value) } />
-          <button onClick={ sendMsg }><img src={ sendIcon } alt="send message" /></button>
-        </div>
+    <div className="page-content chat-page">
+      <div className="messages-container" ref={ list }>
+        { chat.map((m) => <Message msg={ m } itsMe={ activeRoom === m.nickname || (adm && m.nickname === 'Loja') } />) }
+      </div>
+      <div className="msg-input">
+        <input type="text" placeholder="Digite..." autoComplete="off" value={ msg } onChange={ (e) => setMsg(e.target.value) } />
+        <button onClick={ sendMsg }><img src={ sendIcon } alt="send message" /></button>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   AdminOrderDetails,
   AdminProfile,
   Orders,
-  Chat,
+  ChatPage,
 } from './pages';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
@@ -56,7 +56,10 @@ function App() {
         <AdminProfile />
       </Route>
       <Route path="/chat">
-        <Chat />
+        <ChatPage />
+      </Route>
+      <Route path="/admin/chat">
+        <ChatPage />
       </Route>
     </Switch>
   );
