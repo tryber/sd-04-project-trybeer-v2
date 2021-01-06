@@ -77,8 +77,8 @@ io.on('connection', (socket) => {
 
     await Mongo.addNew(user.activeRoom, msg);
 
-    io.to(user.activeRoom).emit('message', msg);
-  
+    io.to(user.activeRoom).emit('message', [msg]);
+
   });
 
   socket.on('disconnect', () => {
