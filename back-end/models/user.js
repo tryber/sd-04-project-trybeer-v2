@@ -42,7 +42,7 @@ const User = (sequelize, DataTypes) => {
     },
     role: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
   }, { timestamps: false });
 

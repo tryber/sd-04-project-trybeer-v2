@@ -10,7 +10,7 @@ const Sale = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     deliveryNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     saleDate: {
       type: DataTypes.DATE,
@@ -21,7 +21,7 @@ const Sale = (sequelize, DataTypes) => {
   }, { timestamps: false });
 
   createSale.associate = (models) => {
-    createSale.hasMany(models.salesProducts, { as: 'salesProducts', foreignKey: 'saleId' });
+    // createSale.hasMany(models.salesProducts, { as: 'salesProducts', foreignKey: 'saleId' });
 
     createSale.belongsTo(models.users, { as: 'users', foreignKey: 'userId' });
   };

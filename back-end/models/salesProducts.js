@@ -12,10 +12,21 @@ const salesProducts = (sequelize, DataTypes) => {
   }, { timestamps: false });
 
   createSalesProducts.associate = (models) => {
-    createSalesProducts.belongsTo(models.products, { as: 'products', foreignKey: 'productId' });
+    createSalesProducts.belongsTo(models.products, {
+      as: 'products',
+      through: createSalesProducts,
+      foreignKey: 'saleId',
+      otherKey: 'productId' });
 
-    createSalesProducts.belongsTo(models.sales, { as: 'sales', foreignKey: 'saleId' });
+    createSalesProducts.belongsTo(models.sales, {
+      as: 'sales',
+      through: createSalesProducts,
+      foreignKey: 'productId',
+      otherKey: 'saleId',
+    });
   };
+  createSalesProducts.removeAttribute('id');
+
   return createSalesProducts;
 };
 

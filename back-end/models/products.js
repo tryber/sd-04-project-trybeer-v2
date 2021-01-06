@@ -4,16 +4,16 @@ const Product = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     price: {
-      type: DataTypes.DECIMAL(4, 2),
+      type: DataTypes.DECIMAL(6, 2),
     },
     url_image: {
       type: DataTypes.STRING,
     },
   }, { timestamps: false });
 
-  createProduct.associate = (models) => {
-    createProduct.hasMany(models.salesProducts, { as: 'salesProducts', foreignKey: 'productId' });
-  };
+  // createProduct.associate = (models) => {
+  //   createProduct.hasMany(models.salesProducts, { as: 'salesProducts', foreignKey: 'productId' });
+  // };
   return createProduct;
 };
 
