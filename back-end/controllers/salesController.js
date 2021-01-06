@@ -31,7 +31,7 @@ const insertSale = async (req, res) => {
     });
 
     for (let i = 0; i < productId.length; i += 1) {
-      ssalesProducts.create({
+      salesProducts.create({
         sale_id: saleInserted.dataValues.id,
         product_id: productId[i],
         quantity: quantity[i],
