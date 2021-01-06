@@ -1,10 +1,9 @@
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { AppContext } from '../context/AppContext';
 import api from '../services/api';
-import TopBar from '../components/ClientBar.jsx';
+import TopBar from '../components/ClientBar';
 
 const sendEdit = async (e, name, email, history, setMessage) => {
   e.preventDefault();
@@ -19,7 +18,6 @@ const URL = 'http://localhost:3001/profile/2';
 export default () => {
   const [message, setMessage] = useState(null);
   const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [newName, setNewName] = useState('');
@@ -75,6 +73,7 @@ export default () => {
             />
             <br />
             <button
+              type="button"
               onClick={ (e) => sendEdit(e, newName, userEmail, history, setMessage) }
               className="btn btn-outline-success"
               disabled={ validateEdit(newName, userName) }

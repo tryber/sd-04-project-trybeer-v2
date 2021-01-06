@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import TopBar from '../components/ClientBar.jsx';
+import TopBar from '../components/ClientBar';
 import api from '../services/api';
 import MyOrdersCard from '../components/MyOrdersCard';
 
@@ -13,7 +13,7 @@ function Orders() {
     api
       .get('/orders', { headers: { Authorization: token } })
       .then((response) => setOrders(response.data))
-      .catch((_err) => history.push('/login'));
+      .catch(() => history.push('/login'));
   }, []);
 
   if (!orders) return <div>Carregando...</div>;

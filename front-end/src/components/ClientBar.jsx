@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './ClientBar.css';
 
 let ctrOpen = false;
@@ -29,6 +30,7 @@ const changeUrl = (history, url, clear, isDetails) => {
     localStorage.setItem('user', '');
   }
   ctrOpen = false;
+  return 'ok';
 };
 
 const admOnline = (history, title) => (
@@ -36,6 +38,7 @@ const admOnline = (history, title) => (
     <div>
       <h3 className="title-adm">{title}</h3>
       <button
+        type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-orders"
         onClick={ () => changeUrl(history, 'orders') }
@@ -43,6 +46,7 @@ const admOnline = (history, title) => (
         Pedidos
       </button>
       <button
+        type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-profile"
         onClick={ () => changeUrl(history, 'profile') }
@@ -51,6 +55,7 @@ const admOnline = (history, title) => (
       </button>
     </div>
     <button
+      type="button"
       className="nav-btn-adm"
       data-testid="side-menu-item-logout"
       onClick={ () => changeUrl(history, '', true) }
@@ -66,7 +71,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
   return (
     <div>
       <div className="body-top-bar">
-        <button className="menu-btn" onClick={ () => changeOpen() } data-testid="top-hamburguer">
+        <button type="button" className="menu-btn" onClick={ () => changeOpen() } data-testid="top-hamburguer">
           <div className="menu-btn-burguer" />
         </button>
         <header className="title" data-testid="top-title">
@@ -78,6 +83,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
         <nav className="side-menu-container">
           <div>
             <button
+              type="button"
               className="nav-btn"
               data-testid="side-menu-item-products"
               onClick={ () => changeUrl(history, 'products', null, isDetails) }
@@ -85,6 +91,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               Produtos
             </button>
             <button
+              type="button"
               className="nav-btn"
               data-testid="side-menu-item-my-orders"
               onClick={ () => changeUrl(history, 'orders', null, isDetails) }
@@ -92,6 +99,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               Meus Pedidos
             </button>
             <button
+              type="button"
               className="nav-btn"
               data-testid="side-menu-item-my-profile"
               onClick={ () => changeUrl(history, 'profile', null, isDetails) }
@@ -100,6 +108,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             </button>
           </div>
           <button
+            type="button"
             className="nav-btn"
             data-testid="side-menu-item-logout"
             onClick={ () => changeUrl(history, '', true) }
@@ -110,6 +119,16 @@ const TopBar = ({ title, isAdm, isDetails }) => {
       </div>
     </div>
   );
+};
+
+TopBar.defaultProps = {
+  isDetails: undefined,
+};
+
+TopBar.propTypes = {
+  isAdm: PropTypes.bool.isRequired,
+  isDetails: PropTypes.bool,
+  title: PropTypes.string.isRequired,
 };
 
 export default TopBar;

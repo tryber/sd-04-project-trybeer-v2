@@ -10,9 +10,10 @@ function Login() {
   const [adminUser, setAdminUser] = useState(false);
   const [clientUser, setClientUser] = useState(false);
 
-  const validateEmail = (email) => email.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
+  const validateEmail = (validEmail) => validEmail.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
 
-  const validatePassword = (password) => password.length >= 6;
+  const seis = 6;
+  const validatePassword = (validPassword) => validPassword.length >= seis;
 
   const login = async (event) => {
     event.preventDefault();
@@ -23,22 +24,23 @@ function Login() {
       })
       .then((response) => {
         const { token, user } = response.data;
-        const { name, email, role } = user;
+        const { name, email: userEmail, role } = user;
         const userData = {
-          name, email, token, role,
+          name,
+          userEmail,
+          token,
+          role,
         };
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(userData));
-        return user.role === 'administrator'
-          ? setAdminUser(true)
-          : setClientUser(true);
+        return user.role === 'administrator' ? setAdminUser(true) : setClientUser(true);
       })
       .catch((e) => console.log(e));
   };
 
   return (
     <div className="main-container">
-      <img src={ beer } className="beer-img" />
+      <img src={ beer } className="beer-img" alt="beer" />
       <h2>Login Page</h2>
       <div>
         <form onSubmit={ (event) => login(event) }>
@@ -91,12 +93,9 @@ function Login() {
 
         <div className="no-account">
           <Link to="/register" style={ { color: 'white', textDecoration: 'none' } }>
-            <div
-              data-testid="no-account-btn"
-              onClick={ () => <Redirect to="/register" /> }
-            >
+            <button type="button" data-testid="no-account-btn" onClick={ () => <Redirect to="/register" /> }>
               Ainda não tenho conta
-            </div>
+            </button>
           </Link>
         </div>
       </div>

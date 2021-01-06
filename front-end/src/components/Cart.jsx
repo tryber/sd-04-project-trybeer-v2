@@ -8,8 +8,8 @@ function Cart() {
     <div>
       <h2>Shopping Cart</h2>
       <p />
-      {cart.map((item, i) => (
-        <p key={ i }>
+      {cart.map((item) => (
+        <p key={ `item-${item}` }>
           {item.name}
           {' '}
           -

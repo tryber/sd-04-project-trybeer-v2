@@ -1,7 +1,8 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const AppContext = createContext();
+const zero = 0;
 
 const list = [
   { product: 'caipirinha', qty: 4, value: 10.0 },
@@ -16,7 +17,7 @@ const AppProvider = ({ children }) => {
   const [userName, setUserName] = useState('');
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(zero);
   const [orderMessage, setOrderMessage] = useState('');
 
   const context = {
