@@ -46,7 +46,7 @@ app.get('/admin/orders', controllers.sale.getSales);
 
 app.put('/admin/orders/:id', controllers.sale.setStatusAsDelivered);
 
-// app.get('/admin/chats', controllers.chat.listCollections);
+app.get('/admin/chats', controllers.chat.listChats);
 
 app.use((err, _req, res, _next) => {
   // console.log(err)
