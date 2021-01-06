@@ -1,4 +1,4 @@
-const { sales, sales_products, products, models } = require('../models/');
+const { sales, sales_products, products } = require('../models');
 const { getCurrentDate } = require('../utils/date');
 
 const getAllSales = async (_req, res) => {
@@ -27,7 +27,7 @@ const insertSale = async (req, res) => {
       delivery_address: deliveryAddr,
       delivery_number: deliveryNumber,
       sale_date: getCurrentDate(),
-      status: 'Pendente'
+      status: 'Pendente',
     });
 
     for (let i = 0; i < productId.length; i += 1) {
@@ -48,7 +48,6 @@ const insertSale = async (req, res) => {
 const getSaleById = async (req, res) => {
   try {
     const { id: saleId } = req.params;
-    
     if (saleId) {
       const orderDetails = await sales.findOne({
         where: { id: saleId },

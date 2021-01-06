@@ -12,7 +12,6 @@ const AdminOrdersDetails = () => {
   React.useEffect(() => {
     (async () => {
       const order = await api.getSaleByIdAPI(id);
-      console.log(order);
       setOrderData(order.data);
       setOrderItem(order.data.products);
     })();
