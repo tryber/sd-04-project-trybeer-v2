@@ -1,8 +1,9 @@
 const saleService = require('../services/saleService');
 
-const findAllSalesController = async (_req, res) => {
+const findAllSalesController = async (req, res) => {
   try {
     const allSales = await saleService.findAllSalesService();
+    console.log('teste', allSales);
     return res.status(200).json(allSales);
   } catch (_e) {
     return res.status(500).json({ message: 'internal error ' });
@@ -11,9 +12,8 @@ const findAllSalesController = async (_req, res) => {
 
 const findSalesByUserIdController = async (req, res) => {
   try {
-    console.log(req.user);
     const { id } = req.user;
-    const sales = await saleService.findSalesByUserId(id);
+    const sales = await saleService.findSalesByUserId(1);
     return res.status(200).json(sales);
   } catch (_e) {
     return res.status(500).json({ message: 'internal error ' });

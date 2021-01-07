@@ -3,7 +3,6 @@ const createSales = (sequelize, DataTypes) => {
     'sales',
     {
       total_price: DataTypes.FLOAT,
-      content: DataTypes.STRING,
       user_id: { type: DataTypes.INTEGER, foreignKey: true },
       delivery_address: DataTypes.STRING,
       delivery_number: DataTypes.STRING,
