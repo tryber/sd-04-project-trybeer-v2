@@ -81,16 +81,13 @@ io.on('connection', (socket) => {
     io.to(user.activeRoom).emit('message', [msg]);
 
     // atualiza a lista de chats para o ADM
-    socket.emit('chatlist', chatList)
+    io.emit('chatList', chatList);
   });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('exit', user.nickname);
   });
-
-
 });
 
 httpServer.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`),
-);
+  console.log(`Example app listening on port ${port}!`));

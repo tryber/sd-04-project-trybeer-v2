@@ -3,7 +3,7 @@ import AdminChat from '../components/AdminChat';
 import Chat from '../components/Chat';
 import Header from '../components/Header'
 
-const { email, role } = JSON.parse(localStorage.user);
+const { email, role } = JSON.parse(localStorage.user || '{}');
 const adm = role === 'administrator';
 
 function ChatPage() {

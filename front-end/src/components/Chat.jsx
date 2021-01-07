@@ -16,6 +16,8 @@ function Chat({ adm, activeRoom }) {
     }
   };
 
+  const enterHandle = (e) => { if (e.which === 13) sendMsg() }
+
   useEffect(() => { //when receive msg scroll to the bottom if scrollbar is at least 70%
     const crr = list.current
     const scrollDown = crr.scrollTop >= crr.scrollHeight * 0.5;
@@ -28,15 +30,18 @@ function Chat({ adm, activeRoom }) {
       setChat(msg);
       list.current.scrollTop = list.current.scrollHeight;
     });
+    return () => window.socket.off('message');
   }, [activeRoom, adm])
 
   return (
     <div className="page-content chat-page">
       <div className="messages-container" ref={ list }>
-        { chat.map((m) => <Message msg={ m } itsMe={ activeRoom === m.nickname || (adm && m.nickname === 'Loja') } />) }
+        { chat.map((m, i) => <Message msg={ m } itsMe={ adm ? m.nickname === 'Loja' : m.nickname !== 'Loja' } 
+        key={m.nickname + i} />) }
       </div>
       <div className="msg-input">
-        <input type="text" placeholder="Digite..." autoComplete="off" value={ msg } onChange={ (e) => setMsg(e.target.value) } />
+        <input type="text" placeholder="Digite..." autoComplete="off" value={ msg }
+          onChange={ (e) => setMsg(e.target.value) } onKeyDown={ enterHandle } />
         <button onClick={ sendMsg }><img src={ sendIcon } alt="send message" /></button>
       </div>
     </div>

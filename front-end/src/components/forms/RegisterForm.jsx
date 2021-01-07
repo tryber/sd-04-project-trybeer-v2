@@ -8,9 +8,9 @@ const RegisterForm = () => {
   const [form, setForm] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      name: null,
-      email: null,
-      password: null,
+      name: '',
+      email: '',
+      password: '',
       role: false,
       error: null,
       redirect: null,
@@ -58,8 +58,9 @@ const RegisterForm = () => {
   const handleDisableButton = (param) => {
     const validation = formValidate(param);
     // validation === true ? setDisableButton(false) : setDisableButton(true);
-    if (validation === true) return setDisableButton(false);
-    return setDisableButton(true);
+    setForm({ error: validation === true ? null : validation })
+
+    setDisableButton(validation !== true);
   };
 
   useEffect(() => {
