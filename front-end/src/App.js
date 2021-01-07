@@ -58,7 +58,7 @@ function App() {
       <Route path="/chat">
         <ChatPage />
       </Route>
-      <Route path="/admin/chat">
+      <Route path="/admin/chats">
         <ChatPage />
       </Route>
     </Switch>

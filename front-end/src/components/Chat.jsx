@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, {
   useEffect, useReducer, useRef, useState,
 } from 'react';
-import { sendIcon } from '../images';
+import { closeIcon, sendIcon } from '../images';
 import '../css/chat.css';
 import Message from './Message';
 
-function Chat({ adm, activeRoom }) {
+function Chat({ adm, activeRoom, setRoom }) {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useReducer(
     (state, newState) => ([...state, ...newState]), [],
@@ -39,6 +39,16 @@ function Chat({ adm, activeRoom }) {
 
   return (
     <div className="page-content chat-page">
+      { adm && (
+        <div>
+          <button type="button" onClick={ () => setRoom('') } data-testid="back-button">
+            <img src={ closeIcon } alt="back to chat list" />
+          </button>
+          Conversando com
+          {' '}
+          {activeRoom}
+        </div>
+      ) }
       <div className="messages-container" ref={ list }>
         { chat.map((m) => (<Message
           msg={ m }
@@ -54,8 +64,11 @@ function Chat({ adm, activeRoom }) {
           value={ msg }
           onChange={ (e) => setMsg(e.target.value) }
           onKeyDown={ enterHandle }
+          data-testid="message-input"
         />
-        <button onClick={ sendMsg } type="button"><img src={ sendIcon } alt="send message" /></button>
+        <button onClick={ sendMsg } type="button" data-testid="send-message">
+          <img src={ sendIcon } alt="send message" />
+        </button>
       </div>
     </div>
   );

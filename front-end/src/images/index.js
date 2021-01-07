@@ -10,3 +10,4 @@ export { default as BtnBurger } from './btn-hamburguer.png';
 export { default as HomerProfile } from './homer-profile.png';
 export { default as happy } from './happy.png';
 export { default as sendIcon } from './sendMsgIcon.png';
+export { default as closeIcon } from './closeIcon.png';
