@@ -1,25 +1,27 @@
 const { Router } = require('express');
 /* const { validateJWT } = require('./middlewares/auth'); */
 const userController = require('./controllers/userController');
+const checkEmailInDatabase = require('./middlewares/checkEmailInDatabase');
 /* const productController = require('./controllers/productController');
 const saleController = require('./controllers/saleController');
-const checkEmailInDatabase = require('./middlewares/checkEmailInDatabase');
 const findUserIdByEmail = require('./middlewares/findUserIdByEmail');
 const checkoutController = require('./controllers/checkoutController'); */
 //  const getDataTestController = require('./controllers/getDataTestController');
 
 const routes = Router();
 
-/* routes.post('/login', userController.userLogin);
+routes.post('/login', userController.userLogin);
 
 routes.get('/profile/:id', userController.getUserByEmail);
+
 routes.put('/profile', userController.saveEditController);
+
 routes.post(
   '/register',
   checkEmailInDatabase,
   userController.registerUserController,
 );
-routes.get('/profile', userController.getUserByEmail); */
+routes.get('/profile', userController.getUserByEmail);
 routes.get('/all', userController.getUsers);
 /* routes.get(
   '/products',
