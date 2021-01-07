@@ -13,18 +13,17 @@ const Products = () => {
 
   const addQuantity = (cart) => {
     const cartWithQuantity = [...cart];
-    cartWithQuantity.forEach((item) => (item.quantity = 0));
+    cartWithQuantity.forEach((item) => item.quantity = 0);
     return cartWithQuantity;
   };
 
-  const configureStorage = async () => {
-    const response = await api.get('/products');
-    const cartUpdated = addQuantity(response.data);
-    setProducts([...cartUpdated]);
-    localStorage.setItem('products', JSON.stringify(response.data));
-  };
-
   useEffect(() => {
+    const configureStorage = async () => {
+      const response = await api.get('/products');
+      const cartUpdated = addQuantity(response.data);
+      setProducts([...cartUpdated]);
+      localStorage.setItem('products', JSON.stringify(response.data));
+    };
     const productList = JSON.parse(localStorage.getItem('products'));
     const fetchProducts = async () => {
       if (productList && productList.length) {

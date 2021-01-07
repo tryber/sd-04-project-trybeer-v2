@@ -1,4 +1,4 @@
-const { productsService } = require('../services');
+// const { productsService } = require('../services');
 const { products, sales, sales_products } = require('../models');
 
 const fetchProducts = async (_req, res) => {
@@ -23,16 +23,17 @@ const fetchSales = async (_req, res) => {
 const fetchSaleById = async (req, res) => {
   try {
     const { id } = req.params;
-    const saleData = await sales.findByPk(id);
+    // const saleData = await sales.findByPk(id);
     // console.log(saleData);
 
     const productsResult = await sales_products.findAll({
-      where: { sale_id: id }
-    }, { include: products });
+      where: { sale_id: id },
+    }, { include: { model: products } });
     console.log(productsResult);
 
     // return res.status(200).json({ saleData, products });
   } catch (error) {
+    console.log(error.message);
     return res.json({ error: error.message });
   }
 };

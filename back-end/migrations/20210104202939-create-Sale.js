@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const SalesTable = queryInterface.createTable(
-      'Sales',
+      'sales',
       {
         id: {
           type: Sequelize.INTEGER,
