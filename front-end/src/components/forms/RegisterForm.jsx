@@ -58,7 +58,7 @@ const RegisterForm = () => {
   const handleDisableButton = (param) => {
     const validation = formValidate(param);
     // validation === true ? setDisableButton(false) : setDisableButton(true);
-    setForm({ error: validation === true ? null : validation })
+    setForm({ error: validation === true ? null : validation });
 
     setDisableButton(validation !== true);
   };
