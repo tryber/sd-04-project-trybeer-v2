@@ -5,6 +5,19 @@ import api from '../../services/api';
 import { getLS } from '../../utils';
 import styles from './index.module.css';
 
+const styleStatus = (status) => {
+  if (status === 'Pendente') {
+    return styles.pendingOrder;
+  }
+  if (status === 'Preparando') {
+    return styles.preparingOrder;
+  }
+  if (status === 'Entregue') {
+    return styles.deliveredOrder;
+  }
+  return null;
+};
+
 const OrderDetails = () => {
   const [orderData, setOrderData] = React.useState(null);
   const { id } = useParams();
@@ -15,10 +28,6 @@ const OrderDetails = () => {
       setOrderData(order.data);
     })();
   }, [id]);
-
-  React.useEffect(() => {
-    console.log(orderData);
-  }, [orderData]);
 
   if (!getLS('user') || !getLS('user').token) return <Redirect to="/login" />;
   return (
@@ -31,22 +40,31 @@ const OrderDetails = () => {
           <h2 className={ styles.titleContainer }>
             <span data-testid="order-number">{`Pedido ${id}`}</span>
             <span className={ styles.date } data-testid="order-date">
-              {/* {new Date(orderData[0].saleDate).toLocaleDateString('pt-BR', {
+              {new Date(orderData.saleDate).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: '2-digit',
-              })} */}
+              })}
             </span>
           </h2>
+          <h4
+            className={ `${styles.orderStatus} ${styleStatus(orderData.status)}` }
+          >
+            { orderData.status }
+          </h4>
           <ul className={ styles.orderList }>
-            {orderData.map(
-              ({ productName, productQuantity, productPrice }, index) => (
+            {orderData.products.map(
+              ({
+                name: productName,
+                sales_products: product,
+                price: productPrice,
+              }, index) => (
                 <li key={ productName } className={ styles.orderItem }>
                   <div className={ styles.orderItemLeftContainer }>
                     <span
                       className={ styles.orderItemQty }
                       data-testid={ `${index}-product-qtd` }
                     >
-                      {productQuantity}
+                      {product.quantity}
                     </span>
                     <span className={ styles.dashSpace }>-</span>
                     <span
@@ -61,13 +79,14 @@ const OrderDetails = () => {
                       className={ styles.unitaryPrice }
                       data-testid={ `${index}-order-unit-price` }
                     >
-                      {`(${productPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})`}
+                      {`(${productPrice.toLocaleString('pt-BR',
+                        { style: 'currency', currency: 'BRL' })})`}
                     </span>
                     <span
                       className={ styles.orderItemPrice }
                       data-testid={ `${index}-product-total-value` }
                     >
-                      {(productPrice * productQuantity).toLocaleString(
+                      {(productPrice * product.quantity).toLocaleString(
                         'pt-BR',
                         {
                           style: 'currency',
@@ -84,7 +103,7 @@ const OrderDetails = () => {
             className={ styles.orderTotal }
             data-testid="order-total-value"
           >
-            {`Total: ${orderData[0].totalPrice.toLocaleString('pt-BR', {
+            {`Total: ${Number(orderData.totalPrice).toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}

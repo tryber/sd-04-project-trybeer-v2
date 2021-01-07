@@ -17,10 +17,6 @@ const AdminOrdersDetails = () => {
     })();
   }, [id]);
 
-  React.useEffect(() => {
-    console.log(orderData);
-  }, [orderData]);
-
   const handleStatus = (orderStatus) => {
     api.updateSaleStatusAPI(orderData.id, orderStatus);
     return setOrderData({
@@ -113,7 +109,7 @@ const AdminOrdersDetails = () => {
             className={ styles.orderTotal }
             data-testid="order-total-value"
           >
-            {`Total: ${orderData.total_price && orderData.total_price.toLocaleString('pt-BR', {
+            {`Total: ${orderData.totalPrice && Number(orderData.totalPrice).toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}

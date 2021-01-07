@@ -22,15 +22,13 @@ const insertSale = async (req, res) => {
       quantity,
     } = req.body;
     const saleInserted = await sales.create({
-      user_id: userId,
-      total_price: totalPrice,
-      delivery_address: deliveryAddr,
-      delivery_number: deliveryNumber,
-      sale_date: getCurrentDate(),
+      userId,
+      totalPrice,
+      deliveryAddress: deliveryAddr,
+      deliveryNumber,
+      saleDate: getCurrentDate(),
       status: 'Pendente',
     });
-
-    console.log(typeof totalPrice);
 
     for (let i = 0; i < productId.length; i += 1) {
       salesProducts.create({
@@ -55,7 +53,6 @@ const getSaleById = async (req, res) => {
         where: { id: saleId },
         include: [{ model: products, as: 'products' }],
       });
-      console.log('orderDetails', orderDetails);
       return res.status(200).json(orderDetails);
     }
     return res.status(404).json({ message: 'Not Found' });
