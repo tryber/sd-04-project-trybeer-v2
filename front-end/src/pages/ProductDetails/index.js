@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import ProductDetailCard from '../../components/ProductDetailsCard';
 
-import api from '../../services/api';
+// import api from '../../services/api';
 
 import './styles.css';
 
 const ProductDetails = ({ match: { params: { orderNumber } } }) => {
-  const [product, /*setProduct*/] = useState('');
-  const [dateFormat, /*setDateFormat*/] = useState('');
+  const [product] = useState('');
+  const [dateFormat] = useState('');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
