@@ -13,7 +13,7 @@ import MyOrdersADM from './pages/MyOrdersADM';
 import PrivateRoute from './PrivateRoute';
 import Checkout from './pages/CheckoutPage';
 import ProductDetailsADM from './pages/ProductDetailsADM';
-import ChatClient from './pages/ChatClient'
+import ChatClient from './pages/ChatClient';
 
 const Routes = () => (
   <Provider>

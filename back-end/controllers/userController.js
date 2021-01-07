@@ -1,5 +1,5 @@
 // const rescue = require('express-rescue');
-const { Products, Sale } = require('../models');
+const { Sale, users } = require('../models');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
@@ -38,23 +38,23 @@ const updateUser = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
   try {
-    const orders = await userModel.findAll();
+    const orders = await users.findAll();
     res.status(200).json(orders);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
 
-const updateStatus = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedOrder =  await Sale.update({ status }, { where: { id } });
-    // const updatedOrder = await Sale.findByPk(id);
-    return res.status(200).json(updatedOrder);
-  } catch (error) {
-    return res.status(401).json({ message: 'BAD REQUEST' });
-  }
-};
+// const updateStatus = async (req, res) => {
+//   try {
+//     // const { id } = req.params;
+//     // const updatedOrder = await Sale.update({ status }, { where: { id } });
+//     // const updatedOrder = await Sale.findByPk(id);
+//     // return res.status(200).json(updatedOrder);
+//   } catch (error) {
+//     return res.status(401).json({ message: 'BAD REQUEST' });
+//   }
+// };
 
 module.exports = {
   loginUser,
