@@ -77,6 +77,7 @@ function Chat({ adm, activeRoom, setRoom }) {
 Chat.propTypes = {
   activeRoom: PropTypes.string.isRequired,
   adm: PropTypes.bool.isRequired,
+  setRoom: PropTypes.func.isRequired,
 };
 
 export default Chat;
