@@ -1,5 +1,5 @@
 // const rescue = require('express-rescue');
-const { Sale, users } = require('../models');
+const { users } = require('../models');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
@@ -61,5 +61,5 @@ module.exports = {
   updateUser,
   registerUser,
   getUserOrders,
-  updateStatus,
+  // updateStatus,
 };
