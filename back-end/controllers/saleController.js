@@ -1,4 +1,4 @@
-/* const saleService = require('../services/saleService');
+const saleService = require('../services/saleService');
 
 const findAllSalesController = async (_req, res) => {
   try {
@@ -11,6 +11,7 @@ const findAllSalesController = async (_req, res) => {
 
 const findSalesByUserIdController = async (req, res) => {
   try {
+    console.log(req.user);
     const { id } = req.user;
     const sales = await saleService.findSalesByUserId(id);
     return res.status(200).json(sales);
@@ -35,4 +36,3 @@ module.exports = {
   findSalesBySaleId,
   findSalesByUserIdController,
 };
- */

@@ -1,4 +1,4 @@
-/* const productService = require('../services/productService');
+const productService = require('../services/productService');
 
 const findAllProductsController = async (_req, res) => {
   try {
@@ -35,4 +35,3 @@ module.exports = {
   findProductByIdController,
   findProductByNameController,
 };
- */
