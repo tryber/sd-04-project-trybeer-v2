@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { getChats } from '../services/TrybeerApi';
 
@@ -28,5 +29,9 @@ function AdminChat({ setRoom }) {
     </div>
   );
 }
+
+AdminChat.propTypes = {
+  setRoom: PropTypes.func.isRequired,
+};
 
 export default AdminChat;
