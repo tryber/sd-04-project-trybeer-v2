@@ -29,8 +29,8 @@ const Orders = () => {
             ? sales.map((order, index) => (
               <OrderCard
                 id={ order.id }
-                totalPrice={ order.total_price }
-                saleDate={ order.sale_date }
+                totalPrice={ order.totalPrice }
+                saleDate={ order.saleDate }
                 index={ index }
                 status={ order.status }
                 key={ order.id }

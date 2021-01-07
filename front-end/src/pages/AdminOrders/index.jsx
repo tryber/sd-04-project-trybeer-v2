@@ -11,7 +11,6 @@ const AdminOrders = () => {
     (async () => {
       const orders = await api.getSalesTb();
       setOrdersData(orders.data.sales);
-      console.log('orders', orders);
     })();
   }, []);
 
@@ -42,9 +41,9 @@ const AdminOrders = () => {
                 {
                   id,
                   status,
-                  total_price: totalPrice,
-                  delivery_address: deliveryAddress,
-                  delivery_number: deliveryNumber,
+                  totalPrice,
+                  deliveryAddress,
+                  deliveryNumber,
                 },
                 index,
               ) => (
@@ -66,7 +65,7 @@ const AdminOrders = () => {
                       className={ styles.orderValue }
                       data-testid={ `${index}-order-total-value` }
                     >
-                      {totalPrice && totalPrice.toLocaleString('pt-BR', {
+                      {totalPrice && Number(totalPrice).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })}
