@@ -7,6 +7,7 @@ import ProductsPage from './pages/ProductsPage';
 import OrdersPage from './pages/OrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import CheckoutPage from './pages/CheckoutPage';
+import ChatPage from './pages/ChatPage';
 import AdminProfile from './pages/AdminProfile';
 import AdminOrders from './pages/AdminOrders';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/orders" component={ OrdersPage } />
         <Route exact path="/profile" component={ ProfilePage } />
         <Route exact path="/checkout" component={ CheckoutPage } />
+        <Route exact path="/chat" component={ ChatPage } />
         <Route exact path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />

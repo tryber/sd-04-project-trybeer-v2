@@ -82,6 +82,8 @@ const getSaleByIdAPI = (id) => api.get(`/sales/${id}`);
 
 const updateSaleStatusAPI = (id, status) => api.put(`/sales/${id}`, { status });
 
+const sendChatMessage = (message) => api.post('/chat', { message });
+
 export default {
   registerUserAPI,
   loginAPI,
@@ -92,4 +94,5 @@ export default {
   updateUserAPI,
   getSaleByIdAPI,
   updateSaleStatusAPI,
+  sendChatMessage,
 };
