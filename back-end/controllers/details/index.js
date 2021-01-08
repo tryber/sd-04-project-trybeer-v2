@@ -3,10 +3,17 @@ const { sales, salesProducts, products } = require('../../models');
 const getDetailController = async (req, res) => {
   try {
     const { id } = req.params;
-    // const prodInfo = await sales.findByPk(id);
-    const prodInfo = await sales.findAll({ where: { id } }, { include: [{ model: products, as: 'products' }] });
-    // const prodInfo = await salesProducts.findAll({ where: { saleId: id } },
-    // { include: { model: products, as: 'products' } });
+
+    const spInfo = await salesProducts.findAll({ where: { saleId: id } });
+    const teste = spInfo.map((e) => e.dataValues);
+    const prodInfo = await Promise.all(teste.map(async (e) => {
+      const { quantity } = e;
+      const produto = await products.findOne({ where: { id: e.productId } });
+      const { name, price } = produto;
+      const prodPrice = quantity * price;
+      return { quantity, name, price, prodPrice };
+    }));
+
     if (prodInfo) {
       return res.status(200).json(prodInfo);
     }
