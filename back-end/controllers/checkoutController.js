@@ -18,7 +18,7 @@ const checkoutController = async (req, res) => {
       convertedDate,
     );
 
-    for (let i = 0; i < products.length; i++) {
+    for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
         registeredSale,
         //  usar o campo id mesmo
