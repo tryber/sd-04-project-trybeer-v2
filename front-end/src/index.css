@@ -15,7 +15,9 @@
 }
 
 .page-content {
-  padding-top: 57px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 53px;
   flex: 1;
 }
 
