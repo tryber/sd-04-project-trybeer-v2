@@ -19,7 +19,7 @@ describe('User Services', () => {
       name,
       email,
       password,
-      role
+      role,
     );
     expect(response).toHaveProperty('token');
     expect(response).toHaveProperty('userData');
@@ -34,7 +34,7 @@ describe('User Services', () => {
     const message = {
       message: 'Atualização concluída com sucesso',
     };
-    const response = await userService.userUpdate(name,email);
+    const response = await userService.userUpdate(name, email);
     expect(response).toHaveProperty('message');
     expect(response).toMatchObject(message);
   });

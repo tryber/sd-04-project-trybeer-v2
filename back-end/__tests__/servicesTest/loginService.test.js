@@ -24,7 +24,7 @@ describe('Login user', () => {
       password: '12345678',
     };
     await expect(() => loginService.userLogin(email, password)).rejects.toThrow(
-      new Error('User not found')
+      new Error('User not found'),
     );
   });
 });
