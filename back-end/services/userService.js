@@ -21,4 +21,15 @@ const userUpdate = async (name, email) => {
   }
 };
 
-module.exports = { userRegister, userUpdate };
+const userDelete = async (email) => {
+  const user = await users.findOne({ where: { email } });
+  if (!user) return null;
+  try {
+    await users.destroy({ where: { email } });
+    return { message: 'deletado com sucesso' };
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+module.exports = { userRegister, userUpdate, userDelete };
