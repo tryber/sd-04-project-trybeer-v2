@@ -3,11 +3,10 @@ const { validateJWT } = require('./middlewares/auth');
 const userController = require('./controllers/userController');
 const checkEmailInDatabase = require('./middlewares/checkEmailInDatabase');
 const productController = require('./controllers/productController');
- 
 const saleController = require('./controllers/saleController');
-/*
+
 const findUserIdByEmail = require('./middlewares/findUserIdByEmail');
-const checkoutController = require('./controllers/checkoutController'); */
+const checkoutController = require('./controllers/checkoutController');
 //  const getDataTestController = require('./controllers/getDataTestController');
 
 const routes = Router();
@@ -32,11 +31,10 @@ routes.get(
 );
 
 routes.get('/allSales', validateJWT, saleController.findAllSalesController); // fins de teste
-
 routes.get('/orders', validateJWT, saleController.findSalesByUserIdController);
 routes.get('/orders/:id', validateJWT, saleController.findSalesBySaleId);
-/*
-routes.post('/checkout', findUserIdByEmail, checkoutController); */
+
+routes.post('/checkout', findUserIdByEmail, checkoutController);
 //  routes.post('/checkout', getDataTestController);
 
 module.exports = routes;

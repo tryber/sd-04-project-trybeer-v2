@@ -19,14 +19,13 @@ const validateJWT = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secret);
     const user = await users.findOne({ where: { email: decoded.data.email } });
-
     if (!user) {
       return res.status(401).json({ message: 'invalid token' });
     }
 
-    const { password, ...userInfo } = user;
+    /* const { password, ...userInfo } = user; */
 
-    req.user = userInfo;
+    req.user = user;
 
     return next();
   } catch (err) {
