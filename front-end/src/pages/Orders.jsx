@@ -14,7 +14,7 @@ export default function Orders() {
     <div className="page">
       <Header>Meus Pedidos</Header>
       {sales.length < 1 && (
-        <div className="orders-page">
+        <div className="orders-page page-content">
           <span className="noOrders">
             &quot;A culpa é minha e eu coloco ela em quem eu quiser!&quot;
             <br />

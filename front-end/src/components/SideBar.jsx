@@ -16,6 +16,9 @@ export default function SideBar({ userRole, active }) {
             <a href="/profile" data-testid="side-menu-item-my-profile">
               Meu perfil
             </a>
+            <a href="/chat" data-testid="side-menu-chat">
+              Conversar com a loja
+            </a>
           </div>
           <a href="/login" data-testid="side-menu-item-logout">
             Sair
@@ -23,13 +26,16 @@ export default function SideBar({ userRole, active }) {
         </div>
       )}
       {userRole === 'administrator' && (
-        <div className="admin-side-bar-container side-bar" visible>
+        <div className="admin-side-bar-container side-bar">
           <div>
             <a href="/admin/orders" data-testid="side-menu-item-orders">
               Meus pedidos
             </a>
             <a href="/admin/profile" data-testid="side-menu-item-profile">
               Meu perfil
+            </a>
+            <a href="/admin/chats" data-testid="side-menu-item-chat">
+              Conversas
             </a>
           </div>
           <a href="/login" data-testid="side-menu-item-logout">
