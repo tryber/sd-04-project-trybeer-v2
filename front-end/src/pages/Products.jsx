@@ -15,27 +15,25 @@ function Products() {
   const {
     products, setProducts, setCart, total, orderMessage,
   } = useContext(AppContext);
+
   const history = useHistory();
 
-  const tempinho = (funcao) => {
-    funcao();
+  const meuQueridoTempo = async () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    api
+      .get('/products', { headers: { Authorization: token } })
+      .then((response) => setProducts(response.data))
+      .catch(() => history.push('/login'));
+
+    if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')));
+    }
   };
 
   useEffect(() => {
-    const meuQueridoTempo = async () => {
-      const token = JSON.parse(localStorage.getItem('token'));
-      api
-        .get('/products', { headers: { Authorization: token } })
-        .then((response) => setProducts(response.data))
-        .catch(() => history.push('/login'));
-
-      if (localStorage.getItem('cart')) {
-        setCart(JSON.parse(localStorage.getItem('cart')));
-      }
-    };
-    setTimeout(async () => {
+    setTimeout(() => {
       setVal(zero);
-      await tempinho(meuQueridoTempo);
+      meuQueridoTempo();
       setVal(1);
     }, mil);
   }, []);
