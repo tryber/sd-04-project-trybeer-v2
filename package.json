@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "install-back": "npm --prefix back-end/ install",
-    "start-back": "npm --prefix back-end/ run start&",
+    "start-back": "npm --prefix back-end/ run debug&",
     "install-front": "npm --prefix front-end/ install",
     "start-front": "npm --prefix front-end/ run start&",
     "drop": "cd back-end/ && npx sequelize-cli db:drop $",
