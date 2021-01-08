@@ -12,7 +12,6 @@ describe('Login user', () => {
     email: 'zebirita@gmail.com',
     password: '12345678',
   };
-  /*Teste para login que existe*/
   test('when the user exist', async () => {
     const response = await loginService.userLogin(email, password);
     // expect(response.status).toEqual(200);

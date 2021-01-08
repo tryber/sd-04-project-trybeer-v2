@@ -1,7 +1,6 @@
 const userService = require('../../services/userService');
 
 describe('User Services', () => {
-  /*Teste para login que existe*/
   test('teste do User Register', async () => {
     const { name, email, password, role } = {
       name: 'Victor Lustosa',

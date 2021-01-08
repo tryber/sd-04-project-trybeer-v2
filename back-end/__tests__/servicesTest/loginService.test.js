@@ -1,8 +1,7 @@
 const loginService = require('../../services/loginService');
-/// esse teste faz o service nao o controller
+// esse teste faz o service nao o controller
 
 describe('Login user', () => {
-  /*Teste para login que existe*/
   test('when the user exist', async () => {
     const user = {
       id: 2,
@@ -24,6 +23,8 @@ describe('Login user', () => {
       email: 'humberto@gmail.com',
       password: '12345678',
     };
-    await expect(() => loginService.userLogin(email, password)).rejects.toThrow(new Error('User not found'));
+    await expect(() => loginService.userLogin(email, password)).rejects.toThrow(
+      new Error('User not found')
+    );
   });
 });
