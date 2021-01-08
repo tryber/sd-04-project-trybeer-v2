@@ -5,7 +5,7 @@ import api from '../../services/api';
 import styles from './index.module.css';
 
 const AdminOrders = () => {
-  const [ordersData, setOrdersData] = React.useState(null);
+  const [ordersData, setOrdersData] = React.useState('');
 
   React.useEffect(() => {
     (async () => {
@@ -13,6 +13,19 @@ const AdminOrders = () => {
       setOrdersData(orders.data.sales);
     })();
   }, []);
+
+  const styleStatus = (status) => {
+    if (status === 'Pendente') {
+      return styles.pendingOrder;
+    }
+    if (status === 'Preparando') {
+      return styles.preparingOrder;
+    }
+    if (status === 'Entregue') {
+      return styles.deliveredOrder;
+    }
+    return null;
+  };
 
   return (
     <div className={ styles.pageContainer }>
@@ -26,7 +39,11 @@ const AdminOrders = () => {
             {ordersData.map(
               (
                 {
-                  id, status, totalPrice, deliveryAddress, deliveryNumber,
+                  id,
+                  status,
+                  totalPrice,
+                  deliveryAddress,
+                  deliveryNumber,
                 },
                 index,
               ) => (
@@ -48,20 +65,18 @@ const AdminOrders = () => {
                       className={ styles.orderValue }
                       data-testid={ `${index}-order-total-value` }
                     >
-                      {totalPrice.toLocaleString('pt-BR', {
+                      {totalPrice && Number(totalPrice).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })}
                     </div>
                     <div
                       className={ `${styles.orderStatus} ${
-                        status === 'pending'
-                          ? styles.pendingOrder
-                          : styles.deliveredOrder
+                        styleStatus(status)
                       }` }
                       data-testid={ `${index}-order-status` }
                     >
-                      {status === 'pending' ? 'Pendente' : 'Entregue'}
+                      {status}
                     </div>
                   </li>
                 </Link>

@@ -6,25 +6,36 @@ import styles from './index.module.css';
 
 const AdminOrdersDetails = () => {
   const [orderData, setOrderData] = React.useState(null);
+  const [orderItem, setOrderItem] = React.useState([]);
   const { id } = useParams();
 
   React.useEffect(() => {
     (async () => {
       const order = await api.getSaleByIdAPI(id);
       setOrderData(order.data);
+      setOrderItem(order.data.products);
     })();
   }, [id]);
 
-  React.useEffect(() => {
-    // console.log(orderData);
-  }, [orderData]);
+  const handleStatus = (orderStatus) => {
+    api.updateSaleStatusAPI(orderData.id, orderStatus);
+    return setOrderData({
+      ...orderData,
+      status: orderStatus,
+    });
+  };
 
-  const handleStatus = async () => {
-    await api.updateSaleStatusAPI(orderData[0].saleID, 'delivered');
-    setOrderData(orderData.map((product) => {
-      const deliveredStatus = { ...product, ...(product.status = 'delivered') };
-      return deliveredStatus;
-    }));
+  const styleStatus = () => {
+    if (orderData.status === 'Pendente') {
+      return styles.pendingOrder;
+    }
+    if (orderData.status === 'Preparando') {
+      return styles.preparingOrder;
+    }
+    if (orderData.status === 'Entregue') {
+      return styles.deliveredOrder;
+    }
+    return null;
   };
 
   return (
@@ -39,34 +50,32 @@ const AdminOrdersDetails = () => {
             <span data-testid="order-number">{`Pedido ${id} - `}</span>
             <span
               className={
-                orderData[0].status === 'pending'
-                  ? styles.pendingOrder
-                  : styles.deliveredOrder
+                styleStatus()
               }
               data-testid="order-status"
             >
               {`${
-                orderData[0].status === 'pending' ? 'Pendente' : 'Entregue'
+                orderData.status
               }`}
             </span>
           </h2>
           <ul className={ styles.orderList }>
-            {orderData.map(
-              ({ productName, productQuantity, productPrice }, index) => (
-                <li key={ productName } className={ styles.orderItem }>
+            {orderItem && orderItem.map(
+              ({ name, sales_products: { quantity }, price }, index) => (
+                <li key={ name } className={ styles.orderItem }>
                   <div className={ styles.orderItemLeftContainer }>
                     <span
                       className={ styles.orderItemQty }
                       data-testid={ `${index}-product-qtd` }
                     >
-                      {productQuantity}
+                      {quantity}
                     </span>
                     <span className={ styles.dashSpace }>-</span>
                     <span
                       className={ styles.orderItemName }
                       data-testid={ `${index}-product-name` }
                     >
-                      {productName}
+                      {name}
                     </span>
                   </div>
                   <div className={ styles.orderItemRightContainer }>
@@ -74,7 +83,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.unitaryPrice }
                       data-testid={ `${index}-order-unit-price` }
                     >
-                      {`(${productPrice.toLocaleString('pt-BR', {
+                      {`(${price && price.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
                       })})`}
@@ -83,7 +92,7 @@ const AdminOrdersDetails = () => {
                       className={ styles.orderItemPrice }
                       data-testid={ `${index}-product-total-value` }
                     >
-                      {(productPrice * productQuantity).toLocaleString(
+                      {(price * quantity).toLocaleString(
                         'pt-BR',
                         {
                           style: 'currency',
@@ -100,21 +109,31 @@ const AdminOrdersDetails = () => {
             className={ styles.orderTotal }
             data-testid="order-total-value"
           >
-            {`Total: ${orderData[0].totalPrice.toLocaleString('pt-BR', {
+            {`Total: ${orderData.totalPrice && Number(orderData.totalPrice).toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}`}
           </h2>
-          {orderData[0].status === 'pending' ? (
+          {orderData.status === 'Pendente' ? (
             <button
               type="button"
               className="buttonMain"
-              onClick={ () => handleStatus() }
+              onClick={ () => handleStatus('Preparando') }
+              data-testid="mark-as-prepared-btn"
+            >
+              Preparar pedido
+            </button>
+          ) : ''}
+          {orderData.status === 'Pendente' ? (
+            <button
+              type="button"
+              className="buttonMain"
+              onClick={ () => handleStatus('Entregue') }
               data-testid="mark-as-delivered-btn"
             >
               Marcar como entregue
             </button>
-          ) : null}
+          ) : ''}
         </section>
       )}
     </div>

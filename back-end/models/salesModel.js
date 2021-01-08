@@ -7,14 +7,27 @@ const salesModel = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      user_id: {
+      userId: {
         type: DataTypes.INTEGER,
         foreignKey: true,
+        field: 'user_id',
       },
-      total_price: DataTypes.DECIMAL(9, 2),
-      delivery_address: DataTypes.STRING,
-      delivery_number: DataTypes.STRING,
-      sale_date: DataTypes.DATE,
+      totalPrice: {
+        type: DataTypes.DECIMAL(9, 2),
+        field: 'total_price',
+      },
+      deliveryAddress: {
+        type: DataTypes.STRING,
+        field: 'delivery_address',
+      },
+      deliveryNumber: {
+        type: DataTypes.STRING,
+        field: 'delivery_number',
+      },
+      saleDate: {
+        type: DataTypes.DATE,
+        field: 'sale_date',
+      },
       status: DataTypes.STRING,
     },
     {

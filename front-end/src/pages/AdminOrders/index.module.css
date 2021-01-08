@@ -79,6 +79,14 @@
   border-radius: 0.2rem;
 }
 
+.preparingOrder {
+  color: black;
+  background-color: rgb(221, 147, 49);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+
 @media only screen and (max-width: 750px) {
   /* .pageContainer {
     margin-top: 48rem;

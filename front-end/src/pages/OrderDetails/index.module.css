@@ -2,15 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: (100vh - 96px);
   flex-direction: column;
-  width: 90vw;
-  margin-left: 15rem;
-  padding: 0 10rem;
+  width: 50vw;
+  margin: 0 auto;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }
-
 .orderDetails {
   width: 100%;
+}
+
+.orderStatus {
+  text-align: center;
+  margin: 0;
 }
 
 .pendingOrder {
@@ -76,4 +81,25 @@
 
 .orderTotal {
   text-align: right;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .pageContainer {
+    width: 90%;
+  }
+
+  .orderItem {
+    flex-direction: column;
+  }
+
+  .orderItemRightContainer {
+    margin-top: 0.8rem;
+    width: 100%;
+    justify-content: center;
+  }
 }
