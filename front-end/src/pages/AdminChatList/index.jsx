@@ -7,16 +7,9 @@ const AdminChatList = () => {
   useEffect(async () => {
     const result = await api.getAllMessages();
     const data = await result.data;
-    console.log(data);
 
     setChat(data);
   }, []);
-
-  /* const getLastDate = (arr) => {
-    const last = arr[arr.length - 1];
-
-    return last.date;
-  }; */
 
   return (
     <div>
