@@ -12,6 +12,7 @@ import AdminProfile from './pages/AdminProfile';
 import AdminOrders from './pages/AdminOrders';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
 import ClientChat from './pages/ClientChat';
+import AdminChat from './pages/AdminChat';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/orders/:id" component={ OrderDetails } />
       <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
       <Route exact path="/chat" component={ ClientChat } />
+      <Route exact path="/admin/chats" component={ AdminChat } />
       <Route path="/" component={ Login } />
     </Switch>
   );
