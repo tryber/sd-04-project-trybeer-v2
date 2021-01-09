@@ -28,7 +28,7 @@ const fetchSaleById = async (req, res) => {
 
     const productsResult = await sales_products.findAll({
       where: { sale_id: id },
-    }, { include: { model: products } });
+    }, { include: { model: sales_products } });
     console.log(productsResult);
 
     // return res.status(200).json({ saleData, products });

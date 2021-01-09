@@ -1,5 +1,5 @@
 // const rescue = require('express-rescue');
-const { Sale, users } = require('../models');
+const { sales, users } = require('../models');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
@@ -7,6 +7,7 @@ const loginUser = async (req, res) => {
     const response = await userService.login(req.body);
     return res.status(200).json(response);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };
@@ -38,9 +39,11 @@ const updateUser = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
   try {
-    const orders = await users.findAll();
+    const orders = await sales.findAll();
+    console.log(orders);
     res.status(200).json(orders);
   } catch (error) {
+    console.log(error.message);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
@@ -48,7 +51,7 @@ const getUserOrders = async (req, res) => {
 const updateStatus = async (req, res) => {
   try {
     // const { id } = req.params;
-    const updatedOrder = await Sale.update();
+    const updatedOrder = await sales.update({});
     // const updatedOrder = await Sale.findByPk(id);
     return res.status(200).json(updatedOrder);
   } catch (error) {

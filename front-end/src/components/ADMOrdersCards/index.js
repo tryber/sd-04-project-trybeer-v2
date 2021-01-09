@@ -14,7 +14,7 @@ const ADMOrdersCards = ({ orders, testid }) => (
     </span>
     <br />
     <span className="bold-text" data-testid={ `${testid}-order-total-value` }>
-      { orders.totalPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+      { orders.total_price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
     </span>
     <button type="button" data-testid={ `${testid}-order-status` }>{ orders.status }</button>
   </div>
