@@ -22,5 +22,6 @@ app.use('/user', router.userRouter);
 app.use('/login', router.loginRouter);
 app.use('/sales', router.salesRouter);
 app.use('/products', router.productsRouter);
+app.use('/chat', router.chatRouter);
 
 module.exports = app;

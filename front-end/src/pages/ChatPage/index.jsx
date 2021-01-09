@@ -18,7 +18,11 @@ const ChatPage = () => {
     setUserId(getLS('userId'));
     setUserRole(getLS('user').role);
 
-    socket.emit(USER_CONNECTED, { userId, username, userRole });
+    console.log(socket);
+
+    socket.emit(USER_CONNECTED, {
+      userId, username, userRole, socketId: socket.id,
+    });
   }, [username, userId, userRole]);
 
   useEffect(() => {
@@ -32,7 +36,9 @@ const ChatPage = () => {
 
     const [input] = e.target;
 
-    socket.emit(MESSAGE_SENT, { message: input.value, username });
+    socket.emit(MESSAGE_SENT, {
+      message: input.value, username, userId, socketId: socket.id,
+    });
   };
 
   return (
