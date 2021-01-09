@@ -13,7 +13,7 @@ const Products = () => {
 
   const addQuantity = (cart) => {
     const cartWithQuantity = [...cart];
-    cartWithQuantity.forEach((item) => item.quantity = 0);
+    cartWithQuantity.forEach((item) => ((item.quantity = 0)));
     return cartWithQuantity;
   };
 

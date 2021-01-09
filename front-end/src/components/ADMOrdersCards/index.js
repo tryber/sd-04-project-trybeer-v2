@@ -27,7 +27,7 @@ ADMOrdersCards.propTypes = {
     deliveryAdress: PropTypes.string,
     deliveryNumber: PropTypes.number,
     status: PropTypes.string,
-    totalPrice: PropTypes.number,
+    total_price: PropTypes.number,
   }).isRequired,
 };
 

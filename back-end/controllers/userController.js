@@ -1,5 +1,5 @@
 // const rescue = require('express-rescue');
-const { sales, users } = require('../models');
+const { sales } = require('../models');
 const { userService } = require('../services');
 
 const loginUser = async (req, res) => {
