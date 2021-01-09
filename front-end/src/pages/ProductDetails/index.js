@@ -4,19 +4,22 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import ProductDetailCard from '../../components/ProductDetailsCard';
 
-import api from '../../services/api';
+// import api from '../../services/api';
 
 import './styles.css';
 
 const ProductDetails = ({ match: { params: { orderNumber } } }) => {
-  const [product, setProduct] = useState('');
-  const [dateFormat, setDateFormat] = useState('');
+  const [product] = useState('');
+  const [dateFormat] = useState('');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
-      const response = await api.get(`/orders/${orderNumber}`);
-      setProduct(response.data);
-      setDateFormat(response.data.date);
+      // const response = await api.get(`/orders/${orderNumber}`);
+      // const { data: { products, saleData } } = await api.get(`/orders/${orderNumber}`);
+      // console.log('products: ', products);
+      // console.log('saleData: ', saleData);
+      // setProduct({ ...saleData, products:  });
+      // setDateFormat(response.data.date);
     };
     fetchProductDetails();
   }, [orderNumber]);

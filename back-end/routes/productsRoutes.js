@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get('/products', productsController.fetchProducts);
 
-router.get('/checkout', productsController.fetchProducts);
+router.get('/checkout', productsController.fetchProducts); //
 
-// router.post('/checkout', productsController.newSale);
+router.post('/checkout', productsController.newSale);
 
-// router.get('/orders', productsController.fetchSales);
+router.get('/orders', productsController.fetchSales);
 
-// router.get('/orders/:id', productsController.fetchSaleById);
+router.get('/orders/:id', productsController.fetchSaleById);
 
 // router.put('/admin/orders/:id', productsController.updateStatus);
 

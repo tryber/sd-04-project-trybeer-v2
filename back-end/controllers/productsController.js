@@ -1,5 +1,5 @@
-const { productsService } = require('../services');
-const { products } = require('../models');
+// const { productsService } = require('../services');
+const { products, sales, sales_products } = require('../models');
 
 const fetchProducts = async (_req, res) => {
   try {
@@ -11,36 +11,57 @@ const fetchProducts = async (_req, res) => {
   }
 };
 
-// const fetchSales = async (_req, res) => {
-//   try {
-//     const response = await productsService.listSales();
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+const fetchSales = async (_req, res) => {
+  try {
+    const response = await sales.findAll();
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-// const fetchSaleById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const saleData = await productsService.getSaleById(id);
-//     const products = await productsService.getSaleProducts(id);
-//     // console.log(products);
+const fetchSaleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    // const saleData = await sales.findByPk(id);
+    // console.log(saleData);
 
-//     return res.status(200).json({ ...saleData, products });
-//   } catch (error) {
-//     return res.json({ error: error.message });
-//   }
-// };
+    const productsResult = await sales_products.findAll({
+      where: { sale_id: id },
+    }, { include: { model: products } });
+    console.log(productsResult);
 
-// const newSale = async (req, res) => {
-//   try {
-//     await productsService.newSale(req.body);
-//     return res.status(200).json({ message: 'Compra realizada com sucesso!' });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+    // return res.status(200).json({ saleData, products });
+  } catch (error) {
+    console.log(error.message);
+    return res.json({ error: error.message });
+  }
+};
+
+const newSale = async (req, res) => {
+  try {
+    const { userId, total, rua, numeroCasa, status, purchasedProducts } = req.body;
+    const { _previousDataValues: { id: saleId } } = await sales.create({
+      user_Id: userId,
+      total_price: total,
+      delivery_address: rua,
+      delivery_number: numeroCasa,
+      sale_date: new Date(),
+      status,
+    });
+    purchasedProducts.forEach(async ({ id, quantity }) => {
+      await sales_products.create({
+        sale_id: saleId,
+        product_id: id,
+        quantity,
+      });
+    });
+    return res.status(200).json({ message: 'Compra realizada com sucesso!' });
+  } catch (error) {
+    console.log('Error de servidor: ', error.message);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 // const updateStatus = async (req, res) => {
 //   try {
@@ -57,8 +78,8 @@ const fetchProducts = async (_req, res) => {
 
 module.exports = {
   fetchProducts,
-  // fetchSales,
-//   fetchSaleById,
-  // newSale,
+  fetchSales,
+  fetchSaleById,
+  newSale,
 //   updateStatus,
 };
