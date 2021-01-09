@@ -5,7 +5,7 @@ const registerSaleService = async (
   totalPrice,
   deliveryAdress,
   deliveryNumber,
-  saleDate
+  saleDate,
 ) => {
   const newSale = await sales.create({
     userId,

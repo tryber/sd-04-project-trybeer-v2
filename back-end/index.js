@@ -12,6 +12,6 @@ app.use(cors());
 app.use(routes);
 app.use('/images', express.static(path.join(__dirname, './public/images')));
 
-const PORT = 3001;
+const PORT = 3002;
 
 app.listen(PORT, () => console.log('listening on port ', PORT));

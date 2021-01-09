@@ -6,7 +6,7 @@ const createSales = (sequelize, DataTypes) => {
       user_id: { type: DataTypes.INTEGER, foreignKey: true },
       delivery_address: DataTypes.STRING,
       delivery_number: DataTypes.STRING,
-      sale_date: DataTypes.DATE,
+      sale_date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
       status: DataTypes.STRING,
     },
     { timestamps: false },

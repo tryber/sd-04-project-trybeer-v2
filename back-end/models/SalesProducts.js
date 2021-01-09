@@ -2,8 +2,6 @@ const CreateSalesProducts = (sequelize, DataTypes) => {
   const SalesProducts = sequelize.define(
     'sales_products',
     {
-      sale_id: DataTypes.INTEGER,
-      product_id: DataTypes.INTEGER,
       quantity: DataTypes.FLOAT,
     },
     {
