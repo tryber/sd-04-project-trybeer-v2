@@ -82,7 +82,15 @@ const getSaleByIdAPI = (id) => api.get(`/sales/${id}`);
 
 const updateSaleStatusAPI = (id, status) => api.put(`/sales/${id}`, { status });
 
-const sendChatMessage = (message) => api.post('/chat', { message });
+const getAllMessages = async () => {
+  try {
+    const result = await api.get('/chat', headers);
+    if (!result) throw Error;
+    return result;
+  } catch (err) {
+    return err.response;
+  }
+};
 
 export default {
   registerUserAPI,
@@ -94,5 +102,5 @@ export default {
   updateUserAPI,
   getSaleByIdAPI,
   updateSaleStatusAPI,
-  sendChatMessage,
+  getAllMessages,
 };
