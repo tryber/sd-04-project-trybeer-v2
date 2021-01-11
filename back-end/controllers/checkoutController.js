@@ -17,7 +17,7 @@ const checkoutController = async (req, res) => {
       total,
       address,
       number,
-      convertedDate
+      convertedDate,
     );
 
     for (let i = 0; i < products.length; i += 1) {
@@ -25,7 +25,7 @@ const checkoutController = async (req, res) => {
         registeredSale,
         //  usar o campo id mesmo
         products[i].id,
-        products[i].quantity
+        products[i].quantity,
       );
     }
 
