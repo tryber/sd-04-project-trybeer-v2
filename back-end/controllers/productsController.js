@@ -1,5 +1,5 @@
 // const { productsService } = require('../services');
-const { products, sales, sales_products } = require('../models');
+const { products, sales, salesProducts } = require('../models');
 
 const fetchProducts = async (_req, res) => {
   try {
@@ -28,8 +28,8 @@ const fetchSaleById = async (req, res) => {
     // }, { include: [{ model: products, as: 'products', through: { attributes: [] } }] });
     const productsResult = await sales.findAll({
       where: { id },
-      include: [{ model: products, as: 'products' }]
-    })
+      include: [{ model: products, as: 'products' }],
+    });
     return res.status(200).json(productsResult);
   } catch (error) {
     return res.json({ error: error.message });
@@ -48,7 +48,7 @@ const newSale = async (req, res) => {
       status,
     });
     purchasedProducts.forEach(async ({ id, quantity }) => {
-      await sales_products.create({
+      await salesProducts.create({
         sale_id: saleId,
         product_id: id,
         quantity,

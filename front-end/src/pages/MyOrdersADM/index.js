@@ -13,7 +13,7 @@ const MyOrdersADM = () => {
   useEffect(() => {
     const getOrders = async () => {
       const response = await api.get('/admin/orders');
-      console.log(response.data);
+      // console.log(response.data);
       setAdminOrders(response.data);
     };
     getOrders();

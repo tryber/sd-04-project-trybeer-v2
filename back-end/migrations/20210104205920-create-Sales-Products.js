@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const SalesProducts = queryInterface.createTable(
-      'sales_products',
+      'salesProducts',
       {
         sale_id: {
           primary_key: true,

@@ -24,8 +24,8 @@ ADMOrdersCards.propTypes = {
   testid: PropTypes.number.isRequired,
   orders: PropTypes.shape({
     id: PropTypes.number,
-    deliveryAdress: PropTypes.string,
-    deliveryNumber: PropTypes.number,
+    delivery_address: PropTypes.string,
+    delivery_number: PropTypes.number,
     status: PropTypes.string,
     total_price: PropTypes.number,
   }).isRequired,

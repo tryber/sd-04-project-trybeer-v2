@@ -17,7 +17,7 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
       const response = await api.put(`/admin/orders/${orderNumber}`);
       setDoneSales(response.data);
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
   };
 
@@ -47,15 +47,15 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
           </div>
           {doneSales.products
             && doneSales.products.map(({
-              orderId, sales_products, name, price,
+              orderId, salesProducts, name, price,
             }, index) => (
               <ProductDetailsCard
                 key={ orderId }
                 testid={ index }
-                quantity={ sales_products.quantity }
+                quantity={ salesProducts.quantity }
                 name={ name }
                 uniPrice={ `(${(price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })})` }
-                total={ (sales_products.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+                total={ (salesProducts.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
               />
             ))}
           <p>
