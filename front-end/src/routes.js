@@ -16,6 +16,7 @@ import Details from './pages/Details';
 import OrdersAdm from './pages/admin/Orders';
 import ProfileAdm from './pages/admin/Profile';
 import test from './pages/test';
+import Chat from './pages/Chat';
 
 const routes = () => (
   <Router>
@@ -23,22 +24,23 @@ const routes = () => (
       <Route exact path="/">
         <Redirect to="/login" />
       </Route>
-      <Route path="/login" component={ Login } />
+      <Route path="/login" component={Login} />
 
-      <Route exact path="/profile/:id" component={ ProfileClient } />
-      <Route exact path="/products" component={ Products } />
+      <Route exact path="/profile/:id" component={ProfileClient} />
+      <Route exact path="/products" component={Products} />
 
-      <Route exact path="/register" component={ Register } />
-      <Route path="/login" component={ Login } />
-      <Route path="/register" component={ Register } />
-      <Route path="/profile" component={ ProfileClient } />
-      <Route path="/checkout" component={ Checkout } />
-      <Route exact path="/orders" component={ OrdersClient } />
-      <Route exact path="/orders/:id" component={ Details } />
-      <Route exact path="/admin/orders" component={ OrdersAdm } />
-      <Route exact path="/admin/profile" component={ ProfileAdm } />
-      <Route exact path="/admin/orders/:id" component={ OrdersAdm } />
-      <Route path="/test" component={ test } />
+      <Route exact path="/register" component={Register} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/profile" component={ProfileClient} />
+      <Route path="/checkout" component={Checkout} />
+      <Route exact path="/orders" component={OrdersClient} />
+      <Route exact path="/orders/:id" component={Details} />
+      <Route exact path="/admin/orders" component={OrdersAdm} />
+      <Route exact path="/admin/profile" component={ProfileAdm} />
+      <Route exact path="/admin/orders/:id" component={OrdersAdm} />
+      <Route exact path="/chat" component={Chat} />
+      <Route path="/test" component={test} />
     </Switch>
   </Router>
 );

@@ -4,6 +4,7 @@ const userService = require('../services/userService');
 const userLogin = rescue(async (req, res) => {
   const { email, password } = req.body;
   const user = await userService.findUserByEmail(email, password);
+  console.log(user);
 
   if (user.err) {
     return res.status(401).json(user.err);
@@ -49,7 +50,7 @@ const registerUserController = async (req, res) => {
       name,
       email,
       password,
-      checkbox,
+      checkbox
     );
     return res.status(201).json(newUser);
   } catch (_err) {

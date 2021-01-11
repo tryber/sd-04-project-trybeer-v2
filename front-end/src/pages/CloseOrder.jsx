@@ -20,7 +20,7 @@ function CloseOrder() {
   useEffect(() => {
     if (localStorage.getItem('cart')) {
       setCart(JSON.parse(localStorage.getItem('cart')));
-      console.log(`eu so log do useffect: total: ${total}`)
+      console.log(`eu so log do useffect: total: ${total}`);
       const loginInStorage = JSON.parse(localStorage.getItem('user'));
       setEmail(loginInStorage.email);
       setTotal(JSON.parse(localStorage.getItem('totalPrice')));
@@ -37,14 +37,6 @@ function CloseOrder() {
   }, [total]);
 
   const postData = async (email, total, address, number, date, products) => {
-    console.log('AQUI JAZ OS DADOS', {
-      email,
-      total,
-      address,
-      number,
-      date,
-      products,
-    });
     await api.post('/checkout', {
       email,
       total,
@@ -89,7 +81,7 @@ function CloseOrder() {
     const cart = JSON.parse(localStorage.getItem('cart'));
     const newCart = [];
     cart.forEach((item) => {
-      const newItem = {...item, address: `${address}, ${number}`};
+      const newItem = { ...item, address: `${address}, ${number}` };
       newCart.push(newItem);
     });
     localStorage.setItem('cart', JSON.stringify(newCart));
@@ -101,7 +93,7 @@ function CloseOrder() {
     const orderDate = new Date();
     setData(orderDate);
     setStore();
-    console.log(`eu sou o log do doneOrder: ${total}`)
+    console.log(`eu sou o log do doneOrder: ${total}`);
     postData(email, total, address, number, orderDate, cart);
     localStorage.removeItem('cart');
     history.push('/products');
@@ -180,7 +172,11 @@ function CloseOrder() {
             })}
           </ul>
           <br />
-          <h4 className="order-total" data-testid="order-total-value" id="itemTotal"></h4>
+          <h4
+            className="order-total"
+            data-testid="order-total-value"
+            id="itemTotal"
+          ></h4>
         </div>
       </div>
 

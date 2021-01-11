@@ -20,7 +20,7 @@ const changeOpen = () => {
 };
 
 const changeUrl = (history, url, clear, isDetails) => {
-  if(isDetails) {
+  if (isDetails) {
     history.replace('/');
   }
   history.push(url);
@@ -35,7 +35,7 @@ const admOnline = (history, title) => {
   return (
     <nav className="admin-side-bar-container">
       <div>
-        <h3 className='title-adm' >{title}</h3>
+        <h3 className="title-adm">{title}</h3>
         <button
           className="nav-btn-adm"
           data-testid="side-menu-item-orders"
@@ -68,7 +68,11 @@ const TopBar = ({ title, isAdm, isDetails }) => {
   return (
     <div>
       <div className="body-top-bar">
-        <button className="menu-btn" onClick={() => changeOpen()} data-testid="top-hamburguer">
+        <button
+          className="menu-btn"
+          onClick={() => changeOpen()}
+          data-testid="top-hamburguer"
+        >
           <div className="menu-btn-burguer" />
         </button>
         <header className="title" data-testid="top-title">
@@ -99,6 +103,10 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               onClick={() => changeUrl(history, 'profile', null, isDetails)}
             >
               Meu Perfil
+            </button>
+            <button className="nav-btn-adm" data-testid="side-menu-chat"
+            onClick={() => changeUrl(history, 'chat')}>
+              Conversar com a loja
             </button>
           </div>
           <button
