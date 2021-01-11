@@ -51,16 +51,16 @@ const AdminDetails = () => {
 
           {products ? products.map(
             ({
-              prodQuan, prodName, prodPrice, price,
+              quantity, name, prodPrice, price,
             }, i) => {
               const unitPrice = `(${price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })})`;
               return (
-                <Box key={ `${price}-${prodName}` }>
+                <Box key={ `${price}-${name}` }>
                   <Text data-testid={ `${i}-product-qtd` }>
                     Quantidade:
-                    {prodQuan}
+                    {quantity}
                   </Text>
-                  <Text data-testid={ `${i}-product-name` }>{prodName}</Text>
+                  <Text data-testid={ `${i}-product-name` }>{name}</Text>
                   <Text data-testid={ `${i}-order-unit-price` }>
                     Preço unitário do produto:
                     {unitPrice}
