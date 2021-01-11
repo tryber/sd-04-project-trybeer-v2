@@ -4,13 +4,14 @@ const salesProductsService = require('../services/salesProductsService');
 
 const checkoutController = async (req, res) => {
   const { total, address, number, date, products } = req.body;
+  const status = 'teste';
   const id = req.user;
   const convertedDate = new Date(date)
     .toISOString()
     .replace('T', ' ')
     .replace('Z', '');
 
-  console.log(req.body);
+  console.log('checkout', req.body);
   try {
     const registeredSale = await saleService.registerSaleService(
       id,
@@ -18,6 +19,7 @@ const checkoutController = async (req, res) => {
       address,
       number,
       convertedDate,
+      status,
     );
 
     for (let i = 0; i < products.length; i += 1) {

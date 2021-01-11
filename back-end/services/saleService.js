@@ -8,11 +8,12 @@ const registerSaleService = async (
   saleDate,
 ) => {
   const newSale = await sales.create({
-    userId,
-    totalPrice,
-    deliveryAdress,
-    deliveryNumber,
-    saleDate,
+    user_id: userId,
+    total_price: totalPrice,
+    delivery_adress: deliveryAdress,
+    delivery_number: deliveryNumber,
+    sale_date: saleDate,
+    statis: 'new',
   });
   return newSale;
 };
