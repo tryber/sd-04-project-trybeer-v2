@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-rescue": "^1.1.26",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"

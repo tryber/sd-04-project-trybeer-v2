@@ -13,6 +13,7 @@ import MyOrdersADM from './pages/MyOrdersADM';
 import PrivateRoute from './PrivateRoute';
 import Checkout from './pages/CheckoutPage';
 import ProductDetailsADM from './pages/ProductDetailsADM';
+import ChatClient from './pages/ChatClient';
 
 const Routes = () => (
   <Provider>
@@ -28,6 +29,7 @@ const Routes = () => (
       <PrivateRoute path="/admin/orders/:orderNumber" exact component={ ProductDetailsADM } />
       <PrivateRoute path="/checkout" exact component={ Checkout } />
       <PrivateRoute path="/admin/profile" exact component={ AdminProfile } />
+      <PrivateRoute path="/chat" exact component={ ChatClient } />
     </Switch>
   </Provider>
 );
