@@ -1,9 +1,18 @@
-const { sales } = require('../../models');
+const { sales, salesProducts, products } = require('../../models');
 
 const getDetailController = async (req, res) => {
   try {
     const { id } = req.params;
-    const prodInfo = await sales.findByPk(id);
+
+    const spInfo = await salesProducts.findAll({ where: { saleId: id } });
+    const teste = spInfo.map((e) => e.dataValues);
+    const prodInfo = await Promise.all(teste.map(async (e) => {
+      const { quantity } = e;
+      const produto = await products.findOne({ where: { id: e.productId } });
+      const { name, price } = produto;
+      const prodPrice = quantity * price;
+      return { quantity, name, price, prodPrice };
+    }));
 
     if (prodInfo) {
       return res.status(200).json(prodInfo);
@@ -17,7 +26,6 @@ const getDetailController = async (req, res) => {
 const postDetailController = async (req, res) => {
   try {
     const { status } = req.body;
-    // console.log('REQ: ', req);
     await sales.update(
       { status },
       { where: { id: req.params.id } },

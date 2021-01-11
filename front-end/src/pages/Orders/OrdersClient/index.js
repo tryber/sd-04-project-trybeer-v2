@@ -29,7 +29,7 @@ const OrdersClient = () => {
   useEffect(() => {
     const user = localStorage.user || null;
     // Pegando os pedidos do banco de dados
-    const { id } = jwtDecode(user);
+    const { id } = jwtDecode(user).dataValues;
     setRole(jwtDecode(user).role);
     getOrders(id)
       .then((response) => {

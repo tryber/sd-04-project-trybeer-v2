@@ -11,12 +11,9 @@ const Product = (sequelize, DataTypes) => {
     },
   }, { timestamps: false });
 
-  // createProduct.associate = (models) => {
-  //   createProduct.hasMany(models.salesProducts, {
-  //     as: 'salesProducts',
-  //     foreignKey: 'productId',
-  //   });
-  // };
+  createProduct.associate = (models) => {
+    createProduct.belongsToMany(models.sales, { as: 'products', foreignKey: 'productId', through: models.salesProducts });
+  };
   return createProduct;
 };
 

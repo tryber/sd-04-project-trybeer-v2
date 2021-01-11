@@ -26,7 +26,10 @@ const ClientDetails = () => {
 
   useEffect(() => {
     getSalesDetails(salesId).then((response) => {
+      console.log('response', response);
+      console.log('response.data.data', response.data);
       setProducts(response.data);
+      console.log('Products', products);
     });
   }, [setProducts, salesId]);
 
@@ -50,21 +53,21 @@ const ClientDetails = () => {
             </Flex>
             <Box>
               Items
-              {products ? (products.map(({ prodQuan, prodName, prodPrice }, i) => (
+              {products ? (products.map(({ quantity, name, price }, i) => (
                 <>
                   <Text data-testid={ `${i}-product-qtd` }>
                     Quantidade:
-                    {prodQuan}
+                    {quantity}
                   </Text>
                   <Text data-testid={ `${i}-product-name` }>
                     Nome do produto
                     {' '}
-                    {prodName}
+                    {name}
                   </Text>
                   <Text data-testid={ `${i}-product-total-value` }>
                     Valor Total:
                     {' '}
-                    {prodPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}
+                    {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}
                   </Text>
                 </>
               )))
