@@ -5,6 +5,7 @@ module.exports = {
       {
         sale_id: {
           primary_key: true,
+          onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
           references: {
             model: 'sales',
@@ -14,6 +15,7 @@ module.exports = {
         },
         product_id: {
           primary_key: true,
+          onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
           references: {
             model: 'products',

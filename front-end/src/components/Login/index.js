@@ -30,13 +30,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await api.post('/login', { email, password });
-    // console.log('Cade o login? ', response);
-    if (response.data.role === 'administrator') {
-      // saveUserData(response.data);
+    // console.log('Cade o login? ', response.data.dataValues);
+    if (response.data.dataValues.role === 'administrator') {
+      // console.log(response.data.role);
       setLocalStorage(response.data);
       history.push('/admin/orders');
     } else {
-      // saveUserData(response.data);
+      // console.log(response.data.role);
       setLocalStorage(response.data);
       history.push('/products');
     }

@@ -23,17 +23,15 @@ const fetchSales = async (_req, res) => {
 const fetchSaleById = async (req, res) => {
   try {
     const { id } = req.params;
-    // const saleData = await sales.findByPk(id);
-    // console.log(saleData);
-
-    const productsResult = await sales_products.findAll({
-      where: { sale_id: id },
-    }, { include: { model: sales_products } });
-    console.log(productsResult);
-
-    // return res.status(200).json({ saleData, products });
+    // const productsResult = await sales.findAll({
+    //   where: { id },
+    // }, { include: [{ model: products, as: 'products', through: { attributes: [] } }] });
+    const productsResult = await sales.findAll({
+      where: { id },
+      include: [{ model: products, as: 'products' }]
+    })
+    return res.status(200).json(productsResult);
   } catch (error) {
-    console.log(error.message);
     return res.json({ error: error.message });
   }
 };

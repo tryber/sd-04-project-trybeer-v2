@@ -40,7 +40,6 @@ const updateUser = async (req, res) => {
 const getUserOrders = async (req, res) => {
   try {
     const orders = await sales.findAll();
-    console.log(orders);
     res.status(200).json(orders);
   } catch (error) {
     console.log(error.message);
