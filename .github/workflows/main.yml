@@ -18,7 +18,7 @@ jobs:
         ports:
           - 3306:3306
           - 33060:33060
-        options: --health-cmd="mysqladmin ping" --health-interval=10 --health-timeout=5s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1.4.4	
