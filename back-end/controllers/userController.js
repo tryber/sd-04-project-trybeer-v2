@@ -63,5 +63,5 @@ module.exports = {
   updateUser,
   registerUser,
   getUserOrders,
-  // updateStatus,
+  updateStatus,
 };
