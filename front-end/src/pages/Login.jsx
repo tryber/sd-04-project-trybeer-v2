@@ -34,8 +34,7 @@ function Login() {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(userData));
         return user.role === 'administrator' ? setAdminUser(true) : setClientUser(true);
-      })
-      .catch((e) => console.log(e));
+      });
   };
 
   return (
