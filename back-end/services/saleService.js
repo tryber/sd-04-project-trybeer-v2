@@ -3,17 +3,18 @@ const { sales } = require('../models');
 const registerSaleService = async (
   userId,
   totalPrice,
-  deliveryAdress,
+  deliveryAddress,
   deliveryNumber,
   saleDate,
+  status,
 ) => {
   const newSale = await sales.create({
     user_id: userId,
     total_price: totalPrice,
-    delivery_adress: deliveryAdress,
+    delivery_address: deliveryAddress,
     delivery_number: deliveryNumber,
     sale_date: saleDate,
-    statis: 'new',
+    status: status,
   });
   return newSale;
 };

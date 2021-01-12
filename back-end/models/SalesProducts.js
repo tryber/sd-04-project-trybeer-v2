@@ -2,7 +2,7 @@ const CreateSalesProducts = (sequelize, DataTypes) => {
   const SalesProducts = sequelize.define(
     'sales_products',
     {
-      quantity: DataTypes.FLOAT,
+      quantity: DataTypes.INTEGER,
     },
     {
       timestamps: false,

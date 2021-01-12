@@ -19,7 +19,7 @@ module.exports = {
       },
       quantity: {
         allowNull: false,
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
       },
     });
 

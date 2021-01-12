@@ -3,9 +3,10 @@ const saleService = require('../services/saleService');
 const salesProductsService = require('../services/salesProductsService');
 
 const checkoutController = async (req, res) => {
-  const { total, address, number, date, products } = req.body;
-  const status = 'teste';
+  const { total, address, number, date, status, products } = req.body;
   const id = req.user;
+
+  console.log(`id: ${id}, total: ${total}, address: ${address} number: ${number}, date: ${date}, products: ${products}`);
   const convertedDate = new Date(date)
     .toISOString()
     .replace('T', ' ')
@@ -32,8 +33,8 @@ const checkoutController = async (req, res) => {
     }
 
     return res.status(201).json({ message: 'Compra realizada com sucesso!' });
-  } catch (_err) {
-    return res.status(401).json({ message: 'BAD REQUEST' });
+  } catch (err) {
+    return res.status(401).json({ message: err });
   }
 };
 
