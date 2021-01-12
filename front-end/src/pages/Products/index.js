@@ -17,7 +17,7 @@ function Products() {
     if (!localStorage.user) history.push('/login');
     if (!localStorage.cartItens) localStorage.cartItens = JSON.stringify([]);
     listProducts().then((response) => {
-      console.log('response', response.data);
+      // ('response', response.data);
       // const { id, name, price, urlImage: url_image } = response.data ;
       const novo = response.data;
       const teste = novo.map((e) => {
@@ -25,7 +25,7 @@ function Products() {
         delete e.url_image
         return e;
         })
-        console.log('novooo', teste);
+        // console.log('novooo', teste);
       setProducts(response.data);
     })
       .catch(() => 'um erro ocorreu');
