@@ -9,7 +9,7 @@ function Register() {
   const [checkbox, setCheckbox] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Conferir URL e metódo.
+  // Conferir URL e metódo
   const redirect = () => {
     if (checkbox) {
       return window.location.replace('http://localhost:3000/admin/orders');
