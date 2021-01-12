@@ -17,6 +17,8 @@ function Register() {
     return window.location.replace('http://localhost:3000/products');
   };
 
+  //  comentario
+
   const register = async (event) => {
     event.preventDefault();
     await api
