@@ -91,7 +91,7 @@ const AdminDetails = () => {
                 data-testid="mark-as-delivered-btn"
                 onClick={ () => {
                   setDetails({ ...details, status: 'Entregue' });
-                  changeStatus(salesId, status);
+                  changeStatus(salesId, 'Entregue');
                 } }
               >
                 Marcar como entregue
@@ -100,7 +100,7 @@ const AdminDetails = () => {
                 data-testid="mark-as-prepared-btn"
                 onClick={ () => {
                   setDetails({ ...details, status: 'Preparando' });
-                  changeStatus(salesId, status);
+                  changeStatus(salesId, 'Preparando');
                 } }
               >
                 Preparar pedido
