@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box, Text,
 } from '@chakra-ui/react';
-import MenuClient from '../../../components/MenuClient'
+import MenuClient from '../../../components/MenuClient';
 
 const ClientChat = () => {
   return (

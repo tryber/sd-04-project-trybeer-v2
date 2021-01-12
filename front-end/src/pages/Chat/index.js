@@ -14,11 +14,11 @@ const Chat = () => {
   if (localStorage.user) {
     if (location.pathname === '/chat') {
       return (
-          <ClientChat />
-        );
-      }
-      return (
-        <AdminChat />
+        <ClientChat />
+      );
+    }
+    return (
+      <AdminChat />
     );
   }
   return <p> Loading...</p>;
