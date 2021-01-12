@@ -60,12 +60,12 @@ const OrderCard = ({ order, userRole }) => {
               { id }
             </Text>
             <Spacer />
-              <Text data-testid={ `${id - 1}-order-date` }>
+            <Text data-testid={ `${id - 1}-order-date` }>
                 {formatDate.split('-')[1]}
                 /
                 {formatDate.split('-')[0]}
               </Text>
-              <>
+            <>
                 <Text data-testid={ `${id - 1}-order-address` }>
                   {`${deliveryAddress}, ${deliveryNumber}`}
                 </Text>

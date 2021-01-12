@@ -19,7 +19,9 @@ const ClientDetails = () => {
   } = useContext(ProductContext);
   const { id: salesId } = useParams();
   const [products, setProducts] = useState([]);
-  const { id, saleDate, totalPrice, status, } = details;
+  const {
+    id, saleDate, totalPrice, status,
+  } = details;
   const sliceOne = 5;
   const sliceTwo = 10;
   const formatDate = saleDate.slice(sliceOne, sliceTwo);
