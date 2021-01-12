@@ -67,11 +67,11 @@ const OrderCard = ({ order, userRole }) => {
             </Text>
             <>
               <Text data-testid={ `${id - 1}-order-address` }>
-                  {`${deliveryAddress}, ${deliveryNumber}`}
-                </Text>
+                {`${deliveryAddress}, ${deliveryNumber}`}
+              </Text>
               <Text data-testid={ `${id - 1}-order-status` }>
-                  {status}
-                </Text>
+                {status}
+              </Text>
             </>
           </Flex>
           <Text
