@@ -12,6 +12,9 @@ const Links = () => (
     <LinkBtn route="/profile" testid="side-menu-item-my-profile">
       Meu Perfil
     </LinkBtn>
+    <LinkBtn route="/chat" testid="side-menu-chat">
+      Conversar com a loja
+    </LinkBtn>
   </>
 );
 
