@@ -24,7 +24,7 @@ function Products() {
         delete e.url_image;
         return e;
       });
-      setProducts(response.data);
+      setProducts(teste);
     })
       .catch(() => 'um erro ocorreu');
   }, [history]);
