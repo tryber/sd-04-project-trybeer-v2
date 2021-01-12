@@ -11,8 +11,11 @@ Talvez fazer uma página (pages) de Chat e ir refatorando conforme os requisitos
 
 CLIENTE
   OK - Criar rota /chat
-  OK - Adicionar ao menu lateral, uma botão de chat denominada 'Conversar com a loja'(data-testid="side-menu-chat"), que leva para a rota /chat
-  - O histórico da conversa deve ser salvo no banco de dados MondoDB e aparecer quando a pessoa abre a página.
+  OK - Adicionar ao menu lateral, uma botão de chat denominada
+  'Conversar com a loja'(data-testid="side-menu-chat"),
+  que leva para a rota /chat
+  - O histórico da conversa deve ser salvo no banco de dados MondoDB
+  e aparecer quando a pessoa abre a página.
   - A maioria das funcionalidades são similares ao projeto webchat.
   DATA-TESTIDs:
     - O elemento com o nickname do cliente deverá conter a tag data-testid="nickname"
@@ -23,7 +26,9 @@ CLIENTE
 
 ADMIN
   OK - A rota da tela deve ser /admin/chats
-  OK - A plataforma deve ter acessível, no menu lateral, uma funcionalidade de chats denominada 'Conversas'(data-testid="side-menu-item-chat"), que leva para a rota /admin/chats
+  OK - A plataforma deve ter acessível, no menu lateral, uma funcionalidade
+  de chats denominada 'Conversas'(data-testid="side-menu-item-chat"),
+  que leva para a rota /admin/chats
   - Mostrar todas as conversas da mais recente para a mais antiga.
   - Ao clicar em uma conversa mostrar a conversa, igual a um chat.
   DATA-TESTIDs:
@@ -55,8 +60,8 @@ const Routes = () => (
           <Products path="/products" />
           <Profile path="/profile" />
           <Register path="/register" />
-          <Chat path='/chat' />
-          <Chat path='/admin/chats' />
+          <Chat path="/chat" />
+          <Chat path="/admin/chats" />
           <Route component={ NotFound } />
         </Switch>
       </ChakraProvider>

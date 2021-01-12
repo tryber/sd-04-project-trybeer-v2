@@ -21,12 +21,13 @@ function Products() {
       // const { id, name, price, urlImage: url_image } = response.data ;
       const novo = response.data;
       const teste = novo.map((e) => {
-        e.urlImage = e.url_image
-        delete e.url_image
+        e.urlImage = e.url_image;
+        delete e.url_image;
         return e;
       });
         // console.log('novooo', teste);
-      setProducts(response.data);
+      // setProducts(response.data);
+      setProducts(teste);
     })
       .catch(() => 'um erro ocorreu');
   }, [history]);

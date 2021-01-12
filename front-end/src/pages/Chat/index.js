@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Flex, Text, Box, Container,
+  Text, Container,
 } from '@chakra-ui/react';
 
 const Chat = () => {
