@@ -3,12 +3,16 @@ const saleService = require('../services/saleService');
 const salesProductsService = require('../services/salesProductsService');
 
 const checkoutController = async (req, res) => {
-  const { total, address, number, date, products } = req.body;
+  const { total, address, number, date, status, products } = req.body;
   const id = req.user;
+
+  console.log(`id: ${id}, total: ${total}, address: ${address} number: ${number}, date: ${date}, products: ${products}`);
   const convertedDate = new Date(date)
     .toISOString()
     .replace('T', ' ')
     .replace('Z', '');
+
+  console.log('checkout', req.body);
   try {
     const registeredSale = await saleService.registerSaleService(
       id,
@@ -16,6 +20,7 @@ const checkoutController = async (req, res) => {
       address,
       number,
       convertedDate,
+      status,
     );
 
     for (let i = 0; i < products.length; i += 1) {
@@ -28,8 +33,8 @@ const checkoutController = async (req, res) => {
     }
 
     return res.status(201).json({ message: 'Compra realizada com sucesso!' });
-  } catch (_err) {
-    return res.status(401).json({ message: 'BAD REQUEST' });
+  } catch (err) {
+    return res.status(401).json({ message: err });
   }
 };
 

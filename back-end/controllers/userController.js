@@ -1,16 +1,24 @@
 const rescue = require('express-rescue');
 const userService = require('../services/userService');
+const { users } = require('../models');
+const { createToken } = require('../middlewares/auth');
 
+// Retorna todos os usuarios - somente para fins de teste
+const getUsers = async (req, res) => {
+  const usuarios = await users.findAll();
+  return res.status(201).json(usuarios);
+};
+
+/* -----------------app começa aqui------------------------------ */
 const userLogin = rescue(async (req, res) => {
   const { email, password } = req.body;
-  const user = await userService.findUserByEmail(email, password);
-  console.log(user);
+  const user = await users.findOne({ where: { email } });
 
-  if (user.err) {
-    return res.status(401).json(user.err);
+  if (!user || user.password !== password) {
+    return res.status(401).json({ message: 'Incorrect username or password' });
   }
 
-  return res.status(200).json(user);
+  return res.status(200).json({ token: createToken(user), user });
 });
 
 const getUserByEmail = async (req, res) => {
@@ -31,7 +39,7 @@ const getUserByEmail = async (req, res) => {
   }
 };
 
-// Controles que Edita o usuário.
+// Controlers que Edita o usuário.
 
 const saveEditController = async (req, res) => {
   const { name, email } = req.body;
@@ -59,6 +67,7 @@ const registerUserController = async (req, res) => {
 };
 
 module.exports = {
+  getUsers,
   userLogin,
   getUserByEmail,
   saveEditController,

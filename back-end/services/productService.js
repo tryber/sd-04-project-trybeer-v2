@@ -1,18 +1,22 @@
-const productModel = require('../models/productModel');
+const { products } = require('../models');
 
 const findAllProductsService = async () => {
-  const allProducts = await productModel.findAllProducts();
+  const allProducts = await products.findAll();
   return allProducts;
 };
 
 const findProductByIdService = async (id) => {
-  const product = productModel.findProductById(id);
+  const product = await products.findByPk(id);
   return product;
 };
 
 const findProductsByNameService = async (name) => {
-  const products = productModel.findProductsByName(name);
-  return products;
+  const productsByName = await products.findAll({
+    where: {
+      name,
+    },
+  });
+  return productsByName;
 };
 
 module.exports = {

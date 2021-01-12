@@ -20,7 +20,7 @@ function CloseOrder() {
   const [address, setAddress] = useState(null);
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null); // teste
 
   const orderRef = useRef(null);
   const hist = useHistory();

@@ -1,25 +1,37 @@
-const saleModel = require('../models/saleModel');
+const { sales } = require('../models');
 
-const registerSaleService = async (userId, totalPrice, deliveryAdress,
-  deliveryNumber, saleDate) => {
-  const newSale = await saleModel.registerSale(userId, totalPrice, deliveryAdress,
-    deliveryNumber, saleDate);
+const registerSaleService = async (
+  userId,
+  totalPrice,
+  deliveryAddress,
+  deliveryNumber,
+  saleDate,
+  status,
+) => {
+  const newSale = await sales.create({
+    user_id: userId,
+    total_price: totalPrice,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+    sale_date: saleDate,
+    status,
+  });
   return newSale;
 };
 
 const findSalesByUserId = async (uid) => {
-  const sales = await saleModel.findAllSalesByUserId(uid);
-  return sales;
+  const salesByUID = await sales.findAll({ where: { user_id: uid } });
+  return salesByUID;
 };
 
 const findAllSalesService = async () => {
-  const allSales = await saleModel.findAllSales();
+  const allSales = await sales.findAll();
   return allSales;
 };
 
 const findSalesBySaleId = async (id) => {
-  const sales = await saleModel.findOrderBySaleId(id);
-  return sales;
+  const salesById = await sales.findByPk(id);
+  return salesById;
 };
 
 module.exports = {

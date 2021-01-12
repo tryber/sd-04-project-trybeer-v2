@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel');
+const { users } = require('../models');
 
 const headers = {
   expiresIn: '30m',
@@ -18,15 +18,14 @@ const validateJWT = async (req, res, next) => {
   if (!token) return res.status(401).json({ message: 'missing auth token' });
   try {
     const decoded = jwt.verify(token, secret);
-    const user = await userModel.findUserByEmail(decoded.data.email);
-
+    const user = await users.findOne({ where: { email: decoded.data.email } });
     if (!user) {
       return res.status(401).json({ message: 'invalid token' });
     }
 
-    const { password, ...userInfo } = user;
+    /* const { password, ...userInfo } = user; */
 
-    req.user = userInfo;
+    req.user = user;
 
     return next();
   } catch (err) {
