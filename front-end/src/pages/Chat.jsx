@@ -1,13 +1,69 @@
-import React from 'react';
-import SideBar from '../components/ClientBar.jsx';
-import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { /* useEffect */} from 'react';
+//  import { useHistory } from 'react-router-dom';
 
-const socket = io('http://localhost:3001');
+//  import io from 'socket.io-client';
+//  import SideBar from '../components/ClientBar.jsx';
 
-const Chat = () => {
-  const history = useHistory();
+//  const socket = io('http://localhost:3001');
+
+const Chat = () => (
+  <div className="container">
+    <div className="bodyAdm">
+      <div className="container">
+        <h3>Usuários conectados</h3>
+        <ul id="listOfNames" />
+      </div>
+
+      <br />
+      <h1>webChat</h1>
+      <div id="chat" />
+      <br />
+      <label htmlFor="userName">
+        Name
+        <input
+          className="form-control"
+          name="nameInput"
+          type="text"
+          data-testid="nickname-box"
+          id="userName"
+        />
+      </label>
+      <br />
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-testid="nickname-save"
+        onClick="saveName()"
+      >
+        Save
+      </button>
+      <br />
+      <br />
+
+      <input
+        type="text"
+        className="form-control form-control-lg"
+        data-testid="message-box"
+        id="messageInput"
+      />
+      <br />
+      <button
+        type="button"
+        className="btn btn-outline-success"
+        id="sendButton"
+        data-testid="send-button"
+        onClick="sendMessage()"
+      >
+        Enviar
+      </button>
+      <hr />
+      <br />
+    </div>
+  </div>
+);
+export default Chat;
+
+/* const history = useHistory();
   const loginInStorage = JSON.parse(localStorage.getItem('user'));
 
   const nameUser = document.getElementById('userName');
@@ -16,7 +72,7 @@ const Chat = () => {
 
   const namesList = [];
 
-  /*   const renderInit = async (data) => {
+    const renderInit = async (data) => {
     data.forEach((item) => {
       let formItem = `${item.date} - ${item.nickname} : ${item.chatMessage}`;
 
@@ -124,58 +180,3 @@ const Chat = () => {
     const nickname = nameUser.value;
 
     socket.emit('message', { chatMessage, nickname }); */
-
-  return (
-    <div className="container">
-      <div className="bodyAdm">
-        <div className="container">
-          <h3>Usuários conectados</h3>
-          <ul id="listOfNames"></ul>
-        </div>
-
-        <br />
-        <h1>webChat</h1>
-        <div id="chat"></div>
-        <br />
-        <label for="nameInput">Name</label>
-        <input
-          className="form-control"
-          name="nameInput"
-          type="text"
-          data-testid="nickname-box"
-          id="userName"
-        />
-        <br />
-        <button
-          className="btn btn-primary"
-          data-testid="nickname-save"
-          onclick="saveName()"
-        >
-          Save
-        </button>
-        <br />
-        <br />
-
-        <input
-          type="text"
-          className="form-control form-control-lg"
-          data-testid="message-box"
-          id="messageInput"
-        />
-        <br />
-        <button
-          className="btn btn-outline-success"
-          id="sendButton"
-          data-testid="send-button"
-          onclick="sendMessage()"
-        >
-          Enviar
-        </button>
-        <hr />
-        <br />
-      </div>
-    </div>
-  );
-};
-
-export default Chat;

@@ -28,7 +28,7 @@ function Details() {
       <TopBar
         data-testid="top-title"
         title="Detalhes do Pedido"
-        isAdm={false}
+        isAdm={ false }
         isDetails
       />
       <div className="container">
@@ -46,12 +46,12 @@ function Details() {
         </div>
         <div>
           {order.map((p, index) => (
-            <div key={`${p}item`}>
+            <div key={ `${p}item` }>
               <div>
                 <div className="products">
-                  <span data-testid={`${index}-product-qtd`}>{p.quantity}</span>
-                  <span data-testid={`${index}-product-name`}>{p.product}</span>
-                  <span data-testid={`${index}-product-total-value`}>
+                  <span data-testid={ `${index}-product-qtd` }>{p.quantity}</span>
+                  <span data-testid={ `${index}-product-name` }>{p.product}</span>
+                  <span data-testid={ `${index}-product-total-value` }>
                     {`R$ ${(p.price * p.quantity)
                       .toFixed(dois)
                       .toString()
@@ -64,7 +64,8 @@ function Details() {
         </div>
         <div className="total">
           <h6 data-testid="order-total-value">
-            Total:{' '}
+            Total:
+            {' '}
             {`R$ ${order[0].totalPrice
               .toFixed(dois)
               .toString()

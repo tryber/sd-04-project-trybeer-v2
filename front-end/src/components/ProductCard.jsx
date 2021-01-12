@@ -7,7 +7,9 @@ import './ProductCard.css';
 const zero = 0;
 const dois = 2;
 
-function ProductCard({ index, id, name, price, urlImage, quantity }) {
+function ProductCard({
+  index, id, name, price, urlImage, quantity,
+}) {
   const [product, setProduct] = useState({
     id,
     name,
@@ -61,29 +63,31 @@ function ProductCard({ index, id, name, price, urlImage, quantity }) {
   return (
     <div className="beer-card">
       <img
-        data-testid={`${index}-product-img`}
+        data-testid={ `${index}-product-img` }
         className="beerImg"
-        src={urlImage}
+        src={ urlImage }
         alt="imagem"
       />
-      <p data-testid={`${index}-product-name`}>{product.name}</p>
-      <span data-testid={`${index}-product-price`}>{`R$ ${product.price
-        .toFixed(dois)
-        .toString()
-        .replace('.', ',')}`}</span>
+      <p data-testid={ `${index}-product-name` }>{product.name}</p>
+      <span data-testid={ `${index}-product-price` }>
+        {`R$ ${product.price
+          .toFixed(dois)
+          .toString()
+          .replace('.', ',')}`}
+      </span>
       <div className="bottom">
         <button
           type="button"
-          data-testid={`${index}-product-minus`}
-          onClick={() => addToCart(product, 'minus')}
+          data-testid={ `${index}-product-minus` }
+          onClick={ () => addToCart(product, 'minus') }
         >
           -
         </button>
-        <span data-testid={`${index}-product-qtd`}>{product.quantity}</span>
+        <span data-testid={ `${index}-product-qtd` }>{product.quantity}</span>
         <button
           type="button"
-          data-testid={`${index}-product-plus`}
-          onClick={() => addToCart(product, 'plus')}
+          data-testid={ `${index}-product-plus` }
+          onClick={ () => addToCart(product, 'plus') }
         >
           +
         </button>

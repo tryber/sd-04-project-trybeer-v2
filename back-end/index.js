@@ -1,13 +1,13 @@
 const express = require('express');
+
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+// const moment = require('moment');
 const routes = require('./routes');
-
-const moment = require('moment');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
