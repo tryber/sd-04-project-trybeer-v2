@@ -115,7 +115,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             <button
               type="button"
               className="nav-btn-adm"
-              data-testid="side-menu-chat"
+              data-testid="side-menu-item-chat"
               onClick={ () => changeUrl(history, 'chat') }
             >
               Conversar com a loja
