@@ -61,18 +61,18 @@ const OrderCard = ({ order, userRole }) => {
             </Text>
             <Spacer />
             <Text data-testid={ `${id - 1}-order-date` }>
-                {formatDate.split('-')[1]}
-                /
-                {formatDate.split('-')[0]}
-              </Text>
+              {formatDate.split('-')[1]}
+              /
+              {formatDate.split('-')[0]}
+            </Text>
             <>
-                <Text data-testid={ `${id - 1}-order-address` }>
+              <Text data-testid={ `${id - 1}-order-address` }>
                   {`${deliveryAddress}, ${deliveryNumber}`}
                 </Text>
-                <Text data-testid={ `${id - 1}-order-status` }>
+              <Text data-testid={ `${id - 1}-order-status` }>
                   {status}
                 </Text>
-              </>
+            </>
           </Flex>
           <Text
             fontWeight="bold"
