@@ -1,14 +1,27 @@
-import React from 'react';
-import {
-  Text, Container,
-} from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import AdminChat from './AdminChat';
+import ClientChat from './ClientChat';
 
 const Chat = () => {
-  return (
-    <Container>
-      <Text>Chat - Conversas com a loja</Text>
-    </Container>
-  );
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!localStorage.user) history.push('/login');
+  }, [history]);
+  if (localStorage.user) {
+    if (location.pathname === '/chat') {
+      return (
+          <ClientChat />
+        );
+      }
+      return (
+        <AdminChat />
+    );
+  }
+  return <p> Loading...</p>;
 };
 
 export default Chat;

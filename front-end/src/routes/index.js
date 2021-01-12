@@ -60,8 +60,8 @@ const Routes = () => (
           <Products path="/products" />
           <Profile path="/profile" />
           <Register path="/register" />
-          <Chat path="/chat" />
-          <Chat path="/admin/chats" />
+          <Chat exact path="/chat" />
+          <Chat exact path="/admin/chats" />
           <Route component={ NotFound } />
         </Switch>
       </ChakraProvider>
