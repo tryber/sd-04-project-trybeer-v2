@@ -1,9 +1,11 @@
-const { sales_products } = require('../models');
+const { salesProducts: sales_products } = require('../models');
 
 const registerSalesProductsService = async (saleId, productId, quantity) => {
+  console.log(
+    `SalesProductsService: - salesId: ${saleId}, productId: ${productId}, quantity: ${quantity}`
+  );
   try {
-    console.log(`SalesProductsService - salesId: ${saleId}, productId: ${productId}, quantity: ${quantity}`);
-    const newRegistered = await sales_products.create({
+    const newRegistered = await salesProducts.create({
       sale_id: saleId,
       product_id: productId,
       quantity,

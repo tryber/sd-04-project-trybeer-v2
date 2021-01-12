@@ -14,7 +14,7 @@ const registerSaleService = async (
     delivery_address: deliveryAddress,
     delivery_number: deliveryNumber,
     sale_date: saleDate,
-    status: status,
+    status,
   });
   return newSale;
 };
