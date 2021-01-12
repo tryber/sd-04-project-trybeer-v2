@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import {
-  Checkout, Login, NotFound, Orders, OrdersDetails, Products, Profile, Register,
+  Chat, Checkout, Login, NotFound, Orders, OrdersDetails, Products, Profile, Register,
 } from '../pages';
 import { ProductProvider } from '../context';
 
@@ -10,7 +10,7 @@ import { ProductProvider } from '../context';
 Talvez fazer uma página (pages) de Chat e ir refatorando conforme os requisitos?
 
 CLIENTE
-  - Criar rota /chat
+  OK - Criar rota /chat
   - Adicionar ao menu lateral, uma botão de chat denominada 'Conversar com a loja'(data-testid="side-menu-chat"), que leva para a rota /chat
   - O histórico da conversa deve ser salvo no banco de dados MondoDB e aparecer quando a pessoa abre a página.
   - A maioria das funcionalidades são similares ao projeto webchat.
@@ -22,7 +22,7 @@ CLIENTE
     - O botão para enviar a mensagem deverá conter a tag data-testid="send-message"
 
 ADMIN
-  - A rota da tela deve ser /admin/chats
+  OK - A rota da tela deve ser /admin/chats
   - A plataforma deve ter acessível, no menu lateral, uma funcionalidade de chats denominada 'Conversas'(data-testid="side-menu-item-chat"), que leva para a rota /admin/chats
   - Mostrar todas as conversas da mais recente para a mais antiga.
   - Ao clicar em uma conversa mostrar a conversa, igual a um chat.
@@ -55,6 +55,8 @@ const Routes = () => (
           <Products path="/products" />
           <Profile path="/profile" />
           <Register path="/register" />
+          <Chat path='/chat' />
+          <Chat path='/admin/chats' />
           <Route component={ NotFound } />
         </Switch>
       </ChakraProvider>
