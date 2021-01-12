@@ -24,7 +24,7 @@ function Products() {
         e.urlImage = e.url_image
         delete e.url_image
         return e;
-        })
+      });
         // console.log('novooo', teste);
       setProducts(response.data);
     })

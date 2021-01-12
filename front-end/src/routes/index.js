@@ -7,6 +7,8 @@ import {
 import { ProductProvider } from '../context';
 
 /*
+Talvez fazer uma página (pages) de Chat e ir refatorando conforme os requisitos?
+
 CLIENTE
   - Criar rota /chat
   - Adicionar ao menu lateral, uma botão de chat denominada 'Conversar com a loja'(data-testid="side-menu-chat"), que leva para a rota /chat
