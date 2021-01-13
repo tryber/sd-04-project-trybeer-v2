@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(routes);
 app.use('/images', express.static(path.join(__dirname, './public/images')));
+app.use(routes);
 
-const PORT = 3002;
+const PORT = 3001;
 
 app.listen(PORT, () => console.log('listening on port ', PORT));

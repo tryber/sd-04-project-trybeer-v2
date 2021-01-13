@@ -65,7 +65,7 @@ function Products() {
             id={product.id}
             name={product.name}
             price={product.price}
-            urlImage={product.urlImage}
+            urlImage={product.url_image}
             quantity={0}
           />
         ))}
