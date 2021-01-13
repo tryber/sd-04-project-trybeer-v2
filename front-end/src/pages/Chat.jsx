@@ -68,6 +68,8 @@ const Chat = () => {
       const bloco = document.createElement('div');
 
       msgLine.setAttribute('data-testid', 'text-message');
+      nick.setAttribute('data-testid', 'nickname');
+      dateLine.setAttribute('data-testid', 'message-time');
       msgLine.setAttribute(
         'class',
         'border border-info border-5 border-end-0 rounded-start',
@@ -116,7 +118,7 @@ const Chat = () => {
           <input
             type="text"
             className="form-control form-control-lg"
-            data-testid="chat-message"
+            data-testid="message-input"
             id="messageInput"
           />
           <br />
@@ -124,7 +126,7 @@ const Chat = () => {
             type="button"
             className="btn btn-outline-success"
             id="sendButton"
-            data-testid="send-message-btn"
+            data-testid="send-message"
             onClick={ () => sendMessage() }
           >
             Enviar
