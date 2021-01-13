@@ -35,6 +35,7 @@ routes.get('/orders', validateJWT, saleController.findSalesByUserIdController);
 routes.get('/orders/:id', validateJWT, saleController.findSalesBySaleId);
 
 routes.post('/checkout', findUserIdByEmail, checkoutController);
+routes.post('/orderStatus', saleController.updateSaleStatus);
 //  routes.post('/checkout', getDataTestController);
 
 module.exports = routes;

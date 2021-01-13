@@ -5,7 +5,7 @@ import './CardAdmOrders.css';
 const changeUrl = (history, url) => history.push(`/admin/orders/${url}`);
 
 const AdmOrders = ({
-  order, address, price, status,
+  order, address, number, price, status,
 }) => {
   const history = useHistory();
   const valueToFixed = 2;
@@ -22,7 +22,7 @@ const AdmOrders = ({
         <h3 data-testid={ `${correctOrder}-order-number` }>
           { `Pedido ${order}` }
         </h3>
-        <p data-testid={ `${correctOrder}-order-address` }>{address}</p>
+        <p data-testid={ `${correctOrder}-order-address` }>{`${address} ${number}`}</p>
       </div>
       <div className="price-container">
         <h4 className="price-text" data-testid={ `${correctOrder}-order-total-value` }>

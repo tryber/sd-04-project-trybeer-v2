@@ -32,8 +32,22 @@ const findSalesBySaleId = async (req, res) => {
   }
 };
 
+const updateSaleStatus = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    console.log(req.body);
+    await saleService.updateSaleStatusService(id, status);
+    const checkUpdated = await saleService.findSalesBySaleId(id);
+    return res.status(200).json(checkUpdated);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'internal error -> cant update status' });
+  }
+};
+
 module.exports = {
   findAllSalesController,
   findSalesBySaleId,
   findSalesByUserIdController,
+  updateSaleStatus,
 };
