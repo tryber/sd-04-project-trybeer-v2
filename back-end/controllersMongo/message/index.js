@@ -5,8 +5,8 @@ const addMessage = async (req, res) => {
     const { nickname, message, chat } = req.body;
     const timestamp = new Date();
     const time = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
-    const newMessage = await messageModel.addMessage({ nickname, time, message, timestamp, chat });
-    return res.status(201).json({ newMessage });
+    const newMessage = await messageModel.addMessage(nickname, time, message, timestamp, chat);
+    return res.status(201).json(newMessage);
   } catch (error) {
     return res.status(500).json({ message: 'Something goes wrong!' });
   }
@@ -15,8 +15,8 @@ const addMessage = async (req, res) => {
 const getMessageByClient = async (req, res) => {
   try {
     const { chat } = req.body;
-    const message = await messageModel.getMessageByClient({ chat });
-    return res.status(201).json({ message });
+    const message = await messageModel.getMessageByClient(chat);
+    return res.status(201).json(message);
   } catch (error) {
     return res.status(500).json({ message: 'Something goes wrong!' });
   }
