@@ -9,7 +9,7 @@ const path = require('path');
 const moment = require('moment');
 const routes = require('./routes');
 
-const chatModel = require('./models/chatModel');
+const chatModel = require('./chatModel/chatModel');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,6 +21,12 @@ app.use(routes);
 io.on('connection', async (socket) => {
   console.log(`O socket ${socket.id}, foi conectado!`);
 
+  socket.on('render', async () => {
+    const history = await chatModel.registeredHistoric();
+    console.log(history);
+    socket.emit('renderInit', history);
+  });
+
   socket.on('message', (mensagem) => {
     console.log(mensagem);
     const time = new Date();
@@ -30,10 +36,6 @@ io.on('connection', async (socket) => {
 
     io.emit('renderMessage', mensagem, timestamp);
   });
-
-  const history = await chatModel.registeredHistoric();
-  console.log(history);
-  socket.emit('renderInit', history);
 
   socket.on('disconnect', () => {
     console.log(`O socket ${socket.id} desconectou :(`);

@@ -24,12 +24,12 @@ const checkoutController = async (req, res) => {
       status,
     );
 
-    console.log('JSON STRINGY', JSON.stringify(products));
+    console.log('JSON STRINGY', products);
     for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
         registeredSale.id,
         //  usar o campo id mesmo
-        products[i].productId,
+        products[i].id,
         products[i].quantity,
       );
     }

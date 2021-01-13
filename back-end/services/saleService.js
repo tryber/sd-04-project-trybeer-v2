@@ -1,4 +1,5 @@
 const { sales } = require('../models');
+const { products } = require('../models');
 
 const registerSaleService = async (
   userId,
@@ -30,7 +31,15 @@ const findAllSalesService = async () => {
 };
 
 const findSalesBySaleId = async (id) => {
-  const salesById = await sales.findByPk(id);
+  const salesById = await sales.findOne({
+    where: { id },
+    include: [
+      {
+        model: products,
+        as: 'products',
+      },
+    ],
+  });
   return salesById;
 };
 

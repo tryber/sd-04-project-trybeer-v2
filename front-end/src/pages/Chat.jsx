@@ -1,5 +1,6 @@
 import React/*  , { useEffect } */ from 'react';
 //  import { useHistory } from 'react-router-dom';
+import TopBar from '../components/ClientBar';
 
 import io from 'socket.io-client';
 //  import SideBar from '../components/ClientBar.jsx';
@@ -19,7 +20,7 @@ const Chat = () => {
       const chat = document.getElementById('chat');
 
       data.forEach((item) => {
-        //  console.log(item.date);
+        console.log('pass');
         const msgLine = document.createElement('p');
 
         const dateLine = document.createElement('p');
@@ -47,16 +48,12 @@ const Chat = () => {
       });
     };
 
+    socket.emit('render');
+
     socket.on('renderInit', async (data) => {
-      //  console.log(data);
+      console.log('do it');
       renderInit(data);
     });
-
-    /* socket.on('renderNames', (name) => {
-      console.log(name);
-      makeListOfName(name);
-    });
-   */
 
     socket.on('goAway', (/* data */) => {
       //  console.log(data);
@@ -109,11 +106,10 @@ const Chat = () => {
     };
 
     return (
-      <div className="container">
-        <h3>Usuários conectados</h3>
-
+      <div>
+        <TopBar title="Chat da loja" isAdm={ false } />
+        <div className="container">
         <br />
-        <h1>Trybeer Chat</h1>
         <div id="chat" className="mb-3" />
         <br />
 
@@ -136,6 +132,7 @@ const Chat = () => {
         <hr />
         <br />
       </div>
+      </div>
     );
   }
 
@@ -143,75 +140,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-/*   socket.on('insertTheName', (name) => {
-  console.log();
-  const itemName = document.createElement('li');
-    itemName.setAttribute('data-testid', 'online-user');
-    itemName.innerHTML = name;
-    listOfNames.appendChild(itemName);
-  });
-  const verifyNameLenght = (name) => {
-    console.log('Lenght', name);
-    if (name.length < 1) {
-      return alert('Digite um nome válido');
-    }
-    {
-      verifyNameExists(name);
-    }
-  };
-  const insertNameOnList = (name) => {
-    console.log('AQUI INSERT NAME', name);
-    // Inserindo o nome no array
-    namesList.push(name);
-    socket.emit('listUsers', name);
-    socket.emit('makeNameTrip', name);
-  };
-  const verifyNameExists = (name) => {
-    let testResult = namesList.filter((item) => {
-      if (item === name) return item;
-    });
-    if (testResult.length > 0) {
-      return alert('Este nome já existe');
-    }
-    {
-      insertNameOnList(name); // Inserindo nome na lista
-    }
-  };
-  const saveName = async () => {
-    const nameUser = document.getElementById('userName');
-    // Função do botão
-    let realName = nameUser.value;
-    await verifyNameLenght(realName);
-  }; */
-
-//  {
-/* <label htmlFor="nameInput">Name</label>
-  <br />
-  <input
-  className="form-control"
-    name="nameInput"
-    type="text"
-    data-testid="nickname-box"
-    id="userName"
-    />
-  <br />
-  <button
-  className="btn btn-primary"
-    data-testid="nickname-save"
-    onClick={() => saveName()}
-    >
-    Save
-    </button>
-    <br />
-    <br /> */
-// }
-
-/*   const makeListOfName = (names) => {
-      names.forEach((item) => {
-        const itemName = document.createElement('li');
-        itemName.setAttribute('data-testid', 'online-user');
-        itemName.innerHTML = item.name;
-        listOfNames.appendChild(itemName);
-      });
-    }; */

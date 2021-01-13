@@ -122,7 +122,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             </button>
             <button
               type="button"
-              className="nav-btn-adm"
+              className="nav-btn"
               data-testid="side-menu-chat"
               onClick={ () => changeUrl(history, 'chat') }
             >
