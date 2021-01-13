@@ -13,6 +13,7 @@ const checkoutController = async (req, res) => {
     .replace('Z', '');
 
   console.log('checkout', req.body);
+  console.log('id:', id);
   try {
     const registeredSale = await saleService.registerSaleService(
       id,
@@ -23,11 +24,12 @@ const checkoutController = async (req, res) => {
       status,
     );
 
+    console.log('JSON STRINGY', JSON.stringify(products));
     for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
-        registeredSale,
+        registeredSale.id,
         //  usar o campo id mesmo
-        products[i].id,
+        products[i].productId,
         products[i].quantity,
       );
     }

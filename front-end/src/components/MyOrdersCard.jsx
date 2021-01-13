@@ -4,13 +4,19 @@ import { Link } from 'react-router-dom';
 import './MyOrdersCard.css';
 
 const dois = 2;
+const cinco = 5;
+const sete = 7;
+const oito = 8;
+const dez = 10;
 
 function MyOrdersCard({
   index, orderId, orderDate, orderPriceSum,
 }) {
+  //  console.log(index);
   //  const redirect = () => window.location.replace(`http://localhost:3000/orders/${orderId}`);
-  const month = Intl.DateTimeFormat('en', { month: '2-digit' }).format(orderDate);
-  const day = Intl.DateTimeFormat('en', { day: '2-digit' }).format(orderDate);
+  const day = orderDate.substring(oito, dez);
+  const month = orderDate.substring(cinco, sete);
+
   return (
     <Link to={ `/orders/${orderId}` } style={ { textDecoration: 'none' } }>
       <div data-testid={ `${index}-order-card-container` } className="order-card">

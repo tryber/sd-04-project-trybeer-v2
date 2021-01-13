@@ -26,8 +26,8 @@ function Orders() {
             key={ order.id }
             index={ index }
             orderId={ order.id }
-            orderDate={ order.saleDate }
-            orderPriceSum={ order.totalPrice }
+            orderDate={ order.sale_date }
+            orderPriceSum={ order.total_price }
           />
         ))}
       </div>
