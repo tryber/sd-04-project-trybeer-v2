@@ -1,0 +1,37 @@
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.productCard {
+  border-radius: 3%;
+  border: black solid 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  padding: 2px 15px;
+}
+
+.quantityContainer {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+}
+
+.quantity {
+  font-size: 2em;
+}
+
+.productButton {
+  appearance: none;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+}
+
+.price {
+  font-size: 1.5em;
+}

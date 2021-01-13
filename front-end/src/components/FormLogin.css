@@ -1,0 +1,23 @@
+.globalContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.formContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px;
+  width: 50vw;
+}
+
+.formContainer label {
+  display: block;
+  margin: 20px;
+}
+
+.formContainer input {
+  display: block;
+}
