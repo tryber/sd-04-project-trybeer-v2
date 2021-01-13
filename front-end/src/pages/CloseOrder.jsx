@@ -52,6 +52,7 @@ function CloseOrder() {
       number,
       date,
       products,
+      status: 'Pendente',
     });
   };
 
