@@ -12,7 +12,7 @@ function Details() {
   useState(() => {
     const token = JSON.parse(localStorage.getItem('token'));
     api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
-      .then(response => setOrder(response.data))
+      .then(response => setOrder([response.data]))
       .catch(() => history.push('/login'));
   }, [params.id]);
 
@@ -23,9 +23,9 @@ function Details() {
       <TopBar data-testid="top-title" title={'Detalhes do Pedido'} isAdm={false} isDetails={true} />
       <div className="container">
         <div className="header">
-          <p data-testid="order-number" className="order-name">Pedido {order[0].saleID}</p>
+          <p data-testid="order-number" className="order-name">Pedido {order[0].id}</p>
           <p data-testid="order-date" className="order-date">
-            {new Date(order[0].saleDate)
+            {new Date(order[0].sale_date)
               .toLocaleDateString('pt-BR').slice(0, 5)}
             {console.log(order)}
           </p>
@@ -47,7 +47,7 @@ function Details() {
         </div>
         <div className="total">
           <h6 data-testid="order-total-value">
-            Total: {`R$ ${order[0].totalPrice.toFixed(2).toString().replace('.', ',')}`}
+            Total: {`R$ ${order[0].total_price.toFixed(2).toString().replace('.', ',')}`}
           </h6>
         </div>
       </div>
