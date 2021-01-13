@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './ClientBar.css';
@@ -17,7 +18,7 @@ const changeOpen = () => {
   menuBtn.classList.remove('open');
   navTrigger.classList.remove('open');
   ctrOpen = false;
-  return null;
+  return true;
 };
 
 const changeUrl = (history, url, clear, isDetails) => {
@@ -30,21 +31,45 @@ const changeUrl = (history, url, clear, isDetails) => {
     localStorage.setItem('user', '');
   }
   ctrOpen = false;
+  return 'ok';
 };
 
 const admOnline = (history, title) => (
   <nav className="admin-side-bar-container">
     <div>
       <h3 className="title-adm">{title}</h3>
-      <button type="button" className="nav-btn-adm" data-testid="side-menu-item-orders" onClick={ () => changeUrl(history, 'orders') }>
-          Pedidos
+      <button
+        type="button"
+        className="nav-btn-adm"
+        data-testid="side-menu-item-orders"
+        onClick={ () => changeUrl(history, 'orders') }
+      >
+        Pedidos
       </button>
-      <button type="button" className="nav-btn-adm" data-testid="side-menu-item-profile" onClick={ () => changeUrl(history, 'profile') }>
-          Perfil
+      <button
+        type="button"
+        className="nav-btn-adm"
+        data-testid="side-menu-item-profile"
+        onClick={ () => changeUrl(history, 'profile') }
+      >
+        Perfil
+      </button>
+      <button
+        type="button"
+        className="nav-btn-adm"
+        data-testid="side-menu-item-chat"
+        onClick={ () => changeUrl(history, 'chat') }
+      >
+        Conversas
       </button>
     </div>
-    <button type="button" className="nav-btn-adm" data-testid="side-menu-item-logout" onClick={ () => changeUrl(history, '', true) }>
-        Sair
+    <button
+      type="button"
+      className="nav-btn-adm"
+      data-testid="side-menu-item-logout"
+      onClick={ () => changeUrl(history, '', true) }
+    >
+      Sair
     </button>
   </nav>
 );
@@ -55,7 +80,12 @@ const TopBar = ({ title, isAdm, isDetails }) => {
   return (
     <div>
       <div className="body-top-bar">
-        <button type="button" className="menu-btn" onClick={ () => changeOpen() } data-testid="top-hamburguer">
+        <button
+          type="button"
+          className="menu-btn"
+          onClick={ () => changeOpen() }
+          data-testid="top-hamburguer"
+        >
           <div className="menu-btn-burguer" />
         </button>
         <header className="title" data-testid="top-title">
@@ -66,23 +96,61 @@ const TopBar = ({ title, isAdm, isDetails }) => {
       <div className="body-nav-bar">
         <nav className="side-menu-container">
           <div>
-            <button type="button" className="nav-btn" data-testid="side-menu-item-products" onClick={ () => changeUrl(history, 'products', null, isDetails) }>
+            <button
+              type="button"
+              className="nav-btn"
+              data-testid="side-menu-item-products"
+              onClick={ () => changeUrl(history, 'products', null, isDetails) }
+            >
               Produtos
             </button>
-            <button type="button" className="nav-btn" data-testid="side-menu-item-my-orders" onClick={ () => changeUrl(history, 'orders', null, isDetails) }>
+            <button
+              type="button"
+              className="nav-btn"
+              data-testid="side-menu-item-my-orders"
+              onClick={ () => changeUrl(history, 'orders', null, isDetails) }
+            >
               Meus Pedidos
             </button>
-            <button type="button" className="nav-btn" data-testid="side-menu-item-my-profile" onClick={ () => changeUrl(history, 'profile', null, isDetails) }>
+            <button
+              type="button"
+              className="nav-btn"
+              data-testid="side-menu-item-my-profile"
+              onClick={ () => changeUrl(history, 'profile', null, isDetails) }
+            >
               Meu Perfil
             </button>
+            <button
+              type="button"
+              className="nav-btn-adm"
+              data-testid="side-menu-chat"
+              onClick={ () => changeUrl(history, 'chat') }
+            >
+              Conversar com a loja
+            </button>
           </div>
-          <button type="button" className="nav-btn" data-testid="side-menu-item-logout" onClick={ () => changeUrl(history, '', true) }>
+          <button
+            type="button"
+            className="nav-btn"
+            data-testid="side-menu-item-logout"
+            onClick={ () => changeUrl(history, '', true) }
+          >
             Sair
           </button>
         </nav>
       </div>
     </div>
   );
+};
+
+TopBar.defaultProps = {
+  isDetails: undefined,
+};
+
+TopBar.propTypes = {
+  isAdm: PropTypes.bool.isRequired,
+  isDetails: PropTypes.bool,
+  title: PropTypes.string.isRequired,
 };
 
 export default TopBar;

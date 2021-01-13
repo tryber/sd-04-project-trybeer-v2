@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import TopBar from '../components/ClientBar.jsx';
+import { useHistory } from 'react-router-dom';
+import TopBar from '../components/ClientBar';
 import api from '../services/api';
 import MyOrdersCard from '../components/MyOrdersCard';
-import { useHistory } from 'react-router-dom';
-
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const history = useHistory(); 
+  const history = useHistory();
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
 
     api
       .get('/orders', { headers: { Authorization: token } })
       .then((response) => setOrders(response.data))
-      .catch((_err) => history.push('/login'));
-      
-
+      .catch(() => history.push('/login'));
   }, []);
-  
+
   if (!orders) return <div>Carregando...</div>;
-  console.log(JSON.stringify(orders));
   return (
   <div>
     <TopBar title={'Meus Pedidos'} isAdm={false} />
@@ -35,8 +31,8 @@ function Orders() {
       />
       ))}
     </div>
-  </div>
   );
-  }
+}
 
 export default Orders;
+

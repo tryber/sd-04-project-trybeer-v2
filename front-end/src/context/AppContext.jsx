@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
 
 const AppContext = createContext();
+const zero = 0;
 
 const list = [
   { product: 'caipirinha', qty: 4, value: 10.0 },
@@ -17,7 +17,7 @@ const AppProvider = ({ children }) => {
   const [userName, setUserName] = useState('');
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(zero);
   const [orderMessage, setOrderMessage] = useState('');
 
   const context = {
@@ -37,10 +37,10 @@ const AppProvider = ({ children }) => {
     setOrderMessage,
   };
 
-  return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={ context }>{children}</AppContext.Provider>;
 };
 
-//Prop-types
+// Prop-types
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,

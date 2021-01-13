@@ -9,12 +9,15 @@ function Cart() {
       <h2>Shopping Cart</h2>
       <p />
       {cart.map((item) => (
-        <p key={ item.id }>
+        <p key={ `item-${item}` }>
           {item.name}
+          {' '}
           -
+          {' '}
           {item.quantity}
-          -
-          R$
+          {' '}
+          - R$
+          {' '}
           {item.price}
         </p>
       ))}
