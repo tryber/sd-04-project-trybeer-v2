@@ -10,6 +10,7 @@ function MyOrdersCard({ index, orderId, orderDate, orderPriceSum }) {
   };
   const day = orderDate.substring(8,10);
   const month = orderDate.substring(5,7);
+  const dois = 2;
 
   return (
     <Link to={ `/orders/${orderId}` } style={ { textDecoration: 'none' } }>
