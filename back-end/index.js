@@ -12,6 +12,7 @@ const { checkout } = require('./controllers/checkout');
 const { userUpdate } = require('./controllers/profile');
 const { getOrderByUserId, getAllSales } = require('./controllers/sale');
 const { getDetailController, postDetailController } = require('./controllers/details');
+const { addMessage, getMessageByClient } = require('./controllersMongo/message');
 
 const app = express();
 const port = 3001;
@@ -39,19 +40,23 @@ app.get('/admin/orders', getAllSales);
 app.get('/admin/orders/:id', getDetailController);
 app.put('/admin/orders/:id', postDetailController);
 
+app.get('/chat', getMessageByClient);
+app.post('/chat', addMessage);
+app.get('/admin/chats', getMessageByClient);
+app.post('/admin/chats', addMessage);
+
 io.on('connection', (socket) => {
   console.log('---- Conectado ----');
-  console.log('BackEnd', socket.id);
+  console.log('BackEnd ', socket.id);
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
+    console.log('---- x ----');
   });
 
   socket.on('message', (msg) => {
     console.log('message: ', msg);
   });
-
-  console.log('---- x ----');
 });
 
 app.listen(port, () => console.log(`app - Listening on port ${port}`));
