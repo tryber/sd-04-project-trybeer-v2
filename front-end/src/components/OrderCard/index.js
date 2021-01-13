@@ -60,22 +60,19 @@ const OrderCard = ({ order, userRole }) => {
               { id }
             </Text>
             <Spacer />
-            {userRole === 'client' ? (
-              <Text data-testid={ `${id - 1}-order-date` }>
-                {formatDate.split('-')[1]}
-                /
-                {formatDate.split('-')[0]}
+            <Text data-testid={ `${id - 1}-order-date` }>
+              {formatDate.split('-')[1]}
+              /
+              {formatDate.split('-')[0]}
+            </Text>
+            <>
+              <Text data-testid={ `${id - 1}-order-address` }>
+                {`${deliveryAddress}, ${deliveryNumber}`}
               </Text>
-            ) : (
-              <>
-                <Text data-testid={ `${id - 1}-order-address` }>
-                  {`${deliveryAddress}, ${deliveryNumber}`}
-                </Text>
-                <Text data-testid={ `${id - 1}-order-status` }>
-                  {status}
-                </Text>
-              </>
-            )}
+              <Text data-testid={ `${id - 1}-order-status` }>
+                {status}
+              </Text>
+            </>
           </Flex>
           <Text
             fontWeight="bold"

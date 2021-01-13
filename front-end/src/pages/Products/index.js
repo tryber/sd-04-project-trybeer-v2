@@ -18,6 +18,7 @@ function Products() {
     if (!localStorage.cartItens) localStorage.cartItens = JSON.stringify([]);
     listProducts().then((response) => {
       // ('response', response.data);
+
       // const { id, name, price, urlImage: url_image } = response.data ;
       const novo = response.data;
       const teste = novo.map((e) => {
@@ -25,7 +26,7 @@ function Products() {
         delete e.url_image;
         return e;
       });
-        // console.log('novooo', teste);
+      // console.log('novooo', teste);
       // setProducts(response.data);
       setProducts(teste);
     })
