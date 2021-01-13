@@ -1,0 +1,45 @@
+ol {
+  counter-reset: index;
+}
+
+ol li:nth-child(2n + 0) {
+  counter-increment: index;
+  list-style: none;
+}
+
+ol li:nth-child(2n + 0):before {
+  content: counter(index) '.';
+}
+
+ol li:nth-child(2n + 0):before {
+  content: '';
+}
+
+.list-group-item.list-group-item-action.list-group-item-primary {
+  background-color: yellowgreen;
+  margin-top: 5px;
+}
+
+.price {
+  margin-right: 30px;
+}
+
+.btn.btn-danger {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.container {
+  color: white;
+}
+
+.container.end {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.order-total {
+  text-align: right;
+}
