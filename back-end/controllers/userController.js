@@ -50,7 +50,7 @@ const registerUserController = async (req, res) => {
       name,
       email,
       password,
-      checkbox
+      checkbox,
     );
     return res.status(201).json(newUser);
   } catch (_err) {

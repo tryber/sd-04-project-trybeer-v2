@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 import TopBar from '../components/ClientBar';
 import { AppContext } from '../context/AppContext';
 import api from '../services/api';
@@ -9,7 +11,9 @@ const zero = 0;
 const dois = 2;
 
 function CloseOrder() {
-  const { cart, setCart, total, setTotal } = useContext(AppContext);
+  const {
+    cart, setCart, total, setTotal,
+  } = useContext(AppContext);
   const { orderMessage, setOrderMessage } = useContext(AppContext);
 
   const [message, setMessage] = useState('');
@@ -42,7 +46,7 @@ function CloseOrder() {
     postAddress,
     postNumber,
     postDate,
-    postProducts
+    postProducts,
   ) => {
     await api.post('/checkout', {
       postEmail,
@@ -110,37 +114,37 @@ function CloseOrder() {
 
   return (
     <div>
-      <TopBar title="Finalizar Pedido" isAdm={false} />
+      <TopBar title="Finalizar Pedido" isAdm={ false } />
       <div className="container">
         <div className="col-lg-15">
           <h1>Produtos</h1>
           <h3>{message}</h3>
           <p id="orderMessage">{orderMessage}</p>
-          <ul ref={orderRef} id="list" className="list-group">
+          <ul ref={ orderRef } id="list" className="list-group">
             {cart.map(({ name, quantity, price }, index) => (
               <li
                 name="itemList"
-                id={name}
-                key={name}
+                id={ name }
+                key={ name }
                 className="list-group-item list-group-item-action list-group-item-primary"
-                index={index}
+                index={ index }
               >
                 <div className="">
                   <div className="row">
                     <div
-                      data-testid={`${index}-product-qtd-input`}
+                      data-testid={ `${index}-product-qtd-input` }
                       className="col"
                     >
                       {quantity}
                     </div>
                     <div
-                      data-testid={`${index}-product-name`}
+                      data-testid={ `${index}-product-name` }
                       className="col-6"
                     >
                       {name}
                     </div>
                     <div
-                      data-testid={`${index}-product-unit-price`}
+                      data-testid={ `${index}-product-unit-price` }
                       className="price"
                     >
                       {`(R$ ${price
@@ -149,7 +153,7 @@ function CloseOrder() {
                         .replace('.', ',')} un)`}
                     </div>
                     <div
-                      data-testid={`${index}-product-total-value`}
+                      data-testid={ `${index}-product-total-value` }
                       className="price"
                     >
                       {`R$ ${(price * quantity)
@@ -158,18 +162,18 @@ function CloseOrder() {
                         .replace('.', ',')}`}
                     </div>
 
-                    <input type="hidden" name="total" value={total} />
-                    <input type="hidden" name="products" value={cart} />
-                    <input type="hidden" name="date" value={data} />
+                    <input type="hidden" name="total" value={ total } />
+                    <input type="hidden" name="products" value={ cart } />
+                    <input type="hidden" name="date" value={ data } />
 
                     <button
                       type="button"
-                      onClick={() => removeItemFromArray(name)}
+                      onClick={ () => removeItemFromArray(name) }
                       className="col"
                     >
                       <button
                         type="button"
-                        data-testid={`${index}-removal-button`}
+                        data-testid={ `${index}-removal-button` }
                         className="btn btn-danger"
                       >
                         X
@@ -200,7 +204,7 @@ function CloseOrder() {
             <label htmlFor="inputEnd">
               Rua:
               <input
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={ (e) => setAddress(e.target.value) }
                 id="inputEnd"
                 name="adrress"
                 data-testid="checkout-street-input"
@@ -214,7 +218,7 @@ function CloseOrder() {
               <input
                 name="number"
                 id="number"
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={ (e) => setNumber(e.target.value) }
                 data-testid="checkout-house-number-input"
                 type="text"
                 className="form-control col-6"
@@ -228,10 +232,8 @@ function CloseOrder() {
             id="inputNum"
             data-testid="checkout-finish-btn"
             className="btn btn-outline-success"
-            disabled={!address || !number || !cart.length > zero}
-            onClick={() =>
-              doneOrder('Compra realizada com sucesso!', setOrderMessage)
-            }
+            disabled={ !address || !number || !cart.length > zero }
+            onClick={ () => doneOrder('Compra realizada com sucesso!', setOrderMessage) }
           >
             Finalizar compra
           </button>

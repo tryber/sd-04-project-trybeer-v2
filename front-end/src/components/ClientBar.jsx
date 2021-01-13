@@ -42,7 +42,7 @@ const admOnline = (history, title) => (
         type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-orders"
-        onClick={() => changeUrl(history, 'orders')}
+        onClick={ () => changeUrl(history, 'orders') }
       >
         Pedidos
       </button>
@@ -50,7 +50,7 @@ const admOnline = (history, title) => (
         type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-profile"
-        onClick={() => changeUrl(history, 'profile')}
+        onClick={ () => changeUrl(history, 'profile') }
       >
         Perfil
       </button>
@@ -59,7 +59,7 @@ const admOnline = (history, title) => (
       type="button"
       className="nav-btn-adm"
       data-testid="side-menu-item-logout"
-      onClick={() => changeUrl(history, '', true)}
+      onClick={ () => changeUrl(history, '', true) }
     >
       Sair
     </button>
@@ -75,7 +75,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
         <button
           type="button"
           className="menu-btn"
-          onClick={() => changeOpen()}
+          onClick={ () => changeOpen() }
           data-testid="top-hamburguer"
         >
           <div className="menu-btn-burguer" />
@@ -92,7 +92,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               type="button"
               className="nav-btn"
               data-testid="side-menu-item-products"
-              onClick={() => changeUrl(history, 'products', null, isDetails)}
+              onClick={ () => changeUrl(history, 'products', null, isDetails) }
             >
               Produtos
             </button>
@@ -100,7 +100,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               type="button"
               className="nav-btn"
               data-testid="side-menu-item-my-orders"
-              onClick={() => changeUrl(history, 'orders', null, isDetails)}
+              onClick={ () => changeUrl(history, 'orders', null, isDetails) }
             >
               Meus Pedidos
             </button>
@@ -108,14 +108,14 @@ const TopBar = ({ title, isAdm, isDetails }) => {
               type="button"
               className="nav-btn"
               data-testid="side-menu-item-my-profile"
-              onClick={() => changeUrl(history, 'profile', null, isDetails)}
+              onClick={ () => changeUrl(history, 'profile', null, isDetails) }
             >
               Meu Perfil
             </button>
             <button
               className="nav-btn-adm"
               data-testid="side-menu-chat"
-              onClick={() => changeUrl(history, 'chat')}
+              onClick={ () => changeUrl(history, 'chat') }
             >
               Conversar com a loja
             </button>
@@ -124,7 +124,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             type="button"
             className="nav-btn"
             data-testid="side-menu-item-logout"
-            onClick={() => changeUrl(history, '', true)}
+            onClick={ () => changeUrl(history, '', true) }
           >
             Sair
           </button>
