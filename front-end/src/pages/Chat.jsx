@@ -1,8 +1,8 @@
 import React/*  , { useEffect } */ from 'react';
 //  import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
 import TopBar from '../components/ClientBar';
 
-import io from 'socket.io-client';
 //  import SideBar from '../components/ClientBar.jsx';
 
 const socket = io('http://localhost:3001');
@@ -20,7 +20,7 @@ const Chat = () => {
       const chat = document.getElementById('chat');
 
       data.forEach((item) => {
-        console.log('pass');
+        //  console.log('pass');
         const msgLine = document.createElement('p');
 
         const dateLine = document.createElement('p');
@@ -51,7 +51,7 @@ const Chat = () => {
     socket.emit('render');
 
     socket.on('renderInit', async (data) => {
-      console.log('do it');
+      //  console.log('do it');
       renderInit(data);
     });
 
@@ -109,29 +109,29 @@ const Chat = () => {
       <div>
         <TopBar title="Chat da loja" isAdm={ false } />
         <div className="container">
-        <br />
-        <div id="chat" className="mb-3" />
-        <br />
+          <br />
+          <div id="chat" className="mb-3" />
+          <br />
 
-        <input
-          type="text"
-          className="form-control form-control-lg"
-          data-testid="chat-message"
-          id="messageInput"
-        />
-        <br />
-        <button
-          type="button"
-          className="btn btn-outline-success"
-          id="sendButton"
-          data-testid="send-message-btn"
-          onClick={ () => sendMessage() }
-        >
-          Enviar
-        </button>
-        <hr />
-        <br />
-      </div>
+          <input
+            type="text"
+            className="form-control form-control-lg"
+            data-testid="chat-message"
+            id="messageInput"
+          />
+          <br />
+          <button
+            type="button"
+            className="btn btn-outline-success"
+            id="sendButton"
+            data-testid="send-message-btn"
+            onClick={ () => sendMessage() }
+          >
+            Enviar
+          </button>
+          <hr />
+          <br />
+        </div>
       </div>
     );
   }
