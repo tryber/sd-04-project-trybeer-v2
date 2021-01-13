@@ -1,0 +1,27 @@
+.headerContainer {
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+}
+
+.headTitleContainer {
+  display: flex;
+  flex-grow: 4;
+  justify-content: center;
+}
+
+.sidebarwrapper {
+  display: flex;
+  position: fixed;
+  width: 480px;
+}
+.sidebar {
+  height: 100%;
+  width: 20%;
+  float: left;
+}
+
+.maincomponent {
+  padding: 5px;
+}
