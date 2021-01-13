@@ -54,6 +54,14 @@ const admOnline = (history, title) => (
       >
         Perfil
       </button>
+      <button
+        type="button"
+        className="nav-btn-adm"
+        data-testid="side-menu-item-chat"
+        onClick={ () => changeUrl(history, 'chat') }
+      >
+        Conversas
+      </button>
     </div>
     <button
       type="button"
@@ -115,7 +123,7 @@ const TopBar = ({ title, isAdm, isDetails }) => {
             <button
               type="button"
               className="nav-btn-adm"
-              data-testid="side-menu-item-chat"
+              data-testid="side-menu-chat"
               onClick={ () => changeUrl(history, 'chat') }
             >
               Conversar com a loja
