@@ -61,9 +61,33 @@ export const changeStatus = async (id, status) => axios
   .put(`${url}/admin/orders/${id}`, { status })
   .catch(({ response }) => response);
 
+// Integração com o banco de dados do chat
+export const addMessageClient = async (nickname, message, chat) => axios
+  .post(`${url}/chat`, { nickname, message, chat })
+  .catch(({ response }) => response);
+
+export const addMessageAdmin = async (nickname, message, chat) => axios
+  .post(`${url}/admin/chats`, { nickname, message, chat })
+  .catch(({ response }) => response);
+
+export const getMessageByClient = async (chat) => axios
+  .get(`${url}/chat`, { chat })
+  .catch(({ response }) => response);
+
+export const getMessageByAdmin = async (chat) => axios
+  .get(`${url}/admin/chats`, { chat })
+  .catch(({ response }) => response);
+
 // socketIoClient
 export const clientConnect = () => {
   const socket = socketIoClient(ENDPOINT);
   socket.emit('message', 'Oiii!');
-  return console.log('CLient-Id: ', socket);
+  const { id } = socket;
+  console.log('CLient-Id: ', socket);
+  console.log('socket-Id: ', id);
+};
+
+export const clientDesconnect = () => {
+  const socket = socketIoClient(ENDPOINT);
+  socket.disconnect();
 };
