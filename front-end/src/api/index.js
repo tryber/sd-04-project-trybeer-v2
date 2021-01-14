@@ -1,7 +1,7 @@
 import axios from 'axios';
 import socketIoClient from 'socket.io-client';
-const ENDPOINT = "http://127.0.0.1:3002";
 
+const ENDPOINT = 'http://127.0.0.1:3002';
 const url = 'http://localhost:3001';
 // const mockURL = 'https://my-json-server.typicode.com/pedrotpo/trybeer-mockapi/users';
 
@@ -88,11 +88,28 @@ export const clientConnect = () => {
   return socket;
 };
 
+export const clientDesconnect = (socket) => {
+  socket.disconnect();
+};
+
 export const clientSendMessage = (socket, msgData) => {
   socket.emit('message', msgData);
 };
 
-export const clientDesconnect = () => {
-  const socket = socketIoClient(ENDPOINT);
-  socket.disconnect();
+// histórico das mensagens
+export const previousMessages = (socket, chat) => {
+  socket.emit('previousMessages', chat);
+  let historyMsg;
+  socket.on('historyMessages', (previousMsg) => {
+    return historyMsg = previousMsg;
+  });
+  return historyMsg;
+};
+
+export const history = (socket) => {
+  let historyMsg;
+  socket.on('historyMessages', (previousMsg) => {
+    return historyMsg = previousMsg;
+  });
+  return historyMsg;
 };

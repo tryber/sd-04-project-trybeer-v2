@@ -24,6 +24,15 @@ const addMessagetest = async (msgData) => {
     return { message: 'Something goes wrong!' };
   }
 };
+const getMessageByClientTest = async (chat) => {
+  try {
+    const message = await messageModel.getMessageByClient(chat);
+    // console.log('newmessageeeee', message);
+    return message;
+  } catch (error) {
+    return { message: 'Something goes wrong!' };
+  }
+};
 
 const getMessageByClient = async (req, res) => {
   try {
@@ -37,4 +46,4 @@ const getMessageByClient = async (req, res) => {
   }
 };
 
-module.exports = { addMessage, addMessagetest, getMessageByClient };
+module.exports = { addMessage, addMessagetest, getMessageByClient, getMessageByClientTest };
