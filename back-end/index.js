@@ -12,7 +12,7 @@ const { checkout } = require('./controllers/checkout');
 const { userUpdate } = require('./controllers/profile');
 const { getOrderByUserId, getAllSales } = require('./controllers/sale');
 const { getDetailController, postDetailController } = require('./controllers/details');
-const { addMessage, getMessageByClient } = require('./controllersMongo/message');
+const { addMessage, getMessageByClient, addMessagetest } = require('./controllersMongo/message');
 
 const app = express();
 const port = 3001;
@@ -54,8 +54,11 @@ io.on('connection', (socket) => {
     console.log('---- x ----');
   });
 
-  socket.on('message', (msg) => {
-    console.log('message: ', msg);
+  // chamada do controller p/ add msg dentro do socket
+  socket.on('message', async (msg) => {
+    const addmsg = await addMessagetest(msg);
+    // console.log('esqueci de identificar', addmsg);
+    console.log('message: ', addmsg);
   });
 });
 
