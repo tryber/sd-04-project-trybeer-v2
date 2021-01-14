@@ -10,6 +10,7 @@ const ClientChat = () => {
   const [user, setUser] = useState({});
   const [socket, setSocket] = useState('');
   const [historyMessages, setHistoryMessages] = useState([]);
+  const counter = 0;
 
   function createMessageData(event) {
     const message = event.target.elements.messageInput.value;
@@ -27,8 +28,7 @@ const ClientChat = () => {
     event.target.elements.messageInput.value = '';
     // depois de enviar a msg o cursor fica no imput
     event.target.elements.messageInput.focus();
-    const historyMsg = previousMessages(socket, chat);
-    setHistoryMessages(historyMsg);
+    counter ++
   }
 
   useEffect(() => {
@@ -36,11 +36,15 @@ const ClientChat = () => {
     const { id, email } = jwtDecode(user).dataValues;
     setUser({ id, email });
     setSocket(clientConnect());
-    const previousMessages = await getMessageByClient(`1-${id}`);
-    console.log('previousMessages', previousMessages);
-    setHistoryMessages(previousMessages);
-    console.log('historymessage', historyMessages);
+    const historyMsg = previousMessages(socket, `1-${user.id}`);
+    setHistoryMessages(historyMsg);
+    
   }, []);
+
+  useEffect(() => {
+    const historyMsg = previousMessages(socket, `1-${user.id}`);
+    setHistoryMessages(historyMsg);
+  },[counter])
 
   /*
   Req. 6 e 9
