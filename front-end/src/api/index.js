@@ -85,6 +85,11 @@ export const clientConnect = () => {
   const { id } = socket;
   console.log('CLient-Id: ', socket);
   console.log('socket-Id: ', id);
+  return socket;
+};
+
+export const clientSendMessage = (socket, msgData) => {
+  socket.emit('message', msgData);
 };
 
 export const clientDesconnect = () => {
