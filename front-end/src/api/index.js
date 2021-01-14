@@ -97,16 +97,15 @@ export const clientSendMessage = (socket, msgData) => {
 };
 
 // histórico das mensagens
-export const previousMessages = (socket, chat) => {
+export const previousMessages = (chat) => {
+  const socket = socketIoClient(ENDPOINT);
+  socket.connect();
   socket.emit('previousMessages', chat);
-  let historyMsg;
-  socket.on('historyMessages', (previousMsg) => {
-    return historyMsg = previousMsg;
-  });
-  return historyMsg;
 };
 
-export const history = (socket) => {
+export const history = () => {
+  const socket = socketIoClient(ENDPOINT);
+  socket.connect();
   let historyMsg;
   socket.on('historyMessages', (previousMsg) => {
     return historyMsg = previousMsg;
