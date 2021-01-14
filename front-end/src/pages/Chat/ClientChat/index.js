@@ -3,11 +3,12 @@ import {
   Box, Text, Container, Button, Input
 } from '@chakra-ui/react';
 import MenuClient from '../../../components/MenuClient';
-import { addMessageClient, getMessageByClient, clientConnect } from '../../../api';
+import { addMessageClient, getMessageByClient, clientConnect, clientSendMessage } from '../../../api';
 import jwtDecode from 'jwt-decode';
 
 const ClientChat = () => {
   const [user, setUser] = useState({});
+  const [socket, setSocket] = useState('');
   const [historyMessages, setHistoryMessages] = useState([]);
 
   async function handleSubmit (event) {
@@ -15,9 +16,12 @@ const ClientChat = () => {
     const message = event.target.elements.messageInput.value;
     const nickname = user.email;
     const chat = `1-${user.id}`;
-    const newMessage = await addMessageClient(nickname, message, chat);
-    console.log('Event.target: ', event.target);
-    console.log(newMessage);
+    const msgData = { nickname, message, chat };
+    clientSendMessage(socket, msgData);
+    // const newMessage = await addMessageClient(nickname, message, chat);
+    // console.log('Event.target: ', event.target);
+    // console.log(newMessage);
+
   }
 
   useEffect( async () => {
@@ -26,7 +30,7 @@ const ClientChat = () => {
     setUser({ id, email });
     const previousMessages = await getMessageByClient(`1-${id}`);
     setHistoryMessages(previousMessages);
-    clientConnect();
+    setSocket(clientConnect());
   }, []);
 
   /*
