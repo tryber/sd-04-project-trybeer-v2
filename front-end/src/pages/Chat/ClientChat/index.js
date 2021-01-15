@@ -21,20 +21,32 @@ const ClientChat = () => {
     // const newMessage = await addMessageClient(nickname, message, chat);
     // console.log('Event.target: ', event.target);
     // console.log(newMessage);
-    const historyMsg = previousMessages(socket, chat);
-    setHistoryMessages(historyMsg);
-    console.log('historyMsg: ', historyMsg);
+    // previousMessages(socket, chat);
+    // let historyMsg;
+    // socket.on('historyMessages', (previousMsg) => {
+    //   historyMsg = previousMsg;
+    // });
+    // setHistoryMessages(historyMsg);
+    // console.log('historyMsg: ', historyMsg);
   }
 
   useEffect(() => {
     const user = localStorage.user || null;
     const { id, email } = jwtDecode(user).dataValues;
     setUser({ id, email });
-    // const chat = `1-${id}`
+    const chat = `1-${id}`
     // const previousMessages = await getMessageByClient(`1-${id}`);
     // setHistoryMessages(previousMessages);
     // console.log('Previous Messages: ', previousMessages);
     setSocket(clientConnect());
+
+    // previousMessages(socket, chat);
+    // let historyMsg;
+    // socket.on('historyMessages', (previousMsg) => {
+    //   historyMsg = previousMsg;
+    // });
+    // setHistoryMessages(historyMsg);
+    // console.log('historyMsg: ', historyMsg);
   }, []);
 
   /*
