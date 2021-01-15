@@ -4,50 +4,49 @@ import {
 } from '@chakra-ui/react';
 import jwtDecode from 'jwt-decode';
 import MenuClient from '../../../components/MenuClient';
-import { addMessageClient, getMessageByClient, clientConnect, clientSendMessage, previousMessages } from '../../../api';
+import { history, clientConnect, clientSendMessage, previousMessages } from '../../../api';
 
 const ClientChat = () => {
   const [user, setUser] = useState({});
   const [socket, setSocket] = useState('');
   const [historyMessages, setHistoryMessages] = useState([]);
+  const [counter, setCounter] = useState(0);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  function createMessageData(event) {
     const message = event.target.elements.messageInput.value;
     const nickname = user.email;
     const chat = `1-${user.id}`;
     const msgData = { nickname, message, chat };
-    clientSendMessage(socket, msgData);
-    // const newMessage = await addMessageClient(nickname, message, chat);
-    // console.log('Event.target: ', event.target);
-    // console.log(newMessage);
-    // previousMessages(socket, chat);
-    // let historyMsg;
-    // socket.on('historyMessages', (previousMsg) => {
-    //   historyMsg = previousMsg;
-    // });
-    // setHistoryMessages(historyMsg);
+    return msgData;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    clientSendMessage(socket, createMessageData(event));
     // console.log('historyMsg: ', historyMsg);
+    // apaga campo do imput
+    event.target.elements.messageInput.value = '';
+    // depois de enviar a msg o cursor fica no imput
+    event.target.elements.messageInput.focus();
+    setCounter(counter + 1);
   }
 
   useEffect(() => {
     const user = localStorage.user || null;
     const { id, email } = jwtDecode(user).dataValues;
     setUser({ id, email });
-    const chat = `1-${id}`
-    // const previousMessages = await getMessageByClient(`1-${id}`);
-    // setHistoryMessages(previousMessages);
-    // console.log('Previous Messages: ', previousMessages);
     setSocket(clientConnect());
-
-    // previousMessages(socket, chat);
-    // let historyMsg;
-    // socket.on('historyMessages', (previousMsg) => {
-    //   historyMsg = previousMsg;
-    // });
-    // setHistoryMessages(historyMsg);
-    // console.log('historyMsg: ', historyMsg);
+    previousMessages(`1-${user.id}`);
+    const historyMsg = history();
+    console.log('history', historyMsg);
+    setHistoryMessages(historyMsg);
+    
   }, []);
+
+  useEffect(() => {
+    const historyMsg = previousMessages(socket, `1-${user.id}`);
+    setHistoryMessages(historyMsg);
+  },[counter])
 
   /*
   Req. 6 e 9
@@ -69,11 +68,18 @@ const ClientChat = () => {
         <Container>
           Container para as mensagens
           {/* A box abaixo contem a estrutura da mensagem, transformar em componente */}
-          <Box>
+          {/* {historyMessages ? historyMessages.map((message) => {
+            return (<Box>
+            <Text data-testid="nickname">{ message.nickname }</Text>
+            <Text data-testid="message-time">{ message.time }</Text>
+            <Text data-testid="text-message">{ message.message }</Text>
+          </Box> )
+          }) : <Text> Sem conversas com essa loja </Text>} */}
+          {/* <Box>
             <Text data-testid="nickname"></Text>
             <Text data-testid="message-time"></Text>
             <Text data-testid="text-message"></Text>
-          </Box>
+          </Box> */}
         </Container>
         <form
           action="chat.html"
