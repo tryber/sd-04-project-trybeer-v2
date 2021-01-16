@@ -25,7 +25,7 @@ const ClientProfile = () => {
   const [intialName, setInitialName] = useState(userName);
 
   useEffect(() => {
-    const { name, userEmail: email } = JSON.parse(localStorage.getItem('user'));
+    const { dataValues: { name, email } } = JSON.parse(localStorage.getItem('user'));
     setUserName(name);
     setInitialName(name);
     setUserEmail(email);

@@ -8,7 +8,7 @@ const AdminProfile = () => {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    const { name, userEmail: email } = JSON.parse(localStorage.getItem('user'));
+    const { dataValues: { name, email } } = JSON.parse(localStorage.getItem('user'));
     setUserName(name);
     setUserEmail(email);
   }, []);

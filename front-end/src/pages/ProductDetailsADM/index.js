@@ -25,7 +25,7 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/admin/orders/${orderNumber}`);
       setStatus(true);
-      setDoneSales(response.data);
+      setDoneSales(response.data[0]);
     };
     fetchProductDetails();
   }, [orderNumber]);
@@ -47,21 +47,21 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
           </div>
           {doneSales.products
             && doneSales.products.map(({
-              orderId, quantity, name, price,
+              orderId, salesProducts, name, price,
             }, index) => (
               <ProductDetailsCard
                 key={ orderId }
                 testid={ index }
-                quantity={ quantity }
+                quantity={ salesProducts.quantity }
                 name={ name }
                 uniPrice={ `(${(price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })})` }
-                total={ (quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+                total={ (salesProducts.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
               />
             ))}
           <p>
             Total: &nbsp;
             <span data-testid="order-total-value">
-              {doneSales && doneSales.totalPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+              {doneSales && doneSales.total_price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
             </span>
           </p>
         </div>

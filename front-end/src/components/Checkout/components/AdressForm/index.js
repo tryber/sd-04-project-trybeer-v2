@@ -31,7 +31,8 @@ const AdressForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { id: userId } = JSON.parse(localStorage.getItem('user'));
+    const { dataValues: { id: userId } } = JSON.parse(localStorage.getItem('user'));
+    // console.log('ID do user: ', userId);
     const total = JSON.parse(localStorage.getItem('totalCarrinho'));
     const status = 'Pendente';
     const purchasedProducts = getPurchasedProducts(cartState);

@@ -10,11 +10,11 @@ const ADMOrdersCards = ({ orders, testid }) => (
       </Link>
     </div>
     <span data-testid={ `${testid}-order-address` }>
-      { `${orders.deliveryAdress}, ${orders.deliveryNumber}` }
+      { `${orders.delivery_address}, ${orders.delivery_number}` }
     </span>
     <br />
     <span className="bold-text" data-testid={ `${testid}-order-total-value` }>
-      { orders.totalPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+      { orders.total_price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
     </span>
     <button type="button" data-testid={ `${testid}-order-status` }>{ orders.status }</button>
   </div>
@@ -24,10 +24,10 @@ ADMOrdersCards.propTypes = {
   testid: PropTypes.number.isRequired,
   orders: PropTypes.shape({
     id: PropTypes.number,
-    deliveryAdress: PropTypes.string,
-    deliveryNumber: PropTypes.number,
+    delivery_address: PropTypes.string,
+    delivery_number: PropTypes.number,
     status: PropTypes.string,
-    totalPrice: PropTypes.number,
+    total_price: PropTypes.number,
   }).isRequired,
 };
 
