@@ -12,9 +12,9 @@ const ProductDetailCard = ({
       &nbsp;-&nbsp;
       <span data-testid={ `${testid}-product-name` }>{ name }</span>
     </p>
-    <span data-testid={ `${testid}-order-unit-price` }>{ orderStatus }</span>
     <span data-testid={ `${testid}-order-unit-price` }>{ uniPrice }</span>
     <span data-testid={ `${testid}-product-total-value` }>{ total }</span>
+    <span>{ orderStatus }</span>
   </div>
 );
 
