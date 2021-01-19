@@ -15,7 +15,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/orders/${orderNumber}`);
-      // console.log(response.data[0]);
+      // console.log(response.data);
       setProduct(response.data[0]);
       setDateFormat(response.data[0].sale_date);
     };
@@ -39,7 +39,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
           </div>
           {product.products
             && product.products.map(({
-              orderId, salesProducts, name, price,
+              orderId, salesProducts, name, price, status,
             }, index) => (
               <ProductDetailCard
                 key={ orderId }
@@ -47,6 +47,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
                 quantity={ salesProducts.quantity }
                 name={ name }
                 total={ (salesProducts.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+                orderStatus={ status }
               />
             ))}
           <p>

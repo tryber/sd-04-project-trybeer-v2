@@ -13,7 +13,6 @@ const MyOrdereds = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await api.get('/orders');
-      console.log(response.data);
       setMyOrders(response.data);
     };
     fetchOrders();
@@ -24,7 +23,15 @@ const MyOrdereds = () => {
       <Header title="Meus Pedidos" />
       <div className="ordereds-card-container">
         { myOrders
-        && myOrders.map(({ id: orderId, total_price: totalPrice, sale_date: saleDate, status: orderStatus }, index) => (
+        && myOrders.map((
+          {
+            id: orderId,
+            total_price: totalPrice,
+            sale_date: saleDate,
+            status: orderStatus,
+          },
+          index,
+        ) => (
           <OrderedsCard
             key={ orderId }
             testid={ index }

@@ -17,7 +17,6 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
       const response = await api.put(`/admin/orders/${orderNumber}`, { status });
       setDoneSales(response.data);
     } catch (error) {
-      console.log('front', error.message);
       // console.log(error.response.data);
     }
   };
@@ -25,7 +24,7 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/admin/orders/${orderNumber}`);
-      
+
       setStatus(true);
       setDoneSales(response.data[0]);
     };
@@ -69,8 +68,8 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
         </div>
         {doneSales.status === 'Pendente' || doneSales.status === 'Preparando' ? (
           <div>
-            <button type="button" data-testid="mark-as-prepared-btn" onClick={ ()=> changeStatus('Preparando') }>Preparar pedido</button>
-            <button type="button" data-testid="mark-as-delivered-btn" onClick={ ()=> changeStatus('Entregue') }>Marcar como entregue</button>
+            <button type="button" data-testid="mark-as-prepared-btn" onClick={ () => changeStatus('Preparando') }>Preparar pedido</button>
+            <button type="button" data-testid="mark-as-delivered-btn" onClick={ () => changeStatus('Entregue') }>Marcar como entregue</button>
           </div>
         ) : ('')}
       </div>
