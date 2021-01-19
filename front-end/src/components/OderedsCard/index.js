@@ -7,7 +7,7 @@ import { NUMBER_ZERO } from '../../validation';
 import './styles.css';
 
 const OrderedsCard = ({
-  testid, orderNumber, total, saleDate,
+  testid, orderNumber, total, saleDate, orderStatus
 }) => {
   const [day, month] = saleDate.substring(NUMBER_ZERO, saleDate.indexOf('T')).split('-').reverse();
 
@@ -32,6 +32,7 @@ const OrderedsCard = ({
       <span className="bold-text" data-testid={ `${testid}-order-total-value` }>
         { total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
       </span>
+      <span data-testid={ `${testid}-order-status` }>{ orderStatus }</span>
     </div>
   );
 };
