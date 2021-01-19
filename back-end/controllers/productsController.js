@@ -61,23 +61,25 @@ const newSale = async (req, res) => {
   }
 };
 
-// const updateStatus = async (req, res) => {
-//   try {
-//     const id = Number(req.params.id);
-//     // console.log('Body: ', req.body);
-//     // console.log('Params: ', req.params);
-//     await productsService.updateSalesStatus(id);
-//     const updatedOrder = await productsModel.findByPk(id);
-//     return res.status(200).json(updatedOrder);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// };
+const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    console.log(status);
+    await sales.update({ status }, { where: { id } });
+    const orderUpdated = await sales.findByPk(id);
+    console.log(orderUpdated.status);
+    return res.status(200).json(orderUpdated);
+  } catch (error) {
+    console.log('erro', error.message);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   fetchProducts,
   fetchSales,
   fetchSaleById,
   newSale,
-//   updateStatus,
+  updateStatus,
 };
