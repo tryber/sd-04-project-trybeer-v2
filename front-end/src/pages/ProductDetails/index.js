@@ -11,13 +11,14 @@ import './styles.css';
 const ProductDetails = ({ match: { params: { orderNumber } } }) => {
   const [product, setProduct] = useState('');
   const [dateFormat, setDateFormat] = useState('');
+  const [statusNow, setStatusNow] = useState('');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/orders/${orderNumber}`);
-      // console.log(response.data[0]);
       setProduct(response.data[0]);
       setDateFormat(response.data[0].sale_date);
+      setStatusNow(response.data[0].status);
     };
     fetchProductDetails();
   }, [orderNumber]);
@@ -47,6 +48,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
                 quantity={ salesProducts.quantity }
                 name={ name }
                 total={ (salesProducts.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+                orderStatus={ statusNow }
               />
             ))}
           <p>

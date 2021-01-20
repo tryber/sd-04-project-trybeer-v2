@@ -10,11 +10,11 @@ import './styles.css';
 
 const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
   const [doneSales, setDoneSales] = useState('');
-  const [status, setStatus] = useState(false);
+  const [statusNow, setStatus] = useState(false);
 
-  const changeStatus = async () => {
+  const changeStatus = async (status) => {
     try {
-      const response = await api.put(`/admin/orders/${orderNumber}`);
+      const response = await api.put(`/admin/orders/${orderNumber}`, { status });
       setDoneSales(response.data);
     } catch (error) {
       // console.log(error.response.data);
@@ -24,6 +24,7 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/admin/orders/${orderNumber}`);
+
       setStatus(true);
       setDoneSales(response.data[0]);
     };
@@ -41,7 +42,7 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
                 {`Pedido ${doneSales.id}`}
               </span>
               <span data-testid="order-status">
-                {`- ${status && doneSales.status}`}
+                {`- ${statusNow && doneSales.status}`}
               </span>
             </p>
           </div>
@@ -65,8 +66,11 @@ const ProductDetailsADM = ({ match: { params: { orderNumber } } }) => {
             </span>
           </p>
         </div>
-        {doneSales.status === 'Pendente' ? (
-          <button type="button" data-testid="mark-as-delivered-btn" onClick={ changeStatus }>Marcar como entregue</button>
+        {doneSales.status === 'Pendente' || doneSales.status === 'Preparando' ? (
+          <div>
+            <button type="button" data-testid="mark-as-prepared-btn" onClick={ () => changeStatus('Preparando') }>Preparar pedido</button>
+            <button type="button" data-testid="mark-as-delivered-btn" onClick={ () => changeStatus('Entregue') }>Marcar como entregue</button>
+          </div>
         ) : ('')}
       </div>
     </div>
