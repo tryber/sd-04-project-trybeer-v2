@@ -6,6 +6,9 @@ import jwtDecode from 'jwt-decode';
 import MenuClient from '../../../components/MenuClient';
 import { history, clientConnect, clientSendMessage, previousMessages } from '../../../api';
 
+// import socketIoClient from 'socket.io-client';
+// const ENDPOINT = 'http://127.0.0.1:3002';
+
 const ClientChat = () => {
   const [user, setUser] = useState({});
   const [socket, setSocket] = useState('');
@@ -35,22 +38,58 @@ const ClientChat = () => {
     const user = localStorage.user || null;
     const { id, email } = jwtDecode(user).dataValues;
     setUser({ id, email });
-    setSocket(clientConnect());
-    previousMessages(`1-${user.id}`);
-    const historyMsg = history();
-    console.log('history', historyMsg);
-    setHistoryMessages(historyMsg);
-    
+
+    // Solução 1
+    const socketInUseEffect = clientConnect();
+    // setSocket(clientConnect());
+    setSocket(socketInUseEffect);
+    previousMessages(`1-${id}`);
+    console.log('CLient-Id: ', socketInUseEffect);
+    console.log('socket-Id: ', socketInUseEffect.id);
+    socketInUseEffect.on('historyMessages', (previousMsg) => {
+      console.log('historyMessages: ', previousMsg);
+      setHistoryMessages(previousMsg);
+    });
+    return () => socketInUseEffect.disconnect();
+
+    // Testes com socket criado diretamente no ClientChat
+    // Solução 2
+    // const socket = socketIoClient(ENDPOINT);
+    // setSocket(socket);
+    // console.log('CLient-Id: ', socket);
+    // console.log('socket-Id: ', socket.id);
+    // const chat = `1-${id}`;
+    // console.log('chat', chat);
+    // socket.emit('previousMessages', chat);
+    // socket.on('historyMessages', (previousMsg) => {
+    //   console.log('historyMessages: ', previousMsg);
+    //   setHistoryMessages(previousMsg);
+    // });
+    // CLEAN UP THE EFFECT (prevent memory leak)
+    // Referência: https://www.valentinog.com/blog/socket-react/
+    // return () => socket.disconnect();
+
   }, []);
 
   useEffect(() => {
-    const historyMsg = previousMessages(socket, `1-${user.id}`);
-    setHistoryMessages(historyMsg);
-  },[counter])
+    // O histórico de mensagens não é reenviado,
+    // quando envia uma nova mensagem pelo chat/input.
+
+    // const historyMsg = history();
+    // console.log('history2', historyMsg);
+    // setHistoryMessages(historyMsg);
+    // const socketInUseEffect = clientConnect();
+    // socketInUseEffect.on('historyMessages', (previousMsg) => {
+    //   console.log('historyMessages2: ', previousMsg);
+    //   setHistoryMessages(previousMsg);
+    // });
+    // return () => socketInUseEffect.disconnect();
+  }, [counter]);
 
   /*
   Req. 6 e 9
   - Passar os dados pelo socket.
+    OK - Tentando mandar historico de msg do back pro front
   - Refatorar a API
   - Renderizar as mensagens na tela
   - Criar um componente para a estrutura das mensagens
