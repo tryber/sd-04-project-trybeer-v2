@@ -16,7 +16,6 @@ const TrybeerContextProvider = ({ children }) => {
   const [meuEstado, setMeuEstado] = useState(false);
   const [totalCarrinho, seTotalCarrinho] = useState(VALOR_INICIAL_CARRINHO);
   const [cartState, setCartState] = useState([]);
-  const [messages, setMessages] = useState([])
 
   const contextValue = {
     meuEstado, // uma variável de estado
@@ -25,8 +24,6 @@ const TrybeerContextProvider = ({ children }) => {
     seTotalCarrinho,
     cartState,
     setCartState,
-    messages,
-    setMessages
   };
   // No contexto você sempre retorna o Context criado usando a função createContext();
   // Daí você chama o provider desse contexto

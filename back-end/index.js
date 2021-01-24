@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const routes = require('./routes');
-const http = require('http');
 const socketIo = require('socket.io');
+const http = require('http');
+const routes = require('./routes');
+const { saveMessage, getMessages } = require('./model/message');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,23 +18,23 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes.userRoutes, routes.productsRoutes);
 
-io.on('connection', (socket) => {
-  try {
-    console.log('Conectado');
+io.on('connection', async (socket) => {
+  console.log(`${socket.id} conectado`);
+  const oldMessages = await getMessages();
+  io.emit('oldMessages', oldMessages);
 
-    socket.on('message', ({ email, message }) => {
-      const newDate = new Date();
-      const now = newDate.toLocaleString([], { hour12: false }).substr(11, 5);
-      const composeMessage = { email, now, message};
-      io.emit('newMessage', composeMessage);
-    })
+  socket.on('message', async ({ email, message }) => {
+    const newDate = new Date();
+    const now = newDate.toLocaleString([], { hour12: false }).substr(11, 5);
+    await saveMessage(now, message, email);
+    const composeMessage = { email, now, message };
+    console.log('composeMessage', composeMessage);
+    io.emit('newMessage', composeMessage);
+  });
 
-    socket.on('disconnect', () => {
-      console.log('Desconectado');
-    })
-  } catch (e) {
-    console.log(e.message);
-  }
-})
+  socket.on('disconnect', () => {
+    console.log('Desconectado');
+  });
+});
 
 server.listen(port, () => console.log(`App listening on port ${port}!`));

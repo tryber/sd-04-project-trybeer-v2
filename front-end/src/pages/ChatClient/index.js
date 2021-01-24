@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Context } from '../../context';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import Header from '../../components/Header';
 import MessageBox from '../../components/MessageBox';
 import './styles.css';
@@ -8,15 +8,11 @@ import './styles.css';
 // https://daveceddia.com/usestate-hook-examples/
 // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
 
-const socket = window.io('http://localhost:3001');
-// console.log(window);
+const socket = io('http://localhost:3001');
 
 const ChatClient = () => {
   const [newMessage, setNewMessage] = useState('');
-  const [email, setEmail] = useState('');
-  const [time, setTime] = useState('');
-  // const [socket, setSocket] = useState('');
-  const { messages, setMessages } = useContext(Context);
+  const [composeMessage, setComposeMessage] = useState('');
 
   const handleNewMessage = (e) => {
     setNewMessage(e.target.value);
@@ -24,30 +20,35 @@ const ChatClient = () => {
 
   const sendMessage = () => {
     const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
-    // setMessages([ ...messages, { user: email, clock: time, content: newMessage }]);
     socket.emit('message', {
-      email, message: newMessage
-    })
+      email, message: newMessage,
+    });
     setNewMessage('');
   };
 
   useEffect(() => {
-    console.log(socket);
-    // const now = newDate.toLocaleString([], { hour12: false }).substr(11, 5);
-    socket.on('newMessage', (composeMessage) => {
-      console.log(composeMessage);
-    })
-    
-    
-  }, []);
+    socket.on('oldMessages', (msg) => {
+      setComposeMessage([...composeMessage, msg]);
+    });
+
+    socket.on('newMessage', (msg) => {
+      // console.log(msg);
+      setComposeMessage([...composeMessage, msg]);
+    });
+  }, [composeMessage]);
 
   return (
     <div>
       <Header title="Finalizar Pedido" dataTestid="top-title" />
-      <div class="messages-container">
-        <ul class="messages">{messages.map((message) => <MessageBox user={message.user} clock={message.clock} content={message.content} />)}</ul>
+      <div className="messages-container">
+        <ul className="messages">
+          {composeMessage
+            && composeMessage.map(({ email, now, message }) => (
+              <MessageBox key={ email } user={ email } clock={ now } content={ message } />
+            ))}
+        </ul>
       </div>
-      <div class="form">
+      <div className="form">
         <input
           value={ newMessage }
           onChange={ handleNewMessage }
