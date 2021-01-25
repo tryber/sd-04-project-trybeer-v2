@@ -4,7 +4,8 @@ import {
 } from '@chakra-ui/react';
 import jwtDecode from 'jwt-decode';
 import MenuClient from '../../../components/MenuClient';
-import { history, clientConnect, clientSendMessage, previousMessages } from '../../../api';
+import ChatMessageCard from '../../../components/ChatMessageCard';
+import { clientConnect, clientSendMessage, previousMessages } from '../../../api';
 
 // import socketIoClient from 'socket.io-client';
 // const ENDPOINT = 'http://127.0.0.1:3002';
@@ -50,6 +51,8 @@ const ClientChat = () => {
       console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
     });
+    // CLEAN UP THE EFFECT (prevent memory leak)
+    // Referência: https://www.valentinog.com/blog/socket-react/
     return () => socketInUseEffect.disconnect();
 
     // Testes com socket criado diretamente no ClientChat
@@ -89,10 +92,10 @@ const ClientChat = () => {
   /*
   Req. 6 e 9
   - Passar os dados pelo socket.
-    OK - Tentando mandar historico de msg do back pro front
+  OK - Tentando mandar historico de msg do back pro front
   - Refatorar a API
   - Renderizar as mensagens na tela
-  - Criar um componente para a estrutura das mensagens
+  OK - Criar um componente para a estrutura das mensagens
 
   id do usuário
   id da loja, ou administrador
@@ -104,21 +107,10 @@ const ClientChat = () => {
       <Text>ClientChat - Conversas com a loja</Text>
 
       <Container>
-        <Container>
-          Container para as mensagens
-          {/* A box abaixo contem a estrutura da mensagem, transformar em componente */}
-          {/* {historyMessages ? historyMessages.map((message) => {
-            return (<Box>
-            <Text data-testid="nickname">{ message.nickname }</Text>
-            <Text data-testid="message-time">{ message.time }</Text>
-            <Text data-testid="text-message">{ message.message }</Text>
-          </Box> )
-          }) : <Text> Sem conversas com essa loja </Text>} */}
-          {/* <Box>
-            <Text data-testid="nickname"></Text>
-            <Text data-testid="message-time"></Text>
-            <Text data-testid="text-message"></Text>
-          </Box> */}
+        <Container pb="3px">
+          {historyMessages ? historyMessages.map((message) => {
+            return (<ChatMessageCard msg={message} key={message._id} />)
+          }) : <Text> Sem conversas com essa loja </Text>}
         </Container>
         <form
           action="chat.html"
