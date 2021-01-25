@@ -11,10 +11,11 @@ import { clientConnect, clientSendMessage, previousMessages } from '../../../api
 // const ENDPOINT = 'http://127.0.0.1:3002';
 
 const ClientChat = () => {
+  const startingCount = 0;
   const [user, setUser] = useState({});
   const [socket, setSocket] = useState('');
   const [historyMessages, setHistoryMessages] = useState([]);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(startingCount);
 
   function createMessageData(event) {
     const message = event.target.elements.messageInput.value;
@@ -36,8 +37,8 @@ const ClientChat = () => {
   }
 
   useEffect(() => {
-    const user = localStorage.user || null;
-    const { id, email } = jwtDecode(user).dataValues;
+    const localUser = localStorage.user || null;
+    const { id, email } = jwtDecode(localUser).dataValues;
     setUser({ id, email });
 
     // Solução 1
@@ -45,10 +46,10 @@ const ClientChat = () => {
     // setSocket(clientConnect());
     setSocket(socketInUseEffect);
     previousMessages(`1-${id}`);
-    console.log('CLient-Id: ', socketInUseEffect);
-    console.log('socket-Id: ', socketInUseEffect.id);
+    // console.log('CLient-Id: ', socketInUseEffect);
+    // console.log('socket-Id: ', socketInUseEffect.id);
     socketInUseEffect.on('historyMessages', (previousMsg) => {
-      console.log('historyMessages: ', previousMsg);
+      // console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
     });
     // CLEAN UP THE EFFECT (prevent memory leak)
@@ -71,7 +72,6 @@ const ClientChat = () => {
     // CLEAN UP THE EFFECT (prevent memory leak)
     // Referência: https://www.valentinog.com/blog/socket-react/
     // return () => socket.disconnect();
-
   }, []);
 
   useEffect(() => {
@@ -108,17 +108,18 @@ const ClientChat = () => {
 
       <Container>
         <Container pb="3px">
-          {historyMessages ? historyMessages.map((message) => {
-            return (<ChatMessageCard msg={message} key={message._id} />)
-          }) : <Text> Sem conversas com essa loja </Text>}
+          {historyMessages ? historyMessages.map((message) => (
+            // eslint-disable-next-line no-underscore-dangle
+            <ChatMessageCard msg={ message } key={ message._id } />
+          )) : <Text> Sem conversas com essa loja </Text>}
         </Container>
         <form
           action="chat.html"
           method="POST"
-          onSubmit={ (event) => { handleSubmit(event) } }
+          onSubmit={ (event) => { handleSubmit(event); } }
         >
           <Input id="messageInput" name="message" data-testid="message-input" />
-          <Button type='submit' data-testid="send-message">Enviar</Button>
+          <Button type="submit" data-testid="send-message">Enviar</Button>
         </form>
       </Container>
     </Box>

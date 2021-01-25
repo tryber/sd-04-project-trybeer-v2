@@ -1,15 +1,24 @@
-import React from 'react';
-import {
-  Box, Text,
-} from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Flex /* , Text */ } from '@chakra-ui/react';
 import MenuAdmin from '../../../components/MenuAdmin';
 
 const AdminChat = () => {
+  const history = useHistory();
+  useEffect(() => {
+    if (!localStorage.user) history.push('/login');
+  }, [history]);
   return (
-    <Box>
+    <Flex direction="row" h="100vh">
       <MenuAdmin />
-      <Text>AdminChat - Conversas</Text>
-    </Box>
+      {/* <Flex direction="column">
+        {chats ? (
+          chats.map((e) => <OrderCard order={ e } userRole={ role } key={ e.id } />)
+        ) : (
+          <Text>Loading...</Text>
+        )}
+      </Flex> */}
+    </Flex>
   );
 };
 

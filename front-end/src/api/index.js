@@ -82,9 +82,9 @@ export const getMessageByAdmin = async (chat) => axios
 export const clientConnect = () => {
   const socket = socketIoClient(ENDPOINT);
   // socket.emit('message', 'Oiii!');
-  const { id } = socket;
+  /* const { id } = socket;
   console.log('CLient-Id: ', socket);
-  console.log('socket-Id: ', id);
+  console.log('socket-Id: ', id); */
   return socket;
 };
 
