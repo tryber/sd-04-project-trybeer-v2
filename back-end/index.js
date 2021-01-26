@@ -12,7 +12,7 @@ const { checkout } = require('./controllers/checkout');
 const { userUpdate } = require('./controllers/profile');
 const { getOrderByUserId, getAllSales } = require('./controllers/sale');
 const { getDetailController, postDetailController } = require('./controllers/details');
-const { addMessage, getMessageByClient, addMessagetest, getMessageByClientTest } = require('./controllersMongo/message');
+const { addMessage, getMessageByClient } = require('./controllersMongo/message');
 
 const app = express();
 const port = 3001;
@@ -40,11 +40,6 @@ app.get('/admin/orders', getAllSales);
 app.get('/admin/orders/:id', getDetailController);
 app.put('/admin/orders/:id', postDetailController);
 
-app.get('/chat', getMessageByClient);
-app.post('/chat', addMessage);
-app.get('/admin/chats', getMessageByClient);
-app.post('/admin/chats', addMessage);
-
 io.on('connection', (socket) => {
   console.log('---- Conectado ----');
   console.log('BackEnd ', socket.id);
@@ -56,7 +51,7 @@ io.on('connection', (socket) => {
 
   // chamada do controller p/ add msg dentro do socket
   socket.on('message', async (msg) => {
-    const addmsg = await addMessagetest(msg);
+    const addmsg = await addMessage(msg);
     // console.log('esqueci de identificar', addmsg);
     console.log('message: ', addmsg);
   });
@@ -64,7 +59,7 @@ io.on('connection', (socket) => {
   // Chamada do controller para o histórico de mensagens,
   // recebe o parâmetro 'chat' do frontend.
   socket.on('previousMessages', async (chat) => {
-    const previousMessages = await getMessageByClientTest(chat);
+    const previousMessages = await getMessageByClient(chat);
     console.log('PreviousMessages: ', previousMessages);
     io.emit('historyMessages', previousMessages);
   });
