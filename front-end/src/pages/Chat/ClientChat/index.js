@@ -27,7 +27,7 @@ const ClientChat = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const newMsg = createMessageData(event)
+    const newMsg = createMessageData(event);
     clientSendMessage(socket, newMsg);
     // console.log('historyMsg: ', historyMsg);
     // apaga campo do imput
@@ -38,7 +38,7 @@ const ClientChat = () => {
     // Fazendo uma nova chamada do histórico para aparecer a nova mensagem
     previousMessages(newMsg.chat);
     socket.on('historyMessages', (previousMsg) => {
-      console.log('historyMessages: ', previousMsg);
+      // console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
     });
   }
@@ -120,7 +120,7 @@ const ClientChat = () => {
         <Container pb="3px">
           {historyMessages ? historyMessages.map((message) => (
             // eslint-disable-next-line no-underscore-dangle
-            <ChatMessageCard msg={ message } key={ message._id } />
+            <ChatMessageCard msg={ message } key={ message.id } />
           )) : <Text> Sem conversas com essa loja </Text>}
         </Container>
         <form
