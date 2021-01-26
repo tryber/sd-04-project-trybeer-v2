@@ -27,13 +27,20 @@ const ClientChat = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    clientSendMessage(socket, createMessageData(event));
+    const newMsg = createMessageData(event)
+    clientSendMessage(socket, newMsg);
     // console.log('historyMsg: ', historyMsg);
     // apaga campo do imput
     event.target.elements.messageInput.value = '';
     // depois de enviar a msg o cursor fica no imput
     event.target.elements.messageInput.focus();
     setCounter(counter + 1);
+    // Fazendo uma nova chamada do histórico para aparecer a nova mensagem
+    previousMessages(newMsg.chat);
+    socket.on('historyMessages', (previousMsg) => {
+      console.log('historyMessages: ', previousMsg);
+      setHistoryMessages(previousMsg);
+    });
   }
 
   useEffect(() => {
@@ -95,6 +102,9 @@ const ClientChat = () => {
   OK - Tentando mandar historico de msg do back pro front
   - Refatorar a API
   - Renderizar as mensagens na tela
+    OK - Histórico de mensagens
+    - Mensagens enviadas pelo cliente
+    - Mensagens enviadas pelo admin
   OK - Criar um componente para a estrutura das mensagens
 
   id do usuário

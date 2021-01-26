@@ -11,7 +11,7 @@ const getMessageByClient = async (chat) => {
   const result = await connectionMongo()
     .then((db) => db.collection('messages')
       .find({ chat })
-      .sort({ timestamp: -1 })
+      .sort({ timestamp: 1 })
       .toArray());
   return result;
 };
