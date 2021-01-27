@@ -8,7 +8,7 @@ import './styles.css';
 // https://daveceddia.com/usestate-hook-examples/
 // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
 
-const socket = io('http://localhost:3001');
+// const socket = io('http://localhost:3001');
 
 const ChatAdmin = () => {
   const [newMessage, setNewMessage] = useState('');
@@ -20,22 +20,22 @@ const ChatAdmin = () => {
 
   const sendMessage = () => {
     const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
-    socket.emit('message', {
-      email, message: newMessage,
-    });
-    setNewMessage('');
+    // socket.emit('message', {
+    //   email, message: newMessage,
+    // });
+    // setNewMessage('');
   };
 
   useEffect(() => {
-    socket.on('oldMessages', (msg) => {
-      setComposeMessage([...composeMessage, msg]);
-    });
+    // socket.on('oldMessages', (msg) => {
+    //   setComposeMessage([...composeMessage, msg]);
+    // });
 
-    socket.on('newMessage', (msg) => {
-      // console.log(msg);
-      setComposeMessage([...composeMessage, msg]);
-    });
-  }, [composeMessage]);
+    // socket.on('newMessage', (msg) => {
+    //   // console.log(msg);
+    //   setComposeMessage([...composeMessage, msg]);
+    // });
+  }, []);
 
   return (
     <div>

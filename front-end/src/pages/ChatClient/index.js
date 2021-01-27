@@ -13,26 +13,33 @@ const socket = io('http://localhost:3001');
 const ChatClient = () => {
   const [newMessage, setNewMessage] = useState('');
   const [composeMessage, setComposeMessage] = useState('');
+  const [user, setUser] = useState('')
 
   const handleNewMessage = (e) => {
     setNewMessage(e.target.value);
   };
 
   const sendMessage = () => {
-    const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
     socket.emit('message', {
-      email, message: newMessage,
+      user, message: newMessage,
     });
+    console.log(user);
     setNewMessage('');
   };
 
   useEffect(() => {
+    const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
+    
+    setUser(email)
+    socket.emit('online', (email));
+
     socket.on('oldMessages', (msg) => {
-      setComposeMessage([...composeMessage, msg]);
+      console.log('oldMessage', msg);
+      // setComposeMessage([...composeMessage, msg]);
     });
 
     socket.on('newMessage', (msg) => {
-      // console.log(msg);
+      console.log(msg);
       setComposeMessage([...composeMessage, msg]);
     });
   }, [composeMessage]);
@@ -43,8 +50,8 @@ const ChatClient = () => {
       <div className="messages-container">
         <ul className="messages">
           {composeMessage
-            && composeMessage.map(({ email, now, message }) => (
-              <MessageBox key={ email } user={ email } clock={ now } content={ message } />
+            && composeMessage.map(({ user, now, message }) => (
+              <MessageBox key={ user } user={ user } clock={ now } content={ message } />
             ))}
         </ul>
       </div>
