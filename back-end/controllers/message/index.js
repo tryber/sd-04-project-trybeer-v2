@@ -1,4 +1,4 @@
-const messageModel = require('../../models/message');
+const messageModel = require('../../mongoModels/message');
 
 /* const addMessage = async (msgData) => {
   try {
