@@ -10,7 +10,7 @@ import './styles.css';
 
 const socket = io('http://localhost:3001');
 
-const ChatClient = () => {
+const ChatAdmin = () => {
   const [newMessage, setNewMessage] = useState('');
   const [composeMessage, setComposeMessage] = useState('');
 
@@ -66,4 +66,4 @@ const ChatClient = () => {
   );
 };
 
-export default ChatClient;
+export default ChatAdmin;

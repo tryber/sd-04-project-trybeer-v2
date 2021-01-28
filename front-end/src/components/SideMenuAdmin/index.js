@@ -34,6 +34,14 @@ function SideMenuAdmin() {
         Perfil
       </button>
       <button
+        data-testid="side-menu-item-chat"
+        type="button"
+        className="admin-side-button"
+        onClick={ () => handlePath(history, 'admin/chats') }
+      >
+        Conversas
+      </button>
+      <button
         data-testid="side-menu-item-logout"
         type="button"
         className="admin-side-button botao-sair"
