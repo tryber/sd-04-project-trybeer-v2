@@ -5,7 +5,9 @@ import {
 import jwtDecode from 'jwt-decode';
 import MenuClient from '../../../components/MenuClient';
 import ChatMessageCard from '../../../components/ChatMessageCard';
-import { clientConnect, clientSendMessage, previousMessages } from '../../../api';
+import {
+  clientConnect, clientSendMessage, checkClient, previousMessages,
+} from '../../../api';
 
 // import socketIoClient from 'socket.io-client';
 // const ENDPOINT = 'http://127.0.0.1:3002';
@@ -19,9 +21,9 @@ const ClientChat = () => {
 
   function createMessageData(event) {
     const message = event.target.elements.messageInput.value;
-    const nickname = user.email;
-    const chat = `1-${user.id}`;
-    const msgData = { nickname, message, chat };
+    const userEmail = user.email;
+    // const chat = `1-${user.id}`;
+    const msgData = { userEmail, message };
     return msgData;
   }
 
@@ -52,7 +54,8 @@ const ClientChat = () => {
     const socketInUseEffect = clientConnect();
     // setSocket(clientConnect());
     setSocket(socketInUseEffect);
-    previousMessages(`1-${id}`);
+    checkClient(email);
+    previousMessages(email);
     // console.log('CLient-Id: ', socketInUseEffect);
     // console.log('socket-Id: ', socketInUseEffect.id);
     socketInUseEffect.on('historyMessages', (previousMsg) => {
