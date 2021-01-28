@@ -38,7 +38,7 @@ const ClientChat = () => {
     event.target.elements.messageInput.focus();
     setCounter(counter + 1);
     // Fazendo uma nova chamada do histórico para aparecer a nova mensagem
-    previousMessages(newMsg.chat);
+    previousMessages(newMsg.userEmail);
     socket.on('historyMessages', (previousMsg) => {
       // console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);

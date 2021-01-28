@@ -22,13 +22,13 @@ const getMessageByClient = async (chat) => {
   }
 }; */
 
-const addMessage = async (userEmail, msg) => {
+const addMessage = async (userEmail, message) => {
   try {
-    const time = new Date();
-    const timestamp = `${time.getHours()}:${time.getMinutes()}`;
-    const finalMsg = { content: msg, timestamp };
-    const message = await messageModel.insertMessage(userEmail, timestamp, finalMsg);
-    return message;
+    const timestamp = new Date();
+    const time = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
+    const finalMsg = { content: message, time, timestamp };
+    const insertedMessage = await messageModel.insertMessage(userEmail, time, finalMsg);
+    return insertedMessage;
   } catch (error) {
     return { message: 'Something goes wrong!' };
   }

@@ -17,10 +17,10 @@ const getMessageByClient = async (chat) => {
   return result;
 }; */
 
-const insertMessage = async (userEmail, timestamp, finalMsg) => {
+const insertMessage = async (userEmail, time, finalMsg) => {
   const result = await connectionMongo()
     .then((db) => db.collection('messages').updateOne(
-      { userEmail }, { $set: { lastMsg: timestamp }, $push: { msgs: finalMsg } },
+      { userEmail }, { $set: { lastMsg: time }, $push: { msgs: finalMsg } },
     ));
   return result;
 };
@@ -46,7 +46,7 @@ const findAllUsers = async () => {
 const insertUser = async (userEmail) => {
   const result = await connectionMongo()
     .then((db) => db.collection('messages').insertOne({
-      userEmail, msgs: [], lastMsg: '00:00',
+      userEmail, msgs: [], lastMsg: '',
     }));
   return result.ops[0];
 };

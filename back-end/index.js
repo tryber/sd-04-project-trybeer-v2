@@ -58,8 +58,8 @@ io.on('connection', (socket) => {
   });
 
   // chamada do controller p/ add msg dentro do socket
-  socket.on('message', async (userEmail, msg) => {
-    const addmsg = await addMessage(userEmail, msg);
+  socket.on('message', async ({ userEmail, message }) => {
+    const addmsg = await addMessage(userEmail, message);
     console.log('message: ', addmsg);
   });
 
