@@ -66,6 +66,8 @@ io.on('connection', (socket) => {
   // Chamada do controller para o histórico de mensagens,
   // recebe o parâmetro 'chat' do frontend.
   socket.on('previousMessages', async (userEmail) => {
+    // linha 70 parece gambiarra por enquanto
+    await addUser(userEmail);
     const previousMessages = await getHistoryByUser(userEmail);
     console.log('PreviousMessages: ', previousMessages);
     io.emit('historyMessages', previousMessages);

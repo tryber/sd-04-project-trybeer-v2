@@ -27,7 +27,7 @@ const insertMessage = async (userEmail, time, finalMsg) => {
 
 const findHistoryByUser = async (userEmail) => {
   const result = await connectionMongo()
-    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { _id: 0, userEmail: 1, msgs: 1 } }).toArray());
+    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { _id: 1, userEmail: 1, msgs: 1 } }));
   return result;
 };
 
