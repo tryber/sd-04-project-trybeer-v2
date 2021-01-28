@@ -38,7 +38,7 @@ const ClientChat = () => {
     event.target.elements.messageInput.focus();
     setCounter(counter + 1);
     // Fazendo uma nova chamada do histórico para aparecer a nova mensagem
-    previousMessages(newMsg.userEmail);
+    previousMessages(socket, newMsg.userEmail);
     socket.on('historyMessages', (previousMsg) => {
       // console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
@@ -54,12 +54,12 @@ const ClientChat = () => {
     const socketInUseEffect = clientConnect();
     // setSocket(clientConnect());
     setSocket(socketInUseEffect);
-    checkClient(email);
-    previousMessages(email);
+    checkClient(socketInUseEffect, email);
+    previousMessages(socketInUseEffect, email);
     // console.log('CLient-Id: ', socketInUseEffect);
     // console.log('socket-Id: ', socketInUseEffect.id);
     socketInUseEffect.on('historyMessages', (previousMsg) => {
-      // console.log('historyMessages: ', previousMsg);
+      console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
     });
     // CLEAN UP THE EFFECT (prevent memory leak)
@@ -121,10 +121,10 @@ const ClientChat = () => {
 
       <Container>
         <Container pb="3px">
-          {historyMessages ? historyMessages.msgs.map((message) => (
+          {/* {historyMessages ? historyMessages.map((message) => (
             // eslint-disable-next-line no-underscore-dangle
             <ChatMessageCard msg={ message } user={ user.email } key={ message.id } />
-          )) : <Text> Sem conversas com essa loja </Text>}
+          )) : <Text> Sem conversas com essa loja </Text>} */}
         </Container>
         <form
           action="chat.html"

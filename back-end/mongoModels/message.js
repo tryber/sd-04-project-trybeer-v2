@@ -27,13 +27,13 @@ const insertMessage = async (userEmail, time, finalMsg) => {
 
 const findHistoryByUser = async (userEmail) => {
   const result = await connectionMongo()
-    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { _id: 0, userEmail: 1, msgs: 1, lastMsg: 0 } }).toArray());
+    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { _id: 0, userEmail: 1, msgs: 1 } }).toArray());
   return result;
 };
 
 const findUser = async (userEmail) => {
   const result = await connectionMongo()
-    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { msgs: 0 } }).toArray());
+    .then((db) => db.collection('messages').findOne({ userEmail }, { projection: { msgs: 0 } }));
   return result;
 };
 

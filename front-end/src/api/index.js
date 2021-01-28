@@ -80,8 +80,8 @@ export const checkClient = (socket, userEmail) => {
 };
 
 // histórico das mensagens
-export const previousMessages = (userEmail) => {
-  const socket = socketIoClient(ENDPOINT);
-  socket.connect();
+export const previousMessages = (socket, userEmail) => {
+  // const socket = socketIoClient(ENDPOINT);
+  // socket.connect();
   socket.emit('previousMessages', userEmail);
 };
