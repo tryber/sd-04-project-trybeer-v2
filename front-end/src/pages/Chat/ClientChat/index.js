@@ -121,9 +121,9 @@ const ClientChat = () => {
 
       <Container>
         <Container pb="3px">
-          {historyMessages ? historyMessages.map((message) => (
+          {historyMessages ? historyMessages.msgs.map((message) => (
             // eslint-disable-next-line no-underscore-dangle
-            <ChatMessageCard msg={ message } key={ message.id } />
+            <ChatMessageCard msg={ message } user={ user.email } key={ message.id } />
           )) : <Text> Sem conversas com essa loja </Text>}
         </Container>
         <form
