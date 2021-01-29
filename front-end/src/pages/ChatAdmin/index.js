@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import Header from '../../components/Header';
-import MessageBox from '../../components/MessageBox';
+// import MessageBox from '../../components/MessageBox';
 import './styles.css';
 
 // https://medium.com/swlh/build-a-real-time-chat-app-with-react-hooks-and-socket-io-4859c9afecb0
@@ -12,14 +12,14 @@ import './styles.css';
 
 const ChatAdmin = () => {
   const [newMessage, setNewMessage] = useState('');
-  const [composeMessage, setComposeMessage] = useState('');
+  // const [composeMessage, setComposeMessage] = useState('');
 
   const handleNewMessage = (e) => {
     setNewMessage(e.target.value);
   };
 
   const sendMessage = () => {
-    const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
+    // const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
     // socket.emit('message', {
     //   email, message: newMessage,
     // });
@@ -42,10 +42,10 @@ const ChatAdmin = () => {
       <Header title="Finalizar Pedido" dataTestid="top-title" />
       <div className="messages-container">
         <ul className="messages">
-          {composeMessage
+          {/* {composeMessage
             && composeMessage.map(({ email, now, message }) => (
               <MessageBox key={ email } user={ email } clock={ now } content={ message } />
-            ))}
+            ))} */}
         </ul>
       </div>
       <div className="form">

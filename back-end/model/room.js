@@ -10,4 +10,4 @@ const createRoom = async (roomRef) => {
   return room;
 };
 
-module.exports = { createRoom }
+module.exports = { createRoom, getRoom }

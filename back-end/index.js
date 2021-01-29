@@ -5,7 +5,7 @@ const socketIo = require('socket.io');
 const http = require('http');
 const routes = require('./routes');
 const { saveMessage, getMessages } = require('./model/message');
-const { createRoom } = require('./model/room');
+const { createRoom, getRoom } = require('./model/room');
 
 const app = express();
 const server = http.createServer(app);
@@ -24,10 +24,14 @@ io.on('connection', async (socket) => {
   
   socket.on('online', async (room) => {
     const oldMessages = await getMessages(room);
-    console.log(oldMessages);
-    await createRoom(room);
+    console.log('mensagens antigas', oldMessages);
+    // const actualRoom = await getRoom(room);
+    // console.log('sala',actualRoom);
+    // if (!actualRoom) {
+    //   await createRoom(room);
+    // }
     socket.join(room);
-    console.log(`conectado em ${room}`);
+    // console.log(`conectado em ${actualRoom}`);
     io.to(room).emit('oldMessages', oldMessages);
   });
 
