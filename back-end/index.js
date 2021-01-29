@@ -5,7 +5,6 @@ const socketIo = require('socket.io');
 const http = require('http');
 const routes = require('./routes');
 const { saveMessage, getMessages } = require('./model/message');
-const { createRoom, getRoom } = require('./model/room');
 
 const app = express();
 const server = http.createServer(app);
@@ -21,27 +20,21 @@ app.use('/', routes.userRoutes, routes.productsRoutes);
 
 io.on('connection', async (socket) => {
   console.log(`${socket.id} conectado`);
-  
+
   socket.on('online', async (room) => {
     const oldMessages = await getMessages(room);
     console.log('mensagens antigas', oldMessages);
-    // const actualRoom = await getRoom(room);
-    // console.log('sala',actualRoom);
-    // if (!actualRoom) {
-    //   await createRoom(room);
-    // }
     socket.join(room);
-    // console.log(`conectado em ${actualRoom}`);
     io.to(room).emit('oldMessages', oldMessages);
   });
 
-  socket.on('message', async ({ user, message }) => {
+  socket.on('message', async ({ userEmail, message }) => {
     const newDate = new Date();
     const now = await newDate.toLocaleString([], { hour12: false }).substr(11, 5);
-    await saveMessage({ timestamp: now, message, nickname: user, room: user });
-    const composeMessage = { user, now, message };
+    await saveMessage({ timestamp: now, message, nickname: userEmail, room: userEmail });
+    const composeMessage = { nick: userEmail, now, message };
     console.log('composeMessage', composeMessage);
-    io.to(user).emit('newMessage', composeMessage);
+    io.to(userEmail).emit('newMessage', composeMessage);
   });
 
   socket.on('disconnect', () => {
