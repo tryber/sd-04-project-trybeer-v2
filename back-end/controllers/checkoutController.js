@@ -5,7 +5,7 @@ const salesProductsService = require('../services/salesProductsService');
 const checkoutController = async (req, res) => {
   const { total, address, number, date, status, products } = req.body;
   const id = req.user;
-
+  console.log(`PRODUCTS: ${JSON.stringify(products)}`);
   console.log(`id: ${id}, total: ${total}, address: ${address} number: ${number}, date: ${date}, products: ${products}`);
   const convertedDate = new Date(date)
     .toISOString()
@@ -28,8 +28,7 @@ const checkoutController = async (req, res) => {
     for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
         registeredSale.id,
-        //  usar o campo id mesmo
-        products[i].id,
+        products[i].productId,
         products[i].quantity,
       );
     }
