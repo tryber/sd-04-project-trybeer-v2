@@ -20,16 +20,21 @@ app.use('/', routes.userRoutes, routes.productsRoutes);
 
 io.on('connection', async (socket) => {
   console.log(`${socket.id} conectado`);
-  const oldMessages = await getMessages();
-  io.emit('oldMessages', oldMessages);
 
-  socket.on('message', async ({ email, message }) => {
+  socket.on('online', async (room) => {
+    const oldMessages = await getMessages(room);
+    console.log('mensagens antigas', oldMessages);
+    socket.join(room);
+    io.to(room).emit('oldMessages', oldMessages);
+  });
+
+  socket.on('message', async ({ userEmail, message }) => {
     const newDate = new Date();
-    const now = newDate.toLocaleString([], { hour12: false }).substr(11, 5);
-    await saveMessage(now, message, email);
-    const composeMessage = { email, now, message };
+    const now = await newDate.toLocaleString([], { hour12: false }).substr(11, 5);
+    await saveMessage({ timestamp: now, message, nickname: userEmail, room: userEmail });
+    const composeMessage = { nick: userEmail, now, message };
     console.log('composeMessage', composeMessage);
-    io.emit('newMessage', composeMessage);
+    io.to(userEmail).emit('newMessage', composeMessage);
   });
 
   socket.on('disconnect', () => {
