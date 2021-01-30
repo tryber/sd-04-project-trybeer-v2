@@ -37,13 +37,13 @@ io.on('connection', async (socket) => {
     io.to(room).emit('oldMessages', oldMessages);
   });
 
-  socket.on('message', async ({ userEmail, message }) => {
+  socket.on('message', async ({ userEmail, message, actualRoom }) => {
     const newDate = new Date();
     const now = await newDate.toLocaleString([], { hour12: false }).substr(11, 5);
-    await saveMessage({ timestamp: now, message, nickname: userEmail, room: userEmail });
+    await saveMessage({ timestamp: now, message, nickname: userEmail, room: actualRoom });
     const composeMessage = { nick: userEmail, now, message };
     console.log('composeMessage', composeMessage);
-    io.to(userEmail).emit('newMessage', composeMessage);
+    io.to(actualRoom).emit('newMessage', composeMessage);
   });
 
   socket.on('disconnect', () => {

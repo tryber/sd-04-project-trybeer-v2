@@ -14,6 +14,7 @@ const AdminChatList = () => {
   useEffect(() => {
     socket.emit('messageList');
     socket.on('allMessages', (msgs) => {
+      localStorage.setItem('room', msgs.room);
       setAllMessages(msgs);
     });
   }, []);
@@ -34,7 +35,7 @@ const AdminChatList = () => {
             <div>
               <h1>Conversas</h1>
               <MessageList
-                user={ allMessages.nickname }
+                user={ allMessages.room }
                 clock={ allMessages.timestamp }
               />
             </div>
