@@ -13,7 +13,8 @@ import Register from './pages/Register';
 import Checkout from './pages/CloseOrder';
 import OrdersClient from './pages/Orders';
 import Details from './pages/Details';
-import OrdersAdm from './pages/admin/Orders';
+import OrdersAdm from './pages/admin/Orders2';
+import OrdersAdmDetails from './pages/admin/OrderAdmDetails'
 import ProfileAdm from './pages/admin/Profile';
 import test from './pages/test';
 import Chat from './pages/Chat';
@@ -38,7 +39,7 @@ const routes = () => (
       <Route exact path="/orders/:id" component={ Details } />
       <Route exact path="/admin/orders" component={ OrdersAdm } />
       <Route exact path="/admin/profile" component={ ProfileAdm } />
-      <Route exact path="/admin/orders/:id" component={ OrdersAdm } />
+      <Route exact path="/admin/orders/:id" component={ OrdersAdmDetails } />
       <Route exact path="/chat" component={ Chat } />
       <Route path="/test" component={ test } />
     </Switch>
