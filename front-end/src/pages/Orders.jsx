@@ -18,20 +18,20 @@ function Orders() {
 
   if (!orders) return <div>Carregando...</div>;
   return (
-  <div>
-    <TopBar title={'Meus Pedidos'} isAdm={false} />
-    <div className="main-container-orders">
-    {orders.map((order, index) => (
-      <MyOrdersCard
-        key={order.id}
-        index={index}
-        orderId={order.id}
-        orderDate={order.sale_date}  
-        orderPriceSum={order.total_price}
-      />
-      ))}
+    <div>
+      <TopBar title="Meus Pedidos" isAdm={ false } />
+      <div className="main-container-orders">
+        {orders.map((order, index) => (
+          <MyOrdersCard
+            key={ order.id }
+            index={ index }
+            orderId={ order.id }
+            orderDate={ order.sale_date }
+            orderPriceSum={ order.total_price }
+          />
+        ))}
+      </div>
     </div>
-  </div>
   );
 }
 

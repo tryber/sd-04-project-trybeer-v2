@@ -3,13 +3,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MyOrdersCard.css';
 
-function MyOrdersCard({ index, orderId, orderDate, orderPriceSum }) {
-  console.log(index);
-  const redirect = () => {
-      return window.location.replace(`http://localhost:3000/orders/${orderId}`);
-  };
-  const day = orderDate.substring(8,10);
-  const month = orderDate.substring(5,7);
+function MyOrdersCard({
+  index, orderId, orderDate, orderPriceSum,
+}) {
+  // const redirect = () => window.location.replace(`http://localhost:3000/orders/${orderId}`);
+
+  // Constantes declaradas para passar no lint. É a posição inical e final da string date
+  const daySubstrStart = 8;
+  const daySubstrEnd = 10;
+  const monthSubstrStart = 5;
+  const monthSubstrEnd = 7;
+
+  const day = orderDate.substring(daySubstrStart, daySubstrEnd);
+  const month = orderDate.substring(monthSubstrStart, monthSubstrEnd);
   const dois = 2;
 
   return (
