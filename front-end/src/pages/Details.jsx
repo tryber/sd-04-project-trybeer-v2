@@ -15,9 +15,8 @@ function Details() {
 
   useState(() => {
     const token = JSON.parse(localStorage.getItem('token'));
-    api
-      .get(`/orders/${params.id}`, { headers: { Authorization: token } })
-      .then((response) => setOrder(response.data))
+    api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
+      .then((response) => setOrder([response.data]))
       .catch(() => history.push('/login'));
   }, [params.id]);
 

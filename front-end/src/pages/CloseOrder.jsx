@@ -41,20 +41,21 @@ function CloseOrder() {
   }, []);
 
   const postData = async (
-    postEmail,
-    postTotal,
-    postAddress,
-    postNumber,
-    postDate,
-    postProducts,
+    emailPost,
+    totalPost,
+    addressPost,
+    numberPost,
+    datePost,
+    productsPost,
   ) => {
     await api.post('/checkout', {
-      postEmail,
-      postTotal,
-      postAddress,
-      postNumber,
-      postDate,
-      postProducts,
+      emailPost,
+      totalPost,
+      addressPost,
+      numberPost,
+      datePost,
+      productsPost,
+      status: 'Pendente',
     });
   };
 

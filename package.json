@@ -44,6 +44,7 @@
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^4.0.0",
     "mochawesome-report-generator": "^4.1.0",
+    "moment": "^2.29.1",
     "sequelize-cli": "^6.2.0"
   }
 }
