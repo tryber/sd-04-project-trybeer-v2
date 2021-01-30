@@ -4,7 +4,7 @@ const cors = require('cors');
 const socketIo = require('socket.io');
 const http = require('http');
 const routes = require('./routes');
-const { saveMessage, getMessages } = require('./model/message');
+const { saveMessage, getMessages, getAllMessages } = require('./model/message');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,6 +20,15 @@ app.use('/', routes.userRoutes, routes.productsRoutes);
 
 io.on('connection', async (socket) => {
   console.log(`${socket.id} conectado`);
+
+  socket.on('messageList', async () => {
+    const allMessages = await getAllMessages();
+    // console.log('todas as mensagens', allMessages);
+    // io.emit('allMessages', allMessages);
+    const lastMessage = allMessages.pop();
+    console.log('ultima mensagem', lastMessage);
+    io.emit('allMessages', lastMessage);
+  });
 
   socket.on('online', async (room) => {
     const oldMessages = await getMessages(room);
