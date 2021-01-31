@@ -23,7 +23,7 @@ const checkoutController = async (req, res) => {
         registeredSale.id,
         //  usar o campo id mesmo
         products[i].id,
-        products[i].quantity
+        products[i].quantity,
       );
     }
 
