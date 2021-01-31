@@ -17,7 +17,7 @@ function Register() {
     return window.location.replace('http://localhost:3000/products');
   };
 
-  // try
+  // not try
 
   const register = async (event) => {
     event.preventDefault();
