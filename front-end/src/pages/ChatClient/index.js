@@ -15,6 +15,7 @@ const ChatClient = () => {
   const [composeMessage, setComposeMessage] = useState('');
   const [oldMessages, setOldMessages] = useState([]);
   const [userEmail, setUserEmail] = useState('');
+  const [actualRoom, setActualRoom] = useState('');
 
   const handleNewMessage = (e) => {
     setNewMessage(e.target.value);
@@ -22,7 +23,7 @@ const ChatClient = () => {
 
   const sendMessage = () => {
     socket.emit('message', {
-      userEmail, message: newMessage,
+      userEmail, message: newMessage, actualRoom,
     });
     setNewMessage('');
   };
@@ -31,7 +32,7 @@ const ChatClient = () => {
     const { dataValues: { email } } = JSON.parse(localStorage.getItem('user'));
     setUserEmail(email);
     socket.emit('online', (email));
-
+    setActualRoom(email);
     socket.on('oldMessages', (msg) => {
       setOldMessages(msg);
     });

@@ -10,4 +10,7 @@ const saveMessage = async ({ timestamp, message, nickname, room }) => {
   return msg;
 };
 
-module.exports = { getMessages, saveMessage };
+const getAllMessages = async () => connection().then((db) => db.collection('messages').find()
+  .toArray());
+
+module.exports = { getMessages, saveMessage, getAllMessages };
