@@ -14,7 +14,7 @@ import Checkout from './pages/CloseOrder';
 import OrdersClient from './pages/Orders';
 import Details from './pages/Details';
 import OrdersAdm from './pages/admin/Orders2';
-import OrdersAdmDetails from './pages/admin/OrderAdmDetails'
+import OrdersAdmDetails from './pages/admin/OrderAdmDetails';
 import ProfileAdm from './pages/admin/Profile';
 import test from './pages/test';
 import Chat from './pages/Chat';

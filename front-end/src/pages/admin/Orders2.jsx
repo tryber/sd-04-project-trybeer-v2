@@ -1,56 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import SideBar from '../../components/ClientBar.jsx';
-import api from '../../services/api';
 import { useHistory } from 'react-router-dom';
-import CardOrders from '../../components/CardAdmOrders.jsx';
+import SideBar from '../../components/ClientBar';
+import api from '../../services/api';
+import CardOrders from '../../components/CardAdmOrders';
 import './CSS/Orders.css';
 
 const Orders = () => {
   const loginInStorage = JSON.parse(localStorage.getItem('cart'));
-  let orderCount = 0;
 
   const [admOrders, setAdmOrders] = useState([]);
-  const history = useHistory(); 
+  const history = useHistory();
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
 
     api
       .get('/allSales', { headers: { Authorization: token } })
       .then((response) => setAdmOrders(response.data))
-      .catch((_err) => history.push('/login'));
-      
-
+      .catch(() => history.push('/login'));
   }, []);
 
   if (!loginInStorage) {
-    return ( 
+    return (
       <div className="bodyAdm">
-        <SideBar title={'TryBeer'} isAdm={true} />
+        <SideBar title="TryBeer" isAdm />
         <h2 className="pedidos-text">Pedidos</h2>
       </div>
     );
   }
 
-
-
+  const orderCount = [];
+  orderCount.push(1);
   return (
     <div className="bodyAdm">
-      <SideBar title={'TryBeer'} isAdm={true} />
+      <SideBar title="TryBeer" isAdm />
       <div className="orders-container">
         <h2 className="pedidos-text">Pedidos</h2>
         <div>
-          {console.log(admOrders)}
+          {console.log(`adm orders ${JSON.stringify(admOrders)}`)}
           {admOrders.map((order) => {
-            orderCount += 1;
-            const { total_price, delivery_address, delivery_number, status } = order;
+            orderCount[0] += 1;
+            const {
+              total_price: totalPrice, delivery_address: deliveryAddress,
+              delivery_number: deliveryNumber, status,
+            } = order;
             return (
               <CardOrders
-                order={orderCount}
-                address={delivery_address}
-                number={delivery_number}
-                price={total_price}
-                status={status}
-                key={`${orderCount}order`}
+                order={ orderCount }
+                address={ deliveryAddress }
+                number={ deliveryNumber }
+                price={ totalPrice }
+                status={ status }
+                key={ `${orderCount}order` }
               />
             );
           })}
