@@ -36,11 +36,18 @@ io.on('connection', async (socket) => {
 
     io.emit('renderMessage', mensagem, timestamp);
   });
+  
+  socket.on('showAllMessages', async() => {
+    const messages = await chatModel.findAndSort()
+    console.log(messages)
+    
+  })
 
   socket.on('disconnect', () => {
     console.log(`O socket ${socket.id} desconectou :(`);
   });
 });
+
 
 io.on('error', (error) => {
   console.log('Erro no socket', error.message);

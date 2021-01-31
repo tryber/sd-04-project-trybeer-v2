@@ -17,6 +17,7 @@ import OrdersAdm from './pages/admin/Orders';
 import ProfileAdm from './pages/admin/Profile';
 import test from './pages/test';
 import Chat from './pages/Chat';
+import ChatAdmin from './pages/admin/chatAdmin';
 
 const routes = () => (
   <Router>
@@ -40,6 +41,7 @@ const routes = () => (
       <Route exact path="/admin/profile" component={ ProfileAdm } />
       <Route exact path="/admin/orders/:id" component={ OrdersAdm } />
       <Route exact path="/chat" component={ Chat } />
+      <Route exact path="/admin/chats" component={ ChatAdmin } />
       <Route path="/test" component={ test } />
     </Switch>
   </Router>
