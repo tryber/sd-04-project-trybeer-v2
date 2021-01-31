@@ -8,13 +8,9 @@ const {
   findSalesBySaleId,
 } = require('../services/saleService');
 
-describe('Testa a função checkoutController ', () => {
-  // beforeEach(() => {
-  //   shell.exec('npx sequelize-cli db:drop');
-  //   shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
-  //   shell.exec('npx sequelize-cli db:seed:all $');
-  // });
+const db = require('../models');
 
+describe('Testa a função checkoutController ', async () => {
   const req = {
     user: {
       id: 1,
@@ -50,25 +46,35 @@ describe('Testa a função checkoutController ', () => {
     return res;
   };
 
-  it('Verifica se consegue realizar uma compra com sucesso', async (done) => {
-    const res = mockResponse();
-    await checkoutController(req, res);
+  afterAll(async (done) => {
+    await db.sequelize.close();
     done();
   });
 
-  it('teste', async () => {
-    await registerSalesProductsService();
-  });
+  try {
+    it('Verifica se consegue realizar uma compra com sucesso', async (done) => {
+      const res = mockResponse();
+      await checkoutController(req, res);
 
-  it('teste 2', async () => {
-    await findSalesByUserId(1);
-  });
+      done();
+    });
 
-  it('teste 3', async () => {
-    await findAllSalesService();
-  });
+    it('teste', async () => {
+      await registerSalesProductsService();
+    });
 
-  it('teste 4', async () => {
-    await findSalesBySaleId(1);
-  });
+    it('teste 2', async () => {
+      await findSalesByUserId(1);
+    });
+
+    it('teste 3', async () => {
+      await findAllSalesService();
+    });
+
+    it('teste 4', async () => {
+      await findSalesBySaleId(1);
+    });
+  } catch (error) {
+    return error;
+  }
 });
