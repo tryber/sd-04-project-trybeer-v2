@@ -24,7 +24,7 @@ function Details() {
   };
 
   if (!order) return <div>Carregando...</div>;
-  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
+  //  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
   return (
     <div>
       <TopBar data-testid="top-title" title="Detalhes do Pedido" isAdm={ false } isDetails />
@@ -37,7 +37,7 @@ function Details() {
           <p data-testid="order-date" className="order-date">
             {new Date(order[0].sale_date)
               .toLocaleDateString('pt-BR').slice(zero, cinco)}
-            {console.log('aqui jaz o Order', order)}
+            {/*  console.log('aqui jaz o Order', order)  */}
           </p>
         </div>
         <div>

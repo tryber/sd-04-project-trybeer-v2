@@ -36,7 +36,7 @@ const Orders = () => {
       <div className="orders-container">
         <h2 className="pedidos-text">Pedidos</h2>
         <div>
-          {console.log(`adm orders ${JSON.stringify(admOrders)}`)}
+          {/*  console.log(`adm orders ${JSON.stringify(admOrders)}`)  */}
           {admOrders.map((order) => {
             orderCount[0] += 1;
             const {
