@@ -2,7 +2,11 @@ const checkoutController = require('../controllers/checkoutController');
 const {
   registerSalesProductsService,
 } = require('../services/salesProductsService');
-const { findSalesByUserId, findAllSalesService, findSalesBySaleId } = require('../services/saleService');
+const {
+  findSalesByUserId,
+  findAllSalesService,
+  findSalesBySaleId,
+} = require('../services/saleService');
 
 describe('Testa a função checkoutController ', () => {
   // beforeEach(() => {
@@ -50,7 +54,6 @@ describe('Testa a função checkoutController ', () => {
     const res = mockResponse();
     await checkoutController(req, res);
     expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.send.mock.calls).toMatchSnapshot();
   });
 
   it('teste', async () => {
