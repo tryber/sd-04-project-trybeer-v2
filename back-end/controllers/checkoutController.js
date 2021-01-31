@@ -6,14 +6,8 @@ const checkoutController = async (req, res) => {
   const { total, address, number, date, status, products } = req.body;
   const id = req.user;
 
-  console.log(`id: ${id}, total: ${total}, address: ${address} number: ${number}, date: ${date}, products: ${products}`);
-  const convertedDate = new Date(date)
-    .toISOString()
-    .replace('T', ' ')
-    .replace('Z', '');
+  const convertedDate = new Date(date);
 
-  console.log('checkout', req.body);
-  console.log('id:', id);
   try {
     const registeredSale = await saleService.registerSaleService(
       id,
@@ -24,13 +18,12 @@ const checkoutController = async (req, res) => {
       status,
     );
 
-    console.log('JSON STRINGY', products);
     for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
         registeredSale.id,
         //  usar o campo id mesmo
         products[i].id,
-        products[i].quantity,
+        products[i].quantity
       );
     }
 
