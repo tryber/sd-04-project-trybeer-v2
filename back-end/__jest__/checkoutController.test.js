@@ -1,4 +1,3 @@
-const shell = require('shelljs');
 const checkoutController = require('../controllers/checkoutController');
 const {
   registerSalesProductsService,
@@ -6,11 +5,11 @@ const {
 const { findSalesByUserId, findAllSalesService, findSalesBySaleId } = require('../services/saleService');
 
 describe('Testa a função checkoutController ', () => {
-  beforeEach(() => {
-    shell.exec('npx sequelize-cli db:drop');
-    shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
-    shell.exec('npx sequelize-cli db:seed:all $');
-  });
+  // beforeEach(() => {
+  //   shell.exec('npx sequelize-cli db:drop');
+  //   shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
+  //   shell.exec('npx sequelize-cli db:seed:all $');
+  // });
 
   const req = {
     user: {
