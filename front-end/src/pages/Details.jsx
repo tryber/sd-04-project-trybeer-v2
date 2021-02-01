@@ -60,7 +60,7 @@ function Details() {
             { console.log(JSON.stringify(order)) }
           </p>
         </div>
-          { productList(order) }
+          { productList() }
         <div className="total">
           <h6 data-testid="order-total-value">
             Total:

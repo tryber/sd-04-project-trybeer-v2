@@ -28,7 +28,7 @@ const checkoutController = async (req, res) => {
     for (let i = 0; i < products.length; i += 1) {
       salesProductsService.registerSalesProductsService(
         registeredSale.id,
-        products[i].productId,
+        products[i].id,
         products[i].quantity,
       );
     }

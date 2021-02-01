@@ -20,7 +20,7 @@ function CloseOrder() {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [data, setData] = useState(''); // teste
+  const [data, setData] = useState('');
 
   const orderRef = useRef(null);
   const hist = useHistory();
@@ -47,15 +47,16 @@ function CloseOrder() {
     address,
     number,
     date,
-    products,
+    cart,
   ) => {
+    console.log(`api.post: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${date}, ${JSON.stringify(cart)}`)
     await api.post('/checkout', {
       email,
       total,
       address,
       number,
       date,
-      products,
+      products: cart,
       status: 'Pendente',
     });
   };
