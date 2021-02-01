@@ -37,7 +37,7 @@ const Orders = () => {
         <h2 className="pedidos-text">Pedidos</h2>
         <div>
           {/*  console.log(`adm orders ${JSON.stringify(admOrders)}`)  */}
-          {admOrders.map((order) => {
+          {admOrders.map((order, index) => {
             orderCount[0] += 1;
             const {
               total_price: totalPrice, delivery_address: deliveryAddress,
@@ -45,6 +45,7 @@ const Orders = () => {
             } = order;
             return (
               <CardOrders
+                index = { index }
                 order={ orderCount }
                 address={ deliveryAddress }
                 number={ deliveryNumber }

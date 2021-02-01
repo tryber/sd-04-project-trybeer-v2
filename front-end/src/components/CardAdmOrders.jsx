@@ -7,7 +7,7 @@ const changeUrl = (history, url) => history.push(`/admin/orders/${url}`);
 const dois = 2;
 
 const AdmOrders = ({
-  order, address, price, status,
+  order, address, price, status, index
 }) => {
   const history = useHistory();
   const correctPrice = price.toFixed(dois).toLocaleString().replace('.', ',');
@@ -17,7 +17,7 @@ const AdmOrders = ({
   return (
     <button type="button" className="card-button" onClick={ () => changeUrl(history, url) }>
       <div className="order-container">
-        <h3 data-testid={ `${correctOrder}-order-number` }>{`Pedido ${order}`}</h3>
+        <h3 data-testid={ `${index}-order-number` }>{`Pedido ${order}`}</h3>
         <p data-testid={ `${correctOrder}-order-address` }>{address}</p>
       </div>
       <div className="price-container">

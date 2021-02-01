@@ -28,6 +28,7 @@ function Orders() {
             orderId={ order.id }
             orderDate={ order.sale_date }
             orderPriceSum={ order.total_price }
+            orderStatus={order.status}
           />
         ))}
       </div>
