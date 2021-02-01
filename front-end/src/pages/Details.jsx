@@ -22,6 +22,24 @@ function Details() {
 
   if (!order) return <div>Carregando...</div>;
 
+  console.log(`details order: ${JSON.stringify(order)}`);
+
+  const productList = () => (<div>
+    {order[0].products.map((p, index) => (
+      <div key={ `${order[0].id}item` }>
+        <div>
+          <div className="products">
+            <span data-testid={ `${index}-product-qtd` }>{p.salesProducts.quantity}</span>
+            <span data-testid={ `${index}-product-name` }>{p.name}</span>
+            <span data-testid={ `${index}-product-total-value` }>
+              {`R$ ${(p.price * p.salesProducts.quantity).toFixed(dois).toString().replace('.', ',')}`}
+            </span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>);
+
   return (
     <div>
       <TopBar
@@ -33,43 +51,28 @@ function Details() {
       <div className="container">
         <div className="header">
           <p data-testid="order-number" className="order-name">
-            Pedido
-            {order[0].saleID}
+            { `Pedido ${order[0].id}` }
           </p>
           <p data-testid="order-date" className="order-date">
-            {new Date(order[0].saleDate)
+            {new Date(order[0].sale_date)
               .toLocaleDateString('pt-BR')
               .slice(zero, cinco)}
-            {/* console.log(order) */}
+            { console.log(JSON.stringify(order)) }
           </p>
         </div>
-        <div>
-          {order.map((p, index) => (
-            <div key={ `${p}item` }>
-              <div>
-                <div className="products">
-                  <span data-testid={ `${index}-product-qtd` }>{p.quantity}</span>
-                  <span data-testid={ `${index}-product-name` }>{p.product}</span>
-                  <span data-testid={ `${index}-product-total-value` }>
-                    {`R$ ${(p.price * p.quantity)
-                      .toFixed(dois)
-                      .toString()
-                      .replace('.', ',')}`}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+          { productList(order) }
         <div className="total">
           <h6 data-testid="order-total-value">
             Total:
             {' '}
-            {`R$ ${order[0].totalPrice
+            {`R$ ${order[0].total_price
               .toFixed(dois)
               .toString()
               .replace('.', ',')}`}
           </h6>
+        </div>
+        <div className="status">
+          <p data-testid="order-status">{order[0].status}</p>
         </div>
       </div>
     </div>
