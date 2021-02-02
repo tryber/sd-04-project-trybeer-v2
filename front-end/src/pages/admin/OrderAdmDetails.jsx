@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import SideBar from '../../components/ClientBar';
 import api from '../../services/api';
+import './CSS/OrderAdminDetails.css';
 
 function Details() {
   const [order, setOrder] = useState();
+  const [btnVisibility, setbtnVisibility] = useState('status-btn');
   const params = useParams();
   const history = useHistory();
   // constantes para passar lint
@@ -17,17 +19,25 @@ function Details() {
     api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
       .then((response) => setOrder([response.data]))
       .catch(() => history.push('/login'));
-  }, [params.id, order]);
+  }, [params.id]);
 
+  const hideButtons = () => {
+    setbtnVisibility('status-btn-hidden');
+  };
   const changeStatusOrder = async (status) => {
     await api.post('/orderStatus', { id: order[0].id, status });
+    const token = JSON.parse(localStorage.getItem('token'));
+    await api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
+      .then((response) => setOrder([response.data]))
+      .catch(() => history.push('/login'));
+    if (status === 'Entregue') hideButtons();
   };
 
   if (!order) return <div>Carregando...</div>;
   console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
   return (
     <div>
-      <SideBar title="TryBeer" isAdm />
+      <SideBar title="TryBeer" isAdm isDetails />
       <div className="container">
         <div className="header">
           <p data-testid="order-number" className="order-name">
@@ -65,15 +75,21 @@ function Details() {
             {`R$ ${order[0].total_price.toFixed(dois).toString().replace('.', ',')}`}
           </h6>
         </div>
-        <div className="status-btn">
+        <div className={ btnVisibility }>
           <button
             data-testid="mark-as-prepared-btn"
             type="button"
-            onClick={ () => changeStatusOrder('Preparando') }
+            onClick={ () => { changeStatusOrder('Preparando'); } }
           >
             Preparar pedido
           </button>
-          <button data-testid="mark-as-delivered-btn" type="button" onClick={ () => changeStatusOrder('Entregue') }>Marcar como entregue</button>
+          <button
+            data-testid="mark-as-delivered-btn"
+            type="button"
+            onClick={ () => changeStatusOrder('Entregue') }
+          >
+            Marcar como entregue
+          </button>
         </div>
       </div>
     </div>
