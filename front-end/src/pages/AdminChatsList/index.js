@@ -14,10 +14,8 @@ const AdminChatList = () => {
   useEffect(() => {
     socket.emit('messageList');
     socket.on('allMessages', (msgs) => {
-      if (msgs) {
-        localStorage.setItem('room', msgs.room);
-        setAllMessages(msgs);
-      }
+      if (msgs) localStorage.setItem('room', msgs.room);
+      setAllMessages(msgs);
     });
   }, []);
 
