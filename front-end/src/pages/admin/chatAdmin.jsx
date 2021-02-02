@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import React from 'react';
 import io from 'socket.io-client';
 import TopBar from '../../components/ClientBar';
 
 const socket = io('http://localhost:3001');
 
-// AGORA DEVO CRIAR as conversas do adm com o usuário, poderei salvar as conversas no mesmo local de conversas do usuário, porém o nickname será diferente, então talvez não seja possível
-// TALVEZ deva salvar toda a conversa exclusivamente no banco do administrator ou a conversa inteira no banco do administrator
+// AGORA DEVO CRIAR as conversas do adm com o usuário, poderei salvar as conversas
+// no mesmo local de conversas do usuário, porém o nickname será diferente, então
+// talvez não seja possível
+// TALVEZ deva salvar toda a conversa exclusivamente no banco do administrator
+//  ou a conversa inteira no banco do administrator
 
 const ChatAdmin = () => {
   const loginInStorage = JSON.parse(localStorage.getItem('user'));
@@ -41,10 +42,9 @@ const ChatAdmin = () => {
     socket.emit('showAllMessages');
 
     socket.on('listByName', (data) => {
-      console.log(data, 'AQUI DATA');
       const lastMessages = [];
 
-      data.forEach((item, index) => {
+      data.forEach((item) => {
         lastMessages.push(item[item.length - 1]);
       });
 
@@ -54,6 +54,7 @@ const ChatAdmin = () => {
         } else {
           return emptyMessages();
         }
+        return null;
       });
     });
 
@@ -62,7 +63,7 @@ const ChatAdmin = () => {
         <TopBar
           data-testid="top-title"
           title="Detalhes do Pedido"
-          isAdm={true}
+          isAdm
           isDetails
         />
         <div className="container">
