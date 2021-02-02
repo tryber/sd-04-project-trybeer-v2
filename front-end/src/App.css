@@ -55,10 +55,10 @@ body {
   color: white;
 }
 
-.main-container button {
+/* .main-container button {
   transition: ease-in 1s;
   margin-top: 85px;
-}
+} */
 
 .bottom-btn {
   border-left: 2px solid yellowgreen;
