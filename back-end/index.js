@@ -30,7 +30,7 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('message', (mensagem) => {
-   // console.log(mensagem, 'MENSAGEM');
+    // console.log(mensagem, 'MENSAGEM');
     const time = new Date();
     const timestamp = moment(time).format('HH:mm');
 
@@ -51,14 +51,14 @@ io.on('connection', async (socket) => {
     // Criando lista de nomes dos usuários cadastrados no BD SQL
     const nameList = await users.findAll({});
 
-    nameList.forEach((item) => nicknames.push(item.dataValues.email))
-    nicknames.filter(() => nicknames !== 'tryber@trybe.com.br')
+    nameList.forEach((item) => nicknames.push(item.dataValues.email));
+    nicknames.filter(() => nicknames !== 'tryber@trybe.com.br');
 
-    console.log('AQUI NICKNAMES!!!!!!!', nicknames );
+    console.log('AQUI NICKNAMES!!!!!!!', nicknames);
 
     const messageFromName = [];
     for (let i = 0; i < nameList.length; i++) {
-      messageFromName.push(await chatModel.registeredHistoric(nicknames[i]))
+      messageFromName.push(await chatModel.registeredHistoric(nicknames[i]));
     }
 
     console.log(messageFromName, 'aqui MESSAGE FROM NAME');
