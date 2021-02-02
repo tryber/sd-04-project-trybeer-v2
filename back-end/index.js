@@ -23,7 +23,7 @@ io.on('connection', async (socket) => {
 
   socket.on('messageList', async () => {
     const allMessages = await getAllMessages();
-    // console.log('todas as mensagens', allMessages);
+    console.log('todas as mensagens', allMessages);
     // io.emit('allMessages', allMessages);
     const lastMessage = allMessages.pop();
     console.log('ultima mensagem', lastMessage);
@@ -39,7 +39,7 @@ io.on('connection', async (socket) => {
 
   socket.on('message', async ({ userEmail, message, actualRoom }) => {
     const newDate = new Date();
-    const now = await newDate.toLocaleString([], { hour12: false }).substr(11, 5);
+    const now = await newDate.toLocaleString([], { hour12: false }).split(' ')[1].substring(0, 5);
     await saveMessage({ timestamp: now, message, nickname: userEmail, room: actualRoom });
     const composeMessage = { nick: userEmail, now, message };
     console.log('composeMessage', composeMessage);
