@@ -63,8 +63,14 @@ function Details() {
           </h6>
         </div>
         <div className="status-btn">
-          <button type="button" onClick={ () => changeStatusOrder('Preparando') }>Preparar pedido</button>
-          <button type="button" onClick={ () => changeStatusOrder('Entregue') }>Marcar como entregue</button>
+          <button
+            data-testid="mark-as-prepared-btn"
+            type="button"
+            onClick={ () => changeStatusOrder('Preparando') }
+          >
+            Preparar pedido
+          </button>
+          <button data-testid="mark-as-delivered-btn" type="button" onClick={ () => changeStatusOrder('Entregue') }>Marcar como entregue</button>
         </div>
       </div>
     </div>
