@@ -30,6 +30,7 @@
     "@mysql/xdevapi": "^8.0.20",
     "bootstrap-icons": "^1.1.0",
     "dotenv": "^8.2.0",
+    "history": "^5.0.0",
     "mongodb": "^3.6.2",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
