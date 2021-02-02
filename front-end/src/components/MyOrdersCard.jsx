@@ -32,6 +32,7 @@ function MyOrdersCard({
 
 MyOrdersCard.propTypes = {
   index: PropTypes.number.isRequired,
+  orderStatus: PropTypes.string.isRequired,
   orderDate: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
   orderPriceSum: PropTypes.shape({

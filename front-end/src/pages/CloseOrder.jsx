@@ -31,7 +31,7 @@ function CloseOrder() {
       //  console.log(`eu so log do useffect: total: ${total}`);
       const loginInStorage = JSON.parse(localStorage.getItem('user'));
       setEmail(loginInStorage.userEmail);
-      console.log(loginInStorage.userEmail)
+      console.log(loginInStorage.userEmail);
       setTotal(JSON.parse(localStorage.getItem('totalPrice')));
     }
     const loginInStorage = JSON.parse(localStorage.getItem('user'));
@@ -42,21 +42,20 @@ function CloseOrder() {
   }, []);
 
   const postData = async (
-    email,
-    total,
-    address,
-    number,
-    date,
-    cart,
+    postEmail,
+    postTotal,
+    postAddress,
+    postNumber,
+    postDate,
+    postProducts,
   ) => {
-    console.log(`api.post: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${date}, ${JSON.stringify(cart)}`)
     await api.post('/checkout', {
-      email,
-      total,
-      address,
-      number,
-      date,
-      products: cart,
+      email: postEmail,
+      total: postTotal,
+      address: postAddress,
+      number: postNumber,
+      date: postDate,
+      products: postProducts,
       status: 'Pendente',
     });
   };

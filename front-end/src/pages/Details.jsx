@@ -24,21 +24,22 @@ function Details() {
 
   console.log(`details order: ${JSON.stringify(order)}`);
 
-  const productList = () => (<div>
-    {order[0].products.map((p, index) => (
-      <div key={ `${order[0].id}item` }>
-        <div>
-          <div className="products">
-            <span data-testid={ `${index}-product-qtd` }>{p.salesProducts.quantity}</span>
-            <span data-testid={ `${index}-product-name` }>{p.name}</span>
-            <span data-testid={ `${index}-product-total-value` }>
-              {`R$ ${(p.price * p.salesProducts.quantity).toFixed(dois).toString().replace('.', ',')}`}
-            </span>
+  const productList = () => (
+    <div>
+      {order[0].products.map((p, index) => (
+        <div key={ `${order[0].id}item` }>
+          <div>
+            <div className="products">
+              <span data-testid={ `${index}-product-qtd` }>{p.salesProducts.quantity}</span>
+              <span data-testid={ `${index}-product-name` }>{p.name}</span>
+              <span data-testid={ `${index}-product-total-value` }>
+                {`R$ ${(p.price * p.salesProducts.quantity).toFixed(dois).toString().replace('.', ',')}`}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    ))}
-  </div>);
+      ))}
+    </div>);
 
   return (
     <div>
@@ -60,7 +61,7 @@ function Details() {
             { console.log(JSON.stringify(order)) }
           </p>
         </div>
-          { productList() }
+        { productList() }
         <div className="total">
           <h6 data-testid="order-total-value">
             Total:

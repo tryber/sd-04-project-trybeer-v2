@@ -45,7 +45,7 @@ const Orders = () => {
             } = order;
             return (
               <CardOrders
-                index = { index }
+                index={ index }
                 order={ orderCount }
                 address={ deliveryAddress }
                 number={ deliveryNumber }
