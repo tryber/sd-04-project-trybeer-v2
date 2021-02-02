@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import TopBar from '../../components/ClientBar';
+import SideBar from '../../components/ClientBar';
 import api from '../../services/api';
 
 function Details() {
@@ -24,10 +24,10 @@ function Details() {
   };
 
   if (!order) return <div>Carregando...</div>;
-  //  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
+  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
   return (
     <div>
-      <TopBar data-testid="top-title" title="Detalhes do Pedido" isAdm={ false } isDetails />
+      <SideBar title="TryBeer" isAdm />
       <div className="container">
         <div className="header">
           <p data-testid="order-number" className="order-name">
@@ -54,6 +54,9 @@ function Details() {
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          <p data-testid="0-order-status">{order[0].status}</p>
         </div>
         <div className="total">
           <h6 data-testid="order-total-value">

@@ -13,6 +13,7 @@ const AdmOrders = ({
   const correctPrice = price.toFixed(dois).toLocaleString().replace('.', ',');
   const correctOrder = order[0] - 1;
   const url = order.toLocaleString();
+  console.log(order);
 
   return (
     <button type="button" className="card-button" onClick={ () => changeUrl(history, url) }>
@@ -24,9 +25,7 @@ const AdmOrders = ({
         <h4 className="price-text" data-testid={ `${order}-order-total-value` }>
           {`R$ ${correctPrice}`}
         </h4>
-        <h5 className="status-text" data-testid={ `${index}-order-status` }>
-          {status}
-        </h5>
+        <p className="status-text" data-testid={ `${index}-order-status` }>{status}</p>
       </div>
     </button>
   );

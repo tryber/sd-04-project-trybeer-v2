@@ -24,7 +24,7 @@ function MyOrdersCard({
         <p className="order-number" data-testid={ `${index}-order-number` }>{`Pedido ${orderId}`}</p>
         <p data-testid={ `${index}-order-date` }>{`${day}/${month}`}</p>
         <p data-testid={ `${index}-order-total-value` }>{`R$ ${orderPriceSum.toFixed(dois).toString().replace('.', ',')}`}</p>
-        <p>{orderStatus}</p>
+        <p data-testid={ `${index}-order-status` }>{orderStatus}</p>
       </div>
     </Link>
   );

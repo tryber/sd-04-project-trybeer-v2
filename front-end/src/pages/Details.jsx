@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import TopBar from '../components/ClientBar';
+import SideBar from '../components/ClientBar';
 import api from '../services/api';
 import './Details.css';
 
@@ -43,12 +43,7 @@ function Details() {
 
   return (
     <div>
-      <TopBar
-        data-testid="top-title"
-        title="Detalhes do Pedido"
-        isAdm={ false }
-        isDetails
-      />
+      <SideBar title="TryBeer" isAdm />
       <div className="container">
         <div className="header">
           <p data-testid="order-number" className="order-name">
