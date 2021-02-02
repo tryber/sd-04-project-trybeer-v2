@@ -32,9 +32,9 @@ const ChatClient = () => {
 
   useEffect(() => {
     setUserEmail('Loja');
-    const room = localStorage.getItem('room');
-    socket.emit('online', room);
-    setActualRoom(room);
+    const roomStg = localStorage.getItem('room');
+    socket.emit('online', roomStg);
+    setActualRoom(roomStg);
     socket.on('oldMessages', (msg) => {
       setOldMessages(msg);
     });
