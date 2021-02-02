@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import SideBar from '../../components/ClientBar';
 import api from '../../services/api';
@@ -12,12 +12,12 @@ function Details() {
   const cinco = 5;
   const dois = 2;
 
-  useState(() => {
+  useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
     api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
       .then((response) => setOrder([response.data]))
       .catch(() => history.push('/login'));
-  }, [params.id]);
+  }, [params.id, order]);
 
   const changeStatusOrder = async (status) => {
     await api.post('/orderStatus', { id: order[0].id, status });
