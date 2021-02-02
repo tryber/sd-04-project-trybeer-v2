@@ -40,12 +40,14 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('showAllMessages', async () => {
-    const messages = await chatModel.findAndSort();
     // CRIAR UMA busca de mensagens com base no nome dos usuários no model
-    // Criar um for na lista de nomes, e à partir disso, para cada usuário, chamar a função de busca de mensagens, certo!
-    // Guardar a mensagem de cada usuário numa var, dessa var pegar o último item da lista(última msg enviada, nome e horário)
+    // Criar um for na lista de nomes, e à partir disso, para cada usuário,
+    // chamar a função de busca de mensagens, certo!
+    // Guardar a mensagem de cada usuário numa var, dessa var pegar o último
+    // item da lista(última msg enviada, nome e horário)
     // Criar um card para cada com o nome e horário, renderizar os cards
-    // creio que será mais fácil por collection para cada usuário, pois criarei uma função de busca genérica onde o nome da collection será o nome do user
+    // creio que será mais fácil por collection para cada usuário, pois
+    // criarei uma função de busca genérica onde o nome da collection será o nome do user
 
     const nicknames = [];
     // Criando lista de nomes dos usuários cadastrados no BD SQL
@@ -57,8 +59,8 @@ io.on('connection', async (socket) => {
     console.log('AQUI NICKNAMES!!!!!!!', nicknames);
 
     const messageFromName = [];
-    for (let i = 0; i < nameList.length; i++) {
-      messageFromName.push(await chatModel.registeredHistoric(nicknames[i]));
+    for (let i = 0; i < nameList.length; i + 1) {
+      messageFromName.push(chatModel.registeredHistoric(nicknames[i]));
     }
 
     console.log(messageFromName, 'aqui MESSAGE FROM NAME');
