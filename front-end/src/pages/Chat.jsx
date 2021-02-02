@@ -14,8 +14,6 @@ const Chat = () => {
   if (loginInStorage.role === 'client') {
     //  console.log(loginInStorage);
 
-    //  const namesList = [];
-
     const renderInit = async (data) => {
       const chat = document.getElementById('chat');
 
@@ -34,7 +32,6 @@ const Chat = () => {
         );
 
         dateLine.innerHTML = item.date;
-        //  console.log(dateLine);
 
         msgLine.innerHTML = item.chatMessage;
 
@@ -48,10 +45,9 @@ const Chat = () => {
       });
     };
 
-    socket.emit('render');
+    socket.emit('render', loginInStorage.userEmail);
 
     socket.on('renderInit', async (data) => {
-      //  console.log('do it');
       renderInit(data);
     });
 
@@ -90,10 +86,6 @@ const Chat = () => {
     });
 
     // AGORA TENHO QUE CRIAR A LÓGICA PARA APENAS COLOCAR NOVOS NOMES NO BD E TBM NA LISTA ATUAL
-
-    /*  const showAlert = () => {
-      alert('Este nome já existe');
-    }; */
 
     const sendMessage = async () => {
       //  const nameUser = document.getElementById('userName');
