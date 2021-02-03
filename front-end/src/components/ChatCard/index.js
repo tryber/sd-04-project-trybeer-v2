@@ -17,9 +17,6 @@ const ChatCard = ({ data }) => {
       mb={ 2 }
       maxWidth="60ch"
       type="button"
-      onClick={ () => {
-        console.log('ok');
-      } }
     >
       <Container>
         <Flex
@@ -49,11 +46,15 @@ const ChatCard = ({ data }) => {
 export default ChatCard;
 
 ChatCard.propTypes = {
-  userEmail: PropTypes.string,
-  lastMsg: PropTypes.string,
+  data: PropTypes.shape({
+    userEmail: PropTypes.string,
+    lastMsg: PropTypes.string,
+  }),
 };
 
 ChatCard.defaultProps = {
-  userEmail: 'teste@teste.com',
-  lastMsg: '00:00',
+  data: {
+    userEmail: 'teste@teste.com',
+    lastMsg: '00:00',
+  },
 };
