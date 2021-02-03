@@ -1,5 +1,7 @@
 import axios from 'axios';
+import socketIoClient from 'socket.io-client';
 
+const ENDPOINT = 'http://127.0.0.1:3002';
 const url = 'http://localhost:3001';
 // const mockURL = 'https://my-json-server.typicode.com/pedrotpo/trybeer-mockapi/users';
 
@@ -58,3 +60,28 @@ export const getAllSalesDetails = async (id) => axios
 export const changeStatus = async (id, status) => axios
   .put(`${url}/admin/orders/${id}`, { status })
   .catch(({ response }) => response);
+
+// socketIoClient
+export const clientConnect = () => {
+  const socket = socketIoClient(ENDPOINT);
+  // socket.emit('message', 'Oiii!');
+  /* const { id } = socket;
+  console.log('CLient-Id: ', socket);
+  console.log('socket-Id: ', id); */
+  return socket;
+};
+
+export const clientDesconnect = (socket) => {
+  socket.disconnect();
+};
+
+export const clientSendMessage = (socket, msgData) => {
+  socket.emit('message', msgData);
+};
+
+// histórico das mensagens
+export const previousMessages = (chat) => {
+  const socket = socketIoClient(ENDPOINT);
+  socket.connect();
+  socket.emit('previousMessages', chat);
+};

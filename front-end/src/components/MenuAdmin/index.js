@@ -26,6 +26,9 @@ const MenuAdmin = () => (
         <LinkBtn route="/admin/profile" testid="side-menu-item-profile">
           Perfil
         </LinkBtn>
+        <LinkBtn route="/admin/chats" testid="side-menu-item-chat">
+          Conversas
+        </LinkBtn>
       </Flex>
       <Spacer />
       <LinkBtn route="/login" testid="side-menu-item-logout">

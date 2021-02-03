@@ -28,7 +28,10 @@ const ClientDetails = () => {
 
   useEffect(() => {
     getSalesDetails(salesId).then((response) => {
+      // console.log('response', response);
+      // console.log('response.data.data', response.data);
       setProducts(response.data);
+      // console.log('Products', products);
     });
   }, [setProducts, salesId]);
 
