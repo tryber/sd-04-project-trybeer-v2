@@ -10,7 +10,7 @@ const {
 
 const db = require('../models');
 
-describe('Testa a função checkoutController ', async () => {
+describe('Testa a função checkoutController ', () => {
   const req = {
     user: {
       id: 1,
