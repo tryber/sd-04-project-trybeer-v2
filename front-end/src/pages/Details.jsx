@@ -22,7 +22,7 @@ function Details() {
 
   if (!order) return <div>Carregando...</div>;
 
-  console.log(`details order: ${JSON.stringify(order)}`);
+  //  console.log(`details order: ${JSON.stringify(order)}`);
 
   const productList = () => (
     <div>
@@ -53,7 +53,7 @@ function Details() {
             {new Date(order[0].sale_date)
               .toLocaleDateString('pt-BR')
               .slice(zero, cinco)}
-            { console.log(JSON.stringify(order)) }
+            { /*  console.log(JSON.stringify(order))  */}
           </p>
         </div>
         { productList() }

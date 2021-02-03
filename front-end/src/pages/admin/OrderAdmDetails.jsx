@@ -34,7 +34,7 @@ function Details() {
   };
 
   if (!order) return <div>Carregando...</div>;
-  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
+  //  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
   return (
     <div>
       <SideBar title="TryBeer" isAdm isDetails />

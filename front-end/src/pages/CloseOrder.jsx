@@ -31,7 +31,7 @@ function CloseOrder() {
       //  console.log(`eu so log do useffect: total: ${total}`);
       const loginInStorage = JSON.parse(localStorage.getItem('user'));
       setEmail(loginInStorage.userEmail);
-      console.log(loginInStorage.userEmail);
+      //  console.log(loginInStorage.userEmail);
       setTotal(JSON.parse(localStorage.getItem('totalPrice')));
     }
     const loginInStorage = JSON.parse(localStorage.getItem('user'));
@@ -108,8 +108,8 @@ function CloseOrder() {
     const orderDate = new Date();
     setData(orderDate);
     setStore();
-    console.log(`eu sou o log do doneOrder: ${total}`);
-    console.log(`dados posDAta: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${orderDate}, ${JSON.stringify(cart)})`);
+    //  console.log(`eu sou o log do doneOrder: ${total}`);
+    //  console.log(`dados posDAta: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${orderDate}, ${JSON.stringify(cart)})`);
     postData(email, total, address, number, orderDate, cart);
     localStorage.removeItem('cart');
     history.push('/products');

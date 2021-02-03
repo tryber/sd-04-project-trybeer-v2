@@ -13,7 +13,7 @@ const AdmOrders = ({
   const correctPrice = price.toFixed(dois).toLocaleString().replace('.', ',');
   const correctOrder = order[0] - 1;
   const url = order.toLocaleString();
-  console.log(order);
+  //  console.log(order);
 
   return (
     <button type="button" className="card-button" onClick={ () => changeUrl(history, url) }>
