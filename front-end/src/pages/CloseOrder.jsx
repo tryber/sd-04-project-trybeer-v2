@@ -109,7 +109,8 @@ function CloseOrder() {
     setData(orderDate);
     setStore();
     //  console.log(`eu sou o log do doneOrder: ${total}`);
-    //  console.log(`dados posDAta: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${orderDate}, ${JSON.stringify(cart)})`);
+    //  console.log(`dados posDAta: ${JSON.stringify(email)}, 
+    //    ${total}, ${address}, ${number}, ${orderDate}, ${JSON.stringify(cart)})`);
     postData(email, total, address, number, orderDate, cart);
     localStorage.removeItem('cart');
     history.push('/products');
