@@ -48,8 +48,7 @@ io.on('connection', (socket) => {
 
   // Implementar chamada no frontend
   socket.on('checkUser', async (userEmail) => {
-    const user = await addUser(userEmail);
-    console.log('user: ', user);
+    await addUser(userEmail);
   });
 
   socket.on('disconnect', () => {
@@ -59,17 +58,13 @@ io.on('connection', (socket) => {
 
   // chamada do controller p/ add msg dentro do socket
   socket.on('message', async ({ userEmail, message }) => {
-    const addmsg = await addMessage(userEmail, message);
-    console.log('message: ', addmsg);
+    await addMessage(userEmail, message);
   });
 
   // Chamada do controller para o histórico de mensagens,
   // recebe o parâmetro 'chat' do frontend.
   socket.on('previousMessages', async (userEmail) => {
-    // linha 70 parece gambiarra por enquanto
-    await addUser(userEmail);
     const previousMessages = await getHistoryByUser(userEmail);
-    console.log('PreviousMessages: ', previousMessages);
     io.emit('historyMessages', previousMessages);
   });
 });

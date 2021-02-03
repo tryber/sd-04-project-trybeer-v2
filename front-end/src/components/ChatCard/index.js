@@ -8,40 +8,43 @@ import {
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
-const ChatCard = ({ userEmail, lastMsg }) => (
-  <Button
-    border="1px solid black"
-    borderRadius="5px"
-    mb={ 2 }
-    maxWidth="60ch"
-    type="button"
-    onClick={ () => {
-      console.log('ok');
-    } }
-  >
-    <Container>
-      <Flex
-        direction="column"
-        data-testid="containerChat"
-      >
-        <Flex>
-          <Text
-            fontWeight="bold"
-            data-testid="profile-name"
-          >
-            { userEmail }
-          </Text>
-          <Spacer />
-          <Text data-testid="last-message">
-            Última mensagem às
-            {' '}
-            {lastMsg}
-          </Text>
+const ChatCard = ({ data }) => {
+  const { userEmail, lastMsg } = data;
+  return (
+    <Button
+      border="1px solid black"
+      borderRadius="5px"
+      mb={ 2 }
+      maxWidth="60ch"
+      type="button"
+      onClick={ () => {
+        console.log('ok');
+      } }
+    >
+      <Container>
+        <Flex
+          direction="column"
+          data-testid="containerChat"
+        >
+          <Flex>
+            <Text
+              fontWeight="bold"
+              data-testid="profile-name"
+            >
+              { userEmail }
+            </Text>
+            <Spacer />
+            <Text data-testid="last-message">
+              Última mensagem às
+              {' '}
+              {lastMsg}
+            </Text>
+          </Flex>
         </Flex>
-      </Flex>
-    </Container>
-  </Button>
-);
+      </Container>
+    </Button>
+  );
+};
 
 export default ChatCard;
 

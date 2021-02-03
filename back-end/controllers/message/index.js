@@ -1,27 +1,5 @@
 const messageModel = require('../../mongoModels/message');
 
-/* const addMessage = async (msgData) => {
-  try {
-    const { nickname, message, chat } = msgData;
-    const timestamp = new Date();
-    const time = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
-    const newMessage = await messageModel.addMessage(nickname, time, message, timestamp, chat);
-    return newMessage;
-  } catch (error) {
-    return { message: 'Something goes wrong!' };
-  }
-};
-
-const getMessageByClient = async (chat) => {
-  try {
-    const message = await messageModel.getMessageByClient(chat);
-    // console.log('newmessageeeee', message);
-    return message;
-  } catch (error) {
-    return { message: 'Something goes wrong!' };
-  }
-}; */
-
 const addMessage = async (userEmail, message) => {
   try {
     const timestamp = new Date();
@@ -36,18 +14,11 @@ const addMessage = async (userEmail, message) => {
 
 const addUser = async (userEmail) => {
   try {
-    // const { userEmail } = req.body;
-    console.log(userEmail);
     const user = await messageModel.findUser(userEmail);
-    console.log('addUser, user: ', user);
-    // if (user.length !== 0) return res.status(201).end();
-    // if (user.length !== 0) return 'Já tem usuário';
     if (user) return 'Já tem usuário';
     const newUser = await messageModel.insertUser(userEmail);
-    // return res.status(201).json(newUser);
     return newUser;
   } catch (error) {
-    // return res.status(500).json({ message: 'Something goes wrong! addUser' });
     return { message: 'Something goes wrong! addUser', Err: error };
   }
 };
