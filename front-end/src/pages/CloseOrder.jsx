@@ -17,10 +17,10 @@ function CloseOrder() {
   const { orderMessage, setOrderMessage } = useContext(AppContext);
 
   const [message, setMessage] = useState('');
-  const [address, setAddress] = useState(null);
+  const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [data, setData] = useState(null); // teste
+  const [data, setData] = useState('');
 
   const orderRef = useRef(null);
   const hist = useHistory();
@@ -30,7 +30,8 @@ function CloseOrder() {
       setCart(JSON.parse(localStorage.getItem('cart')));
       //  console.log(`eu so log do useffect: total: ${total}`);
       const loginInStorage = JSON.parse(localStorage.getItem('user'));
-      setEmail(loginInStorage.email);
+      setEmail(loginInStorage.userEmail);
+      console.log(loginInStorage.userEmail);
       setTotal(JSON.parse(localStorage.getItem('totalPrice')));
     }
     const loginInStorage = JSON.parse(localStorage.getItem('user'));
@@ -41,20 +42,20 @@ function CloseOrder() {
   }, []);
 
   const postData = async (
-    emailPost,
-    totalPost,
-    addressPost,
-    numberPost,
-    datePost,
-    productsPost,
+    postEmail,
+    postTotal,
+    postAddress,
+    postNumber,
+    postDate,
+    postProducts,
   ) => {
     await api.post('/checkout', {
-      emailPost,
-      totalPost,
-      addressPost,
-      numberPost,
-      datePost,
-      productsPost,
+      email: postEmail,
+      total: postTotal,
+      address: postAddress,
+      number: postNumber,
+      date: postDate,
+      products: postProducts,
       status: 'Pendente',
     });
   };
@@ -107,7 +108,8 @@ function CloseOrder() {
     const orderDate = new Date();
     setData(orderDate);
     setStore();
-    //  console.log(`eu sou o log do doneOrder: ${total}`);
+    console.log(`eu sou o log do doneOrder: ${total}`);
+    console.log(`dados posDAta: ${JSON.stringify(email)}, ${total}, ${address}, ${number}, ${orderDate}, ${JSON.stringify(cart)})`);
     postData(email, total, address, number, orderDate, cart);
     localStorage.removeItem('cart');
     history.push('/products');

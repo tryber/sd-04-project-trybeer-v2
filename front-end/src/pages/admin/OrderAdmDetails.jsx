@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import TopBar from '../../components/ClientBar';
+import SideBar from '../../components/ClientBar';
 import api from '../../services/api';
+import './CSS/OrderAdminDetails.css';
 
 function Details() {
   const [order, setOrder] = useState();
+  const [btnVisibility, setbtnVisibility] = useState('status-btn');
   const params = useParams();
   const history = useHistory();
   // constantes para passar lint
@@ -12,22 +14,30 @@ function Details() {
   const cinco = 5;
   const dois = 2;
 
-  useState(() => {
+  useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
     api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
       .then((response) => setOrder([response.data]))
       .catch(() => history.push('/login'));
   }, [params.id]);
 
+  const hideButtons = () => {
+    setbtnVisibility('status-btn-hidden');
+  };
   const changeStatusOrder = async (status) => {
     await api.post('/orderStatus', { id: order[0].id, status });
+    const token = JSON.parse(localStorage.getItem('token'));
+    await api.get(`/orders/${params.id}`, { headers: { Authorization: token } })
+      .then((response) => setOrder([response.data]))
+      .catch(() => history.push('/login'));
+    if (status === 'Entregue') hideButtons();
   };
 
   if (!order) return <div>Carregando...</div>;
-  //  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
+  console.log(`ADMDETAILS ORDER[0] ${JSON.stringify(order[0])}`);
   return (
     <div>
-      <TopBar data-testid="top-title" title="Detalhes do Pedido" isAdm={ false } isDetails />
+      <SideBar title="TryBeer" isAdm isDetails />
       <div className="container">
         <div className="header">
           <p data-testid="order-number" className="order-name">
@@ -55,6 +65,9 @@ function Details() {
             </div>
           ))}
         </div>
+        <div>
+          <p data-testid="0-order-status">{order[0].status}</p>
+        </div>
         <div className="total">
           <h6 data-testid="order-total-value">
             Total:
@@ -62,9 +75,21 @@ function Details() {
             {`R$ ${order[0].total_price.toFixed(dois).toString().replace('.', ',')}`}
           </h6>
         </div>
-        <div className="status-btn">
-          <button type="button" onClick={ () => changeStatusOrder('Preparando') }>Preparar pedido</button>
-          <button type="button" onClick={ () => changeStatusOrder('Entregue') }>Marcar como entregue</button>
+        <div className={ btnVisibility }>
+          <button
+            data-testid="mark-as-prepared-btn"
+            type="button"
+            onClick={ () => { changeStatusOrder('Preparando'); } }
+          >
+            Preparar pedido
+          </button>
+          <button
+            data-testid="mark-as-delivered-btn"
+            type="button"
+            onClick={ () => changeStatusOrder('Entregue') }
+          >
+            Marcar como entregue
+          </button>
         </div>
       </div>
     </div>

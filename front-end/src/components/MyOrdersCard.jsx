@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './MyOrdersCard.css';
 
 function MyOrdersCard({
-  index, orderId, orderDate, orderPriceSum,
+  index, orderId, orderDate, orderPriceSum, orderStatus,
 }) {
   // const redirect = () => window.location.replace(`http://localhost:3000/orders/${orderId}`);
 
@@ -24,6 +24,7 @@ function MyOrdersCard({
         <p className="order-number" data-testid={ `${index}-order-number` }>{`Pedido ${orderId}`}</p>
         <p data-testid={ `${index}-order-date` }>{`${day}/${month}`}</p>
         <p data-testid={ `${index}-order-total-value` }>{`R$ ${orderPriceSum.toFixed(dois).toString().replace('.', ',')}`}</p>
+        <p data-testid={ `${index}-order-status` }>{orderStatus}</p>
       </div>
     </Link>
   );
@@ -31,6 +32,7 @@ function MyOrdersCard({
 
 MyOrdersCard.propTypes = {
   index: PropTypes.number.isRequired,
+  orderStatus: PropTypes.string.isRequired,
   orderDate: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
   orderPriceSum: PropTypes.shape({

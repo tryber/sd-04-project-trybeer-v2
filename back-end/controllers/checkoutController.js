@@ -5,17 +5,12 @@ const salesProductsService = require('../services/salesProductsService');
 const checkoutController = async (req, res) => {
   const { total, address, number, date, status, products } = req.body;
   const id = req.user;
-<<<<<<< HEAD
   console.log(`PRODUCTS: ${JSON.stringify(products)}`);
   console.log(`id: ${id}, total: ${total}, address: ${address} number: ${number}, date: ${date}, products: ${products}`);
   const convertedDate = new Date(date)
     .toISOString()
     .replace('T', ' ')
     .replace('Z', '');
-=======
-
-  const convertedDate = new Date(date);
->>>>>>> group-03-main
 
   try {
     const registeredSale = await saleService.registerSaleService(
