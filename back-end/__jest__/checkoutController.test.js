@@ -7,7 +7,6 @@ const {
   findAllSalesService,
   findSalesBySaleId,
 } = require('../services/saleService');
-
 const db = require('../models');
 
 describe('Testa a função checkoutController ', () => {
