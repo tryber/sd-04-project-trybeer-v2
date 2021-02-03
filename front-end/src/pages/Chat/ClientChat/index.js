@@ -63,10 +63,12 @@ const ClientChat = ({ admin, userProp }) => {
 };
 
 ClientChat.propTypes = {
+  admin: PropTypes.bool,
   userProp: PropTypes.string,
 };
 
 ClientChat.defaultProps = {
+  admin: false,
   userProp: 'User',
 };
 
