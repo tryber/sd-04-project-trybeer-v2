@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import api from '../services/api';
 
-const beer = require('../images/beer2.webp');
+// const beer = require('../images/beer2.webp');
 
 function Login() {
   const [email, setEmail] = useState('');
