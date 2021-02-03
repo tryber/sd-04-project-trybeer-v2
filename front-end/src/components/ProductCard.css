@@ -1,0 +1,55 @@
+.beerImg {
+  margin-top: 10px;
+  width: 130;
+  height: 150px;
+}
+
+.beer-card {
+  align-items: center;
+  border: 2px solid black;
+  box-shadow: 2px 2px 2px rgb(201, 201, 201);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding-bottom: 10px;
+  width: 250px;
+  background-color: white;
+
+}
+
+.beer-card p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top:5px;
+  background-color: greenyellow;
+  padding: 2px;
+  border-radius: 12px;
+  border: 1px solid green;
+  width: 90%;
+}
+
+.beer-card .bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  width: 50%;
+}
+
+.beer-card span {
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+.bottom button {
+  background-color: transparent;
+  border: 0;
+  width: 40px;
+  font-size: 30px;
+}
+
+.bottom button:hover {
+  color: blue;
+  border: 0;
+}

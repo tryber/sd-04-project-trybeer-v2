@@ -19,10 +19,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "@mysql/xdevapi": "^8.0.20",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rescue": "^1.1.26",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.2",
+    "multer": "^1.4.2",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
     "socket.io": "^2.3.0"
@@ -33,6 +40,7 @@
     "eslint-plugin-import": "^2.22.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "typescript": ">=2.8.0"
   }
 }

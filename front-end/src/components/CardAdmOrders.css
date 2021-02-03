@@ -1,0 +1,36 @@
+.card-button {
+  background-color: rgb(255, 255, 255);
+  height: 25vh;
+  margin: 2vh 3vh;
+  outline: none !important;
+  padding: 0;
+  width: 30vw;
+}
+
+.order-container{
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 0 15px;
+}
+
+.price-container {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 15px;
+}
+
+.price-text {
+  margin: 0;
+}
+
+.status-text {
+  margin: 0;
+}
+
+.card-button:hover {
+  background-color: rgb(233, 233, 233);
+  border-color: yellowgreen;
+  box-shadow: 0 10px 13px rgba(153, 205, 50, 0.25);;
+}
