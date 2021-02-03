@@ -14,6 +14,10 @@ const AdminChat = () => {
   const [showChat, setShowChat] = useState(false);
   useEffect(() => {
     if (!localStorage.user) history.push('/login');
+    if (localStorage.chat) {
+      setShowChat(true);
+      setUser(localStorage.chat);
+    }
     getChatUsers()
       .then((chatData) => { setData(chatData.data); });
   }, [history, setData]);
@@ -21,6 +25,12 @@ const AdminChat = () => {
   const displayChat = (event) => {
     setUser(event);
     setShowChat(!showChat);
+    localStorage.chat = event;
+  };
+
+  const hideChat = () => {
+    setShowChat(!showChat);
+    localStorage.chat = '';
   };
 
   const printChats = (userArray) => {
@@ -43,7 +53,7 @@ const AdminChat = () => {
         )}
       </Flex>
       <Flex display={ showChat ? 'block' : 'none' }>
-        <Button onClick={ () => setShowChat(!showChat) } data-testid="back-button">Voltar</Button>
+        <Button onClick={ hideChat } data-testid="back-button">Voltar</Button>
         <ClientChat userProp={ user } admin />
       </Flex>
     </Flex>
