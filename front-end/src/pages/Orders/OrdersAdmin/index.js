@@ -30,7 +30,7 @@ const OrdersAdmin = () => {
     const user = localStorage.user || null;
 
     // Pegando os pedidos do banco de dados
-    setRole(jwtDecode(user).dataValues.role);
+    setRole(jwtDecode(user).role);
     getAllSales()
       .then((response) => {
         setOrders(response.data);

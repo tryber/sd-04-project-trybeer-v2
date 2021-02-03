@@ -61,13 +61,13 @@ export const changeStatus = async (id, status) => axios
   .put(`${url}/admin/orders/${id}`, { status })
   .catch(({ response }) => response);
 
+export const getChatUsers = async () => axios
+  .get(`${url}/admin/chats`)
+  .catch(({ response }) => response);
+
 // socketIoClient
 export const clientConnect = () => {
   const socket = socketIoClient(ENDPOINT);
-  // socket.emit('message', 'Oiii!');
-  /* const { id } = socket;
-  console.log('CLient-Id: ', socket);
-  console.log('socket-Id: ', id); */
   return socket;
 };
 
@@ -79,9 +79,11 @@ export const clientSendMessage = (socket, msgData) => {
   socket.emit('message', msgData);
 };
 
+export const checkClient = (socket, userEmail) => {
+  socket.emit('checkUser', userEmail);
+};
+
 // histórico das mensagens
-export const previousMessages = (chat) => {
-  const socket = socketIoClient(ENDPOINT);
-  socket.connect();
-  socket.emit('previousMessages', chat);
+export const previousMessages = (socket, userEmail) => {
+  socket.emit('previousMessages', userEmail);
 };
