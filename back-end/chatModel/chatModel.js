@@ -20,8 +20,12 @@ const registeredHistoric = async (nick) =>
   mongoConnection().then((db) =>
     db.collection('messages').find({ nickname: nick }).toArray());
 
+const findAllHistoric = async () =>
+  mongoConnection().then((db) => db.collection('messages').find().toArray());
+
 module.exports = {
   registerData,
   registeredHistoric,
   findAndSort,
+  findAllHistoric,
 };
