@@ -1,6 +1,7 @@
 const frisby = require('frisby');
 // const shell = require('shelljs');
 const { login } = require('../controllers/login');
+const db = require('../models');
 // const { createToken } = require('../middlewares/createJWT');
 
 const url = 'http://localhost:3001';
@@ -21,6 +22,11 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
     res.json = jest.fn().mockReturnValue(res);
     return res;
   };
+
+  afterAll(async (done) => {
+    await db.sequelize.close();
+    done();
+  });
 
   describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
   // beforeEach(async () => {
