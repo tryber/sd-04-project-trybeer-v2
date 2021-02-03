@@ -13,11 +13,6 @@ const req = {
 };
 
 describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
-  // beforeEach(() => {
-  //   shell.exec('npx sequelize-cli db:drop');
-  //   shell.exec('npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
-  // });
-
   const mockResponse = () => {
     const res = {
       send: jest.fn(),

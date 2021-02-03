@@ -40,7 +40,6 @@ const getUserOrders = async (req, res) => {
     const orders = await sales.findAll();
     res.status(200).json(orders);
   } catch (error) {
-    console.log(error.message);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };

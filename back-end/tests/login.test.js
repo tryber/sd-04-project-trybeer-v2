@@ -1,34 +1,16 @@
 const frisby = require('frisby');
+// const request = require('supertest');
+// const express = require('express');
 
 const url = 'http://localhost:3001';
 
 const userController = require("../controllers/userController");
 
 const req = {
-  user: {
-    id: 1,
-  },
-  body: {
-    total: {
-      email: 'tryber@trybe.com.br',
-      total: 15.0,
-      address: 'Vila da Folha',
-      number: 15,
-      date: '2020-11-20T20:48:32.649Z',
-      status: 'Pendente',
-      products: [
-        {
-          productId: 8,
-          quantity: 5,
-        },
-        {
-          productId: 4,
-          quantity: 5,
-        },
-      ],
-    },
-  },
-};
+  email: 'zebirita@gmail.com',
+  password: '12345678',
+}
+
 
 describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
   const mockResponse = () => {
@@ -42,7 +24,8 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
 
   it('Será validado que é possível fazer login com sucesso', async () => {
     const res = mockResponse();
-    console.log(res);
+    const user = await userController.loginUser(req, res);
+    console.log(user.status);
     await frisby.post(`${url}/login`,
         {
           email: 'zebirita@gmail.com',
@@ -55,7 +38,6 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
         expect(result.token).not.toBeNull();
       });
     
-    await userController.loginUser(req, res);
   });
 
   it('Será validado que não é possível fazer login sem o campo `email`', async () => {
@@ -99,4 +81,5 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
       expect(result.message).toBe(`Cannot read property 'password' of null`);
     })
   })
-});
+}
+);
