@@ -57,8 +57,8 @@ io.on('connection', (socket) => {
   });
 
   // chamada do controller p/ add msg dentro do socket
-  socket.on('message', async ({ userEmail, message }) => {
-    await addMessage(userEmail, message);
+  socket.on('message', async ({ userEmail, message, nick }) => {
+    await addMessage(userEmail, message, nick);
   });
 
   // Chamada do controller para o histórico de mensagens,

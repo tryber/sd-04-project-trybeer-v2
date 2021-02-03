@@ -23,7 +23,7 @@ const Chat = () => {
         <Box>
           <MenuClient header="Chat da loja" />
           <Text>ClientChat - Conversas com a loja</Text>
-          <ClientChat userProp={ user } />
+          <ClientChat userProp={ user } histProp={ user } />
         </Box>
       );
     }

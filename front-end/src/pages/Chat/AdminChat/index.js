@@ -44,7 +44,7 @@ const AdminChat = () => {
       </Flex>
       <Flex display={ showChat ? 'block' : 'none' }>
         <Button onClick={ () => setShowChat(!showChat) } data-testid="back-button">Voltar</Button>
-        <ClientChat userProp={ user } />
+        <ClientChat userProp={ user } admin />
       </Flex>
     </Flex>
   );

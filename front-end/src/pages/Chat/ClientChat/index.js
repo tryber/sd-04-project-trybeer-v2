@@ -8,13 +8,13 @@ import {
   clientConnect, clientSendMessage, checkClient, previousMessages,
 } from '../../../api';
 
-const ClientChat = ({ userProp }) => {
+const ClientChat = ({ admin, userProp }) => {
   const [socket, setSocket] = useState('');
   const [historyMessages, setHistoryMessages] = useState([]);
 
   function createMessageData(event) {
     const message = event.target.elements.messageInput.value;
-    const msgData = { userEmail: userProp, message };
+    const msgData = { userEmail: userProp, nick: admin ? 'Loja' : userProp, message };
     return msgData;
   }
 
@@ -24,7 +24,7 @@ const ClientChat = ({ userProp }) => {
     clientSendMessage(socket, newMsg);
     event.target.elements.messageInput.value = '';
     event.target.elements.messageInput.focus();
-    previousMessages(socket, newMsg.userEmail);
+    previousMessages(socket, userProp);
     socket.on('historyMessages', (previousMsg) => {
       setHistoryMessages(previousMsg);
     });
@@ -33,7 +33,7 @@ const ClientChat = ({ userProp }) => {
   useEffect(() => {
     const socketInUseEffect = clientConnect();
     setSocket(socketInUseEffect);
-    checkClient(socketInUseEffect, userProp);
+    if (!admin) checkClient(socketInUseEffect, userProp);
     previousMessages(socketInUseEffect, userProp);
     socketInUseEffect.on('historyMessages', (previousMsg) => {
       setHistoryMessages(previousMsg);
@@ -41,13 +41,13 @@ const ClientChat = ({ userProp }) => {
     // CLEAN UP THE EFFECT (prevent memory leak)
     // Referência: https://www.valentinog.com/blog/socket-react/
     return () => socketInUseEffect.disconnect();
-  }, [userProp]);
+  }, [admin, userProp]);
 
   return (
     <Container>
       <Container pb="3px">
         {historyMessages && historyMessages.msgs ? historyMessages.msgs.map((message) => (
-          <ChatMessageCard msg={ message } user={ userProp } key={ historyMessages.id } />
+          <ChatMessageCard msg={ message } key={ Math.random() + 1 } />
         )) : <Text> Sem conversas com essa loja </Text>}
       </Container>
       <form

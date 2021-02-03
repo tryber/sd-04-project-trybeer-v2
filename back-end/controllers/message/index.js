@@ -1,10 +1,10 @@
 const messageModel = require('../../mongoModels/message');
 
-const addMessage = async (userEmail, message) => {
+const addMessage = async (userEmail, message, nick) => {
   try {
     const timestamp = new Date();
     const time = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
-    const finalMsg = { content: message, time, timestamp };
+    const finalMsg = { nick, content: message, time, timestamp };
     const insertedMessage = await messageModel.insertMessage(userEmail, time, finalMsg);
     return insertedMessage;
   } catch (error) {
