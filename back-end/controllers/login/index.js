@@ -2,6 +2,7 @@ const { createToken } = require('../../middlewares/createJWT');
 const { users } = require('../../models');
 
 const login = async (req, res) => {
+  console.log('teste', req.body);
   const { email, password } = req.body;
   // console.log('ok');
 
