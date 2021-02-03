@@ -59,7 +59,6 @@ const ClientChat = () => {
     // console.log('CLient-Id: ', socketInUseEffect);
     // console.log('socket-Id: ', socketInUseEffect.id);
     socketInUseEffect.on('historyMessages', (previousMsg) => {
-      console.log('historyMessages: ', previousMsg);
       setHistoryMessages(previousMsg);
     });
     // CLEAN UP THE EFFECT (prevent memory leak)

@@ -39,7 +39,7 @@ const findUser = async (userEmail) => {
 
 const findAllUsers = async () => {
   const result = await connectionMongo()
-    .then((db) => db.collection('messages').find({}, { projection: { _id: 0, msgs: 0 } }).toArray());
+    .then((db) => db.collection('messages').find({}, { projection: { msgs: 0 } }).toArray());
   return result;
 };
 

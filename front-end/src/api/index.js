@@ -61,6 +61,10 @@ export const changeStatus = async (id, status) => axios
   .put(`${url}/admin/orders/${id}`, { status })
   .catch(({ response }) => response);
 
+export const getChatUsers = async () => axios
+  .get(`${url}/admin/chats`)
+  .catch(({ response }) => response);
+
 // socketIoClient
 export const clientConnect = () => {
   const socket = socketIoClient(ENDPOINT);
