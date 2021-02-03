@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <div className="main-container">
-      <img src={ beer } className="beer-img" alt="beer" />
+      {/* <img src={ beer } className="beer-img" alt="beer" /> */}
       <h2>Login Page</h2>
       <div>
         <form onSubmit={ (event) => login(event) }>
