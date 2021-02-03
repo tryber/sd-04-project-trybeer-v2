@@ -13,7 +13,8 @@
     "prestart": "cd back-end/ && npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "start": "npm run install-back && npm run install-front && npm run start-back && npm run start-front",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress:open": "cypress open force=TRUE"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --config force=True"
   },
   "repository": {
     "type": "git",

@@ -33,14 +33,12 @@ module.exports = (on, config) => {
     }
   });
 
-  on('before:browser:launch', (browser, args) => {
+  on('before:browser:launch', (browser, launchOptions) => {
     if (browser.name === 'chrome') {
-      args = args.filter((arg) => {
-        return arg !== '--disable-blink-features=RootLayerScrolling'
-      })
-
-      return args
+      launchOptions.args.push('--disable-dev-shm-usage');
+      return launchOptions;
     }
+    return launchOptions;
   });
 
   config.env.gitHubUser = process.env.GITHUB_USER;
