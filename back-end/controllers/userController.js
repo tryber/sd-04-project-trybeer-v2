@@ -7,7 +7,6 @@ const loginUser = async (req, res) => {
     const response = await userService.login(req.body);
     return res.status(200).json(response);
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };
@@ -20,7 +19,6 @@ const registerUser = async (req, res) => {
     }
     return res.status(201).json(newUser);
   } catch (err) {
-    console.log('erro register', err.message);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
@@ -49,9 +47,8 @@ const getUserOrders = async (req, res) => {
 
 const updateStatus = async (req, res) => {
   try {
-    // const { id } = req.params;
     const updatedOrder = await sales.update({});
-    // const updatedOrder = await Sale.findByPk(id);
+ 
     return res.status(200).json(updatedOrder);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });
