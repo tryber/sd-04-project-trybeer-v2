@@ -6,13 +6,13 @@ const req = {
   password: '123456',
 };
 
-const reqFail = {
-  userName: 'Rubi',
-  email: 'costaleo1',
-  password: '123456',
-};
-
+req.body = req;
 describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
+  afterEach(() => {
+    req.body = {};
+    req.body = req;
+  });
+
   const mockResponse = () => {
     const res = {
       send: jest.fn(),
@@ -25,30 +25,30 @@ describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
   const res = mockResponse();
 
   it('Será validado que é possível cadastrar um usuário com sucesso', async () => {
-    req.body = req;
-    await userController.registerUser(req, res);
-  });
-
-  it('Será validado nao é possível cadastrar um usuário com dados invalidos', async () => {
-    req.body = {};
     await userController.registerUser(req, res);
   });
 
   it('Será testado se é o update será feito corretamente', async () => {
-    req.body = req;
+    const { body: _, ...withoutBody } = req.body;
+    req.body = withoutBody;
     await userController.updateUser(req, res);
   });
 
+  it('Será testado se é o update nao será feito corretamente', async () => {
+    await userController.updateUser({}, res);
+  });
+
+  it('Será validado nao é possível cadastrar um usuário com dados invalidos', async () => {
+    await userController.registerUser({}, res);
+  });
+
   it('será testado se pode pegar todos os pedidos', async () => {
-    req.body = req;
     await userController.getUserOrders(req, res);
   });
 
-  if (
-    ('será testado se o status é atualizado',
-    async () => {
-      req.body = req;
-      await userController.updateStatus(req, res);
-    })
-  );
+  // it('será testado se o status é atualizado', async () => {
+  //     req.body = req;
+  //     await userController.updateStatus(req, res);
+  //   }
+  // );
 });

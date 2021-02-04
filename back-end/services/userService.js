@@ -1,12 +1,12 @@
 const { users } = require('../models');
 
 const createUser = async ({ userName, email, password, isSeller }) => {
-  const emailInDatabase = await users.findOne({ where: { email: email } });
+  const emailInDatabase = await users.findOne({ where: { email } });
   if (emailInDatabase) return { message: 'E-mail already in database.' };
   const role = isSeller ? 'administrator' : 'client';
   const newUser = await users.create({
     name: userName,
-    email: email,
+    email,
     password,
     role,
   });

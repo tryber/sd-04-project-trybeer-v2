@@ -1,5 +1,6 @@
 const { sales } = require('../models');
 const { userService } = require('../services');
+const { users } = require('../models');
 
 const loginUser = async (req, res) => {
   try {
@@ -19,48 +20,47 @@ const registerUser = async (req, res) => {
     }
     return res.status(201).json(newUser);
   } catch (err) {
-    console.log('erro', err);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
 
 const updateUser = async (req, res) => {
   try {
-    console.log('updated =>>>>>>', req.body);
-    const updated = await userService.updateUser(req.body);
-    console.log('updated =>>>>>>', updated);
-    if (updated.message) {
-      return res.status(200).json(updated);
-    }
+    const { userName, email } = req.body;
+    const updated = await users.update(
+      { userName },
+      {
+        where: { email },
+      }
+    );
     res.status(200).json(updated);
   } catch (error) {
+    console.log(error.message);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
 
 const getUserOrders = async (req, res) => {
-  try {
-    const orders = await sales.findAll();
-    res.status(200).json(orders);
-  } catch (error) {
-    return res.status(401).json({ message: 'BAD REQUEST' });
-  }
+  const orders = await sales.findAll();
+
+  return res.status(200).json(orders);
 };
 
-const updateStatus = async (req, res) => {
-  try {
-    const updatedOrder = await sales.update({});
-
-    return res.status(200).json(updatedOrder);
-  } catch (error) {
-    return res.status(401).json({ message: 'BAD REQUEST' });
-  }
-};
+// const updateStatus = async (req, res) => {
+//   try {
+//     console.log("Aquiiii")
+//     const updatedOrder = await sales.update({});
+//     console.log("Aquiiiiii2")
+//     return res.status(200).json(updatedOrder);
+//   } catch (error) {
+//     return res.status(401).json({ message: 'BAD REQUEST' });
+//   }
+// };
 
 module.exports = {
   loginUser,
   updateUser,
   registerUser,
   getUserOrders,
-  updateStatus,
+  // updateStatus,
 };
