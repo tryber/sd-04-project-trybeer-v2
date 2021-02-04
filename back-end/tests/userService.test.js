@@ -1,4 +1,5 @@
 const userServoce = require('../services/userService');
+const db = require('../models');
 
 const req = {
   userName: 'Rubinho Barrichello',
@@ -7,6 +8,11 @@ const req = {
 };
 
 describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
+  afterAll(async (done) => {
+    await db.sequelize.close();
+    done();
+  });
+
   it('Será testado se o usuario já existe', async () => {
     req.body = req;
     const user = await userServoce.createUser(req);
