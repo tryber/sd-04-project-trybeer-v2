@@ -19,16 +19,16 @@ const registerUser = async (req, res) => {
     }
     return res.status(201).json(newUser);
   } catch (err) {
-    console.log("erro", err)
+    console.log('erro', err);
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
 
 const updateUser = async (req, res) => {
   try {
-    console.log("updated =>>>>>>", req.body)
+    console.log('updated =>>>>>>', req.body);
     const updated = await userService.updateUser(req.body);
-    console.log("updated =>>>>>>", updated)
+    console.log('updated =>>>>>>', updated);
     if (updated.message) {
       return res.status(200).json(updated);
     }
@@ -43,7 +43,6 @@ const getUserOrders = async (req, res) => {
     const orders = await sales.findAll();
     res.status(200).json(orders);
   } catch (error) {
-
     return res.status(401).json({ message: 'BAD REQUEST' });
   }
 };
@@ -51,7 +50,7 @@ const getUserOrders = async (req, res) => {
 const updateStatus = async (req, res) => {
   try {
     const updatedOrder = await sales.update({});
- 
+
     return res.status(200).json(updatedOrder);
   } catch (error) {
     return res.status(401).json({ message: 'BAD REQUEST' });

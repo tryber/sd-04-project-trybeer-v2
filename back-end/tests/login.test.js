@@ -1,12 +1,9 @@
 const frisby = require('frisby');
-// const request = require('supertest');
-// const express = require('express');
-// const request = require('supertest')
-// const app = require('express')()
 
 const url = 'http://localhost:3001';
 
 const userController = require('../controllers/userController');
+const db = require('../models');
 
 const req = {
   email: 'zebirita@gmail.com',
@@ -19,6 +16,11 @@ const reqFail = {
 };
 
 describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
+  afterAll(async (done) => {
+    await db.sequelize.close();
+    done();
+  });
+
   const mockResponse = () => {
     const res = {
       send: jest.fn(),
