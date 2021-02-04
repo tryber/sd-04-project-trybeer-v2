@@ -1,16 +1,22 @@
 const frisby = require('frisby');
 // const request = require('supertest');
 // const express = require('express');
+// const request = require('supertest')
+// const app = require('express')()
 
 const url = 'http://localhost:3001';
 
-const userController = require("../controllers/userController");
+const userController = require('../controllers/userController');
 
 const req = {
   email: 'zebirita@gmail.com',
   password: '12345678',
-}
+};
 
+const reqFail = {
+  email: 'zebita@gmail.com',
+  password: '12345678',
+};
 
 describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
   const mockResponse = () => {
@@ -22,44 +28,38 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
     return res;
   };
 
+  const res = mockResponse();
+
   it('Será validado que é possível fazer login com sucesso', async () => {
-    const res = mockResponse();
-    const user = await userController.loginUser(req, res);
-    console.log(user.status);
-    await frisby.post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-          password: '12345678',
-        })
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.token).not.toBeNull();
-      });
-    
+    req.body = req;
+    await userController.loginUser(req, res);
+  });
+
+  it('sera validado que não é possivel fazer login', async () => {
+    req.body = reqFail;
+    await userController.loginUser(req, res);
   });
 
   it('Será validado que não é possível fazer login sem o campo `email`', async () => {
     await frisby
-      .post(`${url}/login`,
-        {
-          password: '12345678',
-        })
+      .post(`${url}/login`, {
+        password: '12345678',
+      })
       .expect('status', 500)
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
-        expect(result.message).toBe('WHERE parameter \"email\" has invalid \"undefined\" value');
+        expect(result.message).toBe(
+          'WHERE parameter "email" has invalid "undefined" value'
+        );
       });
   });
 
   it('Será validado que não é possível fazer login sem o campo `password`', async () => {
     await frisby
-      .post(`${url}/login`,
-        {
-          email: 'lewishamilton@gmail.com',
-        })
+      .post(`${url}/login`, {
+        email: 'lewishamilton@gmail.com',
+      })
       .expect('status', 500)
       .then((response) => {
         const { body } = response;
@@ -69,17 +69,17 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
   });
 
   it('Seria validado que o email possui o formato correto', async () => {
-    await frisby.post(`${url}/login`, {
-      email: 'teste',
-      password: '12345678'
-    })
-    .expect('status', 500)
-    .then(({ body }) => {
-      const { email } = body;
+    await frisby
+      .post(`${url}/login`, {
+        email: 'teste',
+        password: '12345678',
+      })
+      .expect('status', 500)
+      .then(({ body }) => {
+        const { email } = body;
 
-      const result = JSON.parse(body);
-      expect(result.message).toBe(`Cannot read property 'password' of null`);
-    })
-  })
-}
-);
+        const result = JSON.parse(body);
+        expect(result.message).toBe(`Cannot read property 'password' of null`);
+      });
+  });
+});

@@ -32,6 +32,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
