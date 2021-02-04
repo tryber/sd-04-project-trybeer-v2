@@ -31,7 +31,7 @@ const updateUser = async (req, res) => {
       { userName },
       {
         where: { email },
-      }
+      },
     );
     res.status(200).json(updated);
   } catch (error) {

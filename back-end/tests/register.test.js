@@ -1,4 +1,5 @@
 const userController = require('../controllers/userController');
+const db = require('../models');
 
 const req = {
   userName: 'Rubinho Barrichelloooo',
@@ -8,9 +9,9 @@ const req = {
 
 req.body = req;
 describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
-  afterEach(() => {
-    req.body = {};
-    req.body = req;
+  afterAll(async (done) => {
+    await db.sequelize.close();
+    done();
   });
 
   const mockResponse = () => {
