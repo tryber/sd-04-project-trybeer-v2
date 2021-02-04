@@ -15,7 +15,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 - Cobertura de testes no back-end e no front-end.
 
-- Aprender a usar dois bancos de dados paralelamente na mesma aplicação.
+- Aprender a usar 2 bancos de dados paralelamente na mesma aplicação.
 
 ## Instruções para entregar seu projeto:
 

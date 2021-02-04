@@ -1,0 +1,25 @@
+.order-card {
+  align-items: center;
+  border: 1px solid yellowgreen;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  padding: 10px;
+  width: 250px;
+  color: white;
+  /* background-color: rgb(53, 77, 5); */
+}
+
+.order-card:hover {
+  background-color: rgb(53, 53, 53);
+}
+
+.order-number {
+  font-size: 20px;
+  border: 1px solid rgb(104, 141, 25);
+  background-color: rgb(100, 134, 30);
+  border-radius: 5px;
+  width: 95%;
+  text-align: center;
+}
