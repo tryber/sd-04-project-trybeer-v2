@@ -4,7 +4,7 @@ import socketIoClient from 'socket.io-client';
 const ENDPOINT = 'http://127.0.0.1:3002';
 const url = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 // const mockURL = 'https://my-json-server.typicode.com/pedrotpo/trybeer-mockapi/users';
-
+// teste
 export const userLogin = async (email, password) => axios
   .post(`${url}/login`, { email, password })
   .catch(({ response }) => response);
