@@ -23,10 +23,10 @@ io.on('connection', async (socket) => {
 
   socket.on('messageList', async () => {
     const allMessages = await getAllMessages();
-    console.log('todas as mensagens', allMessages);
+    // console.log('todas as mensagens', allMessages);
     // io.emit('allMessages', allMessages);
     const lastMessage = allMessages.pop();
-    console.log('ultima mensagem', lastMessage);
+    // console.log('ultima mensagem', lastMessage);
     io.emit('allMessages', lastMessage);
   });
 
