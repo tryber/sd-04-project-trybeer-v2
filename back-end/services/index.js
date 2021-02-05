@@ -2,6 +2,5 @@
 const userService = require('./userService');
 
 module.exports = {
-  // productsService,
   userService,
 };

@@ -1,4 +1,3 @@
-// const { productsService } = require('../services');
 const { products, sales, salesProducts } = require('../models');
 
 const fetchProducts = async (_req, res) => {
@@ -23,9 +22,7 @@ const fetchSales = async (_req, res) => {
 const fetchSaleById = async (req, res) => {
   try {
     const { id } = req.params;
-    // const productsResult = await sales.findAll({
-    //   where: { id },
-    // }, { include: [{ model: products, as: 'products', through: { attributes: [] } }] });
+
     const productsResult = await sales.findAll({
       where: { id },
       include: [{ model: products, as: 'products' }],
