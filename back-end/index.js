@@ -8,9 +8,7 @@ const cors = require('cors');
 const path = require('path');
 const moment = require('moment');
 const routes = require('./routes');
-
 const { users } = require('./models');
-
 const chatModel = require('./chatModel/chatModel');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -52,24 +50,36 @@ io.on('connection', async (socket) => {
     const nicknames = [];
     // Criando lista de nomes dos usuários cadastrados no BD SQL
     const nameList = await users.findAll({});
+    nicknames.push('Loja');
 
     nameList.forEach((item) => nicknames.push(item.dataValues.email));
-    nicknames.filter(() => nicknames !== 'tryber@trybe.com.br');
+    const filterNicknames = nicknames.filter(
+      (nickname) => nickname !== 'tryber@trybe.com.br',
+    );
 
     const allHistoric = await chatModel.findAllHistoric();
+    /*     console.log(allHistoric, 'ALL HISTORIC'); */
 
-    const messageFromName = [];
-
-    nicknames.forEach((name) =>
-      allHistoric.forEach((item) => {
-        if (item.nickname === name) {
-          messageFromName.push(item);
+    console.log(nicknames, 'AQUI NICKNAMES');
+    const makeList = (nome) => {
+      const msgByName = [];
+      allHistoric.forEach((msg) => {
+        if (msg.sender === nome) {
+          msgByName.push(msg);
         }
-      }));
+      });
+      return msgByName;
+    };
 
-    console.log(messageFromName, 'AQUI MESSAGE FROM NAME');
+    const listMsgName = [];
+    filterNicknames.forEach((name) => {
+      // console.log(makeList(name), 'AQUI SAÍDA DA FUNÇÃO MAELIST');
+      listMsgName.push(makeList(name));
+    });
 
-    socket.emit('listByName', messageFromName);
+    // console.log(listMsgName, 'aqui msg BY NICKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+
+    socket.emit('listByName', listMsgName);
   });
 
   socket.on('disconnect', () => {

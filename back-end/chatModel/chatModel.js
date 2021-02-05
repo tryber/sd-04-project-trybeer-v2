@@ -4,6 +4,7 @@ const registerData = (data, date) => {
   mongoConnection().then((db) => {
     db.collection('messages').insertOne({
       nickname: data.nickname,
+      sender: data.sender,
       chatMessage: data.chatMessage,
       date,
     });
