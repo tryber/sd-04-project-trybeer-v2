@@ -25,7 +25,7 @@ const Chat = () => {
         const nick = document.createElement('p');
         const bloco = document.createElement('div');
 
-        msgLine.setAttribute('data-testid', 'message');
+        msgLine.setAttribute('data-testid', 'text-message');
         msgLine.setAttribute(
           'class',
           'border border-info border-5 border-end-0 rounded-start',
@@ -35,7 +35,7 @@ const Chat = () => {
 
         msgLine.innerHTML = item.chatMessage;
 
-        nick.innerHTML = item.nickname;
+        nick.innerHTML = item.sender;
 
         bloco.append(nick);
         bloco.append(dateLine);
@@ -76,7 +76,7 @@ const Chat = () => {
 
       msgLine.innerHTML = data.chatMessage;
 
-      nick.innerHTML = data.nickname;
+      nick.innerHTML = data.sender;
 
       bloco.append(nick);
       bloco.append(dateLine);
@@ -96,7 +96,7 @@ const Chat = () => {
       const chatMessage = inputMsg.value;
       const nickname = loginInStorage.userEmail;
 
-      socket.emit('message', { chatMessage, nickname });
+      socket.emit('message', { chatMessage, nickname, sender: nickname });
     };
 
     return (
