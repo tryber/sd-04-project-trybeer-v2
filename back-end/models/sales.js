@@ -2,11 +2,6 @@ const Sales = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
     'sales',
     {
-      // id: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   primaryKey: true,
-      // },
       user_Id: {
         type: DataTypes.INTEGER,
         allowNull: false,
