@@ -14,6 +14,7 @@ module.exports = {
         role: 'client',
       },
     ], {});
+    // { timestamps: false }
   },
 
   down: async (queryInterface, _Sequelize) => {
