@@ -42,7 +42,7 @@ io.on('connection', async (socket) => {
     const now = await newDate.toLocaleString([], { hour12: false }).split(' ')[1].substring(0, 5);
     await saveMessage({ timestamp: now, message, nickname: userEmail, room: actualRoom });
     const composeMessage = { nick: userEmail, now, message };
-    console.log('composeMessage', composeMessage);
+    // console.log('composeMessage', composeMessage);
     io.to(actualRoom).emit('newMessage', composeMessage);
   });
 
