@@ -23,8 +23,6 @@ const validateJWT = async (req, res, next) => {
       return res.status(401).json({ message: 'invalid token' });
     }
 
-    /* const { password, ...userInfo } = user; */
-
     req.user = user;
 
     return next();

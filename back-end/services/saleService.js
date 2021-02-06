@@ -43,9 +43,15 @@ const findSalesBySaleId = async (id) => {
   return salesById;
 };
 
+const updateSaleStatusService = async (id, status) => {
+  const statusUpdated = await sales.update({ status }, { where: { id } });
+  return statusUpdated;
+};
+
 module.exports = {
   registerSaleService,
   findAllSalesService,
   findSalesByUserId,
   findSalesBySaleId,
+  updateSaleStatusService,
 };

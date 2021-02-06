@@ -3,19 +3,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MyOrdersCard.css';
 
-const dois = 2;
-const cinco = 5;
-const sete = 7;
-const oito = 8;
-const dez = 10;
-
 function MyOrdersCard({
-  index, orderId, orderDate, orderPriceSum,
+  index, orderId, orderDate, orderPriceSum, orderStatus,
 }) {
-  //  console.log(index);
-  //  const redirect = () => window.location.replace(`http://localhost:3000/orders/${orderId}`);
-  const day = orderDate.substring(oito, dez);
-  const month = orderDate.substring(cinco, sete);
+  // const redirect = () => window.location.replace(`http://localhost:3000/orders/${orderId}`);
+
+  // Constantes declaradas para passar no lint. É a posição inical e final da string date
+  const daySubstrStart = 8;
+  const daySubstrEnd = 10;
+  const monthSubstrStart = 5;
+  const monthSubstrEnd = 7;
+
+  const day = orderDate.substring(daySubstrStart, daySubstrEnd);
+  const month = orderDate.substring(monthSubstrStart, monthSubstrEnd);
+  const dois = 2;
 
   return (
     <Link to={ `/orders/${orderId}` } style={ { textDecoration: 'none' } }>
@@ -23,6 +24,7 @@ function MyOrdersCard({
         <p className="order-number" data-testid={ `${index}-order-number` }>{`Pedido ${orderId}`}</p>
         <p data-testid={ `${index}-order-date` }>{`${day}/${month}`}</p>
         <p data-testid={ `${index}-order-total-value` }>{`R$ ${orderPriceSum.toFixed(dois).toString().replace('.', ',')}`}</p>
+        <p data-testid={ `${index}-order-status` }>{orderStatus}</p>
       </div>
     </Link>
   );
@@ -30,6 +32,7 @@ function MyOrdersCard({
 
 MyOrdersCard.propTypes = {
   index: PropTypes.number.isRequired,
+  orderStatus: PropTypes.string.isRequired,
   orderDate: PropTypes.number.isRequired,
   orderId: PropTypes.number.isRequired,
   orderPriceSum: PropTypes.shape({

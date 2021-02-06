@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import api from '../services/api';
 
-const beer = require('../images/beer2.webp');
+// const beer = require('../images/beer2.webp');
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <div className="main-container">
-      <img src={ beer } className="beer-img" alt="beer" />
+      {/* <img src={ beer } className="beer-img" alt="beer" /> */}
       <h2>Login Page</h2>
       <div>
         <form onSubmit={ (event) => login(event) }>

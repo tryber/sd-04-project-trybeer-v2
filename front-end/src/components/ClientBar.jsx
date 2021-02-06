@@ -21,20 +21,23 @@ const changeOpen = () => {
   return true;
 };
 
-const changeUrl = (history, url, clear, isDetails) => {
+const changeUrl = (history, url, clear, isDetails, isAdmDetails) => {
   if (isDetails) {
     history.replace('/');
   }
-  history.push(url);
   if (clear) {
     localStorage.setItem('token', '');
     localStorage.setItem('user', '');
   }
   ctrOpen = false;
+  if (isAdmDetails) {
+    return history.push(`/admin/${url}`);
+  }
+  history.push(url);
   return 'ok';
 };
 
-const admOnline = (history, title) => (
+const admOnline = (history, title, isDetails) => (
   <nav className="admin-side-bar-container">
     <div>
       <h3 className="title-adm">{title}</h3>
@@ -42,7 +45,7 @@ const admOnline = (history, title) => (
         type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-orders"
-        onClick={ () => changeUrl(history, 'orders') }
+        onClick={ () => changeUrl(history, 'orders', null, isDetails, true) }
       >
         Pedidos
       </button>
@@ -50,7 +53,7 @@ const admOnline = (history, title) => (
         type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-profile"
-        onClick={ () => changeUrl(history, 'profile') }
+        onClick={ () => changeUrl(history, 'profile', null, isDetails, true) }
       >
         Perfil
       </button>
@@ -58,7 +61,7 @@ const admOnline = (history, title) => (
         type="button"
         className="nav-btn-adm"
         data-testid="side-menu-item-chat"
-        onClick={ () => changeUrl(history, 'chats') }
+        onClick={ () => changeUrl(history, 'chats', null, isDetails, true) }
       >
         Conversas
       </button>
@@ -67,7 +70,7 @@ const admOnline = (history, title) => (
       type="button"
       className="nav-btn-adm"
       data-testid="side-menu-item-logout"
-      onClick={ () => changeUrl(history, '', true) }
+      onClick={ () => changeUrl(history, '', true, isDetails, false) }
     >
       Sair
     </button>
@@ -76,7 +79,7 @@ const admOnline = (history, title) => (
 
 const TopBar = ({ title, isAdm, isDetails }) => {
   const history = useHistory();
-  if (isAdm) return admOnline(history, title);
+  if (isAdm) return admOnline(history, title, isDetails);
   return (
     <div>
       <div className="body-top-bar">
