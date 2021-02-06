@@ -32,7 +32,7 @@ io.on('connection', async (socket) => {
 
   socket.on('online', async (room) => {
     const oldMessages = await getMessages(room);
-    console.log('mensagens antigas', oldMessages);
+    // console.log('mensagens antigas', oldMessages);
     socket.join(room);
     io.to(room).emit('oldMessages', oldMessages);
   });
