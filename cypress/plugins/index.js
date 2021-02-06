@@ -42,5 +42,5 @@ module.exports = (on, config) => {
   });
 
   config.env.gitHubUser = process.env.GITHUB_USER;
-  return config;
+  return config; 
 }
