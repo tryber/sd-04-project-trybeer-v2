@@ -6,15 +6,14 @@ const socket = io('http://localhost:3001');
 
 const ChatAdmin = () => {
   const [onChat, setOnChat] = useState(localStorage.getItem('onChat') || false);
-  const [allMessages, setAllMessages] = useState();
+  const [allMessages, setAllMessages] = useState([]);
   const [lastMsgState, setLastMsgState] = useState('');
   const [onSender, setOnSender] = useState(
     localStorage.getItem('sender') || '',
   );
   const [stateMsg, setStateMsg] = useState('');
-  // const [renderMsg, setRenderMsg] = useState('');
 
-  // console.log(renderMsg, 'aqui teste render msg');
+  // console.log(allMessages, 'aqui teste render msg');
 
   useEffect(() => {
     const loginInStorage = JSON.parse(localStorage.getItem('user'));
@@ -26,27 +25,32 @@ const ChatAdmin = () => {
     const lastMessages = [];
 
     socket.on('listByName', (data) => {
-      // console.log(data); LISTA DE MENSAGEM SEPARADA POR EMAIL
       setAllMessages(data);
 
       data.forEach((item) => {
-        lastMessages.push(item[item.length - 1]);
-        // console.log(item, 'ITEM LOJA USEEFFECT');
+        const lastItem = item[item.length - 1];
+
+        if (lastItem) {
+          lastMessages.push(lastItem);
+        }
       });
 
-      // console.log(lastMessages, 'LAST MESSAGES DO USEEFFECT');
       const userLastMessages = lastMessages.filter(
         (name) => name.sender !== 'Loja',
       );
 
       setLastMsgState(userLastMessages);
     });
+
+    /* socket.on('renderMessage', (message, timestamp) => {
+      addNewMessage(message, timestamp);
+    }); */
   }, []);
 
   const sendMessage = (message, nickname) => {
     // console.log('aqui message', message);
 
-    // setRenderMsg({ chatMessage: message, nickname, sender: 'Loja' });
+    // setAllMessages((dados) => [[...dados], [{chatMessage: message, nickname, sender: 'Loja'}]]);
 
     socket.emit('message', { chatMessage: message, nickname, sender: 'Loja' });
   };
@@ -76,14 +80,15 @@ const ChatAdmin = () => {
     </div>
   );
 
-  const renderChat = (userSender) => {
+  const renderChat = (userSender, newAllMessages) => {
     // console.log(userSender, 'AQUI USER SENDER');
-    const filterFromUser = allMessages.filter((messages, index) => {
-      console.log(messages, 'DENTRO DO FILTER MESSAGES');
-      return messages[index].nickname === userSender;
+
+    const filterFromUser = newAllMessages.filter((messages) => {
+    //  console.log(messages, 'DENTRO DO FILTER MESSAGES');
+      return messages[0] ? messages[0].nickname === userSender : false;
     });
     const data = filterFromUser[0] || [];
-    // console.log(filterFromUser[0], 'FILTER FROM USER');
+    // console.log(filterFromUser, 'FILTER FROM USER');
     return viewChat(data);
   };
 
@@ -94,6 +99,8 @@ const ChatAdmin = () => {
       localStorage.setItem('sender', sender);
       setOnChat(true);
     };
+
+    const numMagic = 0;
 
     if (onChat === false) {
       return (
@@ -108,7 +115,7 @@ const ChatAdmin = () => {
             <h1 className="messages" id="messageBoxes">
               Todas as conversas
             </h1>
-            {lastMsgState ? (
+            {lastMsgState && lastMsgState.length > numMagic ? (
               lastMsgState.map((item) => (
                 <button
                   type="button"
@@ -120,7 +127,6 @@ const ChatAdmin = () => {
                     <h3 data-testid="profile-name">{item.sender}</h3>
                     <h4 data-testid="last-message">{item.date}</h4>
                   </div>
-
                 </button>
               ))
             ) : (
@@ -142,11 +148,15 @@ const ChatAdmin = () => {
           isDetails
         />
         <div>
-          <button type="button" data-testid="back-button" onClick={ () => setOnChat(false) }>
+          <button
+            type="button"
+            data-testid="back-button"
+            onClick={ () => setOnChat(false) }
+          >
             Voltar
           </button>
         </div>
-        {allMessages && renderChat(onSender)}
+        {allMessages && renderChat(onSender, allMessages)}
       </div>
     );
   }
