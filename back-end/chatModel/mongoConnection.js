@@ -12,7 +12,7 @@ async function mongoConnection() {
       useUnifiedTopology: true,
     },
   )
-    .then((conn) => conn.db(process.env.DB_NAMEM))
+    .then((conn) => conn.db(process.env.DB_NAME))
     .then((dbSchema) => {
       schema = dbSchema;
       return schema;
