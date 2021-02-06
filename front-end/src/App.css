@@ -1,3 +1,7 @@
+iframe {
+  display: none
+}
+
 .App {
   text-align: center;
 }
@@ -11,6 +15,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+body {
+  background-color: rgb(39, 39, 39);
 }
 
 .App-header {
@@ -27,6 +35,135 @@
 .App-link {
   color: #61dafb;
 }
+
+.main-container {
+  max-width: 500px;
+  width: 100%;
+  height: 50vh;
+  border-radius: 10px;
+  /* background-color: hotpink; */
+  margin: 80px auto;
+  border-left: 2px solid yellowgreen;
+  padding: 10px;
+  /* box-shadow: 3px 3px black; */
+}
+
+.main-container h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.main-container label {
+  color: white;
+}
+
+.main-container button {
+  transition: ease-in 1s;
+  margin-top: 85px;
+}
+
+.bottom-btn {
+  border-left: 2px solid yellowgreen;
+  border-radius: 10px;
+  margin-left: -12px;
+  padding-bottom: 10px;
+}
+
+.btn.btn-success:disabled {
+  background-color:transparent;
+  color: black;
+}
+
+.btn.btn-success:enabled {
+  background-color:yellowgreen;
+  color: black;
+  margin-top: 25px;
+}
+
+.no-account {
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 600px;
+  margin: auto;
+}
+
+.loading {
+  color: white;
+}
+
+.ver-carrinho {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.ver-carrinho button {
+  border: 1px solid green;
+  background-color: transparent;
+  padding: 6px;
+  width: 300px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: 0.5s;
+  color: white;
+}
+
+.ver-carrinho button:enabled:hover {
+  background-color: rgb(57, 70, 37);
+  /* border: 2px solid greenyellow; */
+  /* color:black; */
+}
+
+.ver-carrinho button:disabled {
+  color: gray;
+  font-weight: normal;
+  border: 1px solid gray;
+}
+
+.ver-carrinho button i {
+  font-size: 1.8rem;
+}
+
+.ver-carrinho:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+link {
+  text-decoration: none;
+}
+
+.btn-value {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.main-container-orders {
+  width: 300px;
+  margin-left: 250px;
+}
+
+.beer-img {
+  width: 70px;
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 50px;
+}
+
+.register-container {
+  color: white;
+}
+
 
 @keyframes App-logo-spin {
   from {
