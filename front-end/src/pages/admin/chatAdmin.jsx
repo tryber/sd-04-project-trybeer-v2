@@ -83,10 +83,9 @@ const ChatAdmin = () => {
   const renderChat = (userSender, newAllMessages) => {
     // console.log(userSender, 'AQUI USER SENDER');
 
-    const filterFromUser = newAllMessages.filter((messages) => {
-    //  console.log(messages, 'DENTRO DO FILTER MESSAGES');
-      return messages[0] ? messages[0].nickname === userSender : false;
-    });
+    const filterFromUser = newAllMessages
+      .filter((messages) => (messages[0] ? messages[0].nickname === userSender : false));
+
     const data = filterFromUser[0] || [];
     // console.log(filterFromUser, 'FILTER FROM USER');
     return viewChat(data);
