@@ -27,26 +27,7 @@ io.on('connection', async (socket) => {
     socket.emit('renderInit', history);
   });
 
-  socket.on('message', (mensagem) => {
-    // console.log(mensagem, 'MENSAGEM');
-    const time = new Date();
-    const timestamp = moment(time).format('HH:mm');
-
-    chatModel.registerData(mensagem, timestamp);
-
-    io.emit('renderMessage', mensagem, timestamp);
-  });
-
-  socket.on('showAllMessages', async () => {
-    // CRIAR UMA busca de mensagens com base no nome dos usuários no model
-    // Criar um for na lista de nomes, e à partir disso, para cada usuário,
-    // chamar a função de busca de mensagens, certo!
-    // Guardar a mensagem de cada usuário numa var, dessa var pegar o último
-    // item da lista(última msg enviada, nome e horário)
-    // Criar um card para cada com o nome e horário, renderizar os cards
-    // creio que será mais fácil por collection para cada usuário, pois
-    // criarei uma função de busca genérica onde o nome da collection será o nome do user
-
+  const showMessages = async () => {
     const nicknames = [];
     // Criando lista de nomes dos usuários cadastrados no BD SQL
     const nameList = await users.findAll({});
@@ -64,7 +45,7 @@ io.on('connection', async (socket) => {
     const makeList = (nome) => {
       const msgByName = [];
       allHistoric.forEach((msg) => {
-        if (msg.sender === nome) {
+        if (msg.nickname === nome) {
           msgByName.push(msg);
         }
       });
@@ -77,9 +58,27 @@ io.on('connection', async (socket) => {
       listMsgName.push(makeList(name));
     });
 
-    // console.log(listMsgName, 'aqui msg BY NICKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+    console.log(listMsgName, 'aqui msg BY NICKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+    return listMsgName;
+  };
 
-    socket.emit('listByName', listMsgName);
+  socket.on('message', async (mensagem) => {
+    // console.log(mensagem, 'MENSAGEM');
+
+    const time = new Date();
+    const timestamp = moment(time).format('HH:mm');
+
+    chatModel.registerData(mensagem, timestamp);
+
+    io.emit('renderMessage', mensagem, timestamp);
+
+    io.emit('listByName', await showMessages());
+
+    console.log(mensagem, 'HHHHHHHHHHHHHHH');
+  });
+
+  socket.on('showAllMessages', async () => {
+    socket.emit('listByName', await showMessages());
   });
 
   socket.on('disconnect', () => {
