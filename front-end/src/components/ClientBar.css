@@ -1,0 +1,168 @@
+/*  REF :  
+	https://www.youtube.com/watch?v=dIyVTjJAkLw&t=303s&ab_channel=codeSTACKr ;
+*/
+
+.body-top-bar {
+	align-items: center;
+	background-color: rgb(24, 24, 24);
+	display: flex;
+	justify-content: space-between;
+	min-height: 16.5vh;
+}
+
+.menu-btn{
+	align-items: center;
+	background-color: transparent;
+	border: 3px solid rgb(247, 247, 247);
+	display: flex;
+	height: 9vh;
+	justify-content: center;
+	margin-left: 3vw;
+	outline: none !important;
+	padding: none;
+	position: relative;
+	transition: all .5s ease-in-out;
+	width: 9vh;
+}
+
+.menu-btn-burguer {
+	background-color: rgb(255, 234, 203);
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+	height: 4px;
+	transition: all .5s ease-in-out;
+	width: 27px;
+}
+
+.menu-btn-burguer::before,
+.menu-btn-burguer::after {
+	background-color: rgb(255, 234, 203);
+	border: 0;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+	content: '';
+	height: 4px;
+	padding: 0;
+	position: absolute;
+	transition: all .5s ease-in-out;
+	width: 27px;
+}
+
+.menu-btn-burguer::before {
+	transform: translate( -13.5px,-13px);
+}
+
+.menu-btn-burguer::after {
+	transform: translate( -13.5px,13px);
+}
+
+.title {
+	color: rgb(255, 255, 255);
+	font-size: 50px;
+	text-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+}
+
+.title-adm {
+	color: rgb(255, 255, 255);
+  font-size: 1.7em;
+  margin-top: 2vh;
+	text-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+}
+
+.empty-box {
+	margin-right: 5vw;
+}
+
+.body-nav-bar {
+	display: flex;
+	justify-content: baseline;
+}
+
+.side-menu-container {
+	height: 83.5vh;
+	transition: all .5s ease-in-out;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: -15vw;
+  position: fixed;
+  width: 15vw;
+  z-index: 6;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: transparent;
+  color: transparent;
+  font-size: large;
+  margin: 3vh 0 2vh;
+  width: 15vw;
+}
+
+.admin-side-bar-container {
+  background-color: rgb(24, 24, 24);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+  width: 15vw;
+}
+
+.nav-btn-adm {
+  background-color: rgb(24, 24, 24);
+  border-bottom: 2px solid  rgb(255, 255, 255);
+  border-left: transparent;
+  border-right: transparent;
+  border-top: 2px solid  rgb(255, 255, 255);
+  box-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+  color: rgb(255, 255, 255);
+  font-size: large;
+  margin: 5vh 0 2vh;
+  text-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+  width: 15vw;
+}
+
+/* ANIMATION */
+
+.menu-btn.open .menu-btn-burguer {
+	background: transparent;
+	box-shadow: none;
+	transform: translateX(-50px);
+}
+
+.menu-btn.open .menu-btn-burguer::before {
+	transform: rotate(45deg) translate(26px, -26px);
+}
+
+.menu-btn.open .menu-btn-burguer::after {
+	transform: rotate(-45deg) translate(26px, 26px);
+}
+
+.body-nav-bar.open .side-menu-container{
+  background-color: rgb(24, 24, 24);
+	transform: translateX(15vw);
+}
+
+.body-nav-bar.open .nav-btn {
+  background-color: rgb(24, 24, 24);
+  border-bottom: 2px solid  rgb(255, 255, 255);
+  border-top: 2px solid  rgb(255, 255, 255);
+  box-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+  color: rgb(255, 255, 255);
+  text-shadow: 0 4px 7px rgba(255, 255, 255, 0.25);
+}
+
+.body-nav-bar.open .nav-btn:hover {
+  border-color: yellowgreen;
+  box-shadow: 0 4px 7px rgba(153, 205, 50, 0.25);
+  color: rgb(255, 220, 220);
+}
+
+.nav-btn-adm:hover {
+	border-color: yellowgreen;
+  box-shadow: 0 4px 7px rgba(153, 205, 50, 0.25);
+  color: rgb(255, 220, 220);
+}

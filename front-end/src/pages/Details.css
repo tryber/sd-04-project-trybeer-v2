@@ -1,0 +1,42 @@
+.container {
+  width: 50%;
+  margin: 20px;
+  margin: 20px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 900;
+}
+
+.products {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.total {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-name {
+  margin: 0 20px;
+}
+
+.order-date {
+  padding-right: 35px;
+}
+
+h6 {
+  margin-top: 30px;
+}
+
+.header {
+  /* background-color: rgb(95, 95, 95); */
+  padding-top: 10px;
+  border: 2px solid rgb(99, 99, 99);
+  margin-bottom: 20px;
+}

@@ -1,0 +1,15 @@
+.bodyAdm {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100vw;
+}
+
+.pedidos-text {
+  color: white;
+  margin: 2vh 3vh;
+}
+
+.orders-container {
+  margin-left: 5vw;
+  max-width: 70vw;
+}
