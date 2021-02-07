@@ -18,7 +18,7 @@ iframe {
 }
 
 body {
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(0, 0, 0);
 }
 
 .App-header {
@@ -106,20 +106,19 @@ body {
 }
 
 .ver-carrinho button {
-  border: 1px solid green;
-  background-color: transparent;
-  padding: 6px;
+  border: 1px solid rgb(249, 193, 11);
+  background-color: rgb(249, 193, 11);
   width: 300px;
-  border-radius: 7px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   transition: 0.5s;
-  color: white;
+  color: black;
 }
 
 .ver-carrinho button:enabled:hover {
-  background-color: rgb(57, 70, 37);
+  background-color: rgb(249, 193, 11);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
   /* border: 2px solid greenyellow; */
   /* color:black; */
 }
@@ -137,6 +136,17 @@ body {
 .ver-carrinho:hover {
   text-decoration: none;
   cursor: pointer;
+}
+
+.ver-carrinho-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.ver-carrinho-flex p {
+  font-family: Roboto, sans-serif;
+  font-size: large;
 }
 
 link {
