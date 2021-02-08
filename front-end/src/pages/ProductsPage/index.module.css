@@ -1,0 +1,51 @@
+.containerCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.footerCart {
+  align-items: center;
+  background: #e85d04;
+  bottom: 0;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px auto 0;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+}
+
+.buttonCart {
+  outline: none;
+  font-size: 14px;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.buttonCart a {
+  color: white;
+  text-decoration: none;
+}
+
+.buttonCart:hover {
+  border: 1px solid #f23202;
+  background-color: #f23202;
+}
+
+.buttonCart:disabled {
+  color: white;
+  opacity: 0.5;
+}
+
+.buttonCart:disabled:hover {
+  color: white;
+  background-color: transparent;
+  opacity: 0.5;
+  border: 1px solid white;
+}

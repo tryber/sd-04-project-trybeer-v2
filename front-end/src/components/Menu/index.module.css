@@ -1,0 +1,36 @@
+.header {
+  background: #e85d04;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  left: 0;
+  padding: 6rem 5rem 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+}
+
+.topTitle {
+  color: #ffffff;
+  font-size: 30px;
+  max-height: 5rem;
+  padding: 10px 30px;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+}
+
+.side-menu-container {
+  background-color: white;
+}
+
+.admin-side-bar-container {
+  background-color: white;
+}
+
+.navLink:hover {
+  background-color: #faa307;
+}
