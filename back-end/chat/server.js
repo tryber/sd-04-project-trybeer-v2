@@ -16,8 +16,8 @@ io.on('connection', async (socket) => {
   socket.on(USER_CONNECTED, (user) => {
     socket.join(user.socketId);
 
-    console.log('user:', user);
-    console.log('Room ?', socket.rooms);
+    // console.log('user:', user);
+    // console.log('Room ?', socket.rooms);
 
     usersOnline.push(user);
   });

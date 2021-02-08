@@ -1,8 +1,9 @@
 import { string } from 'prop-types';
 import React from 'react';
+import styles from './index.module.css';
 
 const Message = ({ username, time, message }) => (
-  <li>
+  <li className={ styles.senderMessageBalloon }>
     <span data-testid="nickname">{username}</span>
     {' '}
     -

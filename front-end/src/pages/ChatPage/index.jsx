@@ -18,8 +18,6 @@ const ChatPage = () => {
     setUserId(getLS('userId'));
     setUserRole(getLS('user').role);
 
-    console.log(socket);
-
     socket.emit(USER_CONNECTED, {
       userId, username, userRole, socketId: socket.id,
     });
@@ -42,27 +40,30 @@ const ChatPage = () => {
   };
 
   return (
-    <div className={ styles.chatContainer }>
+    <div className={ styles.pageContainer }>
       <Menu nomeTela="Chat" />
-      <div>
-        <ul>
-          {chat.map(({ sender, time, message }) => (<Message
-            key={ `${sender}${message}` }
-            username={ sender }
-            time={ time }
-            message={ message }
-          />))}
-        </ul>
+      <div className={ styles.chatContainer }>
+        <div className={ styles.messagesContainer }>
+          <ul>
+            {chat.map(({ sender, time, message }) => (<Message
+              key={ `${sender}${message}` }
+              username={ sender }
+              time={ time }
+              message={ message }
+            />))}
+          </ul>
+        </div>
+        <form onSubmit={ (e) => handleSubmit(e) } className={ styles.chatForm }>
+          <input id="messages" data-testid="message-input" placeholder="Digite sua mensagem..." />
+          <button
+            type="submit"
+            className={ styles.sendMessageBtn }
+            data-testid="send-message"
+          >
+            Enviar
+          </button>
+        </form>
       </div>
-      <form onSubmit={ (e) => handleSubmit(e) }>
-        <input id="messages" data-testid="message-input" />
-        <button
-          type="submit"
-          data-testid="send-message"
-        >
-          Enviar
-        </button>
-      </form>
     </div>
   );
 };
