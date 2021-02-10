@@ -122,7 +122,7 @@ function CloseOrder() {
       <TopBar title="Finalizar Pedido" isAdm={ false } />
       <div className="container">
         <div className="col-lg-15">
-          <img className="header" src={header} />
+          <img className="img-header" src={header} />
           <p id="orderMessage">{orderMessage}</p>
           <ul ref={ orderRef } id="list" className="list-group">
             {cart.map(({ name, quantity, price }, index) => (
@@ -193,10 +193,9 @@ function CloseOrder() {
         </div>
       </div>
 
-      <hr />
-
       <div className="container-end">
-        <div className="col-lg-8 col-offset-6 centered">
+        <div className="col-lg-15">
+          <hr />
           <h3 className="address-title">Dados para Entrega</h3>
           <form className="form" method="POST" action="">
             <input

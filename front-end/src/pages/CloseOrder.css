@@ -66,7 +66,7 @@ col-lg-15 li {
 .order-total {
   font-size: 1.5rem;
   font-weight: 300;
-  padding-left: 500px;
+  padding-left: 600px;
   justify-self: flex-end;
   align-self: flex-end;
 }
@@ -80,6 +80,7 @@ col-lg-15 li {
 
 .container-end input{
   padding: 1px;
+  margin: 0 5px 0 0;
   font-size: 16px;
   border-width: 1px;
   border-color: #CCCCCC;
@@ -92,9 +93,8 @@ col-lg-15 li {
 
 .form {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: space-between;
+  justify-content: flex-start;
+  align-content: space-around;
 }
 
 .confirm-btn {
@@ -127,78 +127,12 @@ col-lg-15 li {
   font-weight: 300;
 }
 
-
-.ver-carrinho {
-  margin: 20px;
-  display: flex;
-  justify-content: center;
+.img-header {
+  width: 710px;
+  margin: 0;
+  padding: 0;
 }
 
-.ver-carrinho button {
-  border: 1px solid rgb(249, 193, 11);
-  background-color: rgb(249, 193, 11);
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-  color: black;
-}
-
-.ver-carrinho button:enabled:hover {
-  background-color: rgb(249, 193, 11);
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
-  /* border: 2px solid greenyellow; */
-  /* color:black; */
-}
-
-.ver-carrinho button:disabled {
-  color: gray;
-  font-weight: normal;
-  border: 1px solid gray;
-}
-
-.ver-carrinho button i {
-  font-size: 1.8rem;
-}
-
-.ver-carrinho:hover {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.ver-carrinho-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.ver-carrinho-flex p {
-  font-family: Roboto, sans-serif;
-  font-size: large;
-}
-
-link {
-  text-decoration: none;
-}
-
-.btn-value {
-  font-size: 1.2rem;
-  font-weight: 900;
-}
-
-.main-container-orders {
-  width: 300px;
-  margin-left: 250px;
-}
-
-.beer-img {
-  width: 70px;
-  position: absolute;
-  margin-top: 0px;
-  margin-left: 50px;
-}
-
-.register-container {
-  color: white;
+.col-lg-15 {
+  width: 710px;
 }
