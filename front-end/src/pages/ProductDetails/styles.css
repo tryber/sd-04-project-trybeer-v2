@@ -1,0 +1,31 @@
+.product-details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+}
+
+.order-details-card-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.order-detail-info {
+  display: flex;
+  width: 50%;
+}
+
+.order-detail-info, p {
+  font-size: 19pt;
+  font-weight: 700;
+}
+
+.details-order-head {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+}
