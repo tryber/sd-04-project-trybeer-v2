@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 const ProductDetailCard = ({
-  testid, quantity, name, uniPrice, total, orderStatus,
+  testid, quantity, name, uniPrice, total,
 }) => (
   <div className="product-detail-card-body">
     <p>
@@ -14,7 +14,6 @@ const ProductDetailCard = ({
     </p>
     <span data-testid={ `${testid}-order-unit-price` }>{ uniPrice }</span>
     <span data-testid={ `${testid}-product-total-value` }>{ total }</span>
-    <span>{ orderStatus }</span>
   </div>
 );
 

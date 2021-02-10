@@ -41,8 +41,8 @@ const Register = () => {
         checkRole(result.data);
       }
     } catch (error) {
-      // alert(error.message);
-      // throw new Error();
+      alert(error.message);
+      throw new Error();
     }
   };
 
