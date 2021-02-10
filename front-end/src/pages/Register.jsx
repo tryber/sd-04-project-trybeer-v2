@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { validateName, validateEmail, validatePassword } from '../utils/inputValidations';
 import api from '../services/api';
+import '../app.sass';
+import './login.css';
 
 function Register() {
   const [name, setName] = useState('');
@@ -33,7 +35,7 @@ function Register() {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container-login hero is-warning is-bold">
       <h2>Register Page</h2>
       <form onSubmit={ (event) => register(event) }>
         <div className="form-group">
@@ -107,6 +109,7 @@ function Register() {
         </div>
 
         <button
+          className="button is-success is-rounded"
           type="submit"
           disabled={ !(validateName(name) && validateEmail(email) && validatePassword(password)) }
           data-testid="signup-btn"
