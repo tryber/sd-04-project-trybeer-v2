@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import api from '../services/api';
+import './Login.css'
 
 // const beer = require('../images/beer2.webp');
 
