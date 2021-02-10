@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button, SimpleGrid, Input, Text } from '@chakra-ui/react';
 import jwtDecode from 'jwt-decode';
 import CheckoutCard from '../../components/CheckoutCard';
 import MenuClient from '../../components/MenuClient';
@@ -73,14 +74,16 @@ const Checkout = () => {
   return (
     <div>
       <MenuClient header="Finalizar Pedido" />
-      {cartValue > zero ? null : <h5>{emptyCart}</h5>}
+      {/* {cartValue > zero ? null : <h5>{emptyCart}</h5>} */}
       {message ? <h5>{message}</h5> : null}
-      {products ? products.map((e) => <CheckoutCard data={ e } key={ e.id } />) : <p>loading</p> }
-      <h5 data-testid="order-total-value">{cartValue}</h5>
+      <SimpleGrid minChildWidth="120px" spacing="10px">
+        {products ? products.map((e) => <CheckoutCard data={ e } key={ e.id } />) : <p>loading</p> }
+      </SimpleGrid>
+      <Text fontSize="20px" fontStyle="solid" data-testid="order-total-value">Total: {cartValue}</Text>
       <form onSubmit={ handleSubmit }>
         <label htmlFor="address">
           Rua
-          <input
+          <Input
             type="text"
             data-testid="checkout-street-input"
             name="addressValue"
@@ -91,7 +94,7 @@ const Checkout = () => {
         </label>
         <label htmlFor="number">
           Número da casa
-          <input
+          <Input
             type="number"
             data-testid="checkout-house-number-input"
             name="numberValue"
@@ -100,14 +103,14 @@ const Checkout = () => {
             onChange={ handleNumber }
           />
         </label>
-        <button
+        <Button
           disabled={ !products || !addressValue || !numberValue }
           type="submit"
           data-testid="checkout-finish-btn"
           // onClick={ () => {} }
         >
           Finalizar Pedido
-        </button>
+        </Button>
       </form>
     </div>
   );

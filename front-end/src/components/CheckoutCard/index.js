@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { Button, Container, Box, Flex, SimpleGrid, Input, Text } from '@chakra-ui/react';
 import { ProductContext } from '../../context';
 
 export default function CheckoutCard(data) {
@@ -11,7 +12,7 @@ export default function CheckoutCard(data) {
   const {
     name, price, quantity, id,
   } = data.data;
-  const finalPrice = `(${price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })} un)`;
+  const finalPrice = `(R$ ${price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })} un)`;
   const valorTotal = (quantity * price).toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' });
 
   // funcao de remocao do produto
@@ -37,18 +38,20 @@ export default function CheckoutCard(data) {
   }, [cartItens, setCartValue, totalValue]);
 
   return (
-    <div id={ `${id}` }>
-      <div data-testid={ `${id - 1}-product-qtd-input` }>{quantity}</div>
-      <div data-testid={ `${id - 1}-product-name` }>{name}</div>
-      <div data-testid={ `${id - 1}-product-unit-price` }>{finalPrice}</div>
-      <div data-testid={ `${id - 1}-product-total-value` }>{valorTotal}</div>
-      <button
+    <Container id={ `${id}` } bgColor="#EDF2F7">
+      <Text data-testid={ `${id - 1}-product-qtd-input` }>Quantidade: {quantity}</Text>
+      <Text data-testid={ `${id - 1}-product-name` }>{name}</Text>
+      <Text fontSize="sm" fontStyle="italic" data-testid={ `${id - 1}-product-unit-price` }>{finalPrice}</Text>
+      <Text data-testid={ `${id - 1}-product-total-value` }>{valorTotal}</Text>
+      <Button
+        colorScheme="red"
+        size="sm"
         type="button"
         data-testid={ `${id - 1}-removal-button` }
         onClick={ () => handleClick(id, cartItens, setCartItens) }
       >
         X
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 }

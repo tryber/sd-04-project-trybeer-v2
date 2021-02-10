@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Box, Button, Text, Container } from '@chakra-ui/react';
 import { ProductContext } from '../../context';
 
 // funcao verifica se tem itens no storage, se n tiver ele adiciona
@@ -88,33 +89,35 @@ export default function ProductCard(data) {
     });
     setCartValue(totalValue());
   }, [id, name, price, quantity, setCartValue, totalValue, urlImage]);
-
+// bgGradient="radial(#ffffff.300, #edf2f7.400, #dce6ef.200)"  color="#40698c"
   return (
-    <div>
-      <div data-testid={ `${id - 1}-product-price` }>{price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}</div>
-      <div>
-        <img width="100px" data-testid={ `${id - 1}-product-img` } src={ urlImage } alt="url da imagem" />
+    <Container bg="#eef3f7" bgGradient="radial(gray.200,yellow.400,pink.200)" maxWidth="120px" >
+      <Text data-testid={ `${id - 1}-product-price` }>R$ {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}</Text>
+      <Box borderRadius="full" >
+        <img height="100px" width="100px" data-testid={ `${id - 1}-product-img` } src={ urlImage } alt="url da imagem" />
         <div data-testid={ `${id - 1}-product-name` }>{name}</div>
-      </div>
-      <div>
-        <button
+      </Box>
+      <Box display="flex" alignItems="center">
+        <Button
           type="button"
+          bg="white"
           // disabled={ quantity === zero }
           data-testid={ `${id - 1}-product-minus` }
           onClick={ () => subButton(quantity, zero, setQuantity) }
-        >
+          >
           -
-        </button>
-        <div data-testid={ `${id - 1}-product-qtd` }>{quantity}</div>
-        <button
+        </Button>
+        <Text data-testid={ `${id - 1}-product-qtd` }>{quantity}</Text>
+        <Button
           type="button"
+          bg="white"
           // disabled={ { quantity } === prodQuantity }
           data-testid={ `${id - 1}-product-plus` }
           onClick={ () => setQuantity(quantity + 1) }
-        >
+          >
           +
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
 }
