@@ -23,7 +23,6 @@ ProductDetailCard.propTypes = {
   name: PropTypes.string.isRequired,
   uniPrice: PropTypes.string.isRequired,
   total: PropTypes.string.isRequired,
-  orderStatus: PropTypes.string.isRequired,
 };
 
 export default ProductDetailCard;

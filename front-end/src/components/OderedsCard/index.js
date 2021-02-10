@@ -8,7 +8,7 @@ import './styles.css';
 
 const OrderedsCard = ({
   testid, orderNumber, total, saleDate, orderStatus,
-}) => { 
+}) => {
   const [day, month] = saleDate.substring(NUMBER_ZERO, saleDate.indexOf('T')).split('-').reverse();
 
   const history = useHistory();
