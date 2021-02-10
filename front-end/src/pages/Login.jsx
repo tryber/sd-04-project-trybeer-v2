@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import api from '../services/api';
+import '../app.sass';
+import './login.css';
 
-// const beer = require('../images/beer2.webp');
+const beer = require('../images/beer2.webp');
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,7 +12,8 @@ function Login() {
   const [adminUser, setAdminUser] = useState(false);
   const [clientUser, setClientUser] = useState(false);
 
-  const validateEmail = (validEmail) => validEmail.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
+  const validateEmail = (validEmail) =>
+    validEmail.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
 
   const seis = 6;
   const validatePassword = (validPassword) => validPassword.length >= seis;
@@ -33,79 +36,72 @@ function Login() {
         };
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('user', JSON.stringify(userData));
-        return user.role === 'administrator' ? setAdminUser(true) : setClientUser(true);
+        return user.role === 'administrator'
+          ? setAdminUser(true)
+          : setClientUser(true);
       });
   };
 
   return (
-    <div className="main-container">
-      {/* <img src={ beer } className="beer-img" alt="beer" /> */}
-      <h2>Login Page</h2>
+    <div className="main-container-login hero is-warning is-bold">
       <div>
-        <form onSubmit={ (event) => login(event) }>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <label htmlFor="email">
-                Email
-                <input
-                  className="form-control"
-                  id="email"
-                  data-testid="email-input"
-                  name="email"
-                  type="email"
-                  required
-                  value={ email }
-                  onChange={ (e) => setEmail(e.target.value) }
-                />
-              </label>
-            </div>
-          </div>
 
-          <div className="form-group">
-            <div className="col-sm-8">
-              <label htmlFor="email">
-                Password
-                <input
-                  className="form-control"
-                  data-testid="password-input"
-                  name="password"
-                  type="password"
-                  required
-                  value={ password }
-                  onChange={ (e) => setPassword(e.target.value) }
-                />
-              </label>
-            </div>
-          </div>
-          <br />
-          <div className="form-group">
-            <div className="bottom-btn">
-              <div className="col-sm-12">
-                <button
-                  type="submit"
-                  disabled={ !(validateEmail(email) && validatePassword(password)) }
-                  data-testid="signin-btn"
-                  className="col-sm-3 btn btn-success"
-                >
-                  ENTRAR
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-
-        <div className="no-account">
-          <Link to="/register" style={ { color: 'white', textDecoration: 'none' } }>
-            <button
-              type="button"
-              data-testid="no-account-btn"
-              onClick={ () => <Redirect to="/register" /> }
-            >
-              Ainda não tenho conta
-            </button>
-          </Link>
-        </div>
       </div>
+
+      <form onSubmit={(event) => login(event)}>
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input
+              className="input"
+              id="email"
+              data-testid="email-input"
+              name="email"
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </p>
+        </div>
+
+        <div class="field">
+          <input
+            className="input is-large"
+            data-testid="password-input"
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <br />
+        <div className="buttons">
+          <button
+            className="button is-success is-rounded"
+            type="submit"
+            disabled={!(validateEmail(email) && validatePassword(password))}
+            data-testid="signin-btn">
+            ENTRAR
+          </button>
+
+          <div className="no-account">
+            <Link
+              to="/register"
+              style={{ color: 'white', textDecoration: 'none' }}>
+              <button
+                className="button is-link is-rounded"
+                type="button"
+                data-testid="no-account-btn"
+                onClick={() => <Redirect to="/register" />}>
+                Ainda não tenho conta
+              </button>
+            </Link>
+          </div>
+        </div>
+      </form>
 
       {adminUser && <Redirect to="/admin/orders" />}
       {clientUser && <Redirect to="/products" />}
