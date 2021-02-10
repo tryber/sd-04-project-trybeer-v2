@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import ProductDetailCard from '../../components/ProductDetailsCard';
 
+import NUMBER_ZERO from '../../validation';
+
 import api from '../../services/api';
 
 import './styles.css';
@@ -12,7 +14,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
   const [product, setProduct] = useState('');
   const [dateFormat, setDateFormat] = useState('');
   const [statusNow, setStatusNow] = useState('');
-
+  const [day, month] = dateFormat.substring(NUMBER_ZERO, dateFormat.indexOf('T')).split('-').reverse();
   useEffect(() => {
     const fetchProductDetails = async () => {
       const response = await api.get(`/orders/${orderNumber}`);
@@ -34,7 +36,7 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
                 {`Pedido ${product.id}`}
               </span>
               <span data-testid="order-date">
-                { dateFormat }
+                { `${day}/${month} - ${statusNow}` }
               </span>
             </p>
           </div>
@@ -48,7 +50,6 @@ const ProductDetails = ({ match: { params: { orderNumber } } }) => {
                 quantity={ salesProducts.quantity }
                 name={ name }
                 total={ (salesProducts.quantity * price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
-                orderStatus={ statusNow }
               />
             ))}
           <p>
