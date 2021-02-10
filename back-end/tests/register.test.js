@@ -47,9 +47,4 @@ describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
     await userController.getUserOrders(req, res);
   });
 
-  // it('será testado se o status é atualizado', async () => {
-  //     req.body = req;
-  //     await userController.updateStatus(req, res);
-  //   }
-  // );
 });
