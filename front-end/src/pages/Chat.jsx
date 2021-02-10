@@ -72,7 +72,7 @@ const Chat = () => {
       );
 
       dateLine.innerHTML = time;
-      //  console.log(dateLine);
+      //  console.log(dateLine)
 
       msgLine.innerHTML = data.chatMessage;
 
