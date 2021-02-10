@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MessageBox = ({ user, clock, content }) => (
-  <div>
+  <div className="messagebox-client">
     <p data-testid="nickname">{user}</p>
     <p data-testid="message-time">{clock}</p>
     <p data-testid="text-message">{content}</p>
