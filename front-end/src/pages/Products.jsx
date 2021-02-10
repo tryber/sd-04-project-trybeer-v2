@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard';
 import { AppContext } from '../context/AppContext';
 import TopBar from '../components/ClientBar';
 import api from '../services/api';
-import '../App.css';
+import './Products.css';
 
 const zero = 0;
 const dois = 2;
@@ -50,11 +50,13 @@ function Products() {
             onClick={ () => <Redirect to="/checkout" /> }
             disabled={ total === zero }
           >
+            <div className="ver-carrinho-flex">
             <i className="fas fa-shopping-cart" />
-            <span data-testid="checkout-bottom-btn-value" className="btn-value">
-              {(total || total === zero)
-                && `R$ ${total.toFixed(dois).toLocaleString().replace('.', ',')}`}
-            </span>
+              <span data-testid="checkout-bottom-btn-value" className="btn-value">
+                {(total || total === zero)
+                  && `R$ ${total.toFixed(dois).toLocaleString().replace('.', ',')}`}
+              </span>
+            </div>
           </button>
         </Link>
       </div>

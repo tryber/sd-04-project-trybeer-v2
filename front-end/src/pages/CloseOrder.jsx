@@ -6,6 +6,7 @@ import TopBar from '../components/ClientBar';
 import { AppContext } from '../context/AppContext';
 import api from '../services/api';
 import './CloseOrder.css';
+import header from './images/checkoutHeader.jpg'
 
 const zero = 0;
 const dois = 2;
@@ -121,8 +122,7 @@ function CloseOrder() {
       <TopBar title="Finalizar Pedido" isAdm={ false } />
       <div className="container">
         <div className="col-lg-15">
-          <h1>Produtos</h1>
-          <h3>{message}</h3>
+          <img className="img-header" src={header} />
           <p id="orderMessage">{orderMessage}</p>
           <ul ref={ orderRef } id="list" className="list-group">
             {cart.map(({ name, quantity, price }, index) => (
@@ -175,13 +175,7 @@ function CloseOrder() {
                       onClick={ () => removeItemFromArray(name) }
                       className="col"
                     >
-                      <button
-                        type="button"
-                        data-testid={ `${index}-removal-button` }
-                        className="btn btn-danger"
-                      >
-                        X
-                      </button>
+                      X
                     </button>
                   </div>
                 </div>
@@ -199,35 +193,30 @@ function CloseOrder() {
         </div>
       </div>
 
-      <hr />
-
-      <div className="container end">
-        <div className="col-lg-8 col-offset-6 centered">
-          <form method="POST" action="">
-            <h3>Dados para Entrega</h3>
-            <label htmlFor="inputEnd">
-              Rua:
-              <input
-                onChange={ (e) => setAddress(e.target.value) }
-                id="inputEnd"
-                name="adrress"
-                data-testid="checkout-street-input"
-                type="text"
-                className="form-control"
-              />
-            </label>
+      <div className="container-end">
+        <div className="col-lg-15">
+          <hr />
+          <h3 className="address-title">Dados para Entrega</h3>
+          <form className="form" method="POST" action="">
+            <input
+              onChange={ (e) => setAddress(e.target.value) }
+              id="inputEnd"
+              placeholder="Rua"
+              name="adrress"
+              data-testid="checkout-street-input"
+              type="text"
+              className="form-control"
+            />
             <br />
-            <label htmlFor="number" className="">
-              Número da casa:
-              <input
-                name="number"
-                id="number"
-                onChange={ (e) => setNumber(e.target.value) }
-                data-testid="checkout-house-number-input"
-                type="text"
-                className="form-control col-6"
-              />
-            </label>
+            <input
+              name="number"
+              id="number"
+              placeholder="Número"
+              onChange={ (e) => setNumber(e.target.value) }
+              data-testid="checkout-house-number-input"
+              type="text"
+              className="form-control col-6"
+            />
           </form>
           <br />
           <br />
@@ -235,7 +224,7 @@ function CloseOrder() {
             type="button"
             id="inputNum"
             data-testid="checkout-finish-btn"
-            className="btn btn-outline-success"
+            className="confirm-btn"
             disabled={ !address || !number || !cart.length > zero }
             onClick={ () => doneOrder('Compra realizada com sucesso!', setOrderMessage) }
           >
