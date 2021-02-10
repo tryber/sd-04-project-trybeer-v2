@@ -57,7 +57,7 @@ const Chat = () => {
 
     socket.on('renderMessage', (data, time) => {
       const chat = document.getElementById('chat');
-      //  console.log(data);
+      //  console.log(data)
       const msgLine = document.createElement('p');
       const dateLine = document.createElement('p');
       const nick = document.createElement('p');
