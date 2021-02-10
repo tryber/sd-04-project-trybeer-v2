@@ -47,8 +47,8 @@ const ChatClient = () => {
   return (
     <div>
       <Header title="Finalizar Pedido" dataTestid="top-title" />
-      <div className="messages-container">
-        <ul className="messages">
+      <div className="messages-container-client">
+        <ul className="messages-client">
           {oldMessages && oldMessages.map(({ nickname, timestamp, message }) => (
             <MessageBox
               key={ nickname }

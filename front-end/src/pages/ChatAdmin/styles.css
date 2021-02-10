@@ -3,9 +3,11 @@
   margin: 0;
   padding: 0;
 }
+
 .container {
   display: flex;
 }
+
 .form {
   background: #000;
   bottom: 0;
@@ -13,12 +15,14 @@
   position: fixed;
   width: 100%;
 }
+
 .form input {
   border: 0;
   margin-right: 0.5%;
   padding: 10px;
   width: 90%;
 }
+
 .form button {
   background-color: #14213d;
   border: none;
@@ -28,17 +32,19 @@
   padding: 10px;
   width: 9%;
 }
-.messages-container {
-  border: 1px solid #000;
-  height: 700px;
-  padding: 10px;
-  width: 100%;
+
+.messages-container-adm {
+  padding: 10px 10px 50px 10px;
+  float: right;
+  width: 70%;
 }
-.messages {
+
+.messages-adm {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 10px 10px 5px 10px;
 }
+
 .messages p {
   padding: 5px 10px;
 }
