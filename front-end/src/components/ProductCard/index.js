@@ -91,7 +91,7 @@ export default function ProductCard(data) {
   }, [id, name, price, quantity, setCartValue, totalValue, urlImage]);
 // bgGradient="radial(#ffffff.300, #edf2f7.400, #dce6ef.200)"  color="#40698c"
   return (
-    <Container bg="#eef3f7" bgGradient="radial(gray.200,yellow.400,pink.200)" maxWidth="120px" >
+    <Container bg="#ffffff" maxWidth="120px" >
       <Text data-testid={ `${id - 1}-product-price` }>R$ {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}</Text>
       <Box borderRadius="full" >
         <img height="100px" width="100px" data-testid={ `${id - 1}-product-img` } src={ urlImage } alt="url da imagem" />
@@ -100,7 +100,7 @@ export default function ProductCard(data) {
       <Box display="flex" alignItems="center">
         <Button
           type="button"
-          bg="white"
+          bg="#789B49"
           // disabled={ quantity === zero }
           data-testid={ `${id - 1}-product-minus` }
           onClick={ () => subButton(quantity, zero, setQuantity) }
@@ -110,7 +110,7 @@ export default function ProductCard(data) {
         <Text data-testid={ `${id - 1}-product-qtd` }>{quantity}</Text>
         <Button
           type="button"
-          bg="white"
+          bg="#789B49"
           // disabled={ { quantity } === prodQuantity }
           data-testid={ `${id - 1}-product-plus` }
           onClick={ () => setQuantity(quantity + 1) }
