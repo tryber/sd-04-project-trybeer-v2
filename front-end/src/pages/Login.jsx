@@ -44,38 +44,34 @@ function Login() {
 
   return (
     <div className="main-container-login hero is-warning is-bold">
-      <div>
 
-      </div>
-
-      <form onSubmit={(event) => login(event)}>
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
+        <div className="container">
+          <div className="field">
+            <label className="label">Username</label>
+            <div className="input">
+              <input
+                className="input is-primary"
+                id="email"
+                data-testid="email-input"
+                name="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <label className="label">Password</label>
             <input
-              className="input"
-              id="email"
-              data-testid="email-input"
-              name="email"
-              type="email"
-              placeholder="Email"
+              className="input is-large"
+              data-testid="password-input"
+              name="password"
+              type="password"
+              placeholder="password"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </p>
-        </div>
-
-        <div class="field">
-          <input
-            className="input is-large"
-            data-testid="password-input"
-            name="password"
-            type="password"
-            placeholder="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
         </div>
         <br />
         <div className="buttons">
@@ -83,25 +79,28 @@ function Login() {
             className="button is-success is-rounded"
             type="submit"
             disabled={!(validateEmail(email) && validatePassword(password))}
-            data-testid="signin-btn">
+            data-testid="signin-btn"
+          >
             ENTRAR
           </button>
 
           <div className="no-account">
             <Link
               to="/register"
-              style={{ color: 'white', textDecoration: 'none' }}>
+              style={{ color: 'white', textDecoration: 'none' }}
+            >
               <button
                 className="button is-link is-rounded"
                 type="button"
                 data-testid="no-account-btn"
-                onClick={() => <Redirect to="/register" />}>
+                onClick={() => <Redirect to="/register" />}
+              >
                 Ainda não tenho conta
               </button>
             </Link>
           </div>
         </div>
-      </form>
+
 
       {adminUser && <Redirect to="/admin/orders" />}
       {clientUser && <Redirect to="/products" />}

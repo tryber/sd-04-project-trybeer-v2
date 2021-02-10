@@ -36,10 +36,9 @@ function Register() {
 
   return (
     <div className="main-container-login hero is-warning is-bold">
-      <h2>Register Page</h2>
       <form onSubmit={ (event) => register(event) }>
-        <div className="form-group">
-          <div className="col-sm-12">
+        <div className="container">
+          <div >
             <label htmlFor="name">
               Nome
               <input
@@ -56,7 +55,7 @@ function Register() {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className="container">
           <div className="col-sm-12">
             <label htmlFor="email">
               Email
@@ -74,8 +73,8 @@ function Register() {
           </div>
         </div>
 
-        <div className="form-group">
-          <div className="col-sm-12">
+        <div className="container">
+          <div>
             <label htmlFor="password">
               Password
               <input
@@ -93,9 +92,9 @@ function Register() {
         </div>
 
         <div className="custom-control custom-checkbox">
-          <div className="col-sm-12">
+          <div className="container">
             <label htmlFor="checkbox-i" className="custom-control-label">
-              Quero Vender
+              Quero Vender{"   "}   
               <input
                 className="custom-control-input"
                 data-testid="signup-seller"
