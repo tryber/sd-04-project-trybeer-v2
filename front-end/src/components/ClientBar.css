@@ -156,8 +156,8 @@
 }
 
 .body-nav-bar.open .nav-btn:hover {
-  border-color: yellowgreen;
-  box-shadow: 0 4px 7px rgba(153, 205, 50, 0.25);
+  border-color: rgb(249, 193, 11);
+  box-shadow: 0 4px 7px solid rgb(255, 255, 255);
   color: rgb(255, 220, 220);
 }
 

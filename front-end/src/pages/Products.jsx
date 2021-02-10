@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard';
 import { AppContext } from '../context/AppContext';
 import TopBar from '../components/ClientBar';
 import api from '../services/api';
-import '../App.css';
+import './Products.css';
 
 const zero = 0;
 const dois = 2;

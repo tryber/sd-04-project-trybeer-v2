@@ -26,6 +26,7 @@
   background-color: rgb(249, 193, 11);
   padding: 2px;
   width: 90%;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .beer-card .bottom {
@@ -47,9 +48,11 @@
   border: 0;
   width: 30px;
   font-size: 20px;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .bottom button:hover {
+  background-color: rgb(255, 255, 255);
   border: 1px solid rgb(249, 193, 11);
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 }
