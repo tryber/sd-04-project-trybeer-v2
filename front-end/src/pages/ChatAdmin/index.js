@@ -49,12 +49,12 @@ const ChatClient = () => {
   return (
     <div>
       <SideMenuAdmin />
-      <div className="messages-container">
+      <div className="messages-container-adm">
         <Link data-testid="back-button" to="/admin/chats" className="list-link">
           Conversando com
           { actualRoom }
         </Link>
-        <ul className="messages">
+        <ul className="messages-adm">
           {oldMessages && oldMessages.map(({ nickname, timestamp, message }) => (
             <MessageBox
               key={ nickname }
