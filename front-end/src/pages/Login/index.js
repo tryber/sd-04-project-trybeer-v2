@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import jwtDecode from 'jwt-decode';
 
 import { userLogin } from '../../api';
 import validationSchema from './validateLogin';
-import Alert from '../../components/Alert';
+import { Alert, Button, Input } from '../../components';
 
 const Login = () => {
   const history = useHistory();
@@ -79,7 +77,7 @@ const Login = () => {
           <FormErrorMessage>{formik.errors.loginPassword}</FormErrorMessage>
         </FormControl>
         <Button
-          variantColor="green"
+          variant="solid"
           type="submit"
           data-testid="signin-btn"
           disabled={
@@ -91,7 +89,7 @@ const Login = () => {
           ENTRAR
         </Button>
         <Button
-          variantColor="blue"
+          variant="solid"
           type="submit"
           data-testid="no-account-btn"
           disabled={ formik.isSubmitting }

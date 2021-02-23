@@ -1,5 +1,7 @@
 import React, { useEffect, useContext } from 'react';
-import { Button, Container, Box, Flex, SimpleGrid, Input, Text } from '@chakra-ui/react';
+import {
+  Button, Container, Text,
+} from '@chakra-ui/react';
 import { ProductContext } from '../../context';
 
 export default function CheckoutCard(data) {
@@ -39,7 +41,11 @@ export default function CheckoutCard(data) {
 
   return (
     <Container id={ `${id}` } bgColor="#EDF2F7">
-      <Text data-testid={ `${id - 1}-product-qtd-input` }>Quantidade: {quantity}</Text>
+      <Text data-testid={ `${id - 1}-product-qtd-input` }>
+        Quantidade:
+        {' '}
+        {quantity}
+      </Text>
       <Text data-testid={ `${id - 1}-product-name` }>{name}</Text>
       <Text fontSize="sm" fontStyle="italic" data-testid={ `${id - 1}-product-unit-price` }>{finalPrice}</Text>
       <Text data-testid={ `${id - 1}-product-total-value` }>{valorTotal}</Text>
