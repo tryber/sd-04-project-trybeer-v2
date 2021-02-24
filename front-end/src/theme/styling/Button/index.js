@@ -1,8 +1,10 @@
 export default {
   // The styles all button have in common
   baseStyle: {
-    fontWeight: 'bold',
+    fontFamily: 'body',
+    letterSpacing: 'wider',
     textTransform: 'uppercase',
+    borderRadius: 'full',
   },
   // Two sizes: sm and md
   sizes: {

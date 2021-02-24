@@ -11,5 +11,5 @@ export default function (props) {
   const styles = useStyleConfig('Input', { variant });
 
   // 3. Pass the computed styles into the `sx` prop
-  return <Input sx={ styles } { ...rest } />;
+  return <Input sx={ styles } _placeholder={ { color: 'rgba(255, 255, 255, 0.6)' } } { ...rest } />;
 }

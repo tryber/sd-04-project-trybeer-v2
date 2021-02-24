@@ -6,11 +6,13 @@ import {
 } from '../pages';
 import { ProductProvider } from '../context';
 import theme from '../theme';
+import Fonts from '../theme/Fonts';
 
 const Routes = () => (
   <BrowserRouter>
     <ProductProvider>
       <ChakraProvider theme={ theme }>
+        <Fonts />
         <Switch>
           <Login exact path="/" />
           <Checkout path="/checkout" />

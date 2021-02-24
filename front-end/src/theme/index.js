@@ -3,15 +3,18 @@ import { extendTheme } from '@chakra-ui/react';
 import { Button, Input } from './styling';
 
 const theme = extendTheme({
+  colors: {
+    basegreen: '#6DB808',
+  },
   components: {
     Button,
     Input,
   },
-  colors: {
-    brand: {
-      100: '#f7fafc',
-      900: '#1a202c',
-    },
+  fonts: {
+    heading: 'Roboto Slab, serif',
+    body: 'Noto Sans, sans-serif',
+    logo: 'Averia Serif Libre, serif',
+    mono: 'Menlo, monospace',
   },
 });
 

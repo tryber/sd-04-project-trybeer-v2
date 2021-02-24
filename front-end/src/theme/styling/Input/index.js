@@ -1,13 +1,15 @@
 export default {
   // The styles all button have in common
   baseStyle: {
-    fontWeight: 'bold',
+    color: 'white',
+    fontFamily: 'body',
     textTransform: 'uppercase',
   },
   // Two variants: outline and solid
   variants: {
     flushed: {
-      borderColor: 'green.500',
+      borderColor: 'white',
+      color: 'white',
     },
     solid: {
       bg: 'green.500',

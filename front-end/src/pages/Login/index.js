@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
+  Box,
   FormControl,
   FormErrorMessage,
-  FormLabel,
+  InputLeftElement,
+  InputGroup,
+  Stack,
 } from '@chakra-ui/react';
+import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { useFormik } from 'formik';
 import jwtDecode from 'jwt-decode';
 
@@ -41,66 +45,80 @@ const Login = () => {
   });
 
   return (
-    <div>
+    <Box bgColor="basegreen" py="50px" minHeight="100%">
       <Alert isOpen={ isOpen } onClose={ onClose } message={ error } />
-      <form onSubmit={ formik.handleSubmit }>
-        <FormControl
-          id="loginEmail"
-          isInvalid={ formik.errors.loginEmail && formik.touched.loginEmail }
-        >
-          <FormLabel htmlFor="loginEmail">Email</FormLabel>
-          <Input
-            type="email"
-            name="loginEmail"
-            data-testid="email-input"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.loginEmail }
-          />
-          <FormErrorMessage>{formik.errors.loginEmail}</FormErrorMessage>
-        </FormControl>
-        <FormControl
-          id="loginPassword"
-          isInvalid={
+      <form style={ { margin: '0 30px' } } onSubmit={ formik.handleSubmit }>
+        <Stack spacing="40px">
+          <FormControl
+            id="loginEmail"
+            isInvalid={ formik.errors.loginEmail && formik.touched.loginEmail }
+          >
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <EmailIcon color="white" />
+              </InputLeftElement>
+              <Input
+                type="email"
+                name="loginEmail"
+                data-testid="email-input"
+                onChange={ formik.handleChange }
+                onBlur={ formik.handleBlur }
+                value={ formik.values.loginEmail }
+                placeholder="meuemail@email.com"
+              />
+              <FormErrorMessage>{formik.errors.loginEmail}</FormErrorMessage>
+            </InputGroup>
+          </FormControl>
+          <FormControl
+            id="loginPassword"
+            isInvalid={
             formik.errors.loginPassword && formik.touched.loginPassword
           }
-        >
-          <FormLabel htmlFor="loginPassword">Password</FormLabel>
-          <Input
-            type="password"
-            name="loginPassword"
-            data-testid="password-input"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.loginPassword }
-          />
-          <FormErrorMessage>{formik.errors.loginPassword}</FormErrorMessage>
-        </FormControl>
-        <Button
-          variant="solid"
-          type="submit"
-          data-testid="signin-btn"
-          disabled={
+          >
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <LockIcon color="white" />
+              </InputLeftElement>
+              <Input
+                type="password"
+                name="loginPassword"
+                data-testid="password-input"
+                onChange={ formik.handleChange }
+                onBlur={ formik.handleBlur }
+                value={ formik.values.loginPassword }
+                placeholder="minhasenha"
+              />
+              <FormErrorMessage>{formik.errors.loginPassword}</FormErrorMessage>
+            </InputGroup>
+          </FormControl>
+        </Stack>
+        <Stack spacing="24px" mt="50px">
+          <Button
+            variant="solid"
+            type="submit"
+            data-testid="signin-btn"
+            disabled={
             formik.errors.loginPassword
             || formik.errors.loginEmail
             || formik.isSubmitting
           }
-        >
-          ENTRAR
-        </Button>
-        <Button
-          variant="solid"
-          type="submit"
-          data-testid="no-account-btn"
-          disabled={ formik.isSubmitting }
-          onClick={ () => {
-            history.push('/register');
-          } }
-        >
-          Ainda não tenho conta
-        </Button>
+          >
+            ENTRAR
+          </Button>
+          <Button
+            variant="solid"
+            type="submit"
+            data-testid="no-account-btn"
+            disabled={ formik.isSubmitting }
+            onClick={ () => {
+              history.push('/register');
+            } }
+          >
+            Ainda não tenho conta
+          </Button>
+        </Stack>
       </form>
-    </div>
+    </Box>
   );
 };
 
