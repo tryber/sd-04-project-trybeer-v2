@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, SimpleGrid, Box } from '@chakra-ui/react';
+import {
+  Button, Box, Flex,
+} from '@chakra-ui/react';
 import MenuClient from '../../components/MenuClient';
 
 import ProductCard from '../../components/ProductCard';
@@ -38,9 +40,9 @@ function Products() {
     <div>
       <MenuClient header="BeerMe!" />
       <Box pt="30px" height="full">
-        <SimpleGrid minChildWidth="120px" spacing="10px">
+        <Flex flexDirection="column" wrap="nowrap" px="10px">
           {products ? products.map((e) => <ProductCard data={ e } key={ e.id } />) : <p>loading</p>}
-        </SimpleGrid>
+        </Flex>
         <Link to="/checkout">
           <Button
             type="button"

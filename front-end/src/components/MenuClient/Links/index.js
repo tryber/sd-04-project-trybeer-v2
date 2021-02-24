@@ -1,8 +1,9 @@
 import React from 'react';
+import { Stack } from '@chakra-ui/react';
 import LinkBtn from '../../LinkBtn';
 
 const Links = () => (
-  <>
+  <Stack spacing="24px" mt="30px">
     <LinkBtn route="/products" testid="side-menu-item-products">
       Produtos
     </LinkBtn>
@@ -15,7 +16,7 @@ const Links = () => (
     <LinkBtn route="/chat" testid="side-menu-chat">
       Conversar com a loja
     </LinkBtn>
-  </>
+  </Stack>
 );
 
 export default Links;

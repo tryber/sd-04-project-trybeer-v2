@@ -29,7 +29,16 @@ export default {
       color: 'white',
     },
     solid: {
-      bg: 'red.500',
+      border: '2px solid',
+      borderColor: 'white',
+      bg: 'white',
+      color: 'basegreen',
+      ':hover': {
+        border: '2px solid',
+        borderColor: 'white',
+        color: 'white',
+        bg: 'basegreen',
+      },
     },
   },
   // The default size and variant values

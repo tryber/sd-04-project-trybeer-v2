@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -22,7 +23,7 @@ const MenuClient = ({ header }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <Box boxShadow="lg" position="fixed" w="full" zIndex={ 2 }>
       <Header text={ header }>
         <IconButton variant="outline" border="0px" onClick={ onOpen } icon={ <HamburgerIcon boxSize={ 7 } /> } data-testid="top-hamburguer" />
       </Header>
@@ -35,8 +36,8 @@ const MenuClient = ({ header }) => {
         >
           <DrawerOverlay />
           <DrawerContent bg="basegreen">
-            <DrawerCloseButton />
-            <DrawerHeader className="side-menu-container">Menu</DrawerHeader>
+            <DrawerCloseButton color="white" fontSize="xl" m={ 1 } />
+            <DrawerHeader className="side-menu-container" color="white" fontFamily="logo" fontSize="28px">Menu</DrawerHeader>
             <DrawerBody>
               <Links />
             </DrawerBody>
@@ -48,7 +49,7 @@ const MenuClient = ({ header }) => {
           </DrawerContent>
         </Drawer>
       </Flex>
-    </>
+    </Box>
   );
 };
 export default MenuClient;
