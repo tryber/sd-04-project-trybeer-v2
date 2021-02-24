@@ -8,7 +8,7 @@ export default function (props) {
   const { size, ...rest } = props;
 
   // 2. Reference `Button` stored in `theme.components`
-  const styles = useStyleConfig('Button', { size });
+  const styles = useStyleConfig('Heading', { size });
 
   // 3. Pass the computed styles into the `sx` prop
   return (<Heading

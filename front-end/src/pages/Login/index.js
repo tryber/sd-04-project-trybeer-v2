@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <Box bgColor="basegreen" pt="50px" height="full">
       <Alert isOpen={ isOpen } onClose={ onClose } message={ error } />
-      <Image src={ logo } htmlHeight="260px" htmlWidth="210px" alt="Segun Adebayo" mx="auto" />
+      <Image src={ logo } htmlHeight="260px" htmlWidth="210px" alt="BeerMe logo" mx="auto" />
       <form style={ { margin: '0 auto', maxWidth: '300px' } } onSubmit={ formik.handleSubmit }>
         <Stack spacing="25px" mt="20px">
           <FormControl

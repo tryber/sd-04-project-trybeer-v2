@@ -9,3 +9,4 @@ export { default as MenuAdmin } from './MenuAdmin';
 export { default as MenuClient } from './MenuClient';
 export { default as OrderCard } from './OrderCard';
 export { default as ProductCard } from './ProductCard';
+export { default as Heading } from './Heading';

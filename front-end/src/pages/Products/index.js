@@ -36,21 +36,21 @@ function Products() {
 
   return (
     <div>
-      <MenuClient header="TryBeer" />
-      <Box bgColor="#789B49">
-      <SimpleGrid minChildWidth="120px" spacing="10px">
-        {products ? products.map((e) => <ProductCard data={ e } key={ e.id } />) : <p>loading</p>}
-      </SimpleGrid>
-      <Link to="/checkout">
-        <Button
-          type="button"
-          data-testid="checkout-bottom-btn"
-          disabled={ storage ? storage.length <= zero : false }
+      <MenuClient header="BeerMe!" />
+      <Box pt="30px" height="full">
+        <SimpleGrid minChildWidth="120px" spacing="10px">
+          {products ? products.map((e) => <ProductCard data={ e } key={ e.id } />) : <p>loading</p>}
+        </SimpleGrid>
+        <Link to="/checkout">
+          <Button
+            type="button"
+            data-testid="checkout-bottom-btn"
+            disabled={ storage ? storage.length <= zero : false }
           >
-          Ver Carrinho
-        </Button>
-      </Link>
-      <span border="1px solid black" data-testid="checkout-bottom-btn-value">{cartValue}</span>
+            Ver Carrinho
+          </Button>
+        </Link>
+        <span border="1px solid black" data-testid="checkout-bottom-btn-value">{cartValue}</span>
       </Box>
     </div>
   );

@@ -2,19 +2,18 @@ import React from 'react';
 import {
   Center,
   Flex,
-  Text,
+  Heading,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 // Helper Component
 const Header = ({ children, text }) => (
-  <Flex bg="black" color="white" justify="space-between">
+  <Flex bg="basegreen" color="white" h="60px">
     <Center w="100px">
       {children}
     </Center>
-    <Center w="100px">
-      <Text data-testid="top-title">{text}</Text>
+    <Center w="full" pr="60px">
+      <Heading size="sm" data-testid="top-title">{text}</Heading>
     </Center>
-    <Center w="100px" />
   </Flex>
 );
 

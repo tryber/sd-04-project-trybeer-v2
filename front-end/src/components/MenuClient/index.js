@@ -24,7 +24,7 @@ const MenuClient = ({ header }) => {
   return (
     <>
       <Header text={ header }>
-        <IconButton variant="outline" border="0px" onClick={ onOpen } icon={ <HamburgerIcon /> } data-testid="top-hamburguer" />
+        <IconButton variant="outline" border="0px" onClick={ onOpen } icon={ <HamburgerIcon boxSize={ 7 } /> } data-testid="top-hamburguer" />
       </Header>
       <Flex id="modalContainer">
         <Drawer
@@ -34,9 +34,9 @@ const MenuClient = ({ header }) => {
           getContainer={ () => document.getElementById('modalContainer') }
         >
           <DrawerOverlay />
-          <DrawerContent>
+          <DrawerContent bg="basegreen">
             <DrawerCloseButton />
-            <DrawerHeader className="side-menu-container">Create your account</DrawerHeader>
+            <DrawerHeader className="side-menu-container">Menu</DrawerHeader>
             <DrawerBody>
               <Links />
             </DrawerBody>
