@@ -27,12 +27,15 @@
   "homepage": "https://github.com/betrybe/sd-0x-project-trybeer-v2#readme",
   "dependencies": {
     "@mysql/xdevapi": "^8.0.20",
-    "mysql2": "^2.1.0",
-    "sequelize": "^6.3.4",
+    "dotenv": "^8.2.0",
     "mongodb": "^3.6.2",
-    "dotenv": "^8.2.0"
+    "mysql2": "^2.1.0",
+    "prop-types": "^15.7.2",
+    "sequelize": "^6.3.4",
+    "simple-react-validator": "^1.6.0"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "cypress": "^5.3.0",
     "cypress-multi-reporters": "^1.2.3",
     "faker": "^4.1.0",

@@ -1,0 +1,81 @@
+div,
+form,
+label,
+input,
+button,
+img {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container-form {
+  margin: 64px auto 0;
+  max-width: 400px;
+}
+
+.user-icon {
+  display: flex;
+  margin: auto;
+  width: 150px;
+}
+
+.login-form {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 16px;
+  
+}
+
+.login-label, .login-label input {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#emailInput,
+#passwordInput {
+  border: 2px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  margin: 10px auto 15px;
+  padding: 8px;
+}
+
+#emailInput:focus,
+#passwordInput:focus {
+  background-color: #fca311;
+  color: white;
+}
+
+.login-button {
+  align-items: center;
+  background-color: #14213d;
+  border: none;
+  border-radius: 4px;
+  color: #ffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  margin: auto;
+  outline: none;
+  width: 100%;
+}
+
+.login-button:disabled {
+  background-color: #e5e5e5;
+  cursor: pointer;
+  color: white;
+}
+
+.register-link {
+  display: block;
+  color: rgb(133, 131, 131);
+  margin: 32px auto;
+  width: fit-content;
+}

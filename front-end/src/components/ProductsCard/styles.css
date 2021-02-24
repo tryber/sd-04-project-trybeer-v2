@@ -1,0 +1,50 @@
+.card-body {
+  align-items: center;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px 2px rgba(156, 156, 156, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 230px;
+  margin: 50px 15px 0;
+  padding: 16px;
+  text-align: center;
+  width: 168px;
+}
+
+.card-body img {
+  border-radius: 0;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+}
+
+.product-title {
+  align-items: center;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: inherit;
+}
+
+.product-card-panel {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: inherit;
+}
+
+.product-card-panel button {
+  height: 35px;
+  width: 50%;
+}
+
+.sum-button {
+  background-color: #14213d;
+  border-style: none;
+  color: white;
+  font-weight: 600;
+}

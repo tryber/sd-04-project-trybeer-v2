@@ -1,0 +1,29 @@
+.admin-order-screen-details {
+  padding: 10px 0;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.orders-card-body {
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-size: 19pt;
+  padding: 1rem;
+  width: 331px;
+}
+
+.ordereds-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.order-situation:hover {
+  background-color: #fca311ff;
+  border-radius: 3px;
+  font-weight: 500;
+  padding: 3px;
+}
