@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  Button,
+  Box,
+  Center,
+  Checkbox,
   FormControl,
-  FormLabel,
   FormErrorMessage,
-  Input,
+  Heading,
+  InputGroup,
+  InputLeftElement,
+  Stack,
 } from '@chakra-ui/react';
+import { EmailIcon, LockIcon, StarIcon } from '@chakra-ui/icons';
 import jwtDecode from 'jwt-decode';
 import { useFormik } from 'formik';
 import { postRegister } from '../../api';
 import validationSchema from './validateRegister';
-import Alert from '../../components/Alert';
+import { Alert, Button, Input } from '../../components';
 
 function Register() {
   const history = useHistory();
@@ -47,87 +52,108 @@ function Register() {
   });
 
   return (
-    <div>
+    <Box bgColor="basegreen" pt="50px" height="full">
       <Alert isOpen={ isOpen } onClose={ onClose } message={ error } />
-      <form onSubmit={ formik.handleSubmit }>
-        <FormControl
-          id="signName"
-          isInvalid={ formik.errors.signName && formik.touched.signName }
-        >
-          <FormLabel htmlFor="signName">Nome</FormLabel>
-          <Input
-            type="text"
-            name="signName"
-            data-testid="signup-name"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.signName }
-          />
-          <FormErrorMessage>{ formik.errors.signName }</FormErrorMessage>
-        </FormControl>
-        <FormControl
-          id="signEmail"
-          isInvalid={
+      <Center>
+        <Heading size="xl">Cadastro</Heading>
+      </Center>
+      <form style={ { margin: '0 auto', maxWidth: '300px' } } onSubmit={ formik.handleSubmit }>
+        <Stack spacing="25px" mt="45px">
+          <FormControl
+            id="signName"
+            isInvalid={ formik.errors.signName && formik.touched.signName }
+          >
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <StarIcon color="white" />
+              </InputLeftElement>
+              <Input
+                data-testid="signup-name"
+                name="signName"
+                onBlur={ formik.handleBlur }
+                onChange={ formik.handleChange }
+                placeholder="meunome"
+                type="text"
+                value={ formik.values.signName }
+              />
+              <FormErrorMessage>{ formik.errors.signName }</FormErrorMessage>
+            </InputGroup>
+          </FormControl>
+          <FormControl
+            id="signEmail"
+            isInvalid={
             formik.errors.signEmail && formik.touched.signEmail
           }
-        >
-          <FormLabel htmlFor="signEmail">Email</FormLabel>
-          <Input
-            type="email"
-            name="signEmail"
-            data-testid="signup-email"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.signEmail }
-          />
-          <FormErrorMessage>{ formik.errors.signEmail }</FormErrorMessage>
-        </FormControl>
-        <FormControl
-          id="signPassword"
-          isInvalid={
+          >
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <EmailIcon color="white" />
+              </InputLeftElement>
+              <Input
+                data-testid="signup-email"
+                name="signEmail"
+                onBlur={ formik.handleBlur }
+                onChange={ formik.handleChange }
+                placeholder="meuemail"
+                type="email"
+                value={ formik.values.signEmail }
+              />
+              <FormErrorMessage>{ formik.errors.signEmail }</FormErrorMessage>
+            </InputGroup>
+          </FormControl>
+          <FormControl
+            id="signPassword"
+            isInvalid={
             formik.errors.signPassword && formik.touched.signPassword
           }
-        >
-          <FormLabel htmlFor="signPassword">Password</FormLabel>
-          <Input
-            type="password"
-            name="signPassword"
-            data-testid="signup-password"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.signPassword }
-          />
-          <FormErrorMessage>{ formik.errors.signPassword }</FormErrorMessage>
-        </FormControl>
-        <FormControl>
-          <label htmlFor="signRole">
-            <input
-              type="checkbox"
+          >
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <LockIcon color="white" />
+              </InputLeftElement>
+              <Input
+                data-testid="signup-password"
+                name="signPassword"
+                onBlur={ formik.handleBlur }
+                onChange={ formik.handleChange }
+                placeholder="minhasenha"
+                type="password"
+                value={ formik.values.signPassword }
+              />
+              <FormErrorMessage>{ formik.errors.signPassword }</FormErrorMessage>
+            </InputGroup>
+          </FormControl>
+        </Stack>
+        <Stack spacing="25px" mt="70px">
+          <FormControl>
+            <Checkbox
+              defaultIsChecked
               name="signRole"
               data-testid="signup-seller"
               id="signRole"
+              color="white"
               onChange={ formik.handleChange }
-            />
-            Quero Vender
-          </label>
-        </FormControl>
-
-        <Button
-          variantColor="green"
-          type="submit"
-          id="signup-btn"
-          data-testid="signup-btn"
-          disabled={
+            >
+              Quero Vender
+            </Checkbox>
+          </FormControl>
+          <Button
+            variantColor="green"
+            type="submit"
+            id="signup-btn"
+            data-testid="signup-btn"
+            disabled={
             formik.isSubmitting
             || formik.errors.signName
             || formik.errors.signEmail
             || formik.errors.signPassword
           }
-        >
-          Cadastrar
-        </Button>
+          >
+            Cadastrar
+          </Button>
+        </Stack>
       </form>
-    </div>
+    </Box>
   );
 }
 

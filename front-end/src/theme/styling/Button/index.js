@@ -5,6 +5,10 @@ export default {
     letterSpacing: 'wider',
     textTransform: 'uppercase',
     borderRadius: 'full',
+    ':hover': {
+      color: 'basegreen',
+      bg: 'white',
+    },
   },
   // Two sizes: sm and md
   sizes: {
@@ -21,11 +25,11 @@ export default {
   variants: {
     outline: {
       border: '2px solid',
-      borderColor: 'red.500',
+      borderColor: 'white',
+      color: 'white',
     },
     solid: {
       bg: 'red.500',
-      color: 'white',
     },
   },
   // The default size and variant values

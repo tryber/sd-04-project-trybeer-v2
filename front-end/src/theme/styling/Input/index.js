@@ -4,6 +4,8 @@ export default {
     color: 'white',
     fontFamily: 'body',
     textTransform: 'uppercase',
+    boxSizing: 'true',
+    paddingLeft: '40px',
   },
   // Two variants: outline and solid
   variants: {

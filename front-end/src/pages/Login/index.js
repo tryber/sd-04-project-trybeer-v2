@@ -4,13 +4,15 @@ import {
   Box,
   FormControl,
   FormErrorMessage,
-  InputLeftElement,
+  Image,
   InputGroup,
+  InputLeftElement,
   Stack,
 } from '@chakra-ui/react';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { useFormik } from 'formik';
 import jwtDecode from 'jwt-decode';
+import logo from '../../assets/img/logo.png';
 
 import { userLogin } from '../../api';
 import validationSchema from './validateLogin';
@@ -45,10 +47,11 @@ const Login = () => {
   });
 
   return (
-    <Box bgColor="basegreen" py="50px" minHeight="100%">
+    <Box bgColor="basegreen" pt="50px" height="full">
       <Alert isOpen={ isOpen } onClose={ onClose } message={ error } />
-      <form style={ { margin: '0 30px' } } onSubmit={ formik.handleSubmit }>
-        <Stack spacing="40px">
+      <Image src={ logo } htmlHeight="260px" htmlWidth="210px" alt="Segun Adebayo" mx="auto" />
+      <form style={ { margin: '0 auto', maxWidth: '300px' } } onSubmit={ formik.handleSubmit }>
+        <Stack spacing="25px" mt="20px">
           <FormControl
             id="loginEmail"
             isInvalid={ formik.errors.loginEmail && formik.touched.loginEmail }
@@ -58,13 +61,13 @@ const Login = () => {
                 <EmailIcon color="white" />
               </InputLeftElement>
               <Input
-                type="email"
-                name="loginEmail"
                 data-testid="email-input"
-                onChange={ formik.handleChange }
+                name="loginEmail"
                 onBlur={ formik.handleBlur }
-                value={ formik.values.loginEmail }
+                onChange={ formik.handleChange }
                 placeholder="meuemail@email.com"
+                type="email"
+                value={ formik.values.loginEmail }
               />
               <FormErrorMessage>{formik.errors.loginEmail}</FormErrorMessage>
             </InputGroup>
@@ -92,9 +95,8 @@ const Login = () => {
             </InputGroup>
           </FormControl>
         </Stack>
-        <Stack spacing="24px" mt="50px">
+        <Stack spacing="24px" mt="30px">
           <Button
-            variant="solid"
             type="submit"
             data-testid="signin-btn"
             disabled={
@@ -106,7 +108,6 @@ const Login = () => {
             ENTRAR
           </Button>
           <Button
-            variant="solid"
             type="submit"
             data-testid="no-account-btn"
             disabled={ formik.isSubmitting }
