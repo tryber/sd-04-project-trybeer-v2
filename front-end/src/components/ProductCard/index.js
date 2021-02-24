@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
-  Box, Button, Text, Image, Flex, Circle,
+  Box, Button, Text, Image, Flex, Circle, Center,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import { ProductContext } from '../../context';
@@ -93,41 +93,45 @@ export default function ProductCard(data) {
     setCartValue(totalValue());
   }, [id, name, price, quantity, setCartValue, totalValue, urlImage]);
   return (
-    <Box bg="basegreen" w="full" my="10px" borderRadius="25px">
-      <Text data-testid={ `${id - 1}-product-price` }>
-        R$
-        {' '}
-        {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}
-      </Text>
-      <Flex flexDirection="row">
+    <Box bg="basegreen" w="full" my="10px" py="5px" borderRadius="25px" boxShadow="base">
+      <Flex flexDirection="row" mx="10px" justifyContent="space-around">
         <Image height="100px" style={ { filter: 'drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3))' } } data-testid={ `${id - 1}-product-img` } src={ urlImage } alt="url da imagem" />
-        <div data-testid={ `${id - 1}-product-name` }>{name}</div>
+        <Flex flexDirection="column" w="200px">
+          <Text textAlign="center" color="white" data-testid={ `${id - 1}-product-name` }>{name}</Text>
+          <Text textAlign="center" color="white" data-testid={ `${id - 1}-product-price` }>
+            R$
+            {' '}
+            {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL' })}
+          </Text>
+          <Center>
+            <Flex alignItems="center" w="100px" justifyContent="space-between">
+              <Circle size="10px">
+                <Button
+                  size="sm"
+                  variant="solid"
+                  data-testid={ `${id - 1}-product-minus` }
+                  onClick={ () => subButton(quantity, zero, setQuantity) }
+                >
+                  <MinusIcon />
+                </Button>
+              </Circle>
+              <Circle size="35px" bg="white" color="basegreen" border="2px solid" borderColor="white">
+                <Text data-testid={ `${id - 1}-product-qtd` }>{quantity}</Text>
+              </Circle>
+              <Circle size="10px" boxShadow="xl">
+                <Button
+                  size="sm"
+                  variant="solid"
+                  data-testid={ `${id - 1}-product-plus` }
+                  onClick={ () => setQuantity(quantity + 1) }
+                >
+                  <AddIcon />
+                </Button>
+              </Circle>
+            </Flex>
+          </Center>
+        </Flex>
       </Flex>
-      <Box display="flex" alignItems="center">
-        <Circle size="10px">
-          <Button
-            size="sm"
-            variant="solid"
-            data-testid={ `${id - 1}-product-minus` }
-            onClick={ () => subButton(quantity, zero, setQuantity) }
-          >
-            <MinusIcon />
-          </Button>
-        </Circle>
-        <Circle size="35px" bg="white" color="basegreen" border="2px solid" borderColor="white">
-          <Text color data-testid={ `${id - 1}-product-qtd` }>{quantity}</Text>
-        </Circle>
-        <Circle size="10px">
-          <Button
-            size="sm"
-            variant="solid"
-            data-testid={ `${id - 1}-product-plus` }
-            onClick={ () => setQuantity(quantity + 1) }
-          >
-            <AddIcon />
-          </Button>
-        </Circle>
-      </Box>
     </Box>
   );
 }

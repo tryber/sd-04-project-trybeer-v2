@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
-  Button, Box, Flex,
+  Button, Box, Flex, Heading, Center,
 } from '@chakra-ui/react';
 import MenuClient from '../../components/MenuClient';
 
@@ -39,7 +39,10 @@ function Products() {
   return (
     <div>
       <MenuClient header="BeerMe!" />
-      <Box pt="30px" height="full">
+      <Box pt="75px" height="full">
+        <Center>
+          <Heading mb="25px" color="basegreen">Cervejas</Heading>
+        </Center>
         <Flex flexDirection="column" wrap="nowrap" px="10px">
           {products ? products.map((e) => <ProductCard data={ e } key={ e.id } />) : <p>loading</p>}
         </Flex>
